@@ -11,17 +11,28 @@ import UIKit
 
 class TagsViewController: UITableViewController {
     weak var delegate: TagsViewControllerDelegate?
+    var selectedTag: Tags?
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
+    override func viewDidLoad() {
+        let defaultsService = UserDefaultsService()
+        let currentFilter = defaultsService.loadFilters()
+        
+        if let newFilter = currentFilter, newFilter.type == FilterType.Tag
+        {
+            selectedTag = Tags(rawValue: newFilter.filter)
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TagCellView") as? TagCellView else {
             return UITableViewCell()
         }
-        
-        cell.setupCell(tag: Tags.allValues[indexPath.row], selected: false)
+        let tag = Tags.allValues[indexPath.row]
+        cell.setupCell(tag: tag, selected: tag == selectedTag)
         return cell
     }
     
@@ -34,13 +45,26 @@ class TagsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView(tableView, didSelectRowAt: indexPath)
         guard let cell = tableView.cellForRow(at: indexPath) as? TagCellView, let tag = cell.customTag else
         {
             return
         }
         
+        selectedTag = tag
         delegate?.tagSelected(tag: tag)
+        
+        deselectCells()
+    }
+    
+    func deselectCells()
+    {
+        for index in 0...tableView.numberOfRows(inSection: 0)
+        {
+            guard let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TagCellView else {
+                break
+            }
+            cell.setupCell(tag: cell.customTag!, selected: cell.customTag! == selectedTag)
+        }
     }
 }
 

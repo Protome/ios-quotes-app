@@ -18,8 +18,11 @@ class QuoteService {
     
     func getRandomQuote(completion: @escaping (Quote) -> ())
     {
+        let defaultsService = UserDefaultsService()
+        let settings = defaultsService.loadFilters()
+        
         let randomPage = Int(arc4random_uniform(UInt32(100)))
-        if Tags.selectedTag == .None
+        if settings == nil || settings?.type == FilterType.None
         {
             let author = randomAuthor()
             getAllQuotesForAuthorAtPage(author: "\(author)", pageNumber: randomPage) { quotes in
@@ -33,9 +36,11 @@ class QuoteService {
                     completion(quotes[random])
                 }
             }
+            return
         }
-        else {
-            getAllQuotesForTagAtPage(tag: Tags.selectedTag, pageNumber: randomPage) { quotes in
+        
+        if settings?.type == FilterType.Tag {
+            getAllQuotesForTagAtPage(tag: settings!.filter, pageNumber: randomPage) { quotes in
                 if quotes.count == 0 {
                     self.getRandomQuote(completion: { quote in
                         completion(quote)
@@ -67,10 +72,10 @@ class QuoteService {
         }
     }
     
-    internal func getAllQuotesForTagAtPage(tag: Tags, pageNumber: Int, completion: @escaping ([Quote]) -> ())
+    internal func getAllQuotesForTagAtPage(tag: String, pageNumber: Int, completion: @escaping ([Quote]) -> ())
     {
         var components = URLComponents(string: baseUrl)
-        components?.path="\(tagPath)/\(tag.rawValue)"
+        components?.path="\(tagPath)/\(tag)"
         components?.queryItems = [URLQueryItem(name: pageQuery, value:"\(pageNumber)")]
         
         if let url = components?.url

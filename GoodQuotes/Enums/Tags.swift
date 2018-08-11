@@ -9,7 +9,6 @@
 import Foundation
 
 enum Tags: String {
-    case None
     case Funny
     case Love
     case Life
@@ -34,9 +33,7 @@ enum Tags: String {
     case Science
     case Spirituality
     
-    static let allValues = [None, Funny, Love, Life, Inspirational, Philosophy, Wisdom, Quotes, Happiness, Romance, Hope, Death, Poetry, Faith, Writing, Religion, Success, Knowledge, Relationships, Motivational, Education, Time, Science, Spirituality]
-    
-    static var selectedTag = None
+    static let allValues = [Funny, Love, Life, Inspirational, Philosophy, Wisdom, Quotes, Happiness, Romance, Hope, Death, Poetry, Faith, Writing, Religion, Success, Knowledge, Relationships, Motivational, Education, Time, Science, Spirituality]
 }
 
 //extension Tags: CaseIterable {}

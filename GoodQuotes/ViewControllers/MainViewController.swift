@@ -20,18 +20,18 @@ class MainViewController: UIViewController {
     
     let quoteService = QuoteService()
     var pastelView:PastelView?
-    var firstLoad = true
+    var restartAnimation = true
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
+        restartAnimation = true
+        addGradient()
+        loadRandomQuote()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addGradient()
         styleView()
-        loadRandomQuote()
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,6 +49,8 @@ class MainViewController: UIViewController {
     
     internal func addGradient()
     {
+        pastelView?.removeFromSuperview()
+        pastelView = nil
         pastelView = PastelView(frame: view.bounds)
         
         guard let pastelView = pastelView else {
@@ -60,7 +62,7 @@ class MainViewController: UIViewController {
         pastelView.animationDuration = 1.5
         pastelView.setColors([UIColor(red:0.09, green:0.31, blue:0.41, alpha:1.0),
                               UIColor(red:0.40, green:0.79, blue:0.60, alpha:1.0)])
-
+        
         view.insertSubview(pastelView, at: 0)
     }
     
@@ -76,24 +78,22 @@ class MainViewController: UIViewController {
     
     internal func loadRandomQuote()
     {
-        if(firstLoad)
+        if(restartAnimation)
         {
             pastelView?.startAnimation()
-            firstLoad = false
+            restartAnimation = false
         }
         else {
             pastelView?.resumeAnimation()
         }
         quoteService.getRandomQuote { quote in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // change 2 to desired number of seconds
-                self.QuoteLabel.text = quote.quote
-                self.AuthorLabel.text = quote.author
-                self.BookLabel.text = quote.publication
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.view.layoutIfNeeded()
-                })
-                self.pastelView?.pauseAnimation()
-            }
+            self.QuoteLabel.text = quote.quote
+            self.AuthorLabel.text = quote.author
+            self.BookLabel.text = quote.publication
+            UIView.animate(withDuration: 0.5, animations: {
+                self.view.layoutIfNeeded()
+            })
+            self.pastelView?.pauseAnimation()
         }
     }
 }
