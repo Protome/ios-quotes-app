@@ -301,11 +301,62 @@
                         <outlet property="resetButton" destination="Zp0-lQ-PcP" id="E7k-vP-8LZ"/>
                         <outlet property="tableView" destination="l5d-zQ-23o" id="8Og-su-gdr"/>
                         <segue destination="gmB-AF-Qbp" kind="show" identifier="ShowTagFilters" id="LCS-1h-fAc"/>
+                        <segue destination="oEh-vd-p8n" kind="show" identifier="AddAuthorFilter" id="Png-6j-IN4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyc-dL-2nH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1007" y="-484"/>
+        </scene>
+        <!--Author Entry View Controller-->
+        <scene sceneID="ucB-K0-njF">
+            <objects>
+                <viewController id="oEh-vd-p8n" customClass="AuthorEntryViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4bh-FK-MHx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2P-ch-lIP">
+                                <rect key="frame" x="97" y="242.5" width="180" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="S7u-lJ-ADk"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m3o-v4-TdE">
+                                <rect key="frame" x="56" y="288.5" width="263" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="263" id="3s2-Ow-OVM"/>
+                                    <constraint firstAttribute="height" constant="36" id="nUn-Id-2fm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Select">
+                                    <color key="titleColor" red="0.14117647059999999" green="0.86274509799999999" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="SelectAuthor:" destination="oEh-vd-p8n" eventType="touchUpInside" id="kOe-N1-Cpx"/>
+                                    <action selector="SelectTag:" destination="gmB-AF-Qbp" eventType="touchUpInside" id="T72-gA-dUd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="P2P-ch-lIP" firstAttribute="centerX" secondItem="jiV-LY-2il" secondAttribute="centerX" id="6Lz-Hb-rar"/>
+                            <constraint firstItem="m3o-v4-TdE" firstAttribute="top" secondItem="P2P-ch-lIP" secondAttribute="bottom" constant="16" id="SqE-2n-dLQ"/>
+                            <constraint firstItem="m3o-v4-TdE" firstAttribute="centerX" secondItem="P2P-ch-lIP" secondAttribute="centerX" id="cz2-du-YLN"/>
+                            <constraint firstItem="P2P-ch-lIP" firstAttribute="centerY" secondItem="jiV-LY-2il" secondAttribute="centerY" multiplier="0.75" id="jfa-3g-4Jh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jiV-LY-2il"/>
+                    </view>
+                    <connections>
+                        <outlet property="AuthorTextField" destination="P2P-ch-lIP" id="iU2-nT-KGg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xle-8K-QuU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1893.5999999999999" y="-177.66116941529236"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="NuF-UE-iuu">
@@ -390,7 +441,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7ag-3W-7Ar" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1804" y="-484.40779610194909"/>
+            <point key="canvasLocation" x="1894" y="-842"/>
         </scene>
     </scenes>
     <resources>
