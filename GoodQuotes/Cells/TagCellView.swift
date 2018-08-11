@@ -13,13 +13,19 @@ class TagCellView: UITableViewCell
 {
     @IBOutlet weak var SelectedTick: UIImageView!
     @IBOutlet weak var TagLabel: UILabel!
+    var selectedTag = false
     
     var customTag:Tags?
+    
+    override func prepareForReuse() {
+        SelectedTick.isHidden = !selectedTag
+    }
     
     func setupCell(tag: Tags, selected: Bool)
     {
         customTag = tag
         TagLabel.text = tag.rawValue
+        selectedTag = selected
         SelectedTick.isHidden = !selected
     }
 }

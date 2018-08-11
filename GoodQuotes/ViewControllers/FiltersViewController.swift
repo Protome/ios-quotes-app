@@ -9,11 +9,15 @@
 import Foundation
 import UIKit
 
-class FiltersViewController: UITableViewController, TagsViewControllerDelegate {
+class FiltersViewController: UIViewController, TagsViewControllerDelegate {
     let tagTitle = "Tag"
     let authorTitle = "Author"
     let bookTitle = "Book Title"
     let tagSegueIdentifier = "ShowTagFilters"
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var applyButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     
     var currentSelection: (filter:String, type: FilterType) = (filter: "", type: FilterType.None)
     var changesMade = false
@@ -26,7 +30,7 @@ class FiltersViewController: UITableViewController, TagsViewControllerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewDidLoad() {
@@ -87,9 +91,9 @@ class FiltersViewController: UITableViewController, TagsViewControllerDelegate {
     }
 }
 
-extension FiltersViewController
+extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
 {
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell") as? FilterCell else {
             return UITableViewCell()
         }
@@ -99,15 +103,15 @@ extension FiltersViewController
         return cell
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let _ = tableView.cellForRow(at: indexPath) as? FilterCell else
         {
             return

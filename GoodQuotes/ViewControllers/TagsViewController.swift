@@ -9,14 +9,17 @@
 import Foundation
 import UIKit
 
-class TagsViewController: UITableViewController {
+class TagsViewController: UIViewController {
     weak var delegate: TagsViewControllerDelegate?
     var selectedTag: Tags?
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var selectButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
+    
     override func viewDidLoad() {
         let defaultsService = UserDefaultsService()
         let currentFilter = defaultsService.loadFilters()
@@ -27,7 +30,18 @@ class TagsViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    @IBAction func SelectTag(_ sender: Any) {
+        if(selectedTag != nil)
+        {
+            delegate?.tagSelected(tag: selectedTag!)
+        }
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+extension TagsViewController: UITableViewDataSource, UITableViewDelegate
+{
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TagCellView") as? TagCellView else {
             return UITableViewCell()
         }
@@ -36,22 +50,21 @@ class TagsViewController: UITableViewController {
         return cell
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Tags.allValues.count
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? TagCellView, let tag = cell.customTag else
         {
             return
         }
         
         selectedTag = tag
-        delegate?.tagSelected(tag: tag)
         
         deselectCells()
     }
@@ -60,10 +73,10 @@ class TagsViewController: UITableViewController {
     {
         for index in 0...tableView.numberOfRows(inSection: 0)
         {
-            guard let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TagCellView else {
-                break
+            if let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? TagCellView
+            {
+                cell.setupCell(tag: cell.customTag!, selected: cell.customTag! == selectedTag)
             }
-            cell.setupCell(tag: cell.customTag!, selected: cell.customTag! == selectedTag)
         }
     }
 }
