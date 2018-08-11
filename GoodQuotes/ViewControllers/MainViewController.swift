@@ -9,7 +9,7 @@
 import UIKit
 import Pastel
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     @IBOutlet weak var QuoteLabel: UILabel!
     @IBOutlet weak var BookLabel: UILabel!
@@ -21,6 +21,10 @@ class ViewController: UIViewController {
     let quoteService = QuoteService()
     var pastelView:PastelView?
     var firstLoad = true
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

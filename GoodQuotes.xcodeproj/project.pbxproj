@@ -11,8 +11,14 @@
 		E554D40A211C9E3100F32AF9 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D409211C9E3100F32AF9 /* QuoteService.swift */; };
 		E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40C211CC03A00F32AF9 /* Quote.swift */; };
 		E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */; };
+		E554D412211F17C200F32AF9 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D411211F17C200F32AF9 /* Tags.swift */; };
+		E554D415211F33BC00F32AF9 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D414211F33BC00F32AF9 /* FiltersViewController.swift */; };
+		E554D417211F33CC00F32AF9 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D416211F33CC00F32AF9 /* TagsViewController.swift */; };
+		E554D41C211F377B00F32AF9 /* TagCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D41B211F377B00F32AF9 /* TagCellView.swift */; };
+		E554D41E211F426C00F32AF9 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D41D211F426C00F32AF9 /* FilterType.swift */; };
+		E554D421211F44EB00F32AF9 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D420211F44EB00F32AF9 /* UserDefaultsService.swift */; };
 		E5C5CCA2211C8E5D0010ACB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCA1211C8E5D0010ACB0 /* AppDelegate.swift */; };
-		E5C5CCA4211C8E5D0010ACB0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCA3211C8E5D0010ACB0 /* ViewController.swift */; };
+		E5C5CCA4211C8E5D0010ACB0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */; };
 		E5C5CCA7211C8E5D0010ACB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCA5211C8E5D0010ACB0 /* Main.storyboard */; };
 		E5C5CCA9211C8E600010ACB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCA8211C8E600010ACB0 /* Assets.xcassets */; };
 		E5C5CCAC211C8E600010ACB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCAA211C8E600010ACB0 /* LaunchScreen.storyboard */; };
@@ -36,9 +42,15 @@
 		E554D409211C9E3100F32AF9 /* QuoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteService.swift; sourceTree = "<group>"; };
 		E554D40C211CC03A00F32AF9 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastelHelper.swift; sourceTree = "<group>"; };
+		E554D411211F17C200F32AF9 /* Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
+		E554D414211F33BC00F32AF9 /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		E554D416211F33CC00F32AF9 /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
+		E554D41B211F377B00F32AF9 /* TagCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCellView.swift; sourceTree = "<group>"; };
+		E554D41D211F426C00F32AF9 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
+		E554D420211F44EB00F32AF9 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		E5C5CC9E211C8E5D0010ACB0 /* GoodQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C5CCA1211C8E5D0010ACB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E5C5CCA3211C8E5D0010ACB0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E5C5CCA6211C8E5D0010ACB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E5C5CCA8211C8E600010ACB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5C5CCAB211C8E600010ACB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -88,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				E554D409211C9E3100F32AF9 /* QuoteService.swift */,
+				E554D420211F44EB00F32AF9 /* UserDefaultsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -106,6 +119,33 @@
 				E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E554D413211F336A00F32AF9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */,
+				E554D414211F33BC00F32AF9 /* FiltersViewController.swift */,
+				E554D416211F33CC00F32AF9 /* TagsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E554D41A211F376900F32AF9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E554D41B211F377B00F32AF9 /* TagCellView.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E554D41F211F426F00F32AF9 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				E554D411211F17C200F32AF9 /* Tags.swift */,
+				E554D41D211F426C00F32AF9 /* FilterType.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		E5C5CC95211C8E5D0010ACB0 = {
@@ -131,11 +171,13 @@
 		E5C5CCA0211C8E5D0010ACB0 /* GoodQuotes */ = {
 			isa = PBXGroup;
 			children = (
+				E554D41F211F426F00F32AF9 /* Enums */,
+				E554D41A211F376900F32AF9 /* Cells */,
+				E554D413211F336A00F32AF9 /* ViewControllers */,
 				E554D40E211EFBEC00F32AF9 /* Helpers */,
 				E554D40B211CC02A00F32AF9 /* Models */,
 				E554D408211C9D2B00F32AF9 /* Services */,
 				E5C5CCA1211C8E5D0010ACB0 /* AppDelegate.swift */,
-				E5C5CCA3211C8E5D0010ACB0 /* ViewController.swift */,
 				E5C5CCA5211C8E5D0010ACB0 /* Main.storyboard */,
 				E5C5CCA8211C8E600010ACB0 /* Assets.xcassets */,
 				E5C5CCAA211C8E600010ACB0 /* LaunchScreen.storyboard */,
@@ -300,10 +342,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */,
-				E5C5CCA4211C8E5D0010ACB0 /* ViewController.swift in Sources */,
+				E554D421211F44EB00F32AF9 /* UserDefaultsService.swift in Sources */,
+				E554D417211F33CC00F32AF9 /* TagsViewController.swift in Sources */,
+				E5C5CCA4211C8E5D0010ACB0 /* MainViewController.swift in Sources */,
+				E554D415211F33BC00F32AF9 /* FiltersViewController.swift in Sources */,
+				E554D412211F17C200F32AF9 /* Tags.swift in Sources */,
 				E554D40A211C9E3100F32AF9 /* QuoteService.swift in Sources */,
 				E5C5CCA2211C8E5D0010ACB0 /* AppDelegate.swift in Sources */,
 				E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */,
+				E554D41C211F377B00F32AF9 /* TagCellView.swift in Sources */,
+				E554D41E211F426C00F32AF9 /* FilterType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
