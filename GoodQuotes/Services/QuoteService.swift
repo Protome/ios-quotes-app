@@ -58,18 +58,21 @@ class QuoteService {
     
     internal func getAuthorQuote(author: String, completion: @escaping (Quote) -> ())
     {
-        let randomPage = Int(arc4random_uniform(UInt32(100)))
         let editedAuthor = author.components(separatedBy: .whitespaces).joined(separator: "+")
         
-        getAllQuotesForAuthorAtPage(author: "\(editedAuthor)", pageNumber: randomPage) { quotes in
-            if quotes.count == 0 {
-                self.getFullyRandomQuote(completion: { quote in
-                    completion(quote)
-                })
-            }
-            else {
-                let random = Int(arc4random_uniform(UInt32(quotes.count)))
-                completion(quotes[random])
+        getTotalPageNumberForAuthor(author: editedAuthor) { pages in
+            let randomPage = Int(arc4random_uniform(UInt32(pages)))
+            
+            self.getAllQuotesForAuthorAtPage(author: editedAuthor, pageNumber: randomPage) { quotes in
+                if quotes.count == 0 {
+                    self.getFullyRandomQuote(completion: { quote in
+                        completion(quote)
+                    })
+                }
+                else {
+                    let random = Int(arc4random_uniform(UInt32(quotes.count)))
+                    completion(quotes[random])
+                }
             }
         }
     }
@@ -103,6 +106,22 @@ class QuoteService {
                     let json = JSON(jsonResponse)
                     let quotes = json["quotes"].map({return Quote(jsonObject: $1)})
                     completion(quotes)
+                }
+            }
+        }
+    }
+    
+    internal func getTotalPageNumberForAuthor(author: String,  completion: @escaping (Int) -> ())
+    {
+        var components = URLComponents(string: baseUrl)
+        components?.path="\(authorPath)/\(author)"
+        
+        if let url = components?.url
+        {
+            Alamofire.request(url).responseJSON { response in
+                if let jsonResponse = response.result.value {
+                    let json = JSON(jsonResponse)
+                    completion(json["total_pages"].intValue)
                 }
             }
         }
