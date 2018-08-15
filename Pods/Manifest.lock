@@ -1,24 +1,40 @@
 PODS:
   - Alamofire (4.7.3)
+  - OAuthSwift (1.2.2)
   - Pastel (0.4.0)
   - SwiftyJSON (4.1.0)
+  - SwiftyXMLParser (4.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - OAuthSwift (~> 1.2.0)
   - Pastel
   - SwiftyJSON (~> 4.0)
+  - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - OAuthSwift
     - Pastel
     - SwiftyJSON
 
+EXTERNAL SOURCES:
+  SwiftyXMLParser:
+    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
+
+CHECKOUT OPTIONS:
+  SwiftyXMLParser:
+    :commit: 1ddcad0a09efb85f2325d994c2169cd9ba116ae3
+    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
+
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  OAuthSwift: 27b34fe80b76b67cd8f45571e0be2432bc9f6de1
   Pastel: 7fa5e26123b3dbe11f7ed255654bf37100b199a5
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  SwiftyXMLParser: b5a79fb8a730903703d0a92d30752a0b05158967
 
-PODFILE CHECKSUM: ad31d81c216ed6112472a884174f8228199e880c
+PODFILE CHECKSUM: 8910e010b7002dde89b029f2400d38953f9e7b54
 
 COCOAPODS: 1.5.3
