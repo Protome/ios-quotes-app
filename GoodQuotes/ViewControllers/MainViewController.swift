@@ -19,6 +19,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var RefreshButtonBackground: UIVisualEffectView!
     
     let quoteService = QuoteService()
+    let goodReadService = GoodreadsService()
     var pastelView:PastelView?
     var restartAnimation = true
     
@@ -64,6 +65,10 @@ class MainViewController: UIViewController {
                               UIColor(red:0.40, green:0.79, blue:0.60, alpha:1.0)])
         
         view.insertSubview(pastelView, at: 0)
+    }
+    
+    @IBAction func loginPressed(_ sender: Any) {
+        goodReadService.loginToGoodreadsAccount(sender: self)
     }
     
     internal func styleView()
