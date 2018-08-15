@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 
-class FiltersViewController: UIViewController, TagsViewControllerDelegate {
+class FiltersViewController: UIViewController {
     let tagTitle = "Tag"
     let authorTitle = "Author"
     let bookTitle = "Book Title"
     let tagSegueIdentifier = "ShowTagFilters"
+    let authorSegueIdentifier = "AddAuthorFilter"
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var applyButton: UIButton!
@@ -22,12 +23,6 @@ class FiltersViewController: UIViewController, TagsViewControllerDelegate {
     var currentSelection: (filter:String, type: FilterType) = (filter: "", type: FilterType.None)
     var changesMade = false
     let defaultsService = UserDefaultsService()
-    
-    func tagSelected(tag: Tags) {
-        currentSelection = (filter: tag.rawValue, type: .Tag)
-        changesMade = true
-        updateCells()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -48,7 +43,6 @@ class FiltersViewController: UIViewController, TagsViewControllerDelegate {
     @IBAction func ResetToDefaults(_ sender: Any) {
         defaultsService.wipeFilters()
         navigationController?.popViewController(animated: true)
-        
     }
     
     @IBAction func Cancel(_ sender: Any) {
@@ -56,11 +50,12 @@ class FiltersViewController: UIViewController, TagsViewControllerDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? TagsViewController else {
-            return
+        if let destination = segue.destination as? TagsViewController {
+            destination.delegate = self
         }
-        
-        destination.delegate = self
+        if let destination = segue.destination as? AuthorEntryViewController {
+            destination.delegate = self
+        }
     }
     
     func updateCells()
@@ -108,7 +103,7 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -117,9 +112,31 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
             return
         }
         
-        if indexPath.row == 0
-        {
+        switch indexPath.row {
+        case 0:
             performSegue(withIdentifier: tagSegueIdentifier, sender: self)
+            break
+            
+        case 1:
+            performSegue(withIdentifier: authorSegueIdentifier, sender: self)
+            break
+        default: break
         }
+    }
+}
+
+extension FiltersViewController: TagsViewControllerDelegate, AuthorEntryViewControllerDelegate
+{
+    func tagSelected(tag: Tags) {
+        currentSelection = (filter: tag.rawValue, type: .Tag)
+        changesMade = true
+        updateCells()
+    }
+    
+    func authorSelected(author: String)
+    {
+        currentSelection = (filter: author, type: .Author)
+        changesMade = true
+        updateCells()
     }
 }

@@ -18,6 +18,8 @@
 		E554D41E211F426C00F32AF9 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D41D211F426C00F32AF9 /* FilterType.swift */; };
 		E554D421211F44EB00F32AF9 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D420211F44EB00F32AF9 /* UserDefaultsService.swift */; };
 		E554D423211F4BE400F32AF9 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D422211F4BE400F32AF9 /* FilterCell.swift */; };
+		E554D425211F916200F32AF9 /* AuthorEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D424211F916200F32AF9 /* AuthorEntryViewController.swift */; };
+		E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */; };
 		E5C5CCA2211C8E5D0010ACB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCA1211C8E5D0010ACB0 /* AppDelegate.swift */; };
 		E5C5CCA4211C8E5D0010ACB0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */; };
 		E5C5CCA7211C8E5D0010ACB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCA5211C8E5D0010ACB0 /* Main.storyboard */; };
@@ -50,6 +52,8 @@
 		E554D41D211F426C00F32AF9 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		E554D420211F44EB00F32AF9 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		E554D422211F4BE400F32AF9 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
+		E554D424211F916200F32AF9 /* AuthorEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorEntryViewController.swift; sourceTree = "<group>"; };
+		E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		E5C5CC9E211C8E5D0010ACB0 /* GoodQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C5CCA1211C8E5D0010ACB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */,
+				E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 				E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */,
 				E554D414211F33BC00F32AF9 /* FiltersViewController.swift */,
 				E554D416211F33CC00F32AF9 /* TagsViewController.swift */,
+				E554D424211F916200F32AF9 /* AuthorEntryViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -344,7 +350,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E554D425211F916200F32AF9 /* AuthorEntryViewController.swift in Sources */,
 				E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */,
+				E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */,
 				E554D423211F4BE400F32AF9 /* FilterCell.swift in Sources */,
 				E554D421211F44EB00F32AF9 /* UserDefaultsService.swift in Sources */,
 				E554D417211F33CC00F32AF9 /* TagsViewController.swift in Sources */,
