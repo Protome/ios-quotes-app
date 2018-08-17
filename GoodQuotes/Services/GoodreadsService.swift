@@ -67,7 +67,14 @@ class GoodreadsService {
         })
     }
     
-    func loadShelves(completion: (([Shelf]) -> ())?) {
+    func loadShelves(sender: UIViewController, completion: (([Shelf]) -> ())?) {
+        guard let _ = self.id else {
+            loginToGoodreadsAccount(sender: sender) {
+                self.loadShelves(sender: sender, completion: completion)
+            }
+            return
+        }
+        
         var components = URLComponents(string: "https://www.goodreads.com/shelf/list.xml")
         components?.queryItems = [
             URLQueryItem(name: "key", value:"\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
@@ -102,13 +109,15 @@ class GoodreadsService {
         }
     }
     
-    func addBookToShelf(sender: UIViewController, bookId: String, shelfName: String, completion: @escaping () -> ())
+    func addBookToShelf(sender: UIViewController, bookId: String, completion: @escaping () -> ())
     {
         if oauthswift == nil || oauthswift!.client.credential.oauthToken.isEmpty {
-            loginToGoodreadsAccount(sender: sender) { self.addBookToShelf(sender: sender, bookId: bookId, shelfName: shelfName, completion: completion) }
+            loginToGoodreadsAccount(sender: sender) { self.addBookToShelf(sender: sender, bookId: bookId, completion: completion) }
             return
         }
         
+        let userDefaults = UserDefaultsService()
+        let shelfName = userDefaults.loadDefaultShelf() ?? "to-read"
         let parameters = ["name" : shelfName,
                           "book_id" : bookId]
         

@@ -9,20 +9,57 @@
 import Foundation
 import UIKit
 
+enum Settings: String {
+    case Tag = "Tag"
+    case Author = "Author"
+    case GoodreadsShelf = "Goodreads Shelf"
+}
+
 class FiltersViewController: UIViewController {
-    let tagTitle = "Tag"
-    let authorTitle = "Author"
-    let bookTitle = "Book Title"
     let tagSegueIdentifier = "ShowTagFilters"
     let authorSegueIdentifier = "AddAuthorFilter"
+    let shelvesSegueIdentifier = "ShowShelves"
+    
+    let sectionTitles: [Int : String]
+    let sections: [Int : [Settings]]
+    let segueForSection: [Settings : String]
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var applyButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     
     var currentSelection: (filter:String, type: FilterType) = (filter: "", type: FilterType.None)
+    var currentShelf = ""
     var changesMade = false
     let defaultsService = UserDefaultsService()
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        sectionTitles = [ 0 : "Filters",
+                          1 : "Settings"]
+        
+        sections =  [ 0 : [.Tag, .Author],
+                      1 : [.GoodreadsShelf]]
+        
+        segueForSection = [ .Tag : tagSegueIdentifier,
+                            .Author : authorSegueIdentifier,
+                            .GoodreadsShelf : shelvesSegueIdentifier]
+        
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        sectionTitles = [ 0 : "Filters",
+                          1 : "Settings"]
+        
+        sections =  [ 0 : [.Tag, .Author],
+                      1 : [.GoodreadsShelf]]
+        
+        segueForSection = [ .Tag : tagSegueIdentifier,
+                            .Author : authorSegueIdentifier,
+                            .GoodreadsShelf : shelvesSegueIdentifier]
+        
+        super.init(coder: aDecoder)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -30,19 +67,22 @@ class FiltersViewController: UIViewController {
     
     override func viewDidLoad() {
         currentSelection = defaultsService.loadFilters() ?? (filter: "", type: FilterType.None)
+        currentShelf = defaultsService.loadDefaultShelf() ?? ""
     }
     
     @IBAction func ApplyFilters(_ sender: UIButton) {
         if currentSelection.type != .None, changesMade
         {
             defaultsService.storeFilter(filter: currentSelection.filter, type: currentSelection.type)
+            defaultsService.storeDefaultShelf(shelfName: currentShelf)
         }
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func ResetToDefaults(_ sender: Any) {
         defaultsService.wipeFilters()
-        navigationController?.popViewController(animated: true)
+        currentSelection = (filter: "", type: FilterType.None)
+        updateFilterCells()
     }
     
     @IBAction func Cancel(_ sender: Any) {
@@ -56,9 +96,12 @@ class FiltersViewController: UIViewController {
         if let destination = segue.destination as? AuthorEntryViewController {
             destination.delegate = self
         }
+        if let destination = segue.destination as? ShelvesSelectionViewController {
+            destination.delegate = self
+        }
     }
     
-    func updateCells()
+    func updateFilterCells()
     {
         for index in 0...tableView.numberOfRows(inSection: 0)
         {
@@ -67,21 +110,19 @@ class FiltersViewController: UIViewController {
                 return
             }
             
-            cell.TitleLabel.text = titleForRow(index)
+            cell.TitleLabel.text = titleForRow(sections[0]![index])
         }
     }
     
-    func titleForRow(_ index: Int) -> String
+    func titleForRow(_ item: Settings) -> String
     {
-        switch index {
-        case 0:
-            return currentSelection.type == FilterType.Tag ? "\(tagTitle): \(currentSelection.filter)" : tagTitle
-        case 1:
-            return currentSelection.type == FilterType.Author ? "\(authorTitle): \(currentSelection.filter)" : authorTitle
-        case 2:
-            return currentSelection.type == FilterType.Title ?  "\(bookTitle): \(currentSelection.filter)" : bookTitle
-        default:
-            return ""
+        switch item {
+        case .Tag:
+            return currentSelection.type == FilterType.Tag ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
+        case .Author:
+            return currentSelection.type == FilterType.Author ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
+        case .GoodreadsShelf:
+            return currentShelf.isEmpty ? item.rawValue : "\(item.rawValue): \(currentShelf)"
         }
     }
 }
@@ -93,50 +134,61 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
             return UITableViewCell()
         }
         
-        cell.TitleLabel.text = titleForRow(indexPath.row)
+        cell.TitleLabel.text = titleForRow(sections[indexPath.section]![indexPath.row])
         
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sections.keys.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return sections[section]!.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let _ = tableView.cellForRow(at: indexPath) as? FilterCell else
+        guard let section = sections[indexPath.section]?[indexPath.row], let segue = segueForSection[section] else
         {
             return
         }
         
-        switch indexPath.row {
-        case 0:
-            performSegue(withIdentifier: tagSegueIdentifier, sender: self)
-            break
-            
-        case 1:
-            performSegue(withIdentifier: authorSegueIdentifier, sender: self)
-            break
-        default: break
-        }
+        performSegue(withIdentifier: segue, sender: self)
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 40))
+        footerView.backgroundColor = UIColor.clear
+        return footerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 40
     }
 }
 
-extension FiltersViewController: TagsViewControllerDelegate, AuthorEntryViewControllerDelegate
+extension FiltersViewController: TagsViewControllerDelegate, AuthorEntryViewControllerDelegate, ShelvesSelectionDelegate
 {
     func tagSelected(tag: Tags) {
         currentSelection = (filter: tag.rawValue, type: .Tag)
         changesMade = true
-        updateCells()
+        updateFilterCells()
     }
     
     func authorSelected(author: String)
     {
         currentSelection = (filter: author, type: .Author)
         changesMade = true
-        updateCells()
+        updateFilterCells()
+    }
+    
+    func shelfSelected(shelfName: String) {
+        currentShelf = shelfName
+        changesMade = true
+        tableView.reloadData()
     }
 }

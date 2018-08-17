@@ -12,6 +12,7 @@ class UserDefaultsService
 {
     let filterKey = "Filter"
     let typeKey = "Type"
+    let shelfKey = "GoodreadsShelf"
     
     func wipeFilters()
     {
@@ -36,5 +37,21 @@ class UserDefaultsService
         }
         
         return (filter: filter, type:type)
+    }
+    
+    func storeDefaultShelf(shelfName: String) {
+        let defaults = UserDefaults.standard
+        defaults.set(shelfName, forKey: shelfKey)
+    }
+    
+    func loadDefaultShelf() -> String?
+    {
+        let defaults = UserDefaults.standard
+        guard let shelf = defaults.string(forKey: shelfKey) else
+        {
+            return nil
+        }
+        
+        return shelf
     }
 }

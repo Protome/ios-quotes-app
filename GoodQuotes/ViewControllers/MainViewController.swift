@@ -72,7 +72,7 @@ class MainViewController: UIViewController {
             pastelView?.resumeAnimation()
         }
         returningFromAuth = true
-        goodReadService.addBookToShelf(sender: self, bookId: book.id, shelfName: "quotey-test") {
+        goodReadService.addBookToShelf(sender: self, bookId: book.id) {
             self.pastelView?.pauseAnimation()
             self.returningFromAuth = false
         }
