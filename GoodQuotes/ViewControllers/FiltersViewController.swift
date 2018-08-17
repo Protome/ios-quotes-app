@@ -86,7 +86,8 @@ class FiltersViewController: UIViewController {
     @IBAction func ResetToDefaults(_ sender: Any) {
         defaultsService.wipeFilters()
         currentSelection = (filter: "", type: FilterType.None)
-        updateFilterCells()
+        currentShelf = "to-read"
+        tableView.reloadData()
     }
     
     @IBAction func Cancel(_ sender: Any) {

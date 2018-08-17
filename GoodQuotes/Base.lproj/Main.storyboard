@@ -390,7 +390,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="P2P-ch-lIP" firstAttribute="centerX" secondItem="jiV-LY-2il" secondAttribute="centerX" id="6Lz-Hb-rar"/>
                             <constraint firstItem="m3o-v4-TdE" firstAttribute="top" secondItem="P2P-ch-lIP" secondAttribute="bottom" constant="16" id="SqE-2n-dLQ"/>
@@ -507,7 +507,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UrE-zE-GlZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="597"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TagCellView" rowHeight="58" id="sXi-CC-DzT" customClass="TagCellView" customModule="GoodQuotes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="58"/>
@@ -561,7 +561,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="UrE-zE-GlZ" firstAttribute="top" secondItem="sAg-w2-Vab" secondAttribute="top" id="Rm0-73-CeE"/>
                             <constraint firstItem="cOo-Wm-AM3" firstAttribute="top" secondItem="UrE-zE-GlZ" secondAttribute="bottom" constant="16" id="UW9-xr-KRr"/>
