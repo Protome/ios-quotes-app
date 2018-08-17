@@ -68,14 +68,18 @@ class FiltersViewController: UIViewController {
     override func viewDidLoad() {
         currentSelection = defaultsService.loadFilters() ?? (filter: "", type: FilterType.None)
         currentShelf = defaultsService.loadDefaultShelf() ?? ""
+        
+        tableView.reloadData()
     }
     
     @IBAction func ApplyFilters(_ sender: UIButton) {
-        if currentSelection.type != .None, changesMade
-        {
+        if currentSelection.type != .None, changesMade {
             defaultsService.storeFilter(filter: currentSelection.filter, type: currentSelection.type)
-            defaultsService.storeDefaultShelf(shelfName: currentShelf)
         }
+        if(changesMade) {
+        defaultsService.storeDefaultShelf(shelfName: currentShelf)
+        }
+        
         navigationController?.popViewController(animated: true)
     }
     
