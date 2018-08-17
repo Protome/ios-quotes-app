@@ -16,11 +16,11 @@ class MainViewController: UIViewController {
     @IBOutlet weak var QuoteLabel: UILabel!
     @IBOutlet weak var BookLabel: UILabel!
     @IBOutlet weak var AuthorLabel: UILabel!
-    @IBOutlet weak var ReRollButton: UIButton!
     @IBOutlet weak var backgroundView: UIVisualEffectView!
-    @IBOutlet weak var RefreshButtonBackground: UIVisualEffectView!
-    @IBOutlet weak var GoodreadsButton: UIButton!
-    @IBOutlet weak var GoodreadsButtonBackground: UIVisualEffectView!
+    
+    @IBOutlet weak var GoodreadsButton: BlurButtonView!
+    @IBOutlet weak var ShareButton: BlurButtonView!
+    @IBOutlet weak var RefreshButton: BlurButtonView!
     
     let quoteService = QuoteService()
     let goodReadService = GoodreadsService()
@@ -41,24 +41,27 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         styleView()
+        setupButtons()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func ReRollButtonPressed(_ sender: Any) {
-        ReRollButton.backgroundColor = UIColor.clear
-        loadRandomQuote()
+    func setupButtons() {
+        ShareButton.buttonAction = shareQuote
+        GoodreadsButton.buttonAction = addBookToShelf
+        RefreshButton.buttonAction = loadRandomQuote
     }
     
-    @IBAction func ReRollButtonPressedDown(_ sender: Any) {
-        ReRollButton.backgroundColor = UIColor.lightGray
+    func shareQuote() {
+        if let quote = QuoteLabel.text {
+            let vc = UIActivityViewController(activityItems: [quote], applicationActivities: [])
+            present(vc, animated: true)
+        }
     }
     
-    @IBAction func goodreadsButtonPressed(_ sender: Any) {
-        GoodreadsButton.backgroundColor = UIColor.clear
-        
+    func addBookToShelf() {
         guard let book = currentBook else {
             return
         }
@@ -77,11 +80,7 @@ class MainViewController: UIViewController {
             self.returningFromAuth = false
         }
     }
-    
-    @IBAction func goodreadsButtonPressedDown(_ sender: Any) {
-        GoodreadsButton.backgroundColor = UIColor.lightGray
-    }
-    
+
     internal func addGradient()
     {
         pastelView?.removeFromSuperview()
@@ -105,12 +104,6 @@ class MainViewController: UIViewController {
     {
         backgroundView.layer.cornerRadius = 6
         backgroundView.clipsToBounds = true
-        
-        RefreshButtonBackground.layer.cornerRadius = RefreshButtonBackground.bounds.width/2
-        RefreshButtonBackground.clipsToBounds = true
-        
-        GoodreadsButtonBackground.layer.cornerRadius = GoodreadsButtonBackground.bounds.width/2
-        GoodreadsButtonBackground.clipsToBounds = true
     }
     
     internal func loadRandomQuote()

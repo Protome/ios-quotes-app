@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		06469ED1BBCB8BAC478B8A97 /* Pods_GoodQuotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */; };
 		E52121682124DE620027BCFC /* GoodreadsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52121672124DE620027BCFC /* GoodreadsService.swift */; };
+		E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5279ED6212765D8007BC585 /* BlurButtonView.xib */; };
+		E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5279ED8212765F6007BC585 /* BlurButtonView.swift */; };
 		E554D40A211C9E3100F32AF9 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D409211C9E3100F32AF9 /* QuoteService.swift */; };
 		E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40C211CC03A00F32AF9 /* Quote.swift */; };
 		E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */; };
@@ -53,6 +55,8 @@
 		AC0E28153F7504ED9B61A988 /* Pods-GoodQuotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.debug.xcconfig"; sourceTree = "<group>"; };
 		CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodQuotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E52121672124DE620027BCFC /* GoodreadsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodreadsService.swift; sourceTree = "<group>"; };
+		E5279ED6212765D8007BC585 /* BlurButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlurButtonView.xib; sourceTree = "<group>"; };
+		E5279ED8212765F6007BC585 /* BlurButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurButtonView.swift; sourceTree = "<group>"; };
 		E554D409211C9E3100F32AF9 /* QuoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteService.swift; sourceTree = "<group>"; };
 		E554D40C211CC03A00F32AF9 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastelHelper.swift; sourceTree = "<group>"; };
@@ -120,6 +124,23 @@
 				CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E5279ED421276402007BC585 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				E5279ED521276412007BC585 /* BlurButton */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		E5279ED521276412007BC585 /* BlurButton */ = {
+			isa = PBXGroup;
+			children = (
+				E5279ED6212765D8007BC585 /* BlurButtonView.xib */,
+				E5279ED8212765F6007BC585 /* BlurButtonView.swift */,
+			);
+			path = BlurButton;
 			sourceTree = "<group>";
 		};
 		E554D408211C9D2B00F32AF9 /* Services */ = {
@@ -209,6 +230,7 @@
 		E5C5CCA0211C8E5D0010ACB0 /* GoodQuotes */ = {
 			isa = PBXGroup;
 			children = (
+				E5279ED421276402007BC585 /* CustomViews */,
 				E554D41F211F426F00F32AF9 /* Enums */,
 				E554D41A211F376900F32AF9 /* Cells */,
 				E554D413211F336A00F32AF9 /* ViewControllers */,
@@ -320,6 +342,7 @@
 				E5E525F02124E68800EF1E1B /* Secrets.strings in Resources */,
 				E5C5CCAC211C8E600010ACB0 /* LaunchScreen.storyboard in Resources */,
 				E5C5CCA9211C8E600010ACB0 /* Assets.xcassets in Resources */,
+				E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */,
 				E5C5CCA7211C8E5D0010ACB0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,6 +413,7 @@
 				E554D425211F916200F32AF9 /* AuthorEntryViewController.swift in Sources */,
 				E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */,
 				E5818A052126C6610099BEAF /* Book.swift in Sources */,
+				E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */,
 				E5E525FE2126374500EF1E1B /* Shelf.swift in Sources */,
 				E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */,
 				E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */,
