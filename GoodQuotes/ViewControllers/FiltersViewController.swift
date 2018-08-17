@@ -13,12 +13,14 @@ enum Settings: String {
     case Tag = "Tag"
     case Author = "Author"
     case GoodreadsShelf = "Goodreads Shelf"
+    case About = "About"
 }
 
 class FiltersViewController: UIViewController {
     let tagSegueIdentifier = "ShowTagFilters"
     let authorSegueIdentifier = "AddAuthorFilter"
     let shelvesSegueIdentifier = "ShowShelves"
+    let aboutSegueIdentifier = "ShowAcknowledgements"
     
     let sectionTitles: [Int : String]
     let sections: [Int : [Settings]]
@@ -35,34 +37,46 @@ class FiltersViewController: UIViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         sectionTitles = [ 0 : "Filters",
-                          1 : "Settings"]
+                          1 : "Settings",
+                          2 : "Other"]
         
         sections =  [ 0 : [.Tag, .Author],
-                      1 : [.GoodreadsShelf]]
+                      1 : [.GoodreadsShelf],
+                      2: [.About]]
         
         segueForSection = [ .Tag : tagSegueIdentifier,
                             .Author : authorSegueIdentifier,
-                            .GoodreadsShelf : shelvesSegueIdentifier]
+                            .GoodreadsShelf : shelvesSegueIdentifier,
+                            .About : aboutSegueIdentifier]
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         sectionTitles = [ 0 : "Filters",
-                          1 : "Settings"]
+                          1 : "Settings",
+                          2 : "Other"]
         
         sections =  [ 0 : [.Tag, .Author],
-                      1 : [.GoodreadsShelf]]
+                      1 : [.GoodreadsShelf],
+                      2: [.About]]
         
         segueForSection = [ .Tag : tagSegueIdentifier,
                             .Author : authorSegueIdentifier,
-                            .GoodreadsShelf : shelvesSegueIdentifier]
+                            .GoodreadsShelf : shelvesSegueIdentifier,
+                            .About : aboutSegueIdentifier]
         
         super.init(coder: aDecoder)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
+        guard let navController = navigationController else {
+            return
+        }
+    
+        navController.navigationItem.backBarButtonItem?.title = ""
+        navController.navigationBar.tintColor = UIColor.darkGray
     }
     
     override func viewDidLoad() {
@@ -128,6 +142,8 @@ class FiltersViewController: UIViewController {
             return currentSelection.type == FilterType.Author ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
         case .GoodreadsShelf:
             return currentShelf.isEmpty ? item.rawValue : "\(item.rawValue): \(currentShelf)"
+        default:
+            return item.rawValue
         }
     }
 }
