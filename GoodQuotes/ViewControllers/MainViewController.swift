@@ -27,12 +27,15 @@ class MainViewController: UIViewController {
     var pastelView:PastelView?
     var currentBook:Book?
     var restartAnimation = true
+    var returningFromAuth = false
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
         restartAnimation = true
         addGradient()
-        loadRandomQuote()
+        if(!returningFromAuth) {
+            loadRandomQuote()
+        }
     }
     
     override func viewDidLoad() {
@@ -68,9 +71,10 @@ class MainViewController: UIViewController {
         else {
             pastelView?.resumeAnimation()
         }
-        
+        returningFromAuth = true
         goodReadService.addBookToShelf(sender: self, bookId: book.id, shelfName: "quotey-test") {
             self.pastelView?.pauseAnimation()
+            self.returningFromAuth = false
         }
     }
     

@@ -119,6 +119,7 @@ class GoodreadsService {
                                 success: { response in
                                     completion()
         }, failure: { error in
+            completion()
             print(error)
         })
     }
