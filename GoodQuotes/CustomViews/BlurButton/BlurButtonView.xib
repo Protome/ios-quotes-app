@@ -38,6 +38,7 @@
                                 <connections>
                                     <action selector="onTouchDown:" destination="-1" eventType="touchDown" id="f3G-Ef-3nF"/>
                                     <action selector="onTouchUpInside:" destination="-1" eventType="touchUpInside" id="qYD-FK-X1I"/>
+                                    <action selector="onTouchUpOutside:" destination="-1" eventType="touchUpOutside" id="OUO-e7-Zb8"/>
                                 </connections>
                             </button>
                         </subviews>

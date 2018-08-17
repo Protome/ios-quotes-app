@@ -48,6 +48,7 @@ import UIKit
         ContentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         layer.cornerRadius = bounds.width/2
         clipsToBounds = true
+        
         self.setNeedsDisplay()
     }
     
@@ -60,4 +61,7 @@ import UIKit
         buttonAction?()
     }
     
+    @IBAction func onTouchUpOutside(_ sender: Any) {
+        backgroundColor = UIColor.clear
+    }
 }

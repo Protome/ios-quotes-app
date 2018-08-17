@@ -150,7 +150,7 @@
                             <constraint firstItem="9rb-LE-oxr" firstAttribute="bottom" secondItem="Izz-a8-QME" secondAttribute="bottom" id="Z1u-Cy-6Pb"/>
                             <constraint firstItem="2Kz-00-d4Y" firstAttribute="width" secondItem="vhm-tI-LXG" secondAttribute="width" multiplier="2.2" id="a1y-he-jyT"/>
                             <constraint firstItem="PJY-dX-bER" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9Du-qH-mYH" secondAttribute="bottom" constant="36" id="b5w-jE-OXj"/>
-                            <constraint firstItem="Izz-a8-QME" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PJY-dX-bER" secondAttribute="bottom" constant="18" id="bUi-eG-iV4"/>
+                            <constraint firstItem="Izz-a8-QME" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PJY-dX-bER" secondAttribute="bottom" constant="8" id="bUi-eG-iV4"/>
                             <constraint firstItem="2Kz-00-d4Y" firstAttribute="top" secondItem="vhm-tI-LXG" secondAttribute="bottom" constant="4" id="hP0-Zg-KcX"/>
                             <constraint firstItem="2Kz-00-d4Y" firstAttribute="centerX" secondItem="vhm-tI-LXG" secondAttribute="centerX" id="oPb-lu-B1U"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Izz-a8-QME" secondAttribute="bottom" constant="46" id="rGR-VN-b7s"/>
