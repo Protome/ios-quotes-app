@@ -21,6 +21,8 @@
 		E554D423211F4BE400F32AF9 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D422211F4BE400F32AF9 /* FilterCell.swift */; };
 		E554D425211F916200F32AF9 /* AuthorEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D424211F916200F32AF9 /* AuthorEntryViewController.swift */; };
 		E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */; };
+		E5818A052126C6610099BEAF /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A042126C6610099BEAF /* Book.swift */; };
+		E5818A072126C9DC0099BEAF /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A062126C9DC0099BEAF /* Author.swift */; };
 		E5C5CCA2211C8E5D0010ACB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCA1211C8E5D0010ACB0 /* AppDelegate.swift */; };
 		E5C5CCA4211C8E5D0010ACB0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */; };
 		E5C5CCA7211C8E5D0010ACB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCA5211C8E5D0010ACB0 /* Main.storyboard */; };
@@ -32,6 +34,7 @@
 		E5E525F42126065400EF1E1B /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E525F32126065400EF1E1B /* KeychainError.swift */; };
 		E5E525FA2126260600EF1E1B /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E525F92126260600EF1E1B /* KeychainPasswordItem.swift */; };
 		E5E525FC21262D2200EF1E1B /* AuthStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E525FB21262D2200EF1E1B /* AuthStorageService.swift */; };
+		E5E525FE2126374500EF1E1B /* Shelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E525FD2126374500EF1E1B /* Shelf.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,8 @@
 		E554D422211F4BE400F32AF9 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		E554D424211F916200F32AF9 /* AuthorEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorEntryViewController.swift; sourceTree = "<group>"; };
 		E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
+		E5818A042126C6610099BEAF /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		E5818A062126C9DC0099BEAF /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		E5C5CC9E211C8E5D0010ACB0 /* GoodQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C5CCA1211C8E5D0010ACB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +81,7 @@
 		E5E525F32126065400EF1E1B /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		E5E525F92126260600EF1E1B /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		E5E525FB21262D2200EF1E1B /* AuthStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStorageService.swift; sourceTree = "<group>"; };
+		E5E525FD2126374500EF1E1B /* Shelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelf.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +138,9 @@
 				E554D40C211CC03A00F32AF9 /* Quote.swift */,
 				E5E525F12126060500EF1E1B /* UserCredentials.swift */,
 				E5E525F32126065400EF1E1B /* KeychainError.swift */,
+				E5E525FD2126374500EF1E1B /* Shelf.swift */,
+				E5818A042126C6610099BEAF /* Book.swift */,
+				E5818A062126C9DC0099BEAF /* Author.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -330,6 +339,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Pastel/Pastel.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -338,6 +348,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pastel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -374,6 +385,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E554D425211F916200F32AF9 /* AuthorEntryViewController.swift in Sources */,
+				E5818A052126C6610099BEAF /* Book.swift in Sources */,
+				E5E525FE2126374500EF1E1B /* Shelf.swift in Sources */,
 				E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */,
 				E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */,
 				E554D423211F4BE400F32AF9 /* FilterCell.swift in Sources */,
@@ -389,6 +402,7 @@
 				E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */,
 				E5E525F22126060500EF1E1B /* UserCredentials.swift in Sources */,
 				E5E525FA2126260600EF1E1B /* KeychainPasswordItem.swift in Sources */,
+				E5818A072126C9DC0099BEAF /* Author.swift in Sources */,
 				E554D41C211F377B00F32AF9 /* TagCellView.swift in Sources */,
 				E5E525F42126065400EF1E1B /* KeychainError.swift in Sources */,
 				E554D41E211F426C00F32AF9 /* FilterType.swift in Sources */,

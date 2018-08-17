@@ -8,6 +8,8 @@
 
 import UIKit
 import Pastel
+import Alamofire
+import AlamofireImage
 
 class MainViewController: UIViewController {
     
@@ -17,10 +19,13 @@ class MainViewController: UIViewController {
     @IBOutlet weak var ReRollButton: UIButton!
     @IBOutlet weak var backgroundView: UIVisualEffectView!
     @IBOutlet weak var RefreshButtonBackground: UIVisualEffectView!
+    @IBOutlet weak var GoodreadsButton: UIButton!
+    @IBOutlet weak var GoodreadsButtonBackground: UIVisualEffectView!
     
     let quoteService = QuoteService()
     let goodReadService = GoodreadsService()
     var pastelView:PastelView?
+    var currentBook:Book?
     var restartAnimation = true
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +53,31 @@ class MainViewController: UIViewController {
         ReRollButton.backgroundColor = UIColor.lightGray
     }
     
+    @IBAction func goodreadsButtonPressed(_ sender: Any) {
+        GoodreadsButton.backgroundColor = UIColor.clear
+        
+        guard let book = currentBook else {
+            return
+        }
+        
+        if(restartAnimation)
+        {
+            pastelView?.startAnimation()
+            restartAnimation = false
+        }
+        else {
+            pastelView?.resumeAnimation()
+        }
+        
+        goodReadService.addBookToShelf(sender: self, bookId: book.id, shelfName: "quotey-test") {
+            self.pastelView?.pauseAnimation()
+        }
+    }
+    
+    @IBAction func goodreadsButtonPressedDown(_ sender: Any) {
+        GoodreadsButton.backgroundColor = UIColor.lightGray
+    }
+    
     internal func addGradient()
     {
         pastelView?.removeFromSuperview()
@@ -67,10 +97,6 @@ class MainViewController: UIViewController {
         view.insertSubview(pastelView, at: 0)
     }
     
-    @IBAction func loginPressed(_ sender: Any) {
-        goodReadService.loginToGoodreadsAccount(sender: self)
-    }
-    
     internal func styleView()
     {
         backgroundView.layer.cornerRadius = 6
@@ -79,6 +105,8 @@ class MainViewController: UIViewController {
         RefreshButtonBackground.layer.cornerRadius = RefreshButtonBackground.bounds.width/2
         RefreshButtonBackground.clipsToBounds = true
         
+        GoodreadsButtonBackground.layer.cornerRadius = GoodreadsButtonBackground.bounds.width/2
+        GoodreadsButtonBackground.clipsToBounds = true
     }
     
     internal func loadRandomQuote()
@@ -98,8 +126,28 @@ class MainViewController: UIViewController {
             UIView.animate(withDuration: 0.5, animations: {
                 self.view.layoutIfNeeded()
             })
+            
+            if !quote.publication.isEmpty {
+                self.goodReadService.searchForBook(title: quote.publication) { book in
+                    self.currentBook = book
+                    print(book)
+                }
+            }
+            else {
+                self.currentBook = nil
+            }
             self.pastelView?.pauseAnimation()
         }
     }
+    
+    //    internal func setupDebugBookInfo() {
+    //        self.debugImageView.af_setImage(withURL: URL(string: currentBook!.imageUrl)!)
+    //
+    //        Alamofire.request(currentBook!.imageUrl).responseImage { response in
+    //            if let image = response.result.value {
+    //               self.GoodreadsButton.setImage(image, for: .normal)
+    //            }
+    //        }
+    //    }
 }
 
