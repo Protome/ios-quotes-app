@@ -28,4 +28,9 @@ class TagCellView: UITableViewCell
         selectedTag = selected
         SelectedTick.isHidden = !selected
     }
+    
+    func setSelected(selected: Bool) {
+        selectedTag = selected
+        SelectedTick.isHidden = !selected
+    }
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		06469ED1BBCB8BAC478B8A97 /* Pods_GoodQuotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */; };
 		E52121682124DE620027BCFC /* GoodreadsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52121672124DE620027BCFC /* GoodreadsService.swift */; };
+		E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5279ED6212765D8007BC585 /* BlurButtonView.xib */; };
+		E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5279ED8212765F6007BC585 /* BlurButtonView.swift */; };
 		E554D40A211C9E3100F32AF9 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D409211C9E3100F32AF9 /* QuoteService.swift */; };
 		E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40C211CC03A00F32AF9 /* Quote.swift */; };
 		E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */; };
@@ -23,6 +25,7 @@
 		E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */; };
 		E5818A052126C6610099BEAF /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A042126C6610099BEAF /* Book.swift */; };
 		E5818A072126C9DC0099BEAF /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A062126C9DC0099BEAF /* Author.swift */; };
+		E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */; };
 		E5C5CCA2211C8E5D0010ACB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCA1211C8E5D0010ACB0 /* AppDelegate.swift */; };
 		E5C5CCA4211C8E5D0010ACB0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */; };
 		E5C5CCA7211C8E5D0010ACB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCA5211C8E5D0010ACB0 /* Main.storyboard */; };
@@ -52,6 +55,8 @@
 		AC0E28153F7504ED9B61A988 /* Pods-GoodQuotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.debug.xcconfig"; sourceTree = "<group>"; };
 		CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodQuotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E52121672124DE620027BCFC /* GoodreadsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodreadsService.swift; sourceTree = "<group>"; };
+		E5279ED6212765D8007BC585 /* BlurButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlurButtonView.xib; sourceTree = "<group>"; };
+		E5279ED8212765F6007BC585 /* BlurButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurButtonView.swift; sourceTree = "<group>"; };
 		E554D409211C9E3100F32AF9 /* QuoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteService.swift; sourceTree = "<group>"; };
 		E554D40C211CC03A00F32AF9 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastelHelper.swift; sourceTree = "<group>"; };
@@ -66,6 +71,7 @@
 		E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		E5818A042126C6610099BEAF /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		E5818A062126C9DC0099BEAF /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
+		E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelvesSelectionViewController.swift; sourceTree = "<group>"; };
 		E5C5CC9E211C8E5D0010ACB0 /* GoodQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C5CCA1211C8E5D0010ACB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +126,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E5279ED421276402007BC585 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				E5279ED521276412007BC585 /* BlurButton */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		E5279ED521276412007BC585 /* BlurButton */ = {
+			isa = PBXGroup;
+			children = (
+				E5279ED6212765D8007BC585 /* BlurButtonView.xib */,
+				E5279ED8212765F6007BC585 /* BlurButtonView.swift */,
+			);
+			path = BlurButton;
+			sourceTree = "<group>";
+		};
 		E554D408211C9D2B00F32AF9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +184,7 @@
 				E554D414211F33BC00F32AF9 /* FiltersViewController.swift */,
 				E554D416211F33CC00F32AF9 /* TagsViewController.swift */,
 				E554D424211F916200F32AF9 /* AuthorEntryViewController.swift */,
+				E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -206,6 +230,7 @@
 		E5C5CCA0211C8E5D0010ACB0 /* GoodQuotes */ = {
 			isa = PBXGroup;
 			children = (
+				E5279ED421276402007BC585 /* CustomViews */,
 				E554D41F211F426F00F32AF9 /* Enums */,
 				E554D41A211F376900F32AF9 /* Cells */,
 				E554D413211F336A00F32AF9 /* ViewControllers */,
@@ -317,6 +342,7 @@
 				E5E525F02124E68800EF1E1B /* Secrets.strings in Resources */,
 				E5C5CCAC211C8E600010ACB0 /* LaunchScreen.storyboard in Resources */,
 				E5C5CCA9211C8E600010ACB0 /* Assets.xcassets in Resources */,
+				E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */,
 				E5C5CCA7211C8E5D0010ACB0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,7 +411,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E554D425211F916200F32AF9 /* AuthorEntryViewController.swift in Sources */,
+				E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */,
 				E5818A052126C6610099BEAF /* Book.swift in Sources */,
+				E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */,
 				E5E525FE2126374500EF1E1B /* Shelf.swift in Sources */,
 				E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */,
 				E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */,
@@ -569,6 +597,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
 				INFOPLIST_FILE = GoodQuotes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -576,7 +605,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -588,6 +617,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
 				INFOPLIST_FILE = GoodQuotes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -595,7 +625,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

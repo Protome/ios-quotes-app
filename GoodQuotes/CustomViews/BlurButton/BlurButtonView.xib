@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BlurButtonView" customModule="GoodQuotes" customModuleProvider="target">
+            <connections>
+                <outlet property="BlurBackground" destination="bBg-jX-T9W" id="lJZ-sT-F5Q"/>
+                <outlet property="ButtonImage" destination="fG0-Xl-4B4" id="NjB-c6-nnx"/>
+                <outlet property="ContentView" destination="iN0-l3-epB" id="ufu-JM-JgJ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBg-jX-T9W">
+                    <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DT0-bJ-vzB">
+                        <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fG0-Xl-4B4">
+                                <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="book">
+                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTouchDown:" destination="-1" eventType="touchDown" id="f3G-Ef-3nF"/>
+                                    <action selector="onTouchUpInside:" destination="-1" eventType="touchUpInside" id="qYD-FK-X1I"/>
+                                    <action selector="onTouchUpOutside:" destination="-1" eventType="touchUpOutside" id="OUO-e7-Zb8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="fG0-Xl-4B4" secondAttribute="bottom" id="Jcd-QI-rmX"/>
+                            <constraint firstItem="fG0-Xl-4B4" firstAttribute="leading" secondItem="DT0-bJ-vzB" secondAttribute="leading" id="RGe-Vh-sxA"/>
+                            <constraint firstItem="fG0-Xl-4B4" firstAttribute="top" secondItem="DT0-bJ-vzB" secondAttribute="top" id="V33-na-ar6"/>
+                            <constraint firstAttribute="trailing" secondItem="fG0-Xl-4B4" secondAttribute="trailing" id="Wsb-gN-8d1"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="light"/>
+                </visualEffectView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="bBg-jX-T9W" secondAttribute="trailing" id="4jk-kR-QLG"/>
+                <constraint firstItem="bBg-jX-T9W" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ifx-kb-qBv"/>
+                <constraint firstItem="bBg-jX-T9W" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mTe-V5-EJx"/>
+                <constraint firstAttribute="bottom" secondItem="bBg-jX-T9W" secondAttribute="bottom" id="v85-2d-aZq"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="book" width="512" height="512"/>
+    </resources>
+</document>
