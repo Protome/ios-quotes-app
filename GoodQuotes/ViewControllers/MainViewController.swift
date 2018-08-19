@@ -28,6 +28,7 @@ class MainViewController: UIViewController {
     var currentBook:Book?
     var restartAnimation = true
     var returningFromAuth = false
+    var openModal: UIViewController?
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -51,6 +52,7 @@ class MainViewController: UIViewController {
     func setupButtons() {
         ShareButton.buttonAction = shareQuote
         GoodreadsButton.buttonAction = addBookToShelf
+        GoodreadsButton.forceTouchAction = selectShelfAction
         RefreshButton.buttonAction = loadRandomQuote
     }
     
@@ -79,6 +81,31 @@ class MainViewController: UIViewController {
             self.pastelView?.pauseAnimation()
             self.returningFromAuth = false
         }
+    }
+    
+    func selectShelfAction(_ isActive: Bool) {
+        guard isActive else {
+            return
+        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let optionsVC = storyboard.instantiateViewController(withIdentifier: "ShelvesSelectionViewController") as? ShelvesSelectionViewController
+        
+        guard let shelvesVC = optionsVC else {
+            GoodreadsButton.activate()
+            return
+        }
+        shelvesVC.delegate = self
+        shelvesVC.modalPresentationStyle = .popover
+        shelvesVC.popoverPresentationController?.sourceView = GoodreadsButton
+        shelvesVC.popoverPresentationController?.delegate = self
+        shelvesVC.view.backgroundColor = UIColor.clear
+        shelvesVC.tableview.alwaysBounceVertical = false
+        openModal = shelvesVC
+        
+        self.present(shelvesVC, animated: true) {
+        }
+        
+        GoodreadsButton.activate()
     }
 
     internal func addGradient()
@@ -136,15 +163,18 @@ class MainViewController: UIViewController {
             self.pastelView?.pauseAnimation()
         }
     }
+}
+
+extension MainViewController: ShelvesSelectionDelegate, UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
     
-    //    internal func setupDebugBookInfo() {
-    //        self.debugImageView.af_setImage(withURL: URL(string: currentBook!.imageUrl)!)
-    //
-    //        Alamofire.request(currentBook!.imageUrl).responseImage { response in
-    //            if let image = response.result.value {
-    //               self.GoodreadsButton.setImage(image, for: .normal)
-    //            }
-    //        }
-    //    }
+    func shelfSelected(shelfName: String) {
+        openModal?.dismiss(animated: true, completion: nil)
+    
+        let defaultsService = UserDefaultsService()
+        defaultsService.storeDefaultShelf(shelfName: shelfName)
+    }
 }
 

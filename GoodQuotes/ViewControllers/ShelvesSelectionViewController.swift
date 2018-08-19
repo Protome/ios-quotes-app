@@ -11,9 +11,12 @@ import UIKit
 
 class ShelvesSelectionViewController: UIViewController {
     @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var selectHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     weak var delegate: ShelvesSelectionDelegate?
     
+    var refreshControl : UIRefreshControl?
     var currentShelf = ""
     var shelves = [Shelf]()
     
@@ -24,15 +27,32 @@ class ShelvesSelectionViewController: UIViewController {
     override func viewDidLoad() {
         let defaultsService = UserDefaultsService()
         let savedShelf = defaultsService.loadDefaultShelf()
-        let goodreadsService = GoodreadsService()
         
         if let shelf = savedShelf {
             currentShelf = shelf
         }
+       
+        loadShelves(self)
         
+        if popoverPresentationController?.presentationStyle == .popover {
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            selectHeightConstraint.constant = 0
+            view.layoutIfNeeded()
+        }
+        else {
+            refreshControl = UIRefreshControl(frame: tableview.frame)
+            refreshControl?.addTarget(self, action: #selector(self.loadShelves(_:)), for: .valueChanged)
+            tableview?.refreshControl = refreshControl
+        }
+    }
+    
+    @objc func loadShelves(_ sender: Any) {
+        let goodreadsService = GoodreadsService()
         goodreadsService.loadShelves(sender: self) { shelves in
+            self.activityIndicator.stopAnimating()
             self.shelves = shelves
             self.tableview.reloadData()
+            self.refreshControl?.endRefreshing()
         }
     }
     
@@ -52,6 +72,9 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
         let shelfName = shelves[indexPath.row].name
         cell.TagLabel.text = shelfName
         cell.setSelected(selected: shelfName == currentShelf)
+        if popoverPresentationController?.presentationStyle == .popover {
+            cell.backgroundColor = UIColor.clear
+        }
         return cell
     }
     
@@ -70,8 +93,13 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
         }
         
         currentShelf = shelves[indexPath.row].name
-        
         deselectCells()
+        
+        if popoverPresentationController?.presentationStyle == .popover {
+           DispatchQueue.main.async {
+            self.delegate?.shelfSelected(shelfName: self.currentShelf)
+            }
+        }
     }
     
     func deselectCells()

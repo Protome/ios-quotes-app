@@ -104,10 +104,6 @@ class FiltersViewController: UIViewController {
         tableView.reloadData()
     }
     
-    @IBAction func Cancel(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? TagsViewController {
             destination.delegate = self
