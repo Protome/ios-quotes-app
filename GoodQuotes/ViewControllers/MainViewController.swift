@@ -100,6 +100,7 @@ class MainViewController: UIViewController {
         shelvesVC.popoverPresentationController?.delegate = self
         shelvesVC.view.backgroundColor = UIColor.clear
         shelvesVC.tableview.alwaysBounceVertical = false
+        shelvesVC.preferredContentSize = CGSize(width: shelvesVC.view.frame.width * 0.65, height: shelvesVC.view.frame.height * 0.4)
         openModal = shelvesVC
         
         self.present(shelvesVC, animated: true) {

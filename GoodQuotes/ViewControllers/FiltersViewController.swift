@@ -75,7 +75,6 @@ class FiltersViewController: UIViewController {
             return
         }
     
-        navController.navigationItem.backBarButtonItem?.title = ""
         navController.navigationBar.tintColor = UIColor.darkGray
     }
     
