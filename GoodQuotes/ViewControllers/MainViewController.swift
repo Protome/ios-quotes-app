@@ -76,8 +76,8 @@ class MainViewController: UIViewController {
     }
     
     func shareQuote() {
-        if let quote = QuoteLabel.text {
-            let vc = UIActivityViewController(activityItems: [quote], applicationActivities: [])
+        if let image = view.toImage(withinFrame: backgroundView.frame) {
+            let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
             present(vc, animated: true)
         }
     }
