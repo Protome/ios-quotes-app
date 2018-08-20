@@ -14,6 +14,7 @@ enum Settings: String {
     case Author = "Author"
     case GoodreadsShelf = "Goodreads Shelf"
     case About = "About"
+    case SignInOutGoodreads = "SignInOutGoodreads"
 }
 
 class FiltersViewController: UIViewController {
@@ -21,6 +22,8 @@ class FiltersViewController: UIViewController {
     let authorSegueIdentifier = "AddAuthorFilter"
     let shelvesSegueIdentifier = "ShowShelves"
     let aboutSegueIdentifier = "ShowAcknowledgements"
+    
+    let goodreadsTitles = (signIn: "Sign In to Goodreads", signOut: "Sign Out of Goodreads")
     
     let sectionTitles: [Int : String]
     let sections: [Int : [Settings]]
@@ -38,11 +41,13 @@ class FiltersViewController: UIViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         sectionTitles = [ 0 : "Filters",
                           1 : "Settings",
-                          2 : "Other"]
+                          2 : "Goodreads",
+                          3 : "Other"]
         
         sections =  [ 0 : [.Tag, .Author],
                       1 : [.GoodreadsShelf],
-                      2: [.About]]
+                      2 : [.SignInOutGoodreads],
+                      3 : [.About]]
         
         segueForSection = [ .Tag : tagSegueIdentifier,
                             .Author : authorSegueIdentifier,
@@ -55,11 +60,13 @@ class FiltersViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         sectionTitles = [ 0 : "Filters",
                           1 : "Settings",
-                          2 : "Other"]
+                          2 : "Goodreads",
+                          3 : "Other"]
         
         sections =  [ 0 : [.Tag, .Author],
                       1 : [.GoodreadsShelf],
-                      2: [.About]]
+                      2 : [.SignInOutGoodreads],
+                      3 : [.About]]
         
         segueForSection = [ .Tag : tagSegueIdentifier,
                             .Author : authorSegueIdentifier,
@@ -74,7 +81,7 @@ class FiltersViewController: UIViewController {
         guard let navController = navigationController else {
             return
         }
-    
+        
         navController.navigationBar.tintColor = UIColor.darkGray
     }
     
@@ -90,7 +97,7 @@ class FiltersViewController: UIViewController {
             defaultsService.storeFilter(filter: currentSelection.filter, type: currentSelection.type)
         }
         if(changesMade) {
-        defaultsService.storeDefaultShelf(shelfName: currentShelf)
+            defaultsService.storeDefaultShelf(shelfName: currentShelf)
         }
         
         navigationController?.popViewController(animated: true)
@@ -137,8 +144,23 @@ class FiltersViewController: UIViewController {
             return currentSelection.type == FilterType.Author ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
         case .GoodreadsShelf:
             return currentShelf.isEmpty ? item.rawValue : "\(item.rawValue): \(currentShelf)"
+        case .SignInOutGoodreads:
+            return GoodreadsService.sharedInstance.isLoggedIn == .LoggedIn ? goodreadsTitles.signOut : goodreadsTitles.signIn
         default:
             return item.rawValue
+        }
+    }
+    
+    func signInOutGoodreads() {
+        let goodreadsService = GoodreadsService.sharedInstance
+        if(GoodreadsService.sharedInstance.isLoggedIn == .LoggedIn) {
+            goodreadsService.logoutOfGoodreadsAccount()
+            self.tableView.reloadData()
+        }
+        else {
+            goodreadsService.loginToGoodreadsAccount(sender: self) {
+                self.tableView.reloadData()
+            }
         }
     }
 }
@@ -164,14 +186,21 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let section = sections[indexPath.section]?[indexPath.row], let segue = segueForSection[section] else
+        guard let section = sections[indexPath.section]?[indexPath.row] else
         {
             return
         }
         
-        performSegue(withIdentifier: segue, sender: self)
+        if let segue = segueForSection[section] {
+            performSegue(withIdentifier: segue, sender: self)
+            return
+        }
+        
+        if section == .SignInOutGoodreads {
+            signInOutGoodreads()
+        }
     }
-
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles[section]
     }

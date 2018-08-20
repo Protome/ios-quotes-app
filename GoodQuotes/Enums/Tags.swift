@@ -21,7 +21,7 @@ enum Tags: String {
     case Hope
     case Death
     case Poetry
-    case Faith
+    case Marriage
     case Writing
     case Religion
     case Success
@@ -33,7 +33,7 @@ enum Tags: String {
     case Science
     case Spirituality
     
-    static let allValues = [Funny, Love, Life, Inspirational, Philosophy, Wisdom, Quotes, Happiness, Romance, Hope, Death, Poetry, Faith, Writing, Religion, Success, Knowledge, Relationships, Motivational, Education, Time, Science, Spirituality]
+    static let allValues = [Funny, Love, Life, Inspirational, Philosophy, Wisdom, Quotes, Happiness, Romance, Hope, Death, Poetry, Marriage, Writing, Religion, Success, Knowledge, Relationships, Motivational, Education, Time, Science, Spirituality]
 }
 
 //extension Tags: CaseIterable {}

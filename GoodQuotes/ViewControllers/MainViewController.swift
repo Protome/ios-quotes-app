@@ -23,7 +23,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var RefreshButton: BlurButtonView!
     
     let quoteService = QuoteService()
-    let goodReadService = GoodreadsService()
     var pastelView:PastelView?
     var currentBook:Book?
     var restartAnimation = true
@@ -32,15 +31,31 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
-        restartAnimation = true
+        restartAnimation = !returningFromAuth
         addGradient()
+        
         if(!returningFromAuth) {
             loadRandomQuote()
         }
+        else {
+            pastelView?.startAnimation()
+            pastelView?.pauseAnimation()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupButtons()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(setupButtonsFromNotification),
+                                               name: .loginStateChanged,
+                                               object: nil)
+        
+        GoodreadsService.sharedInstance.isLoggedIn = AuthStorageService.readAuthToken().isEmpty ? .LoggedOut : .LoggedIn
         styleView()
         setupButtons()
     }
@@ -49,10 +64,14 @@ class MainViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    @objc func setupButtonsFromNotification(_ notification: Notification) {
+        setupButtons()
+    }
+    
     func setupButtons() {
         ShareButton.buttonAction = shareQuote
         GoodreadsButton.buttonAction = addBookToShelf
-        GoodreadsButton.forceTouchAction = selectShelfAction
+        GoodreadsButton.forceTouchAction = GoodreadsService.sharedInstance.isLoggedIn == .LoggedIn ? selectShelfAction : nil
         RefreshButton.buttonAction = loadRandomQuote
     }
     
@@ -77,7 +96,7 @@ class MainViewController: UIViewController {
             pastelView?.resumeAnimation()
         }
         returningFromAuth = true
-        goodReadService.addBookToShelf(sender: self, bookId: book.id) {
+        GoodreadsService.sharedInstance.addBookToShelf(sender: self, bookId: book.id) {
             self.pastelView?.pauseAnimation()
             self.returningFromAuth = false
         }
@@ -87,6 +106,14 @@ class MainViewController: UIViewController {
         guard isActive else {
             return
         }
+        
+        if GoodreadsService.sharedInstance.isLoggedIn == .LoggedOut{
+            GoodreadsService.sharedInstance.loginToGoodreadsAccount(sender: self) {
+                self.selectShelfAction(isActive)
+            }
+            return
+        }
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let optionsVC = storyboard.instantiateViewController(withIdentifier: "ShelvesSelectionViewController") as? ShelvesSelectionViewController
         
@@ -154,7 +181,7 @@ class MainViewController: UIViewController {
             })
             
             if !quote.publication.isEmpty {
-                self.goodReadService.searchForBook(title: quote.publication) { book in
+                GoodreadsService.sharedInstance.searchForBook(title: quote.publication) { book in
                     self.currentBook = book
                     print(book)
                 }

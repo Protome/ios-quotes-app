@@ -47,6 +47,15 @@ struct AuthStorageService {
         return ""
     }
     
+    static func removeAuthToken() {
+        do {
+            let tokenItem = KeychainPasswordItem(service: TokenConfiguration.serviceName, account: TokenConfiguration.accountName, accessGroup: TokenConfiguration.accessGroup)
+            try tokenItem.deleteItem()
+        } catch {
+            print(error)
+        }
+    }
+    
     static func saveTokenSecret(_ secret: String) {
         guard !secret.isEmpty else {
             return
@@ -70,5 +79,14 @@ struct AuthStorageService {
         }
         
         return ""
+    }
+    
+    static func removeTokenSecret() {
+        do {
+            let secretItem = KeychainPasswordItem(service: TokenSecretConfiguration.serviceName, account: TokenSecretConfiguration.accountName, accessGroup: TokenSecretConfiguration.accessGroup)
+            try secretItem.deleteItem()
+        } catch {
+            print(error)
+        }
     }
 }
