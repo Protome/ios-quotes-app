@@ -68,6 +68,43 @@ class MainViewController: UIViewController {
         setupButtons()
     }
     
+    @IBAction func legacyButtonTouchUpInside(_ sender: Any) {
+        guard let button = sender as? BlurButtonView else {
+            return
+        }
+        
+        button.backgroundColor = UIColor.clear
+        
+        if button == GoodreadsButton {
+            addBookToShelf()
+        }
+        
+        if button == ShareButton {
+            shareQuote()
+        }
+        
+        if button == RefreshButton {
+            loadRandomQuote()
+        }
+    }
+    
+    @IBAction func legacyButtonTouchUpOutside(_ sender: Any) {
+        guard let button = sender as? BlurButtonView else {
+            return
+        }
+        
+        button.backgroundColor = UIColor.clear
+    }
+    
+    @IBAction func legacyButtonTouchDown(_ sender: Any) {
+        guard let button = sender as? BlurButtonView else {
+            return
+        }
+        
+        button.backgroundColor = UIColor.lightGray
+    }
+    
+    
     func setupButtons() {
         ShareButton.buttonAction = shareQuote
         GoodreadsButton.buttonAction = addBookToShelf
