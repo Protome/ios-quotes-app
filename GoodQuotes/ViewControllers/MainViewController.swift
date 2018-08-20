@@ -124,7 +124,7 @@ class MainViewController: UIViewController {
         shelvesVC.delegate = self
         shelvesVC.modalPresentationStyle = .popover
         shelvesVC.popoverPresentationController?.sourceView = GoodreadsButton
-        shelvesVC.popoverPresentationController?.sourceRect = CGRect(x: GoodreadsButton.frame.width/2, y: 0, width: GoodreadsButton.frame.width/4, height: GoodreadsButton.frame.height)
+        shelvesVC.popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: GoodreadsButton.frame.width, height: GoodreadsButton.frame.height)
         shelvesVC.popoverPresentationController?.delegate = self
         shelvesVC.view.backgroundColor = UIColor.clear
         shelvesVC.tableview.alwaysBounceVertical = false
