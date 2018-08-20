@@ -103,6 +103,11 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="image" keyPath="image" value="upload"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="legacyButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="3sc-eK-PRI"/>
+                                    <action selector="legacyButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cQI-wZ-QTV"/>
+                                    <action selector="legacyButtonTouchUpOutside:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="9Ii-Xh-OLb"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhm-tI-LXG" customClass="BlurButtonView" customModule="GoodQuotes" customModuleProvider="target">
                                 <rect key="frame" x="86.666666666666671" y="690" width="42.000000000000014" height="42"/>
@@ -114,6 +119,11 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="image" keyPath="image" value="book"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="legacyButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="ZgL-gj-TJh"/>
+                                    <action selector="legacyButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yoO-SI-rdb"/>
+                                    <action selector="legacyButtonTouchUpOutside:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="hp6-j8-ha8"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Izz-a8-QME" customClass="BlurButtonView" customModule="GoodQuotes" customModuleProvider="target">
                                 <rect key="frame" x="160.66666666666666" y="678" width="54" height="54"/>
@@ -125,6 +135,11 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="image" keyPath="image" value="refresh"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="legacyButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="P9A-Qz-p4O"/>
+                                    <action selector="legacyButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TFn-LD-AiP"/>
+                                    <action selector="legacyButtonTouchUpOutside:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="htO-Fr-5UV"/>
+                                </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share quote" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwR-U6-Z6h">
                                 <rect key="frame" x="221.66666666666663" y="736" width="92" height="15.333333333333371"/>
@@ -362,7 +377,7 @@
                         <outlet property="resetButton" destination="Zp0-lQ-PcP" id="E7k-vP-8LZ"/>
                         <outlet property="tableView" destination="l5d-zQ-23o" id="8Og-su-gdr"/>
                         <segue destination="gmB-AF-Qbp" kind="show" identifier="ShowTagFilters" id="LCS-1h-fAc"/>
-                        <segue destination="oEh-vd-p8n" kind="show" identifier="AddAuthorFilter" id="Png-6j-IN4"/>
+                        <segue destination="oEh-vd-p8n" kind="show" identifier="AddCustomTagFilter" id="Png-6j-IN4"/>
                         <segue destination="boQ-35-Qqe" kind="show" identifier="ShowShelves" id="qGd-Vk-OTI"/>
                         <segue destination="CK4-Sh-ahE" kind="show" identifier="ShowAcknowledgements" id="YJZ-Wr-GpW"/>
                     </connections>
@@ -371,19 +386,16 @@
             </objects>
             <point key="canvasLocation" x="1007" y="-484"/>
         </scene>
-        <!--Author Entry View Controller-->
+        <!--Custom Tag Entry View Controller-->
         <scene sceneID="ucB-K0-njF">
             <objects>
-                <viewController id="oEh-vd-p8n" customClass="AuthorEntryViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oEh-vd-p8n" customClass="CustomTagEntryViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4bh-FK-MHx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Author Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2P-ch-lIP">
-                                <rect key="frame" x="97.666666666666686" y="293.33333333333331" width="180" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="S7u-lJ-ADk"/>
-                                </constraints>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="eg: Terry Pratchett" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2P-ch-lIP">
+                                <rect key="frame" x="32" y="293.33333333333331" width="311.33333333333331" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -403,13 +415,34 @@
                                     <action selector="SelectTag:" destination="gmB-AF-Qbp" eventType="touchUpInside" id="T72-gA-dUd"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Tag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JD2-HT-MK8">
+                                <rect key="frame" x="144" y="151.33333333333334" width="87" height="28"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
+                                <color key="textColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vy3-Rh-arT">
+                                <rect key="frame" x="32" y="187.33333333333334" width="311.33333333333331" height="82.000000000000028"/>
+                                <string key="text">Enter a custom tag below. This can be an author name, book title or a word or phrase. If no quotes are found that match it, a random quote will be loaded instead.</string>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                <color key="textColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Vy3-Rh-arT" firstAttribute="centerX" secondItem="JD2-HT-MK8" secondAttribute="centerX" id="3Nh-yr-03V"/>
                             <constraint firstItem="P2P-ch-lIP" firstAttribute="centerX" secondItem="jiV-LY-2il" secondAttribute="centerX" id="6Lz-Hb-rar"/>
+                            <constraint firstItem="P2P-ch-lIP" firstAttribute="top" secondItem="Vy3-Rh-arT" secondAttribute="bottom" constant="24" id="Cr0-hU-bpQ"/>
+                            <constraint firstItem="Vy3-Rh-arT" firstAttribute="top" secondItem="JD2-HT-MK8" secondAttribute="bottom" constant="8" id="F7C-rT-kV6"/>
+                            <constraint firstItem="Vy3-Rh-arT" firstAttribute="width" secondItem="P2P-ch-lIP" secondAttribute="width" id="J79-H8-H9a"/>
+                            <constraint firstItem="JD2-HT-MK8" firstAttribute="centerX" secondItem="jiV-LY-2il" secondAttribute="centerX" id="NdF-ha-rKb"/>
                             <constraint firstItem="m3o-v4-TdE" firstAttribute="top" secondItem="P2P-ch-lIP" secondAttribute="bottom" constant="16" id="SqE-2n-dLQ"/>
+                            <constraint firstAttribute="trailing" secondItem="P2P-ch-lIP" secondAttribute="trailing" constant="32" id="WX0-ie-52e"/>
                             <constraint firstItem="m3o-v4-TdE" firstAttribute="centerX" secondItem="P2P-ch-lIP" secondAttribute="centerX" id="cz2-du-YLN"/>
                             <constraint firstItem="P2P-ch-lIP" firstAttribute="centerY" secondItem="jiV-LY-2il" secondAttribute="centerY" multiplier="0.75" id="jfa-3g-4Jh"/>
+                            <constraint firstItem="P2P-ch-lIP" firstAttribute="leading" secondItem="4bh-FK-MHx" secondAttribute="leading" constant="32" id="mFf-wJ-F7W"/>
+                            <constraint firstItem="JD2-HT-MK8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jiV-LY-2il" secondAttribute="top" constant="48" id="yQ7-y2-c00"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jiV-LY-2il"/>
                     </view>

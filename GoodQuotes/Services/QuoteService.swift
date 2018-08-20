@@ -33,7 +33,7 @@ class QuoteService {
             return
         }
         
-        if settings?.type == FilterType.Author {
+        if settings?.type == FilterType.CustomTag {
             getAuthorQuote(author:settings!.filter, completion: completion)
             return
         }

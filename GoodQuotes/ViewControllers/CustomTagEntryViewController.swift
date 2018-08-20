@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-class AuthorEntryViewController: UIViewController
+class CustomTagEntryViewController: UIViewController
 {
     @IBOutlet weak var AuthorTextField: UITextField!
     
-    weak var delegate: AuthorEntryViewControllerDelegate?
+    weak var delegate: CustomTagEntryViewControllerDelegate?
     
     override func viewDidLoad() {
         hideKeyboardWhenTappedAround()
@@ -22,13 +22,13 @@ class AuthorEntryViewController: UIViewController
     @IBAction func SelectAuthor(_ sender: Any) {
         if(!AuthorTextField.text!.isEmpty)
         {
-            delegate?.authorSelected(author: AuthorTextField.text!)
+            delegate?.customTagSelected(tag: AuthorTextField.text!)
             navigationController?.popViewController(animated: true)
         }
     }
 }
 
-protocol AuthorEntryViewControllerDelegate: class
+protocol CustomTagEntryViewControllerDelegate: class
 {
-    func authorSelected(author: String)
+    func customTagSelected(tag: String)
 }

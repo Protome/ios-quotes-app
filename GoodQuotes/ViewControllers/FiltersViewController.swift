@@ -11,7 +11,7 @@ import UIKit
 
 enum Settings: String {
     case Tag = "Tag"
-    case Author = "Author"
+    case CustomTag = "CustomTag"
     case GoodreadsShelf = "Goodreads Shelf"
     case About = "About"
     case SignInOutGoodreads = "SignInOutGoodreads"
@@ -19,7 +19,7 @@ enum Settings: String {
 
 class FiltersViewController: UIViewController {
     let tagSegueIdentifier = "ShowTagFilters"
-    let authorSegueIdentifier = "AddAuthorFilter"
+    let customTagSegueIdentifier = "AddCustomTagFilter"
     let shelvesSegueIdentifier = "ShowShelves"
     let aboutSegueIdentifier = "ShowAcknowledgements"
     
@@ -44,13 +44,13 @@ class FiltersViewController: UIViewController {
                           2 : "Goodreads",
                           3 : "Other"]
         
-        sections =  [ 0 : [.Tag, .Author],
+        sections =  [ 0 : [.Tag, .CustomTag],
                       1 : [.GoodreadsShelf],
                       2 : [.SignInOutGoodreads],
                       3 : [.About]]
         
         segueForSection = [ .Tag : tagSegueIdentifier,
-                            .Author : authorSegueIdentifier,
+                            .CustomTag : customTagSegueIdentifier,
                             .GoodreadsShelf : shelvesSegueIdentifier,
                             .About : aboutSegueIdentifier]
         
@@ -63,13 +63,13 @@ class FiltersViewController: UIViewController {
                           2 : "Goodreads",
                           3 : "Other"]
         
-        sections =  [ 0 : [.Tag, .Author],
+        sections =  [ 0 : [.Tag, .CustomTag],
                       1 : [.GoodreadsShelf],
                       2 : [.SignInOutGoodreads],
                       3 : [.About]]
         
         segueForSection = [ .Tag : tagSegueIdentifier,
-                            .Author : authorSegueIdentifier,
+                            .CustomTag : customTagSegueIdentifier,
                             .GoodreadsShelf : shelvesSegueIdentifier,
                             .About : aboutSegueIdentifier]
         
@@ -114,7 +114,7 @@ class FiltersViewController: UIViewController {
         if let destination = segue.destination as? TagsViewController {
             destination.delegate = self
         }
-        if let destination = segue.destination as? AuthorEntryViewController {
+        if let destination = segue.destination as? CustomTagEntryViewController {
             destination.delegate = self
         }
         if let destination = segue.destination as? ShelvesSelectionViewController {
@@ -140,8 +140,8 @@ class FiltersViewController: UIViewController {
         switch item {
         case .Tag:
             return currentSelection.type == FilterType.Tag ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
-        case .Author:
-            return currentSelection.type == FilterType.Author ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
+        case .CustomTag:
+            return currentSelection.type == FilterType.CustomTag ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
         case .GoodreadsShelf:
             return currentShelf.isEmpty ? item.rawValue : "\(item.rawValue): \(currentShelf)"
         case .SignInOutGoodreads:
@@ -216,7 +216,7 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
     }
 }
 
-extension FiltersViewController: TagsViewControllerDelegate, AuthorEntryViewControllerDelegate, ShelvesSelectionDelegate
+extension FiltersViewController: TagsViewControllerDelegate, CustomTagEntryViewControllerDelegate, ShelvesSelectionDelegate
 {
     func tagSelected(tag: Tags) {
         currentSelection = (filter: tag.rawValue, type: .Tag)
@@ -224,9 +224,8 @@ extension FiltersViewController: TagsViewControllerDelegate, AuthorEntryViewCont
         updateFilterCells()
     }
     
-    func authorSelected(author: String)
-    {
-        currentSelection = (filter: author, type: .Author)
+    func customTagSelected(tag: String) {
+        currentSelection = (filter: tag, type: .CustomTag)
         changesMade = true
         updateFilterCells()
     }
