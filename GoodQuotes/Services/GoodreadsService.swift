@@ -12,10 +12,18 @@ import Alamofire
 import OAuthSwift
 
 class GoodreadsService {
+    static var sharedInstance = GoodreadsService()
+    
+    var isLoggedIn = LoginState.LoggedOut {
+        didSet {
+            NotificationCenter.default.post(name: .loginStateChanged, object: nil)
+        }
+    }
+    
     var oauthswift: OAuthSwift?
     var id: String?
     
-    func loginToGoodreadsAccount(sender: UIViewController, completion:  @escaping () -> ()) {
+    func loginToGoodreadsAccount(sender: UIViewController, completion:  (() -> ())?) {
         let oauthswift = OAuth1Swift(
             consumerKey:        Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"),
             consumerSecret:     Bundle.main.localizedString(forKey: "goodreads_secret", value: nil, table: "Secrets"),
@@ -37,6 +45,7 @@ class GoodreadsService {
                 success: { credential, response, parameters in
                     AuthStorageService.saveAuthToken(credential.oauthToken)
                     AuthStorageService.saveTokenSecret(credential.oauthTokenSecret)
+                    self.isLoggedIn = .LoggedIn
                     self.loginToUser(oauthswift, completion: completion)
             },
                 failure: { error in
@@ -46,12 +55,19 @@ class GoodreadsService {
         else {
             oauthswift.client.credential.oauthToken = authToken
             oauthswift.client.credential.oauthTokenSecret = authSecret
-            
+            self.isLoggedIn = .LoggedIn
             loginToUser(oauthswift, completion: completion)
         }
     }
     
-    func loginToUser(_ oauthswift: OAuth1Swift, completion: @escaping () -> ()) {
+    func logoutOfGoodreadsAccount() {
+        AuthStorageService.removeAuthToken()
+        AuthStorageService.removeTokenSecret()
+        oauthswift = nil
+        isLoggedIn = .LoggedOut
+    }
+    
+    func loginToUser(_ oauthswift: OAuth1Swift, completion: (() -> ())?) {
         let _ = oauthswift.client.get(
             "https://www.goodreads.com/api/auth_user",
             success: { response in
@@ -61,7 +77,7 @@ class GoodreadsService {
                 }
                 self.id = id
                 
-                completion()
+                completion?()
         }, failure: { error in
             print(error)
         })
@@ -111,7 +127,7 @@ class GoodreadsService {
     
     func addBookToShelf(sender: UIViewController, bookId: String, completion: @escaping () -> ())
     {
-        if oauthswift == nil || oauthswift!.client.credential.oauthToken.isEmpty {
+        guard let oauthswift = oauthswift, !oauthswift.client.credential.oauthToken.isEmpty else {
             loginToGoodreadsAccount(sender: sender) { self.addBookToShelf(sender: sender, bookId: bookId, completion: completion) }
             return
         }
@@ -121,7 +137,7 @@ class GoodreadsService {
         let parameters = ["name" : shelfName,
                           "book_id" : bookId]
         
-        let _ = oauthswift?.client.post("https://www.goodreads.com/shelf/add_to_shelf.xml",
+        let _ = oauthswift.client.post("https://www.goodreads.com/shelf/add_to_shelf.xml",
                                 parameters: parameters,
                                 headers: nil,
                                 body: nil,
