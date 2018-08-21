@@ -10,8 +10,7 @@ import Foundation
 
 extension String {
     var withoutSpecialCharacters: String {
-        var disallowedChars = CharacterSet.urlPathAllowed.inverted
-        disallowedChars.insert(charactersIn: "=&*^()%$£@!|\\/")
+        let disallowedChars = CharacterSet.init(charactersIn: "=&*^()%$£@!|\\/")
         return self.components(separatedBy: disallowedChars).joined(separator: "")
     }
 }

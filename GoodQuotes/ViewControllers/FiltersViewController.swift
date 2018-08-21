@@ -11,7 +11,7 @@ import UIKit
 
 enum Settings: String {
     case Tag = "Tag"
-    case CustomTag = "CustomTag"
+    case CustomTag = "Custom Tag"
     case GoodreadsShelf = "Goodreads Shelf"
     case About = "About"
     case SignInOutGoodreads = "SignInOutGoodreads"

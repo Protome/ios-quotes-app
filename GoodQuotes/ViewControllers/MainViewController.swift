@@ -210,7 +210,7 @@ class MainViewController: UIViewController {
             pastelView?.resumeAnimation()
         }
         quoteService.getRandomQuote { quote in
-            self.QuoteLabel.text = quote.quote
+            self.QuoteLabel.text = "\"\(quote.quote)\""
             self.AuthorLabel.text = quote.author
             self.BookLabel.text = quote.publication
             UIView.animate(withDuration: 0.5, animations: {
