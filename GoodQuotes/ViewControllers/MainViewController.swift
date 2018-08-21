@@ -68,6 +68,43 @@ class MainViewController: UIViewController {
         setupButtons()
     }
     
+    @IBAction func legacyButtonTouchUpInside(_ sender: Any) {
+        guard let button = sender as? BlurButtonView else {
+            return
+        }
+        
+        button.backgroundColor = UIColor.clear
+        
+        if button == GoodreadsButton {
+            addBookToShelf()
+        }
+        
+        if button == ShareButton {
+            shareQuote()
+        }
+        
+        if button == RefreshButton {
+            loadRandomQuote()
+        }
+    }
+    
+    @IBAction func legacyButtonTouchUpOutside(_ sender: Any) {
+        guard let button = sender as? BlurButtonView else {
+            return
+        }
+        
+        button.backgroundColor = UIColor.clear
+    }
+    
+    @IBAction func legacyButtonTouchDown(_ sender: Any) {
+        guard let button = sender as? BlurButtonView else {
+            return
+        }
+        
+        button.backgroundColor = UIColor.lightGray
+    }
+    
+    
     func setupButtons() {
         ShareButton.buttonAction = shareQuote
         GoodreadsButton.buttonAction = addBookToShelf
@@ -76,8 +113,8 @@ class MainViewController: UIViewController {
     }
     
     func shareQuote() {
-        if let quote = QuoteLabel.text {
-            let vc = UIActivityViewController(activityItems: [quote], applicationActivities: [])
+        if let image = view.toImage(withinFrame: backgroundView.frame) {
+            let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
             present(vc, animated: true)
         }
     }
@@ -124,7 +161,7 @@ class MainViewController: UIViewController {
         shelvesVC.delegate = self
         shelvesVC.modalPresentationStyle = .popover
         shelvesVC.popoverPresentationController?.sourceView = GoodreadsButton
-        shelvesVC.popoverPresentationController?.sourceRect = CGRect(x: GoodreadsButton.frame.width/2, y: 0, width: GoodreadsButton.frame.width/4, height: GoodreadsButton.frame.height)
+        shelvesVC.popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: GoodreadsButton.frame.width, height: GoodreadsButton.frame.height)
         shelvesVC.popoverPresentationController?.delegate = self
         shelvesVC.view.backgroundColor = UIColor.clear
         shelvesVC.tableview.alwaysBounceVertical = false

@@ -11,23 +11,30 @@ import UIKit
 
 enum Settings: String {
     case Tag = "Tag"
-    case Author = "Author"
+    case CustomTag = "CustomTag"
     case GoodreadsShelf = "Goodreads Shelf"
     case About = "About"
     case SignInOutGoodreads = "SignInOutGoodreads"
+    case VisitGoodreads = "Visit Goodreads"
 }
 
 class FiltersViewController: UIViewController {
-    let tagSegueIdentifier = "ShowTagFilters"
-    let authorSegueIdentifier = "AddAuthorFilter"
-    let shelvesSegueIdentifier = "ShowShelves"
-    let aboutSegueIdentifier = "ShowAcknowledgements"
-    
     let goodreadsTitles = (signIn: "Sign In to Goodreads", signOut: "Sign Out of Goodreads")
     
-    let sectionTitles: [Int : String]
-    let sections: [Int : [Settings]]
-    let segueForSection: [Settings : String]
+    let sectionTitles = [ 0 : "Filters",
+                          1 : "Settings",
+                          2 : "Goodreads",
+                          3 : "Other"]
+    
+    let sections: [Int : [Settings]] = [ 0 : [.Tag, .CustomTag],
+                     1 : [.GoodreadsShelf],
+                     2 : [.SignInOutGoodreads, .VisitGoodreads],
+                     3 : [.About]]
+    
+    let segueForSection: [Settings : String] = [ .Tag : "ShowTagFilters",
+                                                .CustomTag : "AddCustomTagFilter",
+                                                .GoodreadsShelf : "ShowShelves",
+                                                .About : "ShowAcknowledgements"]
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var applyButton: UIButton!
@@ -39,40 +46,10 @@ class FiltersViewController: UIViewController {
     let defaultsService = UserDefaultsService()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        sectionTitles = [ 0 : "Filters",
-                          1 : "Settings",
-                          2 : "Goodreads",
-                          3 : "Other"]
-        
-        sections =  [ 0 : [.Tag, .Author],
-                      1 : [.GoodreadsShelf],
-                      2 : [.SignInOutGoodreads],
-                      3 : [.About]]
-        
-        segueForSection = [ .Tag : tagSegueIdentifier,
-                            .Author : authorSegueIdentifier,
-                            .GoodreadsShelf : shelvesSegueIdentifier,
-                            .About : aboutSegueIdentifier]
-        
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        sectionTitles = [ 0 : "Filters",
-                          1 : "Settings",
-                          2 : "Goodreads",
-                          3 : "Other"]
-        
-        sections =  [ 0 : [.Tag, .Author],
-                      1 : [.GoodreadsShelf],
-                      2 : [.SignInOutGoodreads],
-                      3 : [.About]]
-        
-        segueForSection = [ .Tag : tagSegueIdentifier,
-                            .Author : authorSegueIdentifier,
-                            .GoodreadsShelf : shelvesSegueIdentifier,
-                            .About : aboutSegueIdentifier]
-        
         super.init(coder: aDecoder)
     }
     
@@ -96,6 +73,7 @@ class FiltersViewController: UIViewController {
         if currentSelection.type != .None, changesMade {
             defaultsService.storeFilter(filter: currentSelection.filter, type: currentSelection.type)
         }
+        
         if(changesMade) {
             defaultsService.storeDefaultShelf(shelfName: currentShelf)
         }
@@ -107,6 +85,7 @@ class FiltersViewController: UIViewController {
         defaultsService.wipeFilters()
         currentSelection = (filter: "", type: FilterType.None)
         currentShelf = "to-read"
+        defaultsService.storeDefaultShelf(shelfName: currentShelf)
         tableView.reloadData()
     }
     
@@ -114,7 +93,7 @@ class FiltersViewController: UIViewController {
         if let destination = segue.destination as? TagsViewController {
             destination.delegate = self
         }
-        if let destination = segue.destination as? AuthorEntryViewController {
+        if let destination = segue.destination as? CustomTagEntryViewController {
             destination.delegate = self
         }
         if let destination = segue.destination as? ShelvesSelectionViewController {
@@ -140,8 +119,8 @@ class FiltersViewController: UIViewController {
         switch item {
         case .Tag:
             return currentSelection.type == FilterType.Tag ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
-        case .Author:
-            return currentSelection.type == FilterType.Author ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
+        case .CustomTag:
+            return currentSelection.type == FilterType.CustomTag ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
         case .GoodreadsShelf:
             return currentShelf.isEmpty ? item.rawValue : "\(item.rawValue): \(currentShelf)"
         case .SignInOutGoodreads:
@@ -154,8 +133,13 @@ class FiltersViewController: UIViewController {
     func signInOutGoodreads() {
         let goodreadsService = GoodreadsService.sharedInstance
         if(GoodreadsService.sharedInstance.isLoggedIn == .LoggedIn) {
-            goodreadsService.logoutOfGoodreadsAccount()
-            self.tableView.reloadData()
+            let alert = UIAlertController(title: "Are you sure?", message: "You'll need to log in again to add books to your shelves (the rest of the app will still work)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                goodreadsService.logoutOfGoodreadsAccount()
+                self.tableView.reloadData()
+            }))
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
         else {
             goodreadsService.loginToGoodreadsAccount(sender: self) {
@@ -199,6 +183,10 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
         if section == .SignInOutGoodreads {
             signInOutGoodreads()
         }
+        
+        if section == .VisitGoodreads {
+            UIApplication.shared.open(URL(string: "https://www.goodreads.com")!, options: [:], completionHandler: nil)
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -216,7 +204,7 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
     }
 }
 
-extension FiltersViewController: TagsViewControllerDelegate, AuthorEntryViewControllerDelegate, ShelvesSelectionDelegate
+extension FiltersViewController: TagsViewControllerDelegate, CustomTagEntryViewControllerDelegate, ShelvesSelectionDelegate
 {
     func tagSelected(tag: Tags) {
         currentSelection = (filter: tag.rawValue, type: .Tag)
@@ -224,9 +212,8 @@ extension FiltersViewController: TagsViewControllerDelegate, AuthorEntryViewCont
         updateFilterCells()
     }
     
-    func authorSelected(author: String)
-    {
-        currentSelection = (filter: author, type: .Author)
+    func customTagSelected(tag: String) {
+        currentSelection = (filter: tag, type: .CustomTag)
         changesMade = true
         updateFilterCells()
     }

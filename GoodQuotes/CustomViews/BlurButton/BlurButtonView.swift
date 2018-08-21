@@ -87,14 +87,19 @@ import UIKit
         clipsToBounds = true
         
         self.setNeedsDisplay()
+        
     }
 }
 
 extension BlurButtonView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        touchExited = false
-        touchMoved(touch: touches.first)
+        if self.traitCollection.forceTouchCapability == .available {
+            touchExited = false
+            touchMoved(touch: touches.first)
+        } else {
+            sendActions(for: .touchDown)
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -104,12 +109,22 @@ extension BlurButtonView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        touchEnded(touch: touches.first)
+        if self.traitCollection.forceTouchCapability == .available {
+            touchEnded(touch: touches.first)
+        }
+        else {
+            sendActions(for: .touchUpInside)
+        }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        touchEnded(touch: touches.first)
+        if self.traitCollection.forceTouchCapability == .available {
+            touchEnded(touch: touches.first)
+        }
+        else {
+            sendActions(for: .touchUpOutside)
+        }
     }
     
     private func touchMoved(touch: UITouch?) {
