@@ -22,7 +22,8 @@ class CustomTagEntryViewController: UIViewController
     @IBAction func SelectAuthor(_ sender: Any) {
         if(!AuthorTextField.text!.isEmpty)
         {
-            delegate?.customTagSelected(tag: AuthorTextField.text!)
+            delegate?.customTagSelected(tag: AuthorTextField.text!.withoutSpecialCharacters)
+            print(AuthorTextField.text!.withoutSpecialCharacters)
             navigationController?.popViewController(animated: true)
         }
     }

@@ -29,6 +29,7 @@
 		E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */; };
 		E5B195C9212B14E700A9901C /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B195C8212B14E700A9901C /* UIViewExtensions.swift */; };
 		E5B195CB212B42A800A9901C /* LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B195CA212B42A800A9901C /* LoginState.swift */; };
+		E5B195CD212CA49100A9901C /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B195CC212CA49100A9901C /* StringExtensions.swift */; };
 		E5C5CCA2211C8E5D0010ACB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCA1211C8E5D0010ACB0 /* AppDelegate.swift */; };
 		E5C5CCA4211C8E5D0010ACB0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */; };
 		E5C5CCA7211C8E5D0010ACB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCA5211C8E5D0010ACB0 /* Main.storyboard */; };
@@ -78,6 +79,7 @@
 		E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelvesSelectionViewController.swift; sourceTree = "<group>"; };
 		E5B195C8212B14E700A9901C /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		E5B195CA212B42A800A9901C /* LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginState.swift; sourceTree = "<group>"; };
+		E5B195CC212CA49100A9901C /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		E5C5CC9E211C8E5D0010ACB0 /* GoodQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C5CCA1211C8E5D0010ACB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */,
 				E5588E112129A71500A84BEC /* CGPointExtensions.swift */,
 				E5B195C8212B14E700A9901C /* UIViewExtensions.swift */,
+				E5B195CC212CA49100A9901C /* StringExtensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				E5E525F22126060500EF1E1B /* UserCredentials.swift in Sources */,
 				E5E525FA2126260600EF1E1B /* KeychainPasswordItem.swift in Sources */,
 				E5818A072126C9DC0099BEAF /* Author.swift in Sources */,
+				E5B195CD212CA49100A9901C /* StringExtensions.swift in Sources */,
 				E554D41C211F377B00F32AF9 /* TagCellView.swift in Sources */,
 				E5E525F42126065400EF1E1B /* KeychainError.swift in Sources */,
 				E554D41E211F426C00F32AF9 /* FilterType.swift in Sources */,
