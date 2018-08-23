@@ -114,7 +114,7 @@ class MainViewController: UIViewController {
     
     func shareQuote() {
         if let image = view.toImage(withinFrame: backgroundView.frame) {
-            let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+            let vc = UIActivityViewController(activityItems: [image, "#Quotey"], applicationActivities: [])
             present(vc, animated: true)
         }
     }
