@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Quote
+struct Quote
 {
     let quote: String
     let author: String
