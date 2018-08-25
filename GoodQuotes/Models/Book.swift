@@ -22,6 +22,5 @@ struct Book {
         author = Author(xml: xml["best_book", "author"])
         imageUrl = xml["best_book", "image_url"].text ?? ""
         averageRating = xml["average_rating"].double ?? 0
-        
     }
 }
