@@ -14,11 +14,14 @@ struct Book {
     var title: String
     var author: Author
     var imageUrl: String
+    var averageRating: Double
     
     init(xml: XML.Accessor) {
-        id = xml["id"].text ?? ""
-        title = xml["title"].text ?? ""
-        author = Author(xml: xml["author"])
-        imageUrl = xml["image_url"].text ?? ""
+        id = xml["best_book", "id"].text ?? ""
+        title = xml["best_book", "title"].text ?? ""
+        author = Author(xml: xml["best_book", "author"])
+        imageUrl = xml["best_book", "image_url"].text ?? ""
+        averageRating = xml["average_rating"].double ?? 0
+        
     }
 }
