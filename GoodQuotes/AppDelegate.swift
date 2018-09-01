@@ -31,6 +31,8 @@ extension AppDelegate {
 extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        let reviewService = ReviewRequestService()
+        reviewService.incrementAppRuns()
         return true
     }
     

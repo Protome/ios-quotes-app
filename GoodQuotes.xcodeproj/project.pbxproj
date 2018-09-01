@@ -26,6 +26,7 @@
 		E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5588E112129A71500A84BEC /* CGPointExtensions.swift */; };
 		E5818A052126C6610099BEAF /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A042126C6610099BEAF /* Book.swift */; };
 		E5818A072126C9DC0099BEAF /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A062126C9DC0099BEAF /* Author.swift */; };
+		E58394C6213AF0E800AC78DE /* ReviewRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */; };
 		E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */; };
 		E5B195C9212B14E700A9901C /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B195C8212B14E700A9901C /* UIViewExtensions.swift */; };
 		E5B195CB212B42A800A9901C /* LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B195CA212B42A800A9901C /* LoginState.swift */; };
@@ -76,6 +77,7 @@
 		E5588E112129A71500A84BEC /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
 		E5818A042126C6610099BEAF /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		E5818A062126C9DC0099BEAF /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
+		E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRequestService.swift; sourceTree = "<group>"; };
 		E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelvesSelectionViewController.swift; sourceTree = "<group>"; };
 		E5B195C8212B14E700A9901C /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		E5B195CA212B42A800A9901C /* LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginState.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				E554D420211F44EB00F32AF9 /* UserDefaultsService.swift */,
 				E52121672124DE620027BCFC /* GoodreadsService.swift */,
 				E5E525FB21262D2200EF1E1B /* AuthStorageService.swift */,
+				E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				E554D425211F916200F32AF9 /* CustomTagEntryViewController.swift in Sources */,
 				E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */,
 				E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */,
+				E58394C6213AF0E800AC78DE /* ReviewRequestService.swift in Sources */,
 				E5818A052126C6610099BEAF /* Book.swift in Sources */,
 				E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */,
 				E5E525FE2126374500EF1E1B /* Shelf.swift in Sources */,

@@ -29,6 +29,7 @@ class MainViewController: UIViewController {
     
     let averageRatingText = "Average Rating:"
     let quoteService = QuoteService()
+    let reviewService = ReviewRequestService()
     var pastelView:PastelView?
     var currentBook:Book?
     var restartAnimation = true
@@ -262,6 +263,12 @@ class MainViewController: UIViewController {
                     self.showBookDetails()
                 }
             }
+            
+            let deadlineTime = DispatchTime.now() + .seconds(5)
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                self.reviewService.showReview()
+            }
+            
             self.pastelView?.pauseAnimation()
         }
     }
