@@ -20,6 +20,7 @@ enum Settings: String {
 
 class FiltersViewController: UIViewController {
     let goodreadsTitles = (signIn: "Sign In to Goodreads", signOut: "Sign Out of Goodreads")
+    let defaultShelf = "to-read"
     
     let sectionTitles = [ 0 : "Filters",
                           1 : "Settings",
@@ -35,7 +36,7 @@ class FiltersViewController: UIViewController {
                                                 .CustomTag : "AddCustomTagFilter",
                                                 .GoodreadsShelf : "ShowShelves",
                                                 .About : "ShowAcknowledgements"]
-    
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var applyButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
@@ -64,7 +65,7 @@ class FiltersViewController: UIViewController {
     
     override func viewDidLoad() {
         currentSelection = defaultsService.loadFilters() ?? (filter: "", type: FilterType.None)
-        currentShelf = defaultsService.loadDefaultShelf() ?? ""
+        currentShelf = defaultsService.loadDefaultShelf() ?? defaultShelf
         
         tableView.reloadData()
     }
@@ -84,7 +85,7 @@ class FiltersViewController: UIViewController {
     @IBAction func ResetToDefaults(_ sender: Any) {
         defaultsService.wipeFilters()
         currentSelection = (filter: "", type: FilterType.None)
-        currentShelf = "to-read"
+        currentShelf = defaultShelf
         defaultsService.storeDefaultShelf(shelfName: currentShelf)
         tableView.reloadData()
     }
