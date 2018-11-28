@@ -12,10 +12,7 @@ import SwiftyJSON
 
 //TODO: This is a mess already, refactor it
 class QuoteService {
-    let baseUrl = "https://goodquotesapi.herokuapp.com"
-    let authorPath = "/author"
-    let tagPath = "/tag"
-    let pageQuery = "page"
+    let baseUrl = "https://quoteyapi.herokuapp.com/api/v1/quotey/"
     
     func getRandomQuote(completion: @escaping (Quote) -> ())
     {
@@ -95,54 +92,34 @@ class QuoteService {
     
     internal func getAllQuotesForAuthorAtPage(author: String, pageNumber: Int, completion: @escaping ([Quote]) -> ())
     {
-        var components = URLComponents(string: baseUrl)
-        components?.path="\(authorPath)/\(author)"
-        components?.queryItems = [URLQueryItem(name: pageQuery, value:"\(pageNumber)")]
-        
-        if let url = components?.url
-        {
-            Alamofire.request(url).responseJSON { response in
+        Alamofire.request(baseUrl + "\(author)/\(pageNumber)").responseJSON { response in
                 if let jsonResponse = response.result.value {
                     let json = JSON(jsonResponse)
                     let quotes = json["quotes"].map({return Quote(jsonObject: $1)})
                     completion(quotes)
                 }
             }
-        }
     }
     
     internal func getTotalPageNumberForAuthor(author: String,  completion: @escaping (Int) -> ())
     {
-        var components = URLComponents(string: baseUrl)
-        components?.path="\(authorPath)/\(author)"
-        
-        if let url = components?.url
-        {
-            Alamofire.request(url).responseJSON { response in
+            Alamofire.request(baseUrl+author).responseJSON { response in
                 if let jsonResponse = response.result.value {
                     let json = JSON(jsonResponse)
                     completion(json["total_pages"].intValue)
                 }
             }
-        }
     }
     
     internal func getAllQuotesForTagAtPage(tag: String, pageNumber: Int, completion: @escaping ([Quote]) -> ())
     {
-        var components = URLComponents(string: baseUrl)
-        components?.path="\(tagPath)/\(tag)"
-        components?.queryItems = [URLQueryItem(name: pageQuery, value:"\(pageNumber)")]
-        
-        if let url = components?.url
-        {
-            Alamofire.request(url).responseJSON { response in
+            Alamofire.request(baseUrl + "\(tag)/\(pageNumber)").responseJSON { response in
                 if let jsonResponse = response.result.value {
                     let json = JSON(jsonResponse)
                     let quotes = json["quotes"].map({return Quote(jsonObject: $1)})
                     completion(quotes)
                 }
             }
-        }
     }
     
     internal func randomAuthor() -> Character
