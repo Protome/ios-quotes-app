@@ -237,11 +237,11 @@ class MainViewController: UIViewController {
         }
         
         quoteService.getRandomQuote { quote in
-            self.QuoteLabel.text = "\"\(quote.quote)\""
+            self.QuoteLabel.text = "\(quote.quote)"
             self.AuthorLabel.text = quote.author
             self.BookLabel.text = quote.publication
             
-            UIView.animate(withDuration: 1.4,
+            UIView.animate(withDuration: 1.2,
                            delay: 0, usingSpringWithDamping: 0.6,
                            initialSpringVelocity: 0.0,
                            options: .beginFromCurrentState,
