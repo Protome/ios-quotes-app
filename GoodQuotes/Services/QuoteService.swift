@@ -13,7 +13,8 @@ import SwiftyJSON
 //TODO: This is a mess already, refactor it
 class QuoteService {
     let baseUrl = "https://quoteyapi.herokuapp.com/api/v1/quotey/"
-    
+    //let baseUrl = "http://192.168.0.5:8000/api/v1/quotey/"
+
     func getRandomQuote(completion: @escaping (Quote) -> ())
     {
         let defaultsService = UserDefaultsService()
@@ -30,7 +31,7 @@ class QuoteService {
             return
         }
         
-        if settings?.type == FilterType.CustomTag {
+        if settings?.type == FilterType.Search {
             getAuthorQuote(author:settings!.filter, completion: completion)
             return
         }

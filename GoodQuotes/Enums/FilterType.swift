@@ -11,6 +11,6 @@ import Foundation
 enum FilterType: Int {
     case None
     case Tag
-    case CustomTag
+    case Search
     case Title
 }

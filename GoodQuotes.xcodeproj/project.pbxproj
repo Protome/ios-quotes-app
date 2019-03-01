@@ -24,6 +24,7 @@
 		E554D425211F916200F32AF9 /* CustomTagEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D424211F916200F32AF9 /* CustomTagEntryViewController.swift */; };
 		E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */; };
 		E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5588E112129A71500A84BEC /* CGPointExtensions.swift */; };
+		E56EBA7321AE264B00A9AF1D /* Secrets.strings in Resources */ = {isa = PBXBuildFile; fileRef = E56EBA7221AE264B00A9AF1D /* Secrets.strings */; };
 		E5818A052126C6610099BEAF /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A042126C6610099BEAF /* Book.swift */; };
 		E5818A072126C9DC0099BEAF /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A062126C9DC0099BEAF /* Author.swift */; };
 		E58394C6213AF0E800AC78DE /* ReviewRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */; };
@@ -37,7 +38,6 @@
 		E5C5CCA9211C8E600010ACB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCA8211C8E600010ACB0 /* Assets.xcassets */; };
 		E5C5CCAC211C8E600010ACB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCAA211C8E600010ACB0 /* LaunchScreen.storyboard */; };
 		E5C5CCB7211C8E600010ACB0 /* GoodQuotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCB6211C8E600010ACB0 /* GoodQuotesTests.swift */; };
-		E5E525F02124E68800EF1E1B /* Secrets.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5E525EF2124E68800EF1E1B /* Secrets.strings */; };
 		E5E525F22126060500EF1E1B /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E525F12126060500EF1E1B /* UserCredentials.swift */; };
 		E5E525F42126065400EF1E1B /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E525F32126065400EF1E1B /* KeychainError.swift */; };
 		E5E525FA2126260600EF1E1B /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E525F92126260600EF1E1B /* KeychainPasswordItem.swift */; };
@@ -75,6 +75,7 @@
 		E554D424211F916200F32AF9 /* CustomTagEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTagEntryViewController.swift; sourceTree = "<group>"; };
 		E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		E5588E112129A71500A84BEC /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
+		E56EBA7221AE264B00A9AF1D /* Secrets.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Secrets.strings; sourceTree = "<group>"; };
 		E5818A042126C6610099BEAF /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		E5818A062126C9DC0099BEAF /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRequestService.swift; sourceTree = "<group>"; };
@@ -92,7 +93,6 @@
 		E5C5CCB2211C8E600010ACB0 /* GoodQuotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoodQuotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C5CCB6211C8E600010ACB0 /* GoodQuotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodQuotesTests.swift; sourceTree = "<group>"; };
 		E5C5CCB8211C8E600010ACB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E5E525EF2124E68800EF1E1B /* Secrets.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Secrets.strings; sourceTree = "<group>"; };
 		E5E525F12126060500EF1E1B /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
 		E5E525F32126065400EF1E1B /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		E5E525F92126260600EF1E1B /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
@@ -257,7 +257,7 @@
 				E5C5CCA8211C8E600010ACB0 /* Assets.xcassets */,
 				E5C5CCAA211C8E600010ACB0 /* LaunchScreen.storyboard */,
 				E5C5CCAD211C8E600010ACB0 /* Info.plist */,
-				E5E525EF2124E68800EF1E1B /* Secrets.strings */,
+				E56EBA7221AE264B00A9AF1D /* Secrets.strings */,
 			);
 			path = GoodQuotes;
 			sourceTree = "<group>";
@@ -354,9 +354,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5E525F02124E68800EF1E1B /* Secrets.strings in Resources */,
 				E5C5CCAC211C8E600010ACB0 /* LaunchScreen.storyboard in Resources */,
 				E5C5CCA9211C8E600010ACB0 /* Assets.xcassets in Resources */,
+				E56EBA7321AE264B00A9AF1D /* Secrets.strings in Resources */,
 				E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */,
 				E5C5CCA7211C8E5D0010ACB0 /* Main.storyboard in Resources */,
 			);

@@ -11,7 +11,7 @@ import UIKit
 
 enum Settings: String {
     case Tag = "Tag"
-    case CustomTag = "Custom Tag"
+    case Search = "Search"
     case GoodreadsShelf = "Goodreads Shelf"
     case About = "About"
     case SignInOutGoodreads = "SignInOutGoodreads"
@@ -27,13 +27,13 @@ class FiltersViewController: UIViewController {
                           2 : "Goodreads",
                           3 : "Other"]
     
-    let sections: [Int : [Settings]] = [ 0 : [.Tag, .CustomTag],
+    let sections: [Int : [Settings]] = [ 0 : [.Tag, .Search],
                      1 : [.GoodreadsShelf],
                      2 : [.SignInOutGoodreads, .VisitGoodreads],
                      3 : [.About]]
     
     let segueForSection: [Settings : String] = [ .Tag : "ShowTagFilters",
-                                                .CustomTag : "AddCustomTagFilter",
+                                                .Search : "AddCustomTagFilter",
                                                 .GoodreadsShelf : "ShowShelves",
                                                 .About : "ShowAcknowledgements"]
 
@@ -120,8 +120,8 @@ class FiltersViewController: UIViewController {
         switch item {
         case .Tag:
             return currentSelection.type == FilterType.Tag ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
-        case .CustomTag:
-            return currentSelection.type == FilterType.CustomTag ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
+        case .Search:
+            return currentSelection.type == FilterType.Search ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
         case .GoodreadsShelf:
             return currentShelf.isEmpty ? item.rawValue : "\(item.rawValue): \(currentShelf)"
         case .SignInOutGoodreads:
@@ -214,7 +214,7 @@ extension FiltersViewController: TagsViewControllerDelegate, CustomTagEntryViewC
     }
     
     func customTagSelected(tag: String) {
-        currentSelection = (filter: tag, type: .CustomTag)
+        currentSelection = (filter: tag, type: .Search)
         changesMade = true
         updateFilterCells()
     }
