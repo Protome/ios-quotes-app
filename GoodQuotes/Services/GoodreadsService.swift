@@ -125,6 +125,23 @@ class GoodreadsService {
         }
     }
     
+    func searchForBooks(title: String, completion:  @escaping ([Book]) -> ())
+    {
+        var components = URLComponents(string: "https://www.goodreads.com/search/index.xml")
+        components?.queryItems = [
+            URLQueryItem(name: "key", value:"\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
+            URLQueryItem(name: "q", value:title)]
+        if let url = components?.url
+        {
+            Alamofire.request(url).response { response in
+                let xml = XML.parse(response.data!)
+                let results = xml["GoodreadsResponse", "search", "results", "work"]
+                let bookResults =  results.map({  return Book(xml: $0) })
+                completion(bookResults)
+            }
+        }
+    }
+    
     func addBookToShelf(sender: UIViewController, bookId: String, completion: @escaping () -> ())
     {
         guard let oauthswift = oauthswift, !oauthswift.client.credential.oauthToken.isEmpty else {

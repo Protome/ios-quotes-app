@@ -27,6 +27,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var BookViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var RatingLabel: UILabel!
     
+    @IBOutlet weak var BookSearchField: BookSearchBox!
+    
     let averageRatingText = "Average Rating:"
     let quoteService = QuoteService()
     let reviewService = ReviewRequestService()
@@ -38,7 +40,6 @@ class MainViewController: UIViewController {
     var maxDistanceTop: CGFloat = 0
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
         restartAnimation = !returningFromAuth
         addGradient()
         
@@ -63,7 +64,18 @@ class MainViewController: UIViewController {
                                                name: .loginStateChanged,
                                                object: nil)
         
-        GoodreadsService.sharedInstance.isLoggedIn = AuthStorageService.readAuthToken().isEmpty ? .LoggedOut : .LoggedIn
+        
+        let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        visualEffectView.frame =  (self.navigationController?.navigationBar.bounds.insetBy(dx: 0, dy: -10).offsetBy(dx: 0, dy: -10))!
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.addSubview(visualEffectView)
+        self.navigationController?.navigationBar.sendSubviewToBack(visualEffectView)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        BookSearchField.parent = self
+        
+                GoodreadsService.sharedInstance.isLoggedIn = AuthStorageService.readAuthToken().isEmpty ? .LoggedOut : .LoggedIn
         styleView()
         setupButtons()
     }
@@ -117,7 +129,7 @@ class MainViewController: UIViewController {
             return
         }
         
-        UIApplication.shared.open(URL(string: "https://www.goodreads.com/book/show/\(bookId)")!, options: [:], completionHandler: nil)
+        UIApplication.shared.open(URL(string: "https://www.goodreads.com/book/show/\(bookId)")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
     
     func setupButtons() {
@@ -332,3 +344,8 @@ extension MainViewController: ShelvesSelectionDelegate, UIPopoverPresentationCon
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}

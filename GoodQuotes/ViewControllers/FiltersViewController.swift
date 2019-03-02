@@ -186,7 +186,7 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
         }
         
         if section == .VisitGoodreads {
-            UIApplication.shared.open(URL(string: "https://www.goodreads.com")!, options: [:], completionHandler: nil)
+            UIApplication.shared.open(URL(string: "https://www.goodreads.com")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         }
     }
     
@@ -224,4 +224,9 @@ extension FiltersViewController: TagsViewControllerDelegate, CustomTagEntryViewC
         changesMade = true
         tableView.reloadData()
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

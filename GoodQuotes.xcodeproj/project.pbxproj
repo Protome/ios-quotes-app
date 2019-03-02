@@ -28,6 +28,7 @@
 		E5818A052126C6610099BEAF /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A042126C6610099BEAF /* Book.swift */; };
 		E5818A072126C9DC0099BEAF /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A062126C9DC0099BEAF /* Author.swift */; };
 		E58394C6213AF0E800AC78DE /* ReviewRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */; };
+		E59965402229DAEA00BAA33C /* BookSearchBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E599653F2229DAEA00BAA33C /* BookSearchBox.swift */; };
 		E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */; };
 		E5B195C9212B14E700A9901C /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B195C8212B14E700A9901C /* UIViewExtensions.swift */; };
 		E5B195CB212B42A800A9901C /* LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B195CA212B42A800A9901C /* LoginState.swift */; };
@@ -79,6 +80,7 @@
 		E5818A042126C6610099BEAF /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		E5818A062126C9DC0099BEAF /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRequestService.swift; sourceTree = "<group>"; };
+		E599653F2229DAEA00BAA33C /* BookSearchBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchBox.swift; sourceTree = "<group>"; };
 		E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelvesSelectionViewController.swift; sourceTree = "<group>"; };
 		E5B195C8212B14E700A9901C /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		E5B195CA212B42A800A9901C /* LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginState.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		E5279ED421276402007BC585 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				E599653E2229D92E00BAA33C /* BookSearchBox */,
 				E5279ED521276412007BC585 /* BlurButton */,
 			);
 			path = CustomViews;
@@ -220,6 +223,14 @@
 				E5B195CA212B42A800A9901C /* LoginState.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		E599653E2229D92E00BAA33C /* BookSearchBox */ = {
+			isa = PBXGroup;
+			children = (
+				E599653F2229DAEA00BAA33C /* BookSearchBox.swift */,
+			);
+			path = BookSearchBox;
 			sourceTree = "<group>";
 		};
 		E5C5CC95211C8E5D0010ACB0 = {
@@ -323,9 +334,11 @@
 				TargetAttributes = {
 					E5C5CC9D211C8E5D0010ACB0 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1010;
 					};
 					E5C5CCB1211C8E600010ACB0 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1010;
 						TestTargetID = E5C5CC9D211C8E5D0010ACB0;
 					};
 				};
@@ -451,6 +464,7 @@
 				E5E525FA2126260600EF1E1B /* KeychainPasswordItem.swift in Sources */,
 				E5818A072126C9DC0099BEAF /* Author.swift in Sources */,
 				E5B195CD212CA49100A9901C /* StringExtensions.swift in Sources */,
+				E59965402229DAEA00BAA33C /* BookSearchBox.swift in Sources */,
 				E554D41C211F377B00F32AF9 /* TagCellView.swift in Sources */,
 				E5E525F42126065400EF1E1B /* KeychainError.swift in Sources */,
 				E554D41E211F426C00F32AF9 /* FilterType.swift in Sources */,
@@ -624,7 +638,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -644,7 +658,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -664,7 +678,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoodQuotes.app/GoodQuotes";
 			};
@@ -685,7 +699,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoodQuotes.app/GoodQuotes";
 			};
