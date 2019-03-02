@@ -13,12 +13,14 @@ class UserDefaultsService
     let filterKey = "Filter"
     let typeKey = "Type"
     let shelfKey = "GoodreadsShelf"
+    let bookKey = "Book"
     
     func wipeFilters()
     {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: filterKey)
         defaults.removeObject(forKey: typeKey)
+        defaults.removeObject(forKey: bookKey)
     }
     
     func storeFilter(filter: String, type: FilterType)
@@ -37,6 +39,42 @@ class UserDefaultsService
         }
         
         return (filter: filter, type:type)
+    }
+    
+    func storeBook(book: Book)
+    {
+        do {
+            let defaults = UserDefaults.standard
+            let data = try PropertyListEncoder().encode(book)
+            let encodedData = NSKeyedArchiver.archivedData(withRootObject: data)
+            defaults.set(encodedData, forKey: bookKey)
+        } catch {
+            print("Save Failed")
+        }
+    }
+    
+    func loadBook() -> Book?
+    {
+        let defaults = UserDefaults.standard
+        guard let defaultsBook = defaults.object(forKey: bookKey) as? Data, let bookData = NSKeyedUnarchiver.unarchiveObject(with: defaultsBook) as? Data else
+        {
+            return nil
+        }
+        
+        do {
+            let book = try PropertyListDecoder().decode(Book.self, from: bookData)
+            return book
+        } catch {
+            print("Retrieve Failed")
+            return nil
+        }
+        
+        return nil
+    }
+    
+    func removeStoredBook() {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: bookKey)
     }
     
     func storeDefaultShelf(shelfName: String) {

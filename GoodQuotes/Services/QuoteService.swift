@@ -18,30 +18,32 @@ class QuoteService {
     func getRandomQuote(completion: @escaping (Quote) -> ())
     {
         let defaultsService = UserDefaultsService()
-        let settings = defaultsService.loadFilters()
+        let searchTerm = defaultsService.loadBook()
         
-        if settings == nil || settings?.type == FilterType.None
+        if searchTerm == nil
         {
             getFullyRandomQuote(completion: completion)
             return
         }
         
-        if settings?.type == FilterType.Tag {
-            getTagQuotes(filter:settings!.filter, completion: completion)
-            return
-        }
+        getBookQuote(book: searchTerm!, completion: completion)
         
-        if settings?.type == FilterType.Search {
-            getAuthorQuote(author:settings!.filter, completion: completion)
-            return
-        }
+//        if settings?.type == FilterType.Tag {
+//            getTagQuotes(filter:settings!.filter, completion: completion)
+//            return
+//        }
+//
+//        if settings?.type == FilterType.Search {
+//            getAuthorQuote(author:settings!.filter, completion: completion)
+//            return
+//        }
     }
     
     internal func getFullyRandomQuote(completion: @escaping (Quote) -> ())
     {
         let randomPage = Int(arc4random_uniform(UInt32(100)))
         let author = randomAuthor()
-        getAllQuotesForAuthorAtPage(author: "\(author)", pageNumber: randomPage) { quotes in
+        getAllQuotesForStringAtPage(query: "\(author)", pageNumber: randomPage) { quotes in
             if quotes.count == 0 {
                 self.getRandomQuote(completion: { quote in
                     completion(quote)
@@ -58,10 +60,10 @@ class QuoteService {
     {
         let editedAuthor = author.components(separatedBy: .whitespaces).joined(separator: "+")
         
-        getTotalPageNumberForAuthor(author: editedAuthor) { pages in
+        getTotalPageNumberForString(query: editedAuthor) { pages in
             let randomPage = Int(arc4random_uniform(UInt32(pages)))
             
-            self.getAllQuotesForAuthorAtPage(author: editedAuthor, pageNumber: randomPage) { quotes in
+            self.getAllQuotesForStringAtPage(query: editedAuthor, pageNumber: randomPage) { quotes in
                 if quotes.count == 0 {
                     self.getFullyRandomQuote(completion: { quote in
                         completion(quote)
@@ -91,9 +93,40 @@ class QuoteService {
         }
     }
     
-    internal func getAllQuotesForAuthorAtPage(author: String, pageNumber: Int, completion: @escaping ([Quote]) -> ())
+    internal func getBookQuote(book: Book, completion: @escaping (Quote) -> ())
     {
-        Alamofire.request(baseUrl + "\(author)/\(pageNumber)").responseJSON { response in
+        let editedTitle = book.title.components(separatedBy: .whitespaces).joined(separator: "+")
+        let editedAuthor = book.author.name.components(separatedBy: .whitespaces).joined(separator: "+")
+        let query = "\(editedTitle)+\(editedAuthor)"
+        
+        getTotalPageNumberForString(query: query) { pages in
+            let randomPage = Int(arc4random_uniform(UInt32(pages)))
+            
+            self.getAllQuotesForStringAtPage(query: editedTitle, pageNumber: randomPage) { quotes in
+                if quotes.count == 0 {
+                    self.getFullyRandomQuote(completion: { quote in
+                        completion(quote)
+                    })
+                }
+                else {
+                    let filteredQuotes = quotes.filter({ quote in
+                        let authorMatches = quote.author == book.author.name
+                        let titleMatches = quote.publication == book.title
+                        return authorMatches && titleMatches
+                    })
+                    
+                    let listToUse = filteredQuotes.count > 0 ? filteredQuotes : quotes
+                    
+                    let random = Int(arc4random_uniform(UInt32(listToUse.count)))
+                    completion(listToUse[random])
+                }
+            }
+        }
+    }
+    
+    internal func getAllQuotesForStringAtPage(query: String, pageNumber: Int, completion: @escaping ([Quote]) -> ())
+    {
+        Alamofire.request(baseUrl + "\(query)/\(pageNumber)").responseJSON { response in
                 if let jsonResponse = response.result.value {
                     let json = JSON(jsonResponse)
                     let quotes = json["quotes"].map({return Quote(jsonObject: $1)})
@@ -102,9 +135,9 @@ class QuoteService {
             }
     }
     
-    internal func getTotalPageNumberForAuthor(author: String,  completion: @escaping (Int) -> ())
+    internal func getTotalPageNumberForString(query: String,  completion: @escaping (Int) -> ())
     {
-            Alamofire.request(baseUrl+author).responseJSON { response in
+            Alamofire.request(baseUrl+query).responseJSON { response in
                 if let jsonResponse = response.result.value {
                     let json = JSON(jsonResponse)
                     completion(json["total_pages"].intValue)

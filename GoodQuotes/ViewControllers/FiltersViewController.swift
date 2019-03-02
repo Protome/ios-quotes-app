@@ -10,8 +10,6 @@ import Foundation
 import UIKit
 
 enum Settings: String {
-    case Tag = "Tag"
-    case Search = "Search"
     case GoodreadsShelf = "Goodreads Shelf"
     case About = "About"
     case SignInOutGoodreads = "SignInOutGoodreads"
@@ -22,26 +20,21 @@ class FiltersViewController: UIViewController {
     let goodreadsTitles = (signIn: "Sign In to Goodreads", signOut: "Sign Out of Goodreads")
     let defaultShelf = "to-read"
     
-    let sectionTitles = [ 0 : "Filters",
-                          1 : "Settings",
-                          2 : "Goodreads",
-                          3 : "Other"]
+    let sectionTitles = [0 : "Settings",
+                          1 : "Goodreads",
+                          2 : "Other"]
     
-    let sections: [Int : [Settings]] = [ 0 : [.Tag, .Search],
-                     1 : [.GoodreadsShelf],
-                     2 : [.SignInOutGoodreads, .VisitGoodreads],
-                     3 : [.About]]
+    let sections: [Int : [Settings]] = [0 : [.GoodreadsShelf],
+                     1 : [.SignInOutGoodreads, .VisitGoodreads],
+                     2 : [.About]]
     
-    let segueForSection: [Settings : String] = [ .Tag : "ShowTagFilters",
-                                                .Search : "AddCustomTagFilter",
-                                                .GoodreadsShelf : "ShowShelves",
+    let segueForSection: [Settings : String] = [.GoodreadsShelf : "ShowShelves",
                                                 .About : "ShowAcknowledgements"]
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var applyButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     
-    var currentSelection: (filter:String, type: FilterType) = (filter: "", type: FilterType.None)
     var currentShelf = ""
     var changesMade = false
     let defaultsService = UserDefaultsService()
@@ -64,17 +57,12 @@ class FiltersViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        currentSelection = defaultsService.loadFilters() ?? (filter: "", type: FilterType.None)
         currentShelf = defaultsService.loadDefaultShelf() ?? defaultShelf
         
         tableView.reloadData()
     }
     
     @IBAction func ApplyFilters(_ sender: UIButton) {
-        if currentSelection.type != .None, changesMade {
-            defaultsService.storeFilter(filter: currentSelection.filter, type: currentSelection.type)
-        }
-        
         if(changesMade) {
             defaultsService.storeDefaultShelf(shelfName: currentShelf)
         }
@@ -84,19 +72,12 @@ class FiltersViewController: UIViewController {
     
     @IBAction func ResetToDefaults(_ sender: Any) {
         defaultsService.wipeFilters()
-        currentSelection = (filter: "", type: FilterType.None)
         currentShelf = defaultShelf
         defaultsService.storeDefaultShelf(shelfName: currentShelf)
         tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? TagsViewController {
-            destination.delegate = self
-        }
-        if let destination = segue.destination as? CustomTagEntryViewController {
-            destination.delegate = self
-        }
         if let destination = segue.destination as? ShelvesSelectionViewController {
             destination.delegate = self
         }
@@ -118,10 +99,6 @@ class FiltersViewController: UIViewController {
     func titleForRow(_ item: Settings) -> String
     {
         switch item {
-        case .Tag:
-            return currentSelection.type == FilterType.Tag ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
-        case .Search:
-            return currentSelection.type == FilterType.Search ? "\(item.rawValue): \(currentSelection.filter)" : item.rawValue
         case .GoodreadsShelf:
             return currentShelf.isEmpty ? item.rawValue : "\(item.rawValue): \(currentShelf)"
         case .SignInOutGoodreads:
@@ -205,20 +182,8 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
     }
 }
 
-extension FiltersViewController: TagsViewControllerDelegate, CustomTagEntryViewControllerDelegate, ShelvesSelectionDelegate
+extension FiltersViewController: ShelvesSelectionDelegate
 {
-    func tagSelected(tag: Tags) {
-        currentSelection = (filter: tag.rawValue, type: .Tag)
-        changesMade = true
-        updateFilterCells()
-    }
-    
-    func customTagSelected(tag: String) {
-        currentSelection = (filter: tag, type: .Search)
-        changesMade = true
-        updateFilterCells()
-    }
-    
     func shelfSelected(shelfName: String) {
         currentShelf = shelfName
         changesMade = true

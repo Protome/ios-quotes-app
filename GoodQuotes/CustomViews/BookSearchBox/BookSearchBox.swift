@@ -89,6 +89,17 @@ import UIKit
         backgroundView = nil
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        handleSearching()
+        return true
+    }
+    
+    func handleSearching() {
+        if text!.isEmpty {
+            defaultsService.removeStoredBook()
+        }
+    }
+    
     @objc func backgroundTapped(sender: UITapGestureRecognizer) {
         dismissView()
     }
@@ -118,7 +129,7 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
         let selectedBook = searchResults[indexPath.row]
         text = selectedBook.title
         
-        defaultsService.storeFilter(filter: selectedBook.title, type: .Search)
+        defaultsService.storeBook(book: selectedBook)
         dismissView()
         
         bookSearchDelegate?.newSearchTermSelected()
