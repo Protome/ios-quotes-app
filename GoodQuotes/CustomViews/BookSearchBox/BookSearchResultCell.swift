@@ -18,6 +18,10 @@ class BookSearchResultCell: UITableViewCell {
     static var Nib = UINib(nibName: String(describing: BookSearchResultCell.self), bundle: nil)
     static var Identifier = String(describing: BookSearchResultCell.self)
     
+    override func prepareForReuse() {
+        CoverImageView?.image = nil
+    }
+    
     func SetupCell(book: Book) {
         CoverImageView.setImageFromUrl(book.imageUrl)
         TitleLabelView.text = book.title

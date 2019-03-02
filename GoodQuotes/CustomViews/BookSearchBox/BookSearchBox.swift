@@ -50,7 +50,8 @@ import UIKit
         GoodreadsService.sharedInstance.searchForBooks(title: textField.text ?? "") {
             books in
                 self.searchResults = books
-                self.resultsTableView?.reloadData()
+            
+            self.resultsTableView?.reloadSections(IndexSet(integer: 0), with: UITableView.RowAnimation.fade)
         }
     }
     
