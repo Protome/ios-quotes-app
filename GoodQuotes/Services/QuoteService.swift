@@ -137,7 +137,9 @@ class QuoteService {
     
     internal func getTotalPageNumberForString(query: String,  completion: @escaping (Int) -> ())
     {
-            Alamofire.request(baseUrl+query).responseJSON { response in
+        let url = baseUrl + query
+        let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            Alamofire.request(encodedURL!).responseJSON { response in
                 if let jsonResponse = response.result.value {
                     let json = JSON(jsonResponse)
                     completion(json["total_pages"].intValue)
