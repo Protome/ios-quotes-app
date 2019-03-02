@@ -10,11 +10,14 @@ import Foundation
 import UIKit
 
 @IBDesignable class BookSearchBox: UITextField, UITextFieldDelegate {
+    weak var bookSearchDelegate: BookSearchSelectionDelegate?
+    
     var searchResults: [Book] = [Book]()
     var parent : UIViewController?
     var resultsTableView : UITableView?
     var backgroundView : UIView?
     var dismissKeyboardGestureRecogniser : UITapGestureRecognizer?
+    let defaultsService = UserDefaultsService()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -78,12 +81,16 @@ import UIKit
         parent!.view.addSubview(backgroundView!)
     }
     
-    @objc func backgroundTapped(sender: UITapGestureRecognizer) {
+    func dismissView() {
         parent?.dismissKeyboard()
         self.resignFirstResponder()
         backgroundView?.removeGestureRecognizer(dismissKeyboardGestureRecogniser!)
         backgroundView?.removeFromSuperview()
         backgroundView = nil
+    }
+    
+    @objc func backgroundTapped(sender: UITapGestureRecognizer) {
+        dismissView()
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -106,4 +113,19 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
         cell.SetupCell(book: searchResults[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedBook = searchResults[indexPath.row]
+        text = selectedBook.title
+        
+        defaultsService.storeFilter(filter: selectedBook.title, type: .Search)
+        dismissView()
+        
+        bookSearchDelegate?.newSearchTermSelected()
+    }
+}
+
+protocol BookSearchSelectionDelegate: class
+{
+    func newSearchTermSelected()
 }

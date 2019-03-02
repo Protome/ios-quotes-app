@@ -66,6 +66,7 @@ class MainViewController: UIViewController {
                                                object: nil)
         
         BookSearchField.parent = self
+        BookSearchField.bookSearchDelegate = self
         
                 GoodreadsService.sharedInstance.isLoggedIn = AuthStorageService.readAuthToken().isEmpty ? .LoggedOut : .LoggedIn
         styleView()
@@ -355,6 +356,11 @@ extension MainViewController: ShelvesSelectionDelegate, UIPopoverPresentationCon
     }
 }
 
+extension MainViewController: BookSearchSelectionDelegate {
+    func newSearchTermSelected() {
+        loadRandomQuote()
+    }
+}
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
