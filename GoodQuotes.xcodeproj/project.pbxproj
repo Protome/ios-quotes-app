@@ -21,7 +21,6 @@
 		E554D41E211F426C00F32AF9 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D41D211F426C00F32AF9 /* FilterType.swift */; };
 		E554D421211F44EB00F32AF9 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D420211F44EB00F32AF9 /* UserDefaultsService.swift */; };
 		E554D423211F4BE400F32AF9 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D422211F4BE400F32AF9 /* FilterCell.swift */; };
-		E554D425211F916200F32AF9 /* CustomTagEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D424211F916200F32AF9 /* CustomTagEntryViewController.swift */; };
 		E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */; };
 		E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5588E112129A71500A84BEC /* CGPointExtensions.swift */; };
 		E56EBA7321AE264B00A9AF1D /* Secrets.strings in Resources */ = {isa = PBXBuildFile; fileRef = E56EBA7221AE264B00A9AF1D /* Secrets.strings */; };
@@ -76,7 +75,6 @@
 		E554D41D211F426C00F32AF9 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		E554D420211F44EB00F32AF9 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		E554D422211F4BE400F32AF9 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
-		E554D424211F916200F32AF9 /* CustomTagEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTagEntryViewController.swift; sourceTree = "<group>"; };
 		E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		E5588E112129A71500A84BEC /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
 		E56EBA7221AE264B00A9AF1D /* Secrets.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Secrets.strings; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 				E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */,
 				E554D414211F33BC00F32AF9 /* FiltersViewController.swift */,
 				E554D416211F33CC00F32AF9 /* TagsViewController.swift */,
-				E554D424211F916200F32AF9 /* CustomTagEntryViewController.swift */,
 				E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */,
 			);
 			path = ViewControllers;
@@ -448,7 +445,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E554D425211F916200F32AF9 /* CustomTagEntryViewController.swift in Sources */,
 				E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */,
 				E5996546222A0E8800BAA33C /* UIImageViewExtensions.swift in Sources */,
 				E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */,
