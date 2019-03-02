@@ -13,7 +13,7 @@ import OAuthSwift
 
 class GoodreadsService {
     static var sharedInstance = GoodreadsService()
-    
+
     var isLoggedIn = LoginState.LoggedOut {
         didSet {
             NotificationCenter.default.post(name: .loginStateChanged, object: nil)
@@ -22,6 +22,7 @@ class GoodreadsService {
     
     var oauthswift: OAuthSwift?
     var id: String?
+    var ongoingRequest: DataRequest?
     
     func loginToGoodreadsAccount(sender: UIViewController, completion:  (() -> ())?) {
         let oauthswift = OAuth1Swift(
@@ -133,7 +134,9 @@ class GoodreadsService {
             URLQueryItem(name: "q", value:title)]
         if let url = components?.url
         {
-            Alamofire.request(url).response { response in
+            ongoingRequest?.cancel()
+            
+            ongoingRequest = Alamofire.request(url).response { response in
                 let xml = XML.parse(response.data!)
                 let results = xml["GoodreadsResponse", "search", "results", "work"]
                 let bookResults =  results.map({  return Book(xml: $0) })

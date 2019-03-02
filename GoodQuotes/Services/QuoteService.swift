@@ -13,8 +13,8 @@ import SwiftyJSON
 //TODO: This is a mess already, refactor it
 class QuoteService {
     let baseUrl = "https://quoteyapi.herokuapp.com/api/v1/quotey/"
-    //let baseUrl = "http://192.168.0.5:8000/api/v1/quotey/"
-
+//    let baseUrl = "http://192.168.0.5:8080/api/v1/quotey/"
+    
     func getRandomQuote(completion: @escaping (Quote) -> ())
     {
         let defaultsService = UserDefaultsService()
@@ -126,7 +126,9 @@ class QuoteService {
     
     internal func getAllQuotesForStringAtPage(query: String, pageNumber: Int, completion: @escaping ([Quote]) -> ())
     {
-        Alamofire.request(baseUrl + "\(query)/\(pageNumber)").responseJSON { response in
+        let url = baseUrl + "\(query)/\(pageNumber)"
+        let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        Alamofire.request(encodedURL!).responseJSON { response in
                 if let jsonResponse = response.result.value {
                     let json = JSON(jsonResponse)
                     let quotes = json["quotes"].map({return Quote(jsonObject: $1)})
