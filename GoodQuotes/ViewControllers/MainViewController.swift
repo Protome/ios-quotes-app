@@ -55,6 +55,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupButtons()
+        setupNavBar()
     }
     
     override func viewDidLoad() {
@@ -63,15 +64,6 @@ class MainViewController: UIViewController {
                                                selector: #selector(setupButtonsFromNotification),
                                                name: .loginStateChanged,
                                                object: nil)
-        
-        
-        let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        visualEffectView.frame =  (self.navigationController?.navigationBar.bounds.insetBy(dx: 0, dy: -10).offsetBy(dx: 0, dy: -10))!
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.addSubview(visualEffectView)
-        self.navigationController?.navigationBar.sendSubviewToBack(visualEffectView)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         BookSearchField.parent = self
         
@@ -130,6 +122,25 @@ class MainViewController: UIViewController {
         }
         
         UIApplication.shared.open(URL(string: "https://www.goodreads.com/book/show/\(bookId)")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+    }
+    
+    func setupNavBar() {
+        let hasBeenSetUp = self.navigationController?.navigationBar.subviews.contains(where: { view in
+            return view is UIVisualEffectView
+        }) ?? false
+        
+        if hasBeenSetUp { return }
+        
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        let barHeight = self.view.safeAreaInsets.top
+        let offsetY = self.navigationController!.navigationBar.bounds.origin.y + (self.navigationController!.navigationBar.bounds.height - barHeight)
+        visualEffectView.frame = CGRect(origin: CGPoint(x: self.navigationController!.navigationBar.bounds.origin.x, y: offsetY),
+                                        size: CGSize(width: self.navigationController!.navigationBar.bounds.width, height: barHeight ))
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.addSubview(visualEffectView)
+        self.navigationController?.navigationBar.sendSubviewToBack(visualEffectView)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     func setupButtons() {

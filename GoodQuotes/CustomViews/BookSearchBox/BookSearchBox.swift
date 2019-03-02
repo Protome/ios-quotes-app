@@ -13,19 +13,32 @@ import UIKit
     var searchResults: [Book] = [Book]()
     var parent : UIViewController?
     var resultsTableView : UITableView?
+    var backgroundView : UIView?
+    var dismissKeyboardGestureRecogniser : UITapGestureRecognizer?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         delegate = self
         addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         guard let parentVC = parent else { return }
         
+        setupDismissKeyboardView()
         setupTableView()
         
-        resultsTableView!.frame = CGRect(x: 0, y: parentVC.view.safeAreaInsets.top, width: parentVC.view.frame.width, height: CGFloat(parentVC.view.frame.height - parentVC.view.safeAreaInsets.top))
+        let width = parentVC.view.frame.width * 0.85
+        let inset = (parentVC.view.frame.width - width) / 2
+        
+        resultsTableView!.frame = CGRect(x: inset, y: parentVC.view.safeAreaInsets.top, width: width, height: CGFloat(parentVC.view.frame.height - parentVC.view.safeAreaInsets.top))
         parentVC.view.addSubview(resultsTableView!)
     }
     
@@ -47,7 +60,36 @@ import UIKit
         resultsTableView = UITableView()
         resultsTableView?.delegate = self
         resultsTableView?.dataSource = self
-        resultsTableView?.backgroundColor = UIColor.red.withAlphaComponent(0.4)
+        resultsTableView?.register(BookSearchResultCell.Nib, forCellReuseIdentifier: BookSearchResultCell.Identifier)
+        resultsTableView?.backgroundColor = UIColor.clear
+        resultsTableView?.tableFooterView = UIView()
+        resultsTableView?.showsVerticalScrollIndicator = false
+        resultsTableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
+    }
+    
+    func setupDismissKeyboardView() {
+        backgroundView = UIView(frame: parent!.view.frame)
+        dismissKeyboardGestureRecogniser = dismissKeyboardGestureRecogniser ?? UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+        
+        backgroundView!.backgroundColor = UIColor.clear
+        backgroundView!.addGestureRecognizer(dismissKeyboardGestureRecogniser!)
+        
+        parent!.view.addSubview(backgroundView!)
+    }
+    
+    @objc func backgroundTapped(sender: UITapGestureRecognizer) {
+        parent?.dismissKeyboard()
+        self.resignFirstResponder()
+        backgroundView?.removeGestureRecognizer(dismissKeyboardGestureRecogniser!)
+        backgroundView?.removeFromSuperview()
+        backgroundView = nil
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            resultsTableView?.tableFooterView = UIView(frame: CGRect(x: 0,y: 0, width: 0, height: keyboardHeight))
+        }
     }
 }
 
@@ -58,11 +100,9 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        let temp = searchResults[indexPath.row]
-        cell.textLabel?.text = temp.title
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: BookSearchResultCell.Identifier) as? BookSearchResultCell else { return UITableViewCell() }
+        
+        cell.SetupCell(book: searchResults[indexPath.row])
         return cell
     }
-    
-
 }
