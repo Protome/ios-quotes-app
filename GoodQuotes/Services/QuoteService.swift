@@ -102,7 +102,7 @@ class QuoteService {
         getTotalPageNumberForString(query: query) { pages in
             let randomPage = Int(arc4random_uniform(UInt32(pages)))
             
-            self.getAllQuotesForStringAtPage(query: editedTitle, pageNumber: randomPage) { quotes in
+            self.getAllQuotesForStringAtPage(query: query, pageNumber: randomPage) { quotes in
                 if quotes.count == 0 {
                     self.getFullyRandomQuote(completion: { quote in
                         completion(quote)

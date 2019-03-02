@@ -65,10 +65,9 @@ class MainViewController: UIViewController {
                                                name: .loginStateChanged,
                                                object: nil)
         
-        BookSearchField.parent = self
         BookSearchField.bookSearchDelegate = self
         
-                GoodreadsService.sharedInstance.isLoggedIn = AuthStorageService.readAuthToken().isEmpty ? .LoggedOut : .LoggedIn
+        GoodreadsService.sharedInstance.isLoggedIn = AuthStorageService.readAuthToken().isEmpty ? .LoggedOut : .LoggedIn
         styleView()
         setupButtons()
     }

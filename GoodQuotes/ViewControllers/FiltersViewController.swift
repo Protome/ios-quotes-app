@@ -53,7 +53,7 @@ class FiltersViewController: UIViewController {
             return
         }
         
-        navController.navigationBar.tintColor = UIColor.darkGray
+        navController.navigationBar.tintColor = UIColor.white
     }
     
     override func viewDidLoad() {

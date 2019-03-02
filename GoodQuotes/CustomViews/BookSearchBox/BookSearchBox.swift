@@ -13,7 +13,6 @@ import UIKit
     weak var bookSearchDelegate: BookSearchSelectionDelegate?
     
     var searchResults: [Book] = [Book]()
-    var parent : UIViewController?
     var resultsTableView : UITableView?
     var backgroundView : UIView?
     var dismissKeyboardGestureRecogniser : UITapGestureRecognizer?
@@ -33,7 +32,7 @@ import UIKit
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        guard let parentVC = parent else { return }
+        guard let parentVC = bookSearchDelegate as? UIViewController else { return }
         
         setupDismissKeyboardView()
         setupTableView()
@@ -72,17 +71,21 @@ import UIKit
     }
     
     func setupDismissKeyboardView() {
-        backgroundView = UIView(frame: parent!.view.frame)
+        guard let parentVC = bookSearchDelegate as? UIViewController else { return }
+        
+        backgroundView = UIView(frame: parentVC.view.frame)
         dismissKeyboardGestureRecogniser = dismissKeyboardGestureRecogniser ?? UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
         
-        backgroundView!.backgroundColor = UIColor.clear
+        backgroundView!.backgroundColor = UIColor.black.withAlphaComponent(0.25)
         backgroundView!.addGestureRecognizer(dismissKeyboardGestureRecogniser!)
         
-        parent!.view.addSubview(backgroundView!)
+        parentVC.view.addSubview(backgroundView!)
     }
     
     func dismissView() {
-        parent?.dismissKeyboard()
+        guard let parentVC = bookSearchDelegate as? UIViewController else { return }
+        
+        parentVC.dismissKeyboard()
         self.resignFirstResponder()
         backgroundView?.removeGestureRecognizer(dismissKeyboardGestureRecogniser!)
         backgroundView?.removeFromSuperview()
@@ -136,7 +139,7 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
     }
 }
 
-protocol BookSearchSelectionDelegate: class
+protocol BookSearchSelectionDelegate: class where Self: UIViewController
 {
     func newSearchTermSelected()
 }
