@@ -10,7 +10,7 @@ import Foundation
 
 class UserDefaultsService
 {
-    let filterKey = "Filter"
+    let searchKey = "Search"
     let typeKey = "Type"
     let shelfKey = "GoodreadsShelf"
     let bookKey = "Book"
@@ -18,27 +18,37 @@ class UserDefaultsService
     func wipeFilters()
     {
         let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: filterKey)
+        defaults.removeObject(forKey: searchKey)
         defaults.removeObject(forKey: typeKey)
         defaults.removeObject(forKey: bookKey)
     }
     
-    func storeFilter(filter: String, type: FilterType)
+    func storeSearchTerm(search: String)
     {
         let defaults = UserDefaults.standard
-        defaults.set(filter, forKey: filterKey)
-        defaults.set(type.rawValue, forKey: typeKey)
+        defaults.set(search, forKey: searchKey)
+        defaults.set(FilterType.Search.rawValue, forKey: typeKey)
     }
     
-    func loadFilters() -> (filter: String, type: FilterType)?
+    func loadSearch() -> String?
     {
         let defaults = UserDefaults.standard
-        guard let filter = defaults.string(forKey: filterKey), let type = FilterType(rawValue: defaults.integer(forKey: typeKey)) else
+        guard let search = defaults.string(forKey: searchKey) else
         {
             return nil
         }
         
-        return (filter: filter, type:type)
+        return search
+    }
+    
+    func loadCurrentFilterType() -> FilterType {
+        let defaults = UserDefaults.standard
+        guard let type = FilterType(rawValue: defaults.integer(forKey: typeKey)) else
+        {
+            return FilterType.None
+        }
+        
+        return type
     }
     
     func storeBook(book: Book)
@@ -48,6 +58,7 @@ class UserDefaultsService
             let data = try PropertyListEncoder().encode(book)
             let encodedData = NSKeyedArchiver.archivedData(withRootObject: data)
             defaults.set(encodedData, forKey: bookKey)
+            defaults.set(FilterType.Book.rawValue, forKey: typeKey)
         } catch {
             print("Save Failed")
         }
@@ -68,8 +79,6 @@ class UserDefaultsService
             print("Retrieve Failed")
             return nil
         }
-        
-        return nil
     }
     
     func removeStoredBook() {

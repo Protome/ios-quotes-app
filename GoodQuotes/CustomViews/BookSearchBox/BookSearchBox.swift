@@ -45,15 +45,17 @@ import UIKit
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        resultsTableView?.removeFromSuperview()
+        dismissView()
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         GoodreadsService.sharedInstance.searchForBooks(title: textField.text ?? "") {
             books in
                 self.searchResults = books
-            
-            self.resultsTableView?.reloadSections(IndexSet(integer: 0), with: UITableView.RowAnimation.fade)
+
+            self.resultsTableView?.reloadData()
+//            self.resultsTableView?.reloadSections(IndexSet(integer: 0), with: UITableView.RowAnimation.none)
+//            self.resultsTableView?.reloadSections(IndexSet(integer: 1), with: UITableView.RowAnimation.fade)
         }
     }
     
@@ -64,6 +66,7 @@ import UIKit
         resultsTableView?.delegate = self
         resultsTableView?.dataSource = self
         resultsTableView?.register(BookSearchResultCell.Nib, forCellReuseIdentifier: BookSearchResultCell.Identifier)
+        resultsTableView?.register(TextOnlyResultCell.Nib, forCellReuseIdentifier: TextOnlyResultCell.Identifier)
         resultsTableView?.backgroundColor = UIColor.clear
         resultsTableView?.tableFooterView = UIView()
         resultsTableView?.showsVerticalScrollIndicator = false
@@ -90,16 +93,26 @@ import UIKit
         backgroundView?.removeGestureRecognizer(dismissKeyboardGestureRecogniser!)
         backgroundView?.removeFromSuperview()
         backgroundView = nil
+        resultsTableView?.removeFromSuperview()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         handleSearching()
+        SearchWithText()
+        dismissView()
         return true
     }
     
-    func handleSearching() {
-        if text!.isEmpty {
-            defaultsService.removeStoredBook()
+    func ClearSearch() {
+        defaultsService.wipeFilters()
+        text = ""
+    }
+    
+    func SearchWithText() {
+        defaultsService.wipeFilters()
+        
+        if text!.count > 0 {
+            defaultsService.storeSearchTerm(search: text!)
         }
     }
     
@@ -117,11 +130,23 @@ import UIKit
 
 extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
 {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
+        let numberOfRowsInFirstSection = text!.count > 0 ? 2 : 1
+        return section == 0 ? numberOfRowsInFirstSection : searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TextOnlyResultCell.Identifier) as? TextOnlyResultCell else { return UITableViewCell() }
+            let cellText = indexPath.row == 0 ? "Clear Saved Search" : "Books containing \"\(text!)\""
+            cell.SetupCell(text: cellText)
+            return cell
+        }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BookSearchResultCell.Identifier) as? BookSearchResultCell else { return UITableViewCell() }
         
         cell.SetupCell(book: searchResults[indexPath.row])
@@ -129,10 +154,21 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedBook = searchResults[indexPath.row]
-        text = selectedBook.title
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                ClearSearch()
+            }
+            
+            if indexPath.row == 1 {
+                SearchWithText()
+            }
+        }
+        else {
+            let selectedBook = searchResults[indexPath.row]
+            text = "\(selectedBook.title) \(selectedBook.author.name)"
         
-        defaultsService.storeBook(book: selectedBook)
+            defaultsService.storeBook(book: selectedBook)
+        }
         dismissView()
         
         bookSearchDelegate?.newSearchTermSelected()

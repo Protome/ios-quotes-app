@@ -18,25 +18,19 @@ class QuoteService {
     func getRandomQuote(completion: @escaping (Quote) -> ())
     {
         let defaultsService = UserDefaultsService()
-        let searchTerm = defaultsService.loadBook()
+        let searchType = defaultsService.loadCurrentFilterType()
         
-        if searchTerm == nil
-        {
-            getFullyRandomQuote(completion: completion)
-            return
+        switch searchType {
+            case .None: getFullyRandomQuote(completion: completion)
+            case .Book:
+                let searchTerm = defaultsService.loadBook()
+                getBookQuote(book: searchTerm!, completion: completion)
+            
+            case .Search:
+                let searchTerm = defaultsService.loadSearch()
+                getAuthorQuote(author: searchTerm ?? "", completion: completion)
+            case .Tag: break
         }
-        
-        getBookQuote(book: searchTerm!, completion: completion)
-        
-//        if settings?.type == FilterType.Tag {
-//            getTagQuotes(filter:settings!.filter, completion: completion)
-//            return
-//        }
-//
-//        if settings?.type == FilterType.Search {
-//            getAuthorQuote(author:settings!.filter, completion: completion)
-//            return
-//        }
     }
     
     internal func getFullyRandomQuote(completion: @escaping (Quote) -> ())

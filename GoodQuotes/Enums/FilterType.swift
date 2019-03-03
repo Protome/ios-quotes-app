@@ -12,5 +12,5 @@ enum FilterType: Int {
     case None
     case Tag
     case Search
-    case Title
+    case Book
 }

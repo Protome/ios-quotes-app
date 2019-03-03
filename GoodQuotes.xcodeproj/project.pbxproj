@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		06469ED1BBCB8BAC478B8A97 /* Pods_GoodQuotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */; };
+		E50ADDC1222B48E20037ACBD /* TextOnlyResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E50ADDC0222B48E20037ACBD /* TextOnlyResultCell.xib */; };
+		E50ADDC3222B49B20037ACBD /* TextOnlyResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */; };
 		E52121682124DE620027BCFC /* GoodreadsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52121672124DE620027BCFC /* GoodreadsService.swift */; };
 		E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5279ED6212765D8007BC585 /* BlurButtonView.xib */; };
 		E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5279ED8212765F6007BC585 /* BlurButtonView.swift */; };
@@ -62,6 +64,8 @@
 		20B20ECBD04CA8B77E56FE71 /* Pods-GoodQuotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.release.xcconfig"; sourceTree = "<group>"; };
 		AC0E28153F7504ED9B61A988 /* Pods-GoodQuotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.debug.xcconfig"; sourceTree = "<group>"; };
 		CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodQuotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E50ADDC0222B48E20037ACBD /* TextOnlyResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextOnlyResultCell.xib; sourceTree = "<group>"; };
+		E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOnlyResultCell.swift; sourceTree = "<group>"; };
 		E52121672124DE620027BCFC /* GoodreadsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodreadsService.swift; sourceTree = "<group>"; };
 		E5279ED6212765D8007BC585 /* BlurButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlurButtonView.xib; sourceTree = "<group>"; };
 		E5279ED8212765F6007BC585 /* BlurButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurButtonView.swift; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 				E599653F2229DAEA00BAA33C /* BookSearchBox.swift */,
 				E5996543222A0B3000BAA33C /* BookSearchResultCell.swift */,
 				E5996541222A0A2200BAA33C /* BookSearchResultCell.xib */,
+				E50ADDC0222B48E20037ACBD /* TextOnlyResultCell.xib */,
+				E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */,
 			);
 			path = BookSearchBox;
 			sourceTree = "<group>";
@@ -374,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5C5CCAC211C8E600010ACB0 /* LaunchScreen.storyboard in Resources */,
+				E50ADDC1222B48E20037ACBD /* TextOnlyResultCell.xib in Resources */,
 				E5C5CCA9211C8E600010ACB0 /* Assets.xcassets in Resources */,
 				E56EBA7321AE264B00A9AF1D /* Secrets.strings in Resources */,
 				E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */,
@@ -470,6 +477,7 @@
 				E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */,
 				E5E525F22126060500EF1E1B /* UserCredentials.swift in Sources */,
 				E5E525FA2126260600EF1E1B /* KeychainPasswordItem.swift in Sources */,
+				E50ADDC3222B49B20037ACBD /* TextOnlyResultCell.swift in Sources */,
 				E5818A072126C9DC0099BEAF /* Author.swift in Sources */,
 				E5B195CD212CA49100A9901C /* StringExtensions.swift in Sources */,
 				E59965402229DAEA00BAA33C /* BookSearchBox.swift in Sources */,
