@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "038-cancel.png",
+      "filename" : "cancel copy 2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "cancel copy.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "cancel.png",
       "scale" : "3x"
     }
   ],

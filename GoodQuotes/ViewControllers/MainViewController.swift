@@ -22,15 +22,24 @@ class MainViewController: UIViewController {
     @IBOutlet weak var ShareButton: BlurButtonView!
     @IBOutlet weak var RefreshButton: BlurButtonView!
     
+    @IBOutlet weak var BookBackgroundView: UIVisualEffectView!
+    @IBOutlet weak var BookCoverImageview: UIImageView!
+    @IBOutlet weak var BookViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var RatingLabel: UILabel!
+    
+    @IBOutlet weak var BookSearchField: BookSearchBox!
+    
+    let averageRatingText = "Average Rating:"
     let quoteService = QuoteService()
+    let reviewService = ReviewRequestService()
     var pastelView:PastelView?
     var currentBook:Book?
     var restartAnimation = true
     var returningFromAuth = false
     var openModal: UIViewController?
+    var maxDistanceTop: CGFloat = 0
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
         restartAnimation = !returningFromAuth
         addGradient()
         
@@ -46,6 +55,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupButtons()
+        setupNavBar()
     }
     
     override func viewDidLoad() {
@@ -54,6 +64,8 @@ class MainViewController: UIViewController {
                                                selector: #selector(setupButtonsFromNotification),
                                                name: .loginStateChanged,
                                                object: nil)
+        
+        BookSearchField.bookSearchDelegate = self
         
         GoodreadsService.sharedInstance.isLoggedIn = AuthStorageService.readAuthToken().isEmpty ? .LoggedOut : .LoggedIn
         styleView()
@@ -104,6 +116,32 @@ class MainViewController: UIViewController {
         button.backgroundColor = UIColor.lightGray
     }
     
+    @IBAction func ViewBookOnGoodreads(_ sender: Any) {
+        guard let bookId = currentBook?.id else {
+            return
+        }
+        
+        UIApplication.shared.open(URL(string: "https://www.goodreads.com/book/show/\(bookId)")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+    }
+    
+    func setupNavBar() {
+        let hasBeenSetUp = self.navigationController?.navigationBar.subviews.contains(where: { view in
+            return view is UIVisualEffectView
+        }) ?? false
+        
+        if hasBeenSetUp { return }
+        
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        let barHeight = self.view.safeAreaInsets.top
+        let offsetY = self.navigationController!.navigationBar.bounds.origin.y + (self.navigationController!.navigationBar.bounds.height - barHeight)
+        visualEffectView.frame = CGRect(origin: CGPoint(x: self.navigationController!.navigationBar.bounds.origin.x, y: offsetY),
+                                        size: CGSize(width: self.navigationController!.navigationBar.bounds.width, height: barHeight ))
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.addSubview(visualEffectView)
+        self.navigationController?.navigationBar.sendSubviewToBack(visualEffectView)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
     
     func setupButtons() {
         ShareButton.buttonAction = shareQuote
@@ -174,7 +212,7 @@ class MainViewController: UIViewController {
         GoodreadsButton.activate()
     }
 
-    internal func addGradient()
+    private func addGradient()
     {
         pastelView?.removeFromSuperview()
         pastelView = nil
@@ -187,19 +225,33 @@ class MainViewController: UIViewController {
         pastelView.startPastelPoint = .bottomLeft
         pastelView.endPastelPoint = .topRight
         pastelView.animationDuration = 1.5
+//        pastelView.setColors([UIColor(red:10/255, green:125/255, blue:178/255, alpha:1.0),
+//                              UIColor(red:96/255, green:174/255, blue:190/255, alpha:1.0),
+//                              UIColor(red:166/255, green:232/255, blue:246/255, alpha:1.0)])
         pastelView.setColors([UIColor(red:0.09, green:0.31, blue:0.41, alpha:1.0),
                               UIColor(red:0.40, green:0.79, blue:0.60, alpha:1.0)])
         
         view.insertSubview(pastelView, at: 0)
     }
     
-    internal func styleView()
+    private func styleView()
     {
         backgroundView.layer.cornerRadius = 6
         backgroundView.clipsToBounds = true
+        
+        BookBackgroundView.layer.cornerRadius = 6
+        BookBackgroundView.clipsToBounds = true
+        
+        maxDistanceTop = BookViewTopConstraint.constant
+        
+        BookCoverImageview.layer.cornerRadius = 2
+        
+        BookViewTopConstraint.constant = -maxDistanceTop
+        BookBackgroundView.alpha = 0
+        view.layoutIfNeeded()
     }
     
-    internal func loadRandomQuote()
+    private func loadRandomQuote()
     {
         if(restartAnimation)
         {
@@ -209,25 +261,87 @@ class MainViewController: UIViewController {
         else {
             pastelView?.resumeAnimation()
         }
+        
         quoteService.getRandomQuote { quote in
-            self.QuoteLabel.text = "\"\(quote.quote)\""
+            self.QuoteLabel.text = "\(quote.quote)"
             self.AuthorLabel.text = quote.author
             self.BookLabel.text = quote.publication
-            UIView.animate(withDuration: 0.5, animations: {
+            
+            UIView.animate(withDuration: 1.2,
+                           delay: 0, usingSpringWithDamping: 0.6,
+                           initialSpringVelocity: 0.0,
+                           options: .beginFromCurrentState,
+                           animations: {
                 self.view.layoutIfNeeded()
             })
             
-            if !quote.publication.isEmpty {
-                GoodreadsService.sharedInstance.searchForBook(title: quote.publication) { book in
-                    self.currentBook = book
-                    print(book)
-                }
+            self.RatingLabel.text = self.averageRatingText
+            self.updateBookImage(bookCover: nil)
+            
+            if quote.publication.isEmpty {
+                self.currentBook = nil
+                self.hideBookDetails()
             }
             else {
-                self.currentBook = nil
+                GoodreadsService.sharedInstance.searchForBook(title: quote.publication, author: quote.author) { book in
+                    self.currentBook = book
+                    self.setupCurrentBookButton(book)
+                    self.showBookDetails()
+                }
             }
+            
+            let deadlineTime = DispatchTime.now() + .seconds(5)
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                self.reviewService.showReview()
+            }
+            
             self.pastelView?.pauseAnimation()
         }
+    }
+    
+    private func setupCurrentBookButton(_ book: Book) {
+        Alamofire.request(book.imageUrl).responseImage { imageReponse in
+            if let image = imageReponse.result.value {
+                self.updateBookImage(bookCover: image)
+            }
+        }
+        
+        RatingLabel.text = "\(averageRatingText) \(book.averageRating)/5"
+    }
+    
+    private func updateBookImage(bookCover: UIImage?) {
+        UIView.transition(with: self.BookCoverImageview,
+                          duration: 0.3,
+                          options: .transitionCrossDissolve,
+                          animations: { self.BookCoverImageview.image = bookCover },
+                          completion: nil)
+    }
+    
+    private func showBookDetails() {
+        BookViewTopConstraint.constant = maxDistanceTop
+        
+        UIView.animate(withDuration: 1.4,
+                       delay: 0, usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 0.0,
+                       options: .beginFromCurrentState,
+                       animations: {
+                        self.BookBackgroundView.alpha = 1
+                        self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private func hideBookDetails() {
+        BookViewTopConstraint.constant = -maxDistanceTop
+        
+        UIView.animate(withDuration: 1.4,
+                       delay: 0,
+                       usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 0.0,
+                       options: .beginFromCurrentState,
+                       animations: {
+                        self.BookBackgroundView.alpha = 0
+                        self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
 
@@ -244,3 +358,13 @@ extension MainViewController: ShelvesSelectionDelegate, UIPopoverPresentationCon
     }
 }
 
+extension MainViewController: BookSearchSelectionDelegate {
+    func newSearchTermSelected() {
+        loadRandomQuote()
+    }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}

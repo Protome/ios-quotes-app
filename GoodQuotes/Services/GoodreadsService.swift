@@ -13,7 +13,7 @@ import OAuthSwift
 
 class GoodreadsService {
     static var sharedInstance = GoodreadsService()
-    
+
     var isLoggedIn = LoginState.LoggedOut {
         didSet {
             NotificationCenter.default.post(name: .loginStateChanged, object: nil)
@@ -22,6 +22,7 @@ class GoodreadsService {
     
     var oauthswift: OAuthSwift?
     var id: String?
+    var ongoingRequest: DataRequest?
     
     func loginToGoodreadsAccount(sender: UIViewController, completion:  (() -> ())?) {
         let oauthswift = OAuth1Swift(
@@ -107,20 +108,48 @@ class GoodreadsService {
         }
     }
     
-    func searchForBook(title: String, completion:  @escaping (Book) -> ())
+    func searchForBook(title: String, author: String, completion:  @escaping (Book) -> ())
     {
         var components = URLComponents(string: "https://www.goodreads.com/search/index.xml")
         components?.queryItems = [
             URLQueryItem(name: "key", value:"\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
-            URLQueryItem(name: "q", value:"\(title)")]
+            URLQueryItem(name: "q", value:"\(title)+\(author)")]
         if let url = components?.url
         {
             Alamofire.request(url).response { response in
                 let xml = XML.parse(response.data!)
                 let results = xml["GoodreadsResponse", "search", "results", "work"]
-                let bestResult = Book(xml: results[0, "best_book"])
+                let bestResult = Book(xml: results[0])
                 
                 completion(bestResult)
+            }
+        }
+    }
+    
+    func searchForBooks(title: String, page: Int, completion:  @escaping ([Book], Int) -> ())
+    {
+        var components = URLComponents(string: "https://www.goodreads.com/search/index.xml")
+        components?.queryItems = [
+            URLQueryItem(name: "key", value:"\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
+            URLQueryItem(name: "q", value:title),
+            URLQueryItem(name: "page", value:"\(page)")]
+        if let url = components?.url
+        {
+            ongoingRequest?.cancel()
+            
+            ongoingRequest = Alamofire.request(url).response { response in
+                guard response.error == nil else {
+                    return
+                }
+                
+                let xml = XML.parse(response.data!)
+                let searchResults = xml["GoodreadsResponse", "search"]
+                let totalResults = searchResults["total-results"].double ?? 0
+                let pages = ceil(totalResults/18)
+                let results = xml["GoodreadsResponse", "search", "results", "work"]
+                let bookResults =  results.map({  return Book(xml: $0) })
+
+                completion(bookResults, Int(pages))
             }
         }
     }

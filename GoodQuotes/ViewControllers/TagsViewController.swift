@@ -22,12 +22,12 @@ class TagsViewController: UIViewController {
     
     override func viewDidLoad() {
         let defaultsService = UserDefaultsService()
-        let currentFilter = defaultsService.loadFilters()
-        
-        if let newFilter = currentFilter, newFilter.type == FilterType.Tag
-        {
-            selectedTag = Tags(rawValue: newFilter.filter)
-        }
+//        let currentFilter = defaultsService.loadFilters()
+//        
+//        if let newFilter = currentFilter, newFilter.type == FilterType.Tag
+//        {
+//            selectedTag = Tags(rawValue: newFilter.filter)
+//        }
     }
     
     @IBAction func SelectTag(_ sender: Any) {
