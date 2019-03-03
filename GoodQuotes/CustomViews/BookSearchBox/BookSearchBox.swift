@@ -247,6 +247,7 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
         
             defaultsService.storeBook(book: selectedBook)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
         dismissView()
         
         bookSearchDelegate?.newSearchTermSelected()
