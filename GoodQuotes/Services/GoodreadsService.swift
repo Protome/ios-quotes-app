@@ -126,21 +126,30 @@ class GoodreadsService {
         }
     }
     
-    func searchForBooks(title: String, completion:  @escaping ([Book]) -> ())
+    func searchForBooks(title: String, page: Int, completion:  @escaping ([Book], Int) -> ())
     {
         var components = URLComponents(string: "https://www.goodreads.com/search/index.xml")
         components?.queryItems = [
             URLQueryItem(name: "key", value:"\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
-            URLQueryItem(name: "q", value:title)]
+            URLQueryItem(name: "q", value:title),
+            URLQueryItem(name: "page", value:"\(page)")]
         if let url = components?.url
         {
             ongoingRequest?.cancel()
             
             ongoingRequest = Alamofire.request(url).response { response in
+                guard response.error == nil else {
+                    return
+                }
+                
                 let xml = XML.parse(response.data!)
+                let searchResults = xml["GoodreadsResponse", "search"]
+                let totalResults = searchResults["total-results"].double ?? 0
+                let pages = ceil(totalResults/18)
                 let results = xml["GoodreadsResponse", "search", "results", "work"]
                 let bookResults =  results.map({  return Book(xml: $0) })
-                completion(bookResults)
+
+                completion(bookResults, Int(pages))
             }
         }
     }

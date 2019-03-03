@@ -257,9 +257,9 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search For Books Or Authors" textAlignment="natural" minimumFontSize="11" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="UkD-63-O14" customClass="BookSearchBox" customModule="GoodQuotes" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="250" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="230" height="30"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="250" id="AFm-LC-0L7"/>
+                                        <constraint firstAttribute="width" constant="230" id="AFm-LC-0L7"/>
                                         <constraint firstAttribute="height" constant="30" id="pGZ-Rj-iLd"/>
                                     </constraints>
                                     <nil key="textColor"/>
