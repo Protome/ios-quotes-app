@@ -97,7 +97,6 @@ import UIKit
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        handleSearching()
         SearchWithText()
         dismissView()
         return true
