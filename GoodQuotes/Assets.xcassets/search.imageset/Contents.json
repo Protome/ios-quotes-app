@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "042-open-book.png",
+      "filename" : "magnifying-glass 2-2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "magnifying-glass 2-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "magnifying-glass 2.png",
       "scale" : "3x"
     }
   ],

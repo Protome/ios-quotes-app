@@ -27,6 +27,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var BookViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var RatingLabel: UILabel!
     
+    @IBOutlet weak var BookSearchField: BookSearchBox!
+    
     let averageRatingText = "Average Rating:"
     let quoteService = QuoteService()
     let reviewService = ReviewRequestService()
@@ -38,7 +40,6 @@ class MainViewController: UIViewController {
     var maxDistanceTop: CGFloat = 0
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
         restartAnimation = !returningFromAuth
         addGradient()
         
@@ -54,6 +55,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupButtons()
+        setupNavBar()
     }
     
     override func viewDidLoad() {
@@ -62,6 +64,8 @@ class MainViewController: UIViewController {
                                                selector: #selector(setupButtonsFromNotification),
                                                name: .loginStateChanged,
                                                object: nil)
+        
+        BookSearchField.bookSearchDelegate = self
         
         GoodreadsService.sharedInstance.isLoggedIn = AuthStorageService.readAuthToken().isEmpty ? .LoggedOut : .LoggedIn
         styleView()
@@ -117,7 +121,26 @@ class MainViewController: UIViewController {
             return
         }
         
-        UIApplication.shared.open(URL(string: "https://www.goodreads.com/book/show/\(bookId)")!, options: [:], completionHandler: nil)
+        UIApplication.shared.open(URL(string: "https://www.goodreads.com/book/show/\(bookId)")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+    }
+    
+    func setupNavBar() {
+        let hasBeenSetUp = self.navigationController?.navigationBar.subviews.contains(where: { view in
+            return view is UIVisualEffectView
+        }) ?? false
+        
+        if hasBeenSetUp { return }
+        
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        let barHeight = self.view.safeAreaInsets.top
+        let offsetY = self.navigationController!.navigationBar.bounds.origin.y + (self.navigationController!.navigationBar.bounds.height - barHeight)
+        visualEffectView.frame = CGRect(origin: CGPoint(x: self.navigationController!.navigationBar.bounds.origin.x, y: offsetY),
+                                        size: CGSize(width: self.navigationController!.navigationBar.bounds.width, height: barHeight ))
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.addSubview(visualEffectView)
+        self.navigationController?.navigationBar.sendSubviewToBack(visualEffectView)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     func setupButtons() {
@@ -332,3 +355,13 @@ extension MainViewController: ShelvesSelectionDelegate, UIPopoverPresentationCon
     }
 }
 
+extension MainViewController: BookSearchSelectionDelegate {
+    func newSearchTermSelected() {
+        loadRandomQuote()
+    }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}
