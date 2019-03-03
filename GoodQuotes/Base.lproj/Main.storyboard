@@ -106,7 +106,7 @@
                                     <constraint firstAttribute="width" constant="42" id="97l-Uz-7zE"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="book"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="like"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="legacyButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="ZgL-gj-TJh"/>
@@ -252,19 +252,25 @@
                     <navigationItem key="navigationItem" id="jfO-hr-349">
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title=" " id="RIe-Dg-Jy1"/>
-                        <view key="titleView" contentMode="scaleToFill" id="RSg-03-w7b">
+                        <view key="titleView" contentMode="scaleToFill" ambiguous="YES" id="RSg-03-w7b">
                             <rect key="frame" x="77.666666666666686" y="7" width="220" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search For Books Or Authors" textAlignment="natural" minimumFontSize="11" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="UkD-63-O14" customClass="BookSearchBox" customModule="GoodQuotes" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="250" height="30"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="220" id="AFm-LC-0L7"/>
+                                        <constraint firstAttribute="width" constant="250" id="AFm-LC-0L7"/>
                                         <constraint firstAttribute="height" constant="30" id="pGZ-Rj-iLd"/>
                                     </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="search"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                            <real key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -321,7 +327,7 @@
                                 <color key="textColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icons by Becris from flaticon.com, they're very good https://www.flaticon.com/packs/mintab-for-ios" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jC4-EA-jI2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icons by Gregor Cresnar from flaticon.com, they're very good https://www.flaticon.com/packs/multimedia-collection" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jC4-EA-jI2">
                                 <rect key="frame" x="16" y="201" width="343" height="61.666666666666686"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                 <color key="textColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -424,7 +430,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5bJ-Ac-wqk">
                                 <rect key="frame" x="0.0" y="676" width="375" height="136"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBW-SV-laq">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBW-SV-laq">
                                         <rect key="frame" x="56" y="0.0" width="263" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="e0U-ZK-Jf9"/>
@@ -437,7 +443,7 @@
                                             <action selector="ApplyFilters:" destination="AvR-Ec-ZOr" eventType="touchUpInside" id="VLc-GB-tYq"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zp0-lQ-PcP">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zp0-lQ-PcP">
                                         <rect key="frame" x="56" y="46" width="263" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="6QB-eW-Vek"/>
@@ -632,10 +638,11 @@ Send us a message!</string>
         </scene>
     </scenes>
     <resources>
-        <image name="book" width="354.4615478515625" height="354.4615478515625"/>
-        <image name="more" width="27" height="27"/>
-        <image name="refresh" width="365" height="365"/>
-        <image name="rightArrow" width="354.4615478515625" height="354.4615478515625"/>
+        <image name="like" width="376.16326904296875" height="376.16326904296875"/>
+        <image name="more" width="39" height="39"/>
+        <image name="refresh" width="392.17022705078125" height="392.17022705078125"/>
+        <image name="rightArrow" width="380" height="380"/>
+        <image name="search" width="19.764705657958984" height="19.764705657958984"/>
         <image name="tick" width="341.33334350585938" height="341.33334350585938"/>
         <image name="upload" width="384" height="384"/>
     </resources>

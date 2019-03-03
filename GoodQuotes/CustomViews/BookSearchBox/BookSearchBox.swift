@@ -10,6 +10,20 @@ import Foundation
 import UIKit
 
 @IBDesignable class BookSearchBox: UITextField, UITextFieldDelegate {
+    @IBInspectable var leftImage: UIImage? {
+        didSet {
+            updateView()
+        }
+    }
+    
+    @IBInspectable var leftPadding: CGFloat = 0
+    
+    @IBInspectable var color: UIColor = UIColor.lightGray {
+        didSet {
+            updateView()
+        }
+    }
+    
     weak var bookSearchDelegate: BookSearchSelectionDelegate?
     
     var searchResults: [Book] = [Book]()
@@ -22,13 +36,46 @@ import UIKit
         super.awakeFromNib()
         delegate = self
         addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        
+   
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
+        
+        let currentType = defaultsService.loadCurrentFilterType()
+        switch currentType {
+        case .Search:
+            text = defaultsService.loadSearch()
+        case .Book:
+            text = defaultsService.loadBook()?.title
+        default:
+            return
+        }
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        var textRect = super.leftViewRect(forBounds: bounds)
+        textRect.origin.x += leftPadding
+        return textRect
+    }
+    
+    func updateView() {
+        if let image = leftImage {
+            leftViewMode = UITextField.ViewMode.always
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            imageView.contentMode = .center
+            imageView.image = image
+            imageView.tintColor = color
+            leftView = imageView
+        } else {
+            leftViewMode = UITextField.ViewMode.never
+            leftView = nil
+        }
+        
+        // Placeholder text color
+        attributedPlaceholder = NSAttributedString(string: placeholder != nil ?  placeholder! : "", attributes:[NSAttributedString.Key.foregroundColor: color])
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -42,20 +89,19 @@ import UIKit
         
         resultsTableView!.frame = CGRect(x: inset, y: parentVC.view.safeAreaInsets.top, width: width, height: CGFloat(parentVC.view.frame.height - parentVC.view.safeAreaInsets.top))
         parentVC.view.addSubview(resultsTableView!)
+        
+        searchByCurrentText()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         dismissView()
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        GoodreadsService.sharedInstance.searchForBooks(title: textField.text ?? "") {
+    func searchByCurrentText() {
+        GoodreadsService.sharedInstance.searchForBooks(title: text ?? "") {
             books in
-                self.searchResults = books
-
+            self.searchResults = books
             self.resultsTableView?.reloadData()
-//            self.resultsTableView?.reloadSections(IndexSet(integer: 0), with: UITableView.RowAnimation.none)
-//            self.resultsTableView?.reloadSections(IndexSet(integer: 1), with: UITableView.RowAnimation.fade)
         }
     }
     
@@ -115,6 +161,10 @@ import UIKit
         }
     }
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        searchByCurrentText()
+    }
+    
     @objc func backgroundTapped(sender: UITapGestureRecognizer) {
         dismissView()
     }
@@ -141,7 +191,7 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TextOnlyResultCell.Identifier) as? TextOnlyResultCell else { return UITableViewCell() }
-            let cellText = indexPath.row == 0 ? "Clear Saved Search" : "Books containing \"\(text!)\""
+            let cellText = indexPath.row == 0 ? "Clear Saved Search" : "All books & authors containing \"\(text!)\""
             cell.SetupCell(text: cellText)
             return cell
         }
