@@ -225,6 +225,9 @@ class MainViewController: UIViewController {
         pastelView.startPastelPoint = .bottomLeft
         pastelView.endPastelPoint = .topRight
         pastelView.animationDuration = 1.5
+//        pastelView.setColors([UIColor(red:10/255, green:125/255, blue:178/255, alpha:1.0),
+//                              UIColor(red:96/255, green:174/255, blue:190/255, alpha:1.0),
+//                              UIColor(red:166/255, green:232/255, blue:246/255, alpha:1.0)])
         pastelView.setColors([UIColor(red:0.09, green:0.31, blue:0.41, alpha:1.0),
                               UIColor(red:0.40, green:0.79, blue:0.60, alpha:1.0)])
         

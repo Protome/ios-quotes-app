@@ -14,6 +14,7 @@ enum Settings: String {
     case About = "About"
     case SignInOutGoodreads = "SignInOutGoodreads"
     case VisitGoodreads = "Visit Goodreads"
+    case Feedback = "Feedback"
 }
 
 class FiltersViewController: UIViewController {
@@ -26,10 +27,11 @@ class FiltersViewController: UIViewController {
     
     let sections: [Int : [Settings]] = [0 : [.GoodreadsShelf],
                      1 : [.SignInOutGoodreads, .VisitGoodreads],
-                     2 : [.About]]
+                     2 : [.About, .Feedback]]
     
     let segueForSection: [Settings : String] = [.GoodreadsShelf : "ShowShelves",
-                                                .About : "ShowAcknowledgements"]
+                                                .About : "ShowAcknowledgements",
+                                                .Feedback : "ShowFeedback"]
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var applyButton: UIButton!
