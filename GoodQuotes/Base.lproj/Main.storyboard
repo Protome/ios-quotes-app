@@ -252,7 +252,7 @@
                     <navigationItem key="navigationItem" id="jfO-hr-349">
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title=" " id="RIe-Dg-Jy1"/>
-                        <view key="titleView" contentMode="scaleToFill" ambiguous="YES" id="RSg-03-w7b">
+                        <view key="titleView" contentMode="scaleToFill" id="RSg-03-w7b">
                             <rect key="frame" x="77.666666666666686" y="7" width="220" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -321,38 +321,34 @@
                                 <color key="textColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goodreads functionality all uses the official Goodreads API" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBR-yz-Usb">
-                                <rect key="frame" x="16" y="278.66666666666669" width="343" height="41"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WDY-UU-vzl">
+                                <rect key="frame" x="16" y="152" width="343" height="314"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="314" id="a3v-le-rLu"/>
+                                </constraints>
+                                <string key="text">App created by Kieran Bamford. I'm @Protome on Twitter, feel free to send me feedback! 
+
+Icons by Gregor Cresnar from flaticon.com, they're very good https://www.flaticon.com/packs/multimedia-collection
+
+Goodreads functionality all uses the official Goodreads API
+
+App Logo was created by Amy Gallagher, go check her stuff out at http://www.amiluu.com
+
+</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                <color key="textColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icons by Gregor Cresnar from flaticon.com, they're very good https://www.flaticon.com/packs/multimedia-collection" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jC4-EA-jI2">
-                                <rect key="frame" x="16" y="201" width="343" height="61.666666666666686"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                <color key="textColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App created by Kieran Bamford. I'm @Protome on Twitter, feel free to send me feedback! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWm-M6-IWp">
-                                <rect key="frame" x="16" y="144" width="343" height="41"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                <color key="textColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.1215686277" green="0.1294117719" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="im3-Ae-cUy" firstAttribute="top" secondItem="S32-Zu-DWq" secondAttribute="top" constant="24" id="0oF-i6-ZWj"/>
                             <constraint firstItem="im3-Ae-cUy" firstAttribute="centerX" secondItem="S32-Zu-DWq" secondAttribute="centerX" id="2ie-sw-6Ru"/>
-                            <constraint firstItem="S32-Zu-DWq" firstAttribute="trailing" secondItem="jBR-yz-Usb" secondAttribute="trailing" constant="16" id="4Gz-cG-DJd"/>
-                            <constraint firstItem="S32-Zu-DWq" firstAttribute="trailing" secondItem="jC4-EA-jI2" secondAttribute="trailing" constant="16" id="CjM-C4-1qU"/>
-                            <constraint firstItem="S32-Zu-DWq" firstAttribute="trailing" secondItem="xWm-M6-IWp" secondAttribute="trailing" constant="16" id="Seq-xV-Ww9"/>
-                            <constraint firstItem="jBR-yz-Usb" firstAttribute="top" secondItem="jC4-EA-jI2" secondAttribute="bottom" constant="16" id="WE8-9T-UoD"/>
-                            <constraint firstItem="jBR-yz-Usb" firstAttribute="leading" secondItem="S32-Zu-DWq" secondAttribute="leading" constant="16" id="be4-VQ-aFR"/>
-                            <constraint firstItem="xWm-M6-IWp" firstAttribute="top" secondItem="im3-Ae-cUy" secondAttribute="bottom" constant="8" id="bg7-SW-Wr0"/>
-                            <constraint firstItem="jC4-EA-jI2" firstAttribute="leading" secondItem="S32-Zu-DWq" secondAttribute="leading" constant="16" id="ckP-jJ-ifo"/>
-                            <constraint firstItem="jC4-EA-jI2" firstAttribute="top" secondItem="xWm-M6-IWp" secondAttribute="bottom" constant="16" id="nNq-pA-MI3"/>
-                            <constraint firstItem="xWm-M6-IWp" firstAttribute="leading" secondItem="S32-Zu-DWq" secondAttribute="leading" constant="16" id="wbl-0i-G7d"/>
+                            <constraint firstItem="S32-Zu-DWq" firstAttribute="trailing" secondItem="WDY-UU-vzl" secondAttribute="trailing" constant="16" id="70B-iv-9sk"/>
+                            <constraint firstItem="WDY-UU-vzl" firstAttribute="top" secondItem="im3-Ae-cUy" secondAttribute="bottom" constant="16" id="lJb-Nr-mbr"/>
+                            <constraint firstItem="WDY-UU-vzl" firstAttribute="leading" secondItem="S32-Zu-DWq" secondAttribute="leading" constant="16" id="mYf-mq-M5v"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="S32-Zu-DWq"/>
                     </view>
