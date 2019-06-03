@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="is8-aw-xg4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="is8-aw-xg4">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -284,7 +285,7 @@
                         <barButtonItem key="rightBarButtonItem" image="more" width="52" id="DXa-Go-t8f">
                             <color key="tintColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="AvR-Ec-ZOr" kind="show" id="RJD-qA-Q8R"/>
+                                <segue destination="AvR-Ec-ZOr" kind="show" identifier="ChangeBackground" id="RJD-qA-Q8R"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -485,6 +486,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                         <segue destination="boQ-35-Qqe" kind="show" identifier="ShowShelves" id="qGd-Vk-OTI"/>
                         <segue destination="CK4-Sh-ahE" kind="show" identifier="ShowAcknowledgements" id="YJZ-Wr-GpW"/>
                         <segue destination="2xS-Us-Fpt" kind="show" identifier="ShowFeedback" id="GmH-sg-eNg"/>
+                        <segue destination="z9T-Zc-gxW" kind="show" identifier="ChangeBackground" id="xdD-2g-k23"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyc-dL-2nH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -649,14 +651,67 @@ Just want to say hi? </string>
             </objects>
             <point key="canvasLocation" x="1894" y="-485"/>
         </scene>
+        <!--Colour Selection View Controller-->
+        <scene sceneID="1kL-en-ezg">
+            <objects>
+                <viewController id="z9T-Zc-gxW" customClass="ColourSelectionViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e6E-rS-mbf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="d8U-Kh-bX0">
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="ptk-Cl-drC">
+                                    <size key="itemSize" width="106" height="104"/>
+                                    <size key="headerReferenceSize" width="0.0" height="20"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GradientCell" id="diP-MR-auH" customClass="GradientCell" customModule="GoodQuotes" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="20" width="106" height="104"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="106" height="104"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="we1-L6-YgQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionReusableView>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" name="SettingsBackground"/>
+                        <constraints>
+                            <constraint firstItem="d8U-Kh-bX0" firstAttribute="leading" secondItem="VPU-Ru-bZj" secondAttribute="leading" id="1Fx-JC-IXZ"/>
+                            <constraint firstItem="VPU-Ru-bZj" firstAttribute="trailing" secondItem="d8U-Kh-bX0" secondAttribute="trailing" id="KK2-ae-e95"/>
+                            <constraint firstItem="VPU-Ru-bZj" firstAttribute="bottom" secondItem="d8U-Kh-bX0" secondAttribute="bottom" id="ayJ-IU-b4y"/>
+                            <constraint firstItem="d8U-Kh-bX0" firstAttribute="top" secondItem="VPU-Ru-bZj" secondAttribute="top" id="rIL-jD-MfL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="VPU-Ru-bZj"/>
+                    </view>
+                    <connections>
+                        <outlet property="CollectionView" destination="d8U-Kh-bX0" id="oqT-tT-fpg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pBy-VS-NT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1932" y="-1184.4827586206898"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="like" width="376.16326904296875" height="376.16326904296875"/>
-        <image name="more" width="39" height="39"/>
-        <image name="refresh" width="392.17022705078125" height="392.17022705078125"/>
-        <image name="rightArrow" width="380" height="380"/>
-        <image name="search" width="19.764705657958984" height="19.764705657958984"/>
+        <image name="like" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="more" width="17.333333969116211" height="17.333333969116211"/>
+        <image name="refresh" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="rightArrow" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="search" width="9.3333330154418945" height="9.3333330154418945"/>
         <image name="tick" width="341.33334350585938" height="341.33334350585938"/>
-        <image name="upload" width="384" height="384"/>
+        <image name="upload" width="170.66667175292969" height="170.66667175292969"/>
+        <namedColor name="SettingsBackground">
+            <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

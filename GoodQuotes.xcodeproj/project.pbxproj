@@ -26,6 +26,10 @@
 		E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */; };
 		E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5588E112129A71500A84BEC /* CGPointExtensions.swift */; };
 		E56EBA7321AE264B00A9AF1D /* Secrets.strings in Resources */ = {isa = PBXBuildFile; fileRef = E56EBA7221AE264B00A9AF1D /* Secrets.strings */; };
+		E57D4A5222A5D07C007B93F1 /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57D4A5122A5D07C007B93F1 /* Colours.xcassets */; };
+		E57D4A5422A5D4E4007B93F1 /* ColourSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D4A5322A5D4E4007B93F1 /* ColourSelectionViewController.swift */; };
+		E57D4A5622A5D6DF007B93F1 /* GradientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D4A5522A5D6DF007B93F1 /* GradientCell.swift */; };
+		E57D4A5822A5D99E007B93F1 /* GradientsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D4A5722A5D99E007B93F1 /* GradientsService.swift */; };
 		E5818A052126C6610099BEAF /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A042126C6610099BEAF /* Book.swift */; };
 		E5818A072126C9DC0099BEAF /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5818A062126C9DC0099BEAF /* Author.swift */; };
 		E58394C6213AF0E800AC78DE /* ReviewRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */; };
@@ -83,6 +87,10 @@
 		E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		E5588E112129A71500A84BEC /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
 		E56EBA7221AE264B00A9AF1D /* Secrets.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Secrets.strings; sourceTree = "<group>"; };
+		E57D4A5122A5D07C007B93F1 /* Colours.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colours.xcassets; sourceTree = "<group>"; };
+		E57D4A5322A5D4E4007B93F1 /* ColourSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourSelectionViewController.swift; sourceTree = "<group>"; };
+		E57D4A5522A5D6DF007B93F1 /* GradientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientCell.swift; sourceTree = "<group>"; };
+		E57D4A5722A5D99E007B93F1 /* GradientsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientsService.swift; sourceTree = "<group>"; };
 		E5818A042126C6610099BEAF /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		E5818A062126C9DC0099BEAF /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRequestService.swift; sourceTree = "<group>"; };
@@ -175,6 +183,7 @@
 				E52121672124DE620027BCFC /* GoodreadsService.swift */,
 				E5E525FB21262D2200EF1E1B /* AuthStorageService.swift */,
 				E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */,
+				E57D4A5722A5D99E007B93F1 /* GradientsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -213,6 +222,8 @@
 				E554D416211F33CC00F32AF9 /* TagsViewController.swift */,
 				E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */,
 				E5E0592B222BFCA900DF74EC /* FeedbackViewController.swift */,
+				E57D4A5322A5D4E4007B93F1 /* ColourSelectionViewController.swift */,
+				E57D4A5522A5D6DF007B93F1 /* GradientCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -284,6 +295,7 @@
 				E5C5CCAA211C8E600010ACB0 /* LaunchScreen.storyboard */,
 				E5C5CCAD211C8E600010ACB0 /* Info.plist */,
 				E56EBA7221AE264B00A9AF1D /* Secrets.strings */,
+				E57D4A5122A5D07C007B93F1 /* Colours.xcassets */,
 			);
 			path = GoodQuotes;
 			sourceTree = "<group>";
@@ -349,11 +361,11 @@
 				TargetAttributes = {
 					E5C5CC9D211C8E5D0010ACB0 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 					E5C5CCB1211C8E600010ACB0 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 						TestTargetID = E5C5CC9D211C8E5D0010ACB0;
 					};
 				};
@@ -385,6 +397,7 @@
 				E5C5CCAC211C8E600010ACB0 /* LaunchScreen.storyboard in Resources */,
 				E50ADDC1222B48E20037ACBD /* TextOnlyResultCell.xib in Resources */,
 				E5C5CCA9211C8E600010ACB0 /* Assets.xcassets in Resources */,
+				E57D4A5222A5D07C007B93F1 /* Colours.xcassets in Resources */,
 				E56EBA7321AE264B00A9AF1D /* Secrets.strings in Resources */,
 				E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */,
 				E5C5CCA7211C8E5D0010ACB0 /* Main.storyboard in Resources */,
@@ -408,7 +421,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
@@ -427,7 +440,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5022527FA90FA83EB4664A40 /* [CP] Check Pods Manifest.lock */ = {
@@ -458,6 +471,7 @@
 				E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */,
 				E5996546222A0E8800BAA33C /* UIImageViewExtensions.swift in Sources */,
 				E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */,
+				E57D4A5822A5D99E007B93F1 /* GradientsService.swift in Sources */,
 				E58394C6213AF0E800AC78DE /* ReviewRequestService.swift in Sources */,
 				E5818A052126C6610099BEAF /* Book.swift in Sources */,
 				E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */,
@@ -466,6 +480,7 @@
 				E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */,
 				E554D423211F4BE400F32AF9 /* FilterCell.swift in Sources */,
 				E554D421211F44EB00F32AF9 /* UserDefaultsService.swift in Sources */,
+				E57D4A5622A5D6DF007B93F1 /* GradientCell.swift in Sources */,
 				E5B195CB212B42A800A9901C /* LoginState.swift in Sources */,
 				E52121682124DE620027BCFC /* GoodreadsService.swift in Sources */,
 				E5E0592C222BFCA900DF74EC /* FeedbackViewController.swift in Sources */,
@@ -478,6 +493,7 @@
 				E5B195C9212B14E700A9901C /* UIViewExtensions.swift in Sources */,
 				E554D40A211C9E3100F32AF9 /* QuoteService.swift in Sources */,
 				E5C5CCA2211C8E5D0010ACB0 /* AppDelegate.swift in Sources */,
+				E57D4A5422A5D4E4007B93F1 /* ColourSelectionViewController.swift in Sources */,
 				E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */,
 				E5E525F22126060500EF1E1B /* UserCredentials.swift in Sources */,
 				E5E525FA2126260600EF1E1B /* KeychainPasswordItem.swift in Sources */,
@@ -658,7 +674,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -678,7 +694,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -698,7 +714,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoodQuotes.app/GoodQuotes";
 			};
@@ -719,7 +735,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoodQuotes.app/GoodQuotes";
 			};

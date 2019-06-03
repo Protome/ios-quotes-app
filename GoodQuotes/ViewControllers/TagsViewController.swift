@@ -21,7 +21,7 @@ class TagsViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        let defaultsService = UserDefaultsService()
+//        let defaultsService = UserDefaultsService()
 //        let currentFilter = defaultsService.loadFilters()
 //        
 //        if let newFilter = currentFilter, newFilter.type == FilterType.Tag

@@ -227,9 +227,11 @@ class MainViewController: UIViewController {
         pastelView.animationDuration = 1.5
 //        pastelView.setColors([UIColor(red:213/255, green:92/255, blue:112/255, alpha:1.0),
 //                              UIColor(red:155/255, green:114/255, blue:211/255, alpha:1.0)])
-        pastelView.setColors([UIColor(red:0.09, green:0.31, blue:0.41, alpha:1.0),
-                              UIColor(red:0.40, green:0.79, blue:0.60, alpha:1.0)])
-        
+//        pastelView.setColors([UIColor(named: "GreenGradient1")!,
+//                              UIColor(named: "GreenGradient2")!])
+        pastelView.setColors([UIColor(named: "BlueGradientLight")!,
+                              UIColor(named: "BlueGradientMid")!,
+                              UIColor(named: "BlueGradientDark")!])
         view.insertSubview(pastelView, at: 0)
     }
     
