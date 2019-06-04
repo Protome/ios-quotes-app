@@ -253,7 +253,7 @@
                     <navigationItem key="navigationItem" id="jfO-hr-349">
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title=" " id="RIe-Dg-Jy1"/>
-                        <view key="titleView" contentMode="scaleToFill" id="RSg-03-w7b">
+                        <view key="titleView" contentMode="scaleToFill" ambiguous="YES" id="RSg-03-w7b">
                             <rect key="frame" x="77.666666666666686" y="7" width="220" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -278,7 +278,7 @@
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="UkD-63-O14" secondAttribute="bottom" id="89E-ki-JXx"/>
                                 <constraint firstItem="UkD-63-O14" firstAttribute="top" secondItem="RSg-03-w7b" secondAttribute="top" id="Ga5-HP-LT2"/>
-                                <constraint firstItem="UkD-63-O14" firstAttribute="leading" secondItem="RSg-03-w7b" secondAttribute="leading" id="hpk-4S-Uqk"/>
+                                <constraint firstItem="UkD-63-O14" firstAttribute="leading" secondItem="RSg-03-w7b" secondAttribute="leading" id="eg6-XK-mIx"/>
                                 <constraint firstAttribute="trailing" secondItem="UkD-63-O14" secondAttribute="trailing" id="iDW-fY-rm8"/>
                             </constraints>
                         </view>
@@ -662,7 +662,7 @@ Just want to say hi? </string>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="d8U-Kh-bX0">
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="ptk-Cl-drC">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="3" id="ptk-Cl-drC">
                                     <size key="itemSize" width="106" height="104"/>
                                     <size key="headerReferenceSize" width="0.0" height="20"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>

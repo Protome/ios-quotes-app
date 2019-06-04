@@ -47,6 +47,7 @@
 		E5C5CCA9211C8E600010ACB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCA8211C8E600010ACB0 /* Assets.xcassets */; };
 		E5C5CCAC211C8E600010ACB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCAA211C8E600010ACB0 /* LaunchScreen.storyboard */; };
 		E5C5CCB7211C8E600010ACB0 /* GoodQuotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCB6211C8E600010ACB0 /* GoodQuotesTests.swift */; };
+		E5CCE0C022A6FB8F00886885 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CCE0BF22A6FB8F00886885 /* GradientView.swift */; };
 		E5E0592C222BFCA900DF74EC /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E0592B222BFCA900DF74EC /* FeedbackViewController.swift */; };
 		E5E525F22126060500EF1E1B /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E525F12126060500EF1E1B /* UserCredentials.swift */; };
 		E5E525F42126065400EF1E1B /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E525F32126065400EF1E1B /* KeychainError.swift */; };
@@ -112,6 +113,7 @@
 		E5C5CCB2211C8E600010ACB0 /* GoodQuotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoodQuotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C5CCB6211C8E600010ACB0 /* GoodQuotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodQuotesTests.swift; sourceTree = "<group>"; };
 		E5C5CCB8211C8E600010ACB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5CCE0BF22A6FB8F00886885 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		E5E0592B222BFCA900DF74EC /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		E5E525F12126060500EF1E1B /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
 		E5E525F32126065400EF1E1B /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				E599653E2229D92E00BAA33C /* BookSearchBox */,
 				E5279ED521276412007BC585 /* BlurButton */,
+				E5CCE0BF22A6FB8F00886885 /* GradientView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				E57D4A5622A5D6DF007B93F1 /* GradientCell.swift in Sources */,
 				E5B195CB212B42A800A9901C /* LoginState.swift in Sources */,
 				E52121682124DE620027BCFC /* GoodreadsService.swift in Sources */,
+				E5CCE0C022A6FB8F00886885 /* GradientView.swift in Sources */,
 				E5E0592C222BFCA900DF74EC /* FeedbackViewController.swift in Sources */,
 				E554D417211F33CC00F32AF9 /* TagsViewController.swift in Sources */,
 				E5C5CCA4211C8E5D0010ACB0 /* MainViewController.swift in Sources */,

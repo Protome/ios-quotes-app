@@ -249,6 +249,7 @@ class MainViewController: UIViewController {
         
         BookViewTopConstraint.constant = -maxDistanceTop
         BookBackgroundView.alpha = 0
+        
         view.layoutIfNeeded()
     }
     
