@@ -9,12 +9,17 @@
 import Foundation
 import UIKit
 import Pastel
+import ChromaColorPicker
 
 class ColourSelectionViewController : UIViewController {
     
     @IBOutlet weak var PreviewGradientView: UIView!
     @IBOutlet weak var CollectionView: UICollectionView!
+    @IBOutlet weak var TopRightColourPicker: UIView!
+    @IBOutlet weak var BottomLeftColourPIcker: UIView!
     
+    var colourPickerTopRight: ChromaColorPicker?
+    var colourPickerBottomLeft: ChromaColorPicker?
     var previewPastelView: PastelView?
     var keys: [String]?
     var selectedIndex: Int = 0
@@ -43,6 +48,8 @@ class ColourSelectionViewController : UIViewController {
         
         CollectionView.dataSource = self
         CollectionView.delegate = self
+        
+        styleView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +59,42 @@ class ColourSelectionViewController : UIViewController {
             self.CollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionView.ScrollPosition.centeredVertically)
             self.collectionView(self.CollectionView, didSelectItemAt: indexPath)
         }
+    }
+    
+    func styleView()
+    {
+        TopRightColourPicker.isHidden = true
+        BottomLeftColourPIcker.isHidden = true
+        
+        colourPickerTopRight = ChromaColorPicker(frame: TopRightColourPicker.bounds)
+        colourPickerTopRight!.delegate = self
+        colourPickerTopRight!.padding = 5
+        colourPickerTopRight!.stroke = 3
+        colourPickerTopRight!.hexLabel.textColor = UIColor.white
+        
+        colourPickerBottomLeft = ChromaColorPicker(frame: BottomLeftColourPIcker.bounds)
+        colourPickerBottomLeft!.delegate = self
+        colourPickerBottomLeft!.padding = 5
+        colourPickerBottomLeft!.stroke = 3
+        colourPickerBottomLeft!.hexLabel.textColor = UIColor.white
+        
+        TopRightColourPicker.addSubview(colourPickerTopRight!)
+        BottomLeftColourPIcker.addSubview(colourPickerBottomLeft!)
+        view.layoutIfNeeded()
+    }
+    
+    func updatePreview(selectedColours: [UIColor])
+    {
+        previewPastelView?.removeFromSuperview()
+        previewPastelView = PastelView(frame: PreviewGradientView.bounds)
+        
+        previewPastelView!.startPastelPoint = .bottomLeft
+        previewPastelView!.endPastelPoint = .topRight
+        previewPastelView!.animationDuration = 1.4
+        
+        previewPastelView!.setColors(selectedColours)
+        PreviewGradientView.insertSubview(previewPastelView!, at: 0)
+        previewPastelView!.startAnimation()
     }
 }
 
@@ -87,23 +130,35 @@ extension ColourSelectionViewController: UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = collectionView.cellForItem(at: indexPath) as? GradientCell,
             let gradientName = item.gradientName,
-            let selectedColours = GradientsService.ColourMappings[gradientName]
+            var selectedColours = GradientsService.ColourMappings[gradientName]
             else {
                 return
         }
         
         userDefaultService.storeBackgroundType(type: gradientName)
         
-        previewPastelView?.removeFromSuperview()
-        previewPastelView = PastelView(frame: PreviewGradientView.bounds)
+        if gradientName == "Custom",  let colours = userDefaultService.loadColours()
+        {
+            colourPickerTopRight?.adjustToColor(colours[0])
+            colourPickerBottomLeft?.adjustToColor(colours[1])
+            selectedColours = colours
+        }
         
-        previewPastelView!.startPastelPoint = .bottomLeft
-        previewPastelView!.endPastelPoint = .topRight
-        previewPastelView!.animationDuration = 1.4
+        TopRightColourPicker.isHidden = gradientName != "Custom"
+        BottomLeftColourPIcker.isHidden = gradientName != "Custom"
         
-        previewPastelView!.setColors(selectedColours)
-        PreviewGradientView.insertSubview(previewPastelView!, at: 0)
-        previewPastelView!.startAnimation()
+        updatePreview(selectedColours: selectedColours)
+    }
+}
+
+extension ColourSelectionViewController: ChromaColorPickerDelegate
+{
+    func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
+        let colours = [colourPickerTopRight?.currentColor ?? UIColor(named: "BlueGradientLight")!,
+                              colourPickerBottomLeft?.currentColor ?? UIColor(named: "BlueGradientDark")!]
+        
+        updatePreview(selectedColours: colours)
+        userDefaultService.storeColours(colours: colours)
     }
 }
 

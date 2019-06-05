@@ -10,7 +10,6 @@ import UIKit
 import Pastel
 import Alamofire
 import AlamofireImage
-import ChromaColorPicker
 
 class MainViewController: UIViewController {
     
@@ -40,8 +39,6 @@ class MainViewController: UIViewController {
     var returningFromAuth = false
     var openModal: UIViewController?
     var maxDistanceTop: CGFloat = 0
-    var colourPickerTopRight: ChromaColorPicker?
-    var colourPickerBottomLeft: ChromaColorPicker?
     
     override func viewWillAppear(_ animated: Bool) {
         restartAnimation = !returningFromAuth
@@ -60,10 +57,6 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         setupButtons()
         setupNavBar()
-        let test = UIColor(named: "BlueGradientDark")
-        let test2 = UIColor(named: "BlueGradientLight")
-        colourPickerTopRight?.adjustToColor(test ?? UIColor.gray)
-        colourPickerBottomLeft?.adjustToColor(test2 ?? UIColor.purple)
     }
     
     override func viewDidLoad() {
@@ -240,8 +233,9 @@ class MainViewController: UIViewController {
         if colourType == "Custom", let colours = defaultsService.loadColours() {
             pastelView.setColors(colours)
         }
-        
-        pastelView.setColors(GradientsService.ColourMappings[colourType] ?? [UIColor.red])
+        else {
+            pastelView.setColors(GradientsService.ColourMappings[colourType] ?? [UIColor.red])
+        }
         view.insertSubview(pastelView, at: 0)
     }
     
@@ -261,21 +255,6 @@ class MainViewController: UIViewController {
         BookBackgroundView.alpha = 0
         
         DividerLine.layer.cornerRadius = 2
-        
-//        colourPickerTopRight = ChromaColorPicker(frame: PickerTestView.bounds)
-//        colourPickerTopRight!.delegate = self //ChromaColorPickerDelegate
-//        colourPickerTopRight!.padding = 5
-//        colourPickerTopRight!.stroke = 3
-//        colourPickerTopRight!.hexLabel.textColor = UIColor.white
-//
-//        colourPickerBottomLeft = ChromaColorPicker(frame: PickerTestView2.bounds)
-//        colourPickerBottomLeft!.delegate = self //ChromaColorPickerDelegate
-//        colourPickerBottomLeft!.padding = 5
-//        colourPickerBottomLeft!.stroke = 3
-//        colourPickerBottomLeft!.hexLabel.textColor = UIColor.white
-
-//        PickerTestView.addSubview(colourPickerTopRight!)
-//        PickerTestView2.addSubview(colourPickerBottomLeft!)
         view.layoutIfNeeded()
     }
     
@@ -389,28 +368,6 @@ extension MainViewController: ShelvesSelectionDelegate, UIPopoverPresentationCon
 extension MainViewController: BookSearchSelectionDelegate {
     func newSearchTermSelected() {
         loadRandomQuote()
-    }
-}
-
-extension MainViewController: ChromaColorPickerDelegate
-{
-    func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
-        pastelView?.removeFromSuperview()
-        pastelView = nil
-        pastelView = PastelView(frame: view.bounds)
-
-        guard let pastelView = pastelView else {
-            return
-        }
-        
-        pastelView.startPastelPoint = .bottomLeft
-        pastelView.endPastelPoint = .topRight
-        pastelView.animationDuration = 1.5
-        
-        pastelView.setColors([colourPickerTopRight?.currentColor ?? UIColor(named: "BlueGradientLight")!,
-                              colourPickerBottomLeft?.currentColor ?? UIColor(named: "BlueGradientDark")!])
-        view.insertSubview(pastelView, at: 0)
-        pastelView.startAnimation()
     }
 }
 
