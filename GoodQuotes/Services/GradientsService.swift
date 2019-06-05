@@ -11,23 +11,32 @@ import UIKit
 
 class GradientsService {
     static private let BlueGradient = [UIColor(named: "BlueGradientLight")!,
-                        UIColor(named: "BlueGradientDark")!]
+                                       UIColor(named: "BlueGradientDark")!]
     
     static private let GreenGradient = [UIColor(named: "GreenGradient1")!,
-                         UIColor(named: "GreenGradient2")!]
+                                        UIColor(named: "GreenGradient2")!]
     
     static private let YellowPeach = [UIColor(named: "LightYellow")!,
-                                        UIColor(named: "Peach")!]
+                                      UIColor(named: "Peach")!]
     
     static private let PeachPink = [UIColor(named: "Peach2")!,
-                                        UIColor(named: "Pink")!]
-
+                                    UIColor(named: "Pink")!]
+    
     static private let PurPink = [UIColor(named: "DarkPurple")!,
-                                    UIColor(named: "HotPink")!]
+                                  UIColor(named: "HotPink")!]
+    
+    static private var Custom: [UIColor] {
+        get {
+            let userDefaultService = UserDefaultsService()
+            let colours = userDefaultService.loadColours()
+            return colours ?? [UIColor.lightGray, UIColor.darkGray]
+        }
+    }
     
     static let ColourMappings = ["GreenGradient": GreenGradient,
                                  "BlueGradient": BlueGradient,
                                  "YellowPeach": YellowPeach,
                                  "PeachPink": PeachPink,
-                                 "PurPink": PurPink]
+                                 "PurPink": PurPink,
+                                 "Custom": Custom]
 }

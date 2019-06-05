@@ -18,6 +18,7 @@ class ColourSelectionViewController : UIViewController {
     var previewPastelView: PastelView?
     var keys: [String]?
     var selectedIndex: Int = 0
+    let userDefaultService = UserDefaultsService()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -27,7 +28,12 @@ class ColourSelectionViewController : UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         keys = GradientsService.ColourMappings.keys.sorted()
-        guard let startingIndex = keys?.firstIndex(where: {$0 == "GreenGradient"}) else { return }
+        
+        guard let customIndex = keys?.firstIndex(where: {$0 == "Custom"}) else { return }
+        let removedCustom = keys?.remove(at: customIndex)
+        keys?.append(removedCustom!)
+        
+        guard let startingIndex = keys?.firstIndex(where: {$0 == userDefaultService.loadBackgroundType()}) else { return }
         let removed = keys?.remove(at: startingIndex)
         keys?.insert(removed!, at: 0)
     }
@@ -85,6 +91,8 @@ extension ColourSelectionViewController: UICollectionViewDataSource, UICollectio
             else {
                 return
         }
+        
+        userDefaultService.storeBackgroundType(type: gradientName)
         
         previewPastelView?.removeFromSuperview()
         previewPastelView = PastelView(frame: PreviewGradientView.bounds)

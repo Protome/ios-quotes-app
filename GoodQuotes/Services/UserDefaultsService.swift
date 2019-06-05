@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class UserDefaultsService
 {
@@ -14,6 +15,9 @@ class UserDefaultsService
     let typeKey = "Type"
     let shelfKey = "GoodreadsShelf"
     let bookKey = "Book"
+    let backgroundColour1 = "BackgroundColour1"
+    let backgroundColour2 = "BackgroundColour2"
+    let backgroundType = "BackgroundType"
     
     func wipeFilters()
     {
@@ -21,6 +25,8 @@ class UserDefaultsService
         defaults.removeObject(forKey: searchKey)
         defaults.removeObject(forKey: typeKey)
         defaults.removeObject(forKey: bookKey)
+        defaults.removeObject(forKey: backgroundColour1)
+        defaults.removeObject(forKey: backgroundColour2)
     }
     
     func storeSearchTerm(search: String)
@@ -100,5 +106,47 @@ class UserDefaultsService
         }
         
         return shelf
+    }
+    
+    func storeColours(colours: [UIColor])
+    {
+        do {
+            let defaults = UserDefaults.standard
+            defaults.set(colours[0].hexCode, forKey: backgroundColour1)
+            defaults.set(colours[1].hexCode, forKey: backgroundColour2)
+        } catch {
+            print("Save Failed")
+        }
+    }
+    
+    func loadColours() -> [UIColor]?
+    {
+        let defaults = UserDefaults.standard
+        guard let colourHex1 = defaults.string(forKey: backgroundColour1),
+              let colourHex2 = defaults.string(forKey: backgroundColour2)
+              else
+        {
+            return nil
+        }
+        
+        return [UIColor(hexString: colourHex1), UIColor(hexString: colourHex2)]
+    }
+    
+    func storeBackgroundType(type: String)
+    {
+            let defaults = UserDefaults.standard
+            defaults.set(type, forKey: backgroundType)
+    }
+    
+    func loadBackgroundType() -> String
+    {
+        let defaults = UserDefaults.standard
+        guard let backgroundType = defaults.string(forKey: backgroundType)
+            else
+        {
+            return "GreenGradient"
+        }
+        
+        return backgroundType
     }
 }

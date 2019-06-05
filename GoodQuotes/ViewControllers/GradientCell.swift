@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Pastel
+import ChromaColorPicker
 
 class GradientCell: UICollectionViewCell
 {
@@ -18,7 +19,7 @@ class GradientCell: UICollectionViewCell
     var gradientView: GradientView?
     
     override var isSelected: Bool
-    {
+        {
         didSet {
             if isSelected {
                 createAnimatedGradient()
@@ -42,6 +43,21 @@ class GradientCell: UICollectionViewCell
         GradientBackgroundContainer.layer.borderColor = UIColor.black.cgColor
         
         createGradientView()
+        
+        if gradientName == "Custom"
+        {
+            let colourPicker = ChromaColorPicker(frame: GradientBackgroundContainer.bounds)
+            colourPicker.padding = 5
+            colourPicker.stroke = 3
+            colourPicker.hexLabel.textColor = UIColor.clear
+            colourPicker.colorToggleButton.isHidden = true
+            colourPicker.isUserInteractionEnabled = false
+            colourPicker.addButton.isHidden = true
+            colourPicker.handleLine.isHidden = true
+            colourPicker.shadeSlider.isHidden = true
+            colourPicker.handleView.isHidden = true
+            GradientBackgroundContainer.addSubview(colourPicker)
+        }
     }
     
     func createGradientView()
