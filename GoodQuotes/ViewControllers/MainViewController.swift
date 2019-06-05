@@ -10,6 +10,7 @@ import UIKit
 import Pastel
 import Alamofire
 import AlamofireImage
+import ChromaColorPicker
 
 class MainViewController: UIViewController {
     
@@ -28,6 +29,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var RatingLabel: UILabel!
     
     @IBOutlet weak var BookSearchField: BookSearchBox!
+    @IBOutlet weak var PickerTestView: UIView!
+    @IBOutlet weak var PickerTestView2: UIView!
     
     let averageRatingText = "Average Rating:"
     let quoteService = QuoteService()
@@ -38,6 +41,8 @@ class MainViewController: UIViewController {
     var returningFromAuth = false
     var openModal: UIViewController?
     var maxDistanceTop: CGFloat = 0
+    var colourPickerTopRight: ChromaColorPicker?
+    var colourPickerBottomLeft: ChromaColorPicker?
     
     override func viewWillAppear(_ animated: Bool) {
         restartAnimation = !returningFromAuth
@@ -56,6 +61,10 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         setupButtons()
         setupNavBar()
+        let test = UIColor(named: "BlueGradientDark")
+        let test2 = UIColor(named: "BlueGradientLight")
+        colourPickerTopRight?.adjustToColor(test ?? UIColor.gray)
+        colourPickerBottomLeft?.adjustToColor(test2 ?? UIColor.purple)
     }
     
     override func viewDidLoad() {
@@ -225,13 +234,8 @@ class MainViewController: UIViewController {
         pastelView.startPastelPoint = .bottomLeft
         pastelView.endPastelPoint = .topRight
         pastelView.animationDuration = 1.5
-//        pastelView.setColors([UIColor(red:213/255, green:92/255, blue:112/255, alpha:1.0),
-//                              UIColor(red:155/255, green:114/255, blue:211/255, alpha:1.0)])
-//        pastelView.setColors([UIColor(named: "GreenGradient1")!,
-//                              UIColor(named: "GreenGradient2")!])
-        pastelView.setColors([UIColor(named: "BlueGradientLight")!,
-                              UIColor(named: "BlueGradientMid")!,
-                              UIColor(named: "BlueGradientDark")!])
+        
+        pastelView.setColors(GradientsService.ColourMappings["GreenGradient"] ?? [UIColor.red])
         view.insertSubview(pastelView, at: 0)
     }
     
@@ -250,6 +254,20 @@ class MainViewController: UIViewController {
         BookViewTopConstraint.constant = -maxDistanceTop
         BookBackgroundView.alpha = 0
         
+        colourPickerTopRight = ChromaColorPicker(frame: PickerTestView.bounds)
+        colourPickerTopRight!.delegate = self //ChromaColorPickerDelegate
+        colourPickerTopRight!.padding = 5
+        colourPickerTopRight!.stroke = 3
+        colourPickerTopRight!.hexLabel.textColor = UIColor.white
+        
+        colourPickerBottomLeft = ChromaColorPicker(frame: PickerTestView2.bounds)
+        colourPickerBottomLeft!.delegate = self //ChromaColorPickerDelegate
+        colourPickerBottomLeft!.padding = 5
+        colourPickerBottomLeft!.stroke = 3
+        colourPickerBottomLeft!.hexLabel.textColor = UIColor.white
+
+        PickerTestView.addSubview(colourPickerTopRight!)
+        PickerTestView2.addSubview(colourPickerBottomLeft!)
         view.layoutIfNeeded()
     }
     
@@ -363,6 +381,28 @@ extension MainViewController: ShelvesSelectionDelegate, UIPopoverPresentationCon
 extension MainViewController: BookSearchSelectionDelegate {
     func newSearchTermSelected() {
         loadRandomQuote()
+    }
+}
+
+extension MainViewController: ChromaColorPickerDelegate
+{
+    func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
+        pastelView?.removeFromSuperview()
+        pastelView = nil
+        pastelView = PastelView(frame: view.bounds)
+
+        guard let pastelView = pastelView else {
+            return
+        }
+        
+        pastelView.startPastelPoint = .bottomLeft
+        pastelView.endPastelPoint = .topRight
+        pastelView.animationDuration = 1.5
+        
+        pastelView.setColors([colourPickerTopRight?.currentColor ?? UIColor(named: "BlueGradientLight")!,
+                              colourPickerBottomLeft?.currentColor ?? UIColor(named: "BlueGradientDark")!])
+        view.insertSubview(pastelView, at: 0)
+        pastelView.startAnimation()
     }
 }
 

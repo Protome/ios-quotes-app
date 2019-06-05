@@ -136,7 +136,6 @@ class GoodreadsService {
         if let url = components?.url
         {
             ongoingRequest?.cancel()
-            
             ongoingRequest = Alamofire.request(url).response { response in
                 guard response.error == nil else {
                     return
