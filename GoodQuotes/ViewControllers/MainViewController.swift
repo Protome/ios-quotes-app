@@ -28,9 +28,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var BookViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var RatingLabel: UILabel!
     
+    @IBOutlet weak var DividerLine: UIView!
     @IBOutlet weak var BookSearchField: BookSearchBox!
-    @IBOutlet weak var PickerTestView: UIView!
-    @IBOutlet weak var PickerTestView2: UIView!
     
     let averageRatingText = "Average Rating:"
     let quoteService = QuoteService()
@@ -235,7 +234,14 @@ class MainViewController: UIViewController {
         pastelView.endPastelPoint = .topRight
         pastelView.animationDuration = 1.5
         
-        pastelView.setColors(GradientsService.ColourMappings["GreenGradient"] ?? [UIColor.red])
+        let defaultsService = UserDefaultsService()
+        let colourType = defaultsService.loadBackgroundType()
+        
+        if colourType == "Custom", let colours = defaultsService.loadColours() {
+            pastelView.setColors(colours)
+        }
+        
+        pastelView.setColors(GradientsService.ColourMappings[colourType] ?? [UIColor.red])
         view.insertSubview(pastelView, at: 0)
     }
     
@@ -254,20 +260,22 @@ class MainViewController: UIViewController {
         BookViewTopConstraint.constant = -maxDistanceTop
         BookBackgroundView.alpha = 0
         
-        colourPickerTopRight = ChromaColorPicker(frame: PickerTestView.bounds)
-        colourPickerTopRight!.delegate = self //ChromaColorPickerDelegate
-        colourPickerTopRight!.padding = 5
-        colourPickerTopRight!.stroke = 3
-        colourPickerTopRight!.hexLabel.textColor = UIColor.white
+        DividerLine.layer.cornerRadius = 2
         
-        colourPickerBottomLeft = ChromaColorPicker(frame: PickerTestView2.bounds)
-        colourPickerBottomLeft!.delegate = self //ChromaColorPickerDelegate
-        colourPickerBottomLeft!.padding = 5
-        colourPickerBottomLeft!.stroke = 3
-        colourPickerBottomLeft!.hexLabel.textColor = UIColor.white
+//        colourPickerTopRight = ChromaColorPicker(frame: PickerTestView.bounds)
+//        colourPickerTopRight!.delegate = self //ChromaColorPickerDelegate
+//        colourPickerTopRight!.padding = 5
+//        colourPickerTopRight!.stroke = 3
+//        colourPickerTopRight!.hexLabel.textColor = UIColor.white
+//
+//        colourPickerBottomLeft = ChromaColorPicker(frame: PickerTestView2.bounds)
+//        colourPickerBottomLeft!.delegate = self //ChromaColorPickerDelegate
+//        colourPickerBottomLeft!.padding = 5
+//        colourPickerBottomLeft!.stroke = 3
+//        colourPickerBottomLeft!.hexLabel.textColor = UIColor.white
 
-        PickerTestView.addSubview(colourPickerTopRight!)
-        PickerTestView2.addSubview(colourPickerBottomLeft!)
+//        PickerTestView.addSubview(colourPickerTopRight!)
+//        PickerTestView2.addSubview(colourPickerBottomLeft!)
         view.layoutIfNeeded()
     }
     
