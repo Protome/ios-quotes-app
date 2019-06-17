@@ -22,6 +22,8 @@ class ColourSelectionViewController : UIViewController {
     var colourPickerBottomLeft: ChromaColorPicker?
     var previewPastelView: PastelView?
     var keys: [String]?
+    var selectedColours: [UIColor]?
+    var colourType:String?
     var selectedIndex: Int = 0
     let userDefaultService = UserDefaultsService()
     
@@ -48,12 +50,17 @@ class ColourSelectionViewController : UIViewController {
         
         CollectionView.dataSource = self
         CollectionView.delegate = self
-        
-        styleView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+       
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItem.Style.done,target: self, action: #selector(SaveChanges))
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        styleView()
+        
         let indexPath = IndexPath(row: selectedIndex, section: 0)
         DispatchQueue.main.async {
             self.CollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionView.ScrollPosition.centeredVertically)
@@ -63,23 +70,27 @@ class ColourSelectionViewController : UIViewController {
     
     func styleView()
     {
-        TopRightColourPicker.isHidden = true
-        BottomLeftColourPIcker.isHidden = true
-        
         colourPickerTopRight = ChromaColorPicker(frame: TopRightColourPicker.bounds)
-        colourPickerTopRight!.delegate = self
         colourPickerTopRight!.padding = 5
         colourPickerTopRight!.stroke = 3
         colourPickerTopRight!.hexLabel.textColor = UIColor.white
+        colourPickerTopRight!.colorToggleButton.isHidden = true
+        colourPickerTopRight!.addButton.isHidden = true
+        colourPickerTopRight!.addTarget(self, action: #selector(ColourChanged), for: UIControl.Event.valueChanged)
         
         colourPickerBottomLeft = ChromaColorPicker(frame: BottomLeftColourPIcker.bounds)
-        colourPickerBottomLeft!.delegate = self
         colourPickerBottomLeft!.padding = 5
         colourPickerBottomLeft!.stroke = 3
         colourPickerBottomLeft!.hexLabel.textColor = UIColor.white
+        colourPickerBottomLeft!.colorToggleButton.isHidden = true
+        colourPickerBottomLeft!.addButton.isHidden = true
+        colourPickerBottomLeft!.addTarget(self, action: #selector(ColourChanged), for: UIControl.Event.valueChanged)
         
         TopRightColourPicker.addSubview(colourPickerTopRight!)
         BottomLeftColourPIcker.addSubview(colourPickerBottomLeft!)
+        
+        colourPickerTopRight?.isHidden = colourType != "Custom"
+        colourPickerBottomLeft?.isHidden = colourType != "Custom"
         view.layoutIfNeeded()
     }
     
@@ -95,6 +106,19 @@ class ColourSelectionViewController : UIViewController {
         previewPastelView!.setColors(selectedColours)
         PreviewGradientView.insertSubview(previewPastelView!, at: 0)
         previewPastelView!.startAnimation()
+    }
+    
+    @objc func ColourChanged(control:ChromaColorPicker, withEvent event: UIEvent)
+    {
+        guard colourType == "Custom" else {
+            return
+        }
+        
+        let colours = [colourPickerTopRight?.currentColor ?? UIColor(named: "BlueGradientLight")!,
+                       colourPickerBottomLeft?.currentColor ?? UIColor(named: "BlueGradientDark")!]
+        
+        updatePreview(selectedColours: colours)
+        selectedColours = colours
     }
 }
 
@@ -135,7 +159,7 @@ extension ColourSelectionViewController: UICollectionViewDataSource, UICollectio
                 return
         }
         
-        userDefaultService.storeBackgroundType(type: gradientName)
+        colourType = gradientName
         
         if gradientName == "Custom",  let colours = userDefaultService.loadColours()
         {
@@ -144,21 +168,25 @@ extension ColourSelectionViewController: UICollectionViewDataSource, UICollectio
             selectedColours = colours
         }
         
-        TopRightColourPicker.isHidden = gradientName != "Custom"
-        BottomLeftColourPIcker.isHidden = gradientName != "Custom"
+        colourPickerTopRight?.isHidden = colourType != "Custom"
+        colourPickerBottomLeft?.isHidden = colourType != "Custom"
         
         updatePreview(selectedColours: selectedColours)
     }
-}
-
-extension ColourSelectionViewController: ChromaColorPickerDelegate
-{
-    func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
-        let colours = [colourPickerTopRight?.currentColor ?? UIColor(named: "BlueGradientLight")!,
-                              colourPickerBottomLeft?.currentColor ?? UIColor(named: "BlueGradientDark")!]
+    
+    @objc func SaveChanges() {
+        guard let selectedType = colourType else {
+            return
+        }
+    
+        userDefaultService.storeBackgroundType(type: selectedType)
         
-        updatePreview(selectedColours: colours)
-        userDefaultService.storeColours(colours: colours)
+        if selectedType == "Custom", let colours = selectedColours
+        {
+            userDefaultService.storeColours(colours: colours)
+        }
+        
+        navigationController?.popViewController(animated: true)
     }
 }
 
