@@ -139,11 +139,11 @@ class MainViewController: UIViewController {
                                         size: CGSize(width: self.navigationController!.navigationBar.bounds.width, height: barHeight ))
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.addSubview(visualEffectView)
-        self.navigationController?.navigationBar.sendSubviewToBack(visualEffectView)
+//        self.navigationController?.navigationBar.addSubview(visualEffectView)
+//        self.navigationController?.navigationBar.sendSubviewToBack(visualEffectView)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
-    
+   
     func setupButtons() {
         ShareButton.buttonAction = shareQuote
         GoodreadsButton.buttonAction = addBookToShelf

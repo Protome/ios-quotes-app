@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="is8-aw-xg4">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="is8-aw-xg4">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +16,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FGq-sT-Ig2">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="0.253631161971831" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="jRL-Oa-3FB"/>
@@ -45,24 +42,24 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Quotes..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="0vg-eJ-FwG">
                                             <rect key="frame" x="8" y="16" width="311" height="22"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                            <color key="textColor" name="Text"/>
+                                            <color key="textColor" name="MainText"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aa6-If-hgw">
                                             <rect key="frame" x="8" y="51" width="311" height="0.0"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
-                                            <color key="textColor" name="Text"/>
+                                            <color key="textColor" name="MainText"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncM-y5-vkV">
                                             <rect key="frame" x="8" y="59" width="311" height="0.0"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
-                                            <color key="textColor" name="Text"/>
+                                            <color key="textColor" name="MainText"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LQk-Tu-9bq">
                                             <rect key="frame" x="130.66666666666666" y="46" width="65.666666666666657" height="1"/>
-                                            <color key="backgroundColor" name="Text"/>
+                                            <color key="backgroundColor" name="MainText"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="Rig-Qj-ENL"/>
                                             </constraints>
@@ -90,7 +87,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add to Goodreads Shelf" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Kz-00-d4Y">
                                 <rect key="frame" x="61.333333333333336" y="736" width="92.333333333333314" height="30.333333333333371"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
-                                <color key="textColor" name="Text"/>
+                                <color key="textColor" name="MainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-LE-oxr" customClass="BlurButtonView" customModule="GoodQuotes" customModuleProvider="target">
@@ -144,7 +141,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share quote" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwR-U6-Z6h">
                                 <rect key="frame" x="221.33333333333334" y="736" width="92.333333333333343" height="15.333333333333371"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
-                                <color key="textColor" name="Text"/>
+                                <color key="textColor" name="MainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apT-li-tRR">
@@ -154,7 +151,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ylh-Le-VVC">
-                                            <rect key="frame" x="36.666666666666664" y="51" width="20" height="20"/>
+                                            <rect key="frame" x="36.333333333333336" y="51" width="20" height="20"/>
                                         </activityIndicatorView>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N36-cq-VJx">
                                             <rect key="frame" x="16" y="15.333333333333314" width="61" height="91.333333333333329"/>
@@ -163,18 +160,18 @@
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ei-pt-Qqi">
-                                            <rect key="frame" x="93" y="36.666666666666686" width="186" height="48.666666666666657"/>
+                                            <rect key="frame" x="93" y="36.333333333333314" width="186" height="49"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average Rating: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="ojW-CW-Q9e">
                                                     <rect key="frame" x="0.0" y="0.0" width="186" height="22"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
-                                                    <color key="textColor" name="Text"/>
+                                                    <color key="textColor" name="MainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="View on Goodreads" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="8GA-DK-hOG">
-                                                    <rect key="frame" x="0.0" y="26.666666666666629" width="186" height="22"/>
+                                                    <rect key="frame" x="0.0" y="27" width="186" height="22"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
-                                                    <color key="textColor" name="Text"/>
+                                                    <color key="textColor" name="MainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -189,14 +186,14 @@
                                             </constraints>
                                         </view>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Rny-lu-twW">
-                                            <rect key="frame" x="287" y="-0.33333333333331439" width="24" height="122.33333333333333"/>
+                                            <rect key="frame" x="287" y="0.0" width="24" height="121.66666666666667"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="XvA-tB-MYk"/>
                                                 <constraint firstAttribute="width" constant="24" id="kIx-Jt-HZU"/>
                                             </constraints>
                                         </imageView>
                                         <button opaque="NO" contentMode="right" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNL-s7-ME7">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="122"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="121.66666666666667"/>
                                             <inset key="contentEdgeInsets" minX="300" minY="35" maxX="5" maxY="35"/>
                                             <connections>
                                                 <action selector="ViewBookOnGoodreads:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RzZ-7g-rYY"/>
@@ -268,12 +265,12 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search For Books Or Authors" textAlignment="natural" minimumFontSize="11" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="UkD-63-O14" customClass="BookSearchBox" customModule="GoodQuotes" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="230" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="230" id="AFm-LC-0L7"/>
                                         <constraint firstAttribute="height" constant="30" id="pGZ-Rj-iLd"/>
                                     </constraints>
-                                    <color key="textColor" name="Text"/>
+                                    <color key="textColor" name="MainText"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <userDefinedRuntimeAttributes>
@@ -380,7 +377,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l5d-zQ-23o">
                                 <rect key="frame" x="0.0" y="88" width="375" height="588"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="sectionIndexColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexColor" name="Text"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="P6J-bg-CHX">
@@ -389,20 +386,20 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="pjD-bx-6gI">
-                                    <rect key="frame" x="0.0" y="90" width="375" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="118" width="375" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" reuseIdentifier="FilterCell" rowHeight="58" id="fdW-yU-wMJ" customClass="FilterCell" customModule="GoodQuotes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FilterCell" rowHeight="58" id="fdW-yU-wMJ" customClass="FilterCell" customModule="GoodQuotes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="32" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fdW-yU-wMJ" id="Cte-c5-hyo">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="57.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Y4-zh-agM">
-                                                    <rect key="frame" x="15" y="17.333333333333332" width="326" height="22.999999999999996"/>
+                                                    <rect key="frame" x="15" y="17.666666666666668" width="326" height="23.000000000000004"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                                     <color key="textColor" name="Text"/>
                                                     <nil key="highlightedColor"/>
@@ -424,7 +421,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                                 <constraint firstItem="9Y4-zh-agM" firstAttribute="centerY" secondItem="Cte-c5-hyo" secondAttribute="centerY" id="pi9-qf-pte"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <connections>
                                             <outlet property="TitleLabel" destination="9Y4-zh-agM" id="YjC-Pa-p1e"/>
                                         </connections>
@@ -519,7 +516,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="720"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="4AD-y2-Dnk">
-                                    <rect key="frame" x="0.0" y="86" width="375" height="1"/>
+                                    <rect key="frame" x="0.0" y="114" width="375" height="1"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -528,17 +525,18 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                         <rect key="frame" x="0.0" y="28" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yF3-dg-Y9j" id="1Za-6U-gJu">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="57.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2B-Wp-e9d">
                                                     <rect key="frame" x="15" y="17" width="319" height="24"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="Text"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick" translatesAutoresizingMaskIntoConstraints="NO" id="ryH-RD-GBd">
                                                     <rect key="frame" x="342" y="20" width="18" height="18"/>
+                                                    <color key="tintColor" name="Text"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="ryH-RD-GBd" secondAttribute="height" multiplier="1:1" id="cUN-Pv-QhL"/>
                                                         <constraint firstAttribute="height" constant="18" id="l0o-Fg-kDT"/>
@@ -555,7 +553,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                                 <constraint firstItem="t2B-Wp-e9d" firstAttribute="centerY" secondItem="1Za-6U-gJu" secondAttribute="centerY" id="z5S-cQ-2pc"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <connections>
                                             <outlet property="SelectedTick" destination="ryH-RD-GBd" id="aZG-ed-Ny1"/>
                                             <outlet property="TagLabel" destination="t2B-Wp-e9d" id="O3k-pY-aC6"/>
@@ -616,7 +614,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utY-Xu-Mcs">
                                 <rect key="frame" x="149.33333333333334" y="104" width="76.333333333333343" height="24"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                <color key="textColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" name="Text"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXh-Po-niA">
@@ -625,7 +623,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
 See something that's broken?
 Just want to say hi? </string>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                <color key="textColor" red="0.88065117390000003" green="0.86959181379999995" blue="0.86524547860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" name="Text"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGl-cq-6Po">
@@ -641,7 +639,7 @@ Just want to say hi? </string>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.12156862745098039" green="0.12941176470588234" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="utY-Xu-Mcs" firstAttribute="centerX" secondItem="tca-kP-Pgd" secondAttribute="centerX" id="18x-Oo-isT"/>
                             <constraint firstItem="sXh-Po-niA" firstAttribute="leading" secondItem="nQw-p7-G5n" secondAttribute="leading" constant="24" id="J0K-IH-on1"/>
@@ -716,26 +714,26 @@ Just want to say hi? </string>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJw-EL-qn4">
                                         <rect key="frame" x="24" y="76" width="327" height="258.66666666666669"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XKN-OM-KXE">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="259"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="258.66666666666669"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fpR-MN-25e">
                                                     <rect key="frame" x="8" y="16" width="311" height="153"/>
                                                     <string key="text">Any child knows what a witch looks like. The warts are important, yes, the hooked nose, the cruel smile. But it’s the hat that cinches it: pointy and black with a wide rim. Plenty of people have warts and hooked noses and cruel smiles but are not witches at all. Hats change everything.</string>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="MainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="The Girl Who Circumnavigated Fairyland in a Ship of Her Own Making (Fairyland, #1)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaM-cQ-O6U">
                                                     <rect key="frame" x="8" y="177.00000000000006" width="311" height="38.333333333333343"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="MainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Catherynne M. Valente" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1F-F0-8TQ">
                                                     <rect key="frame" x="8" y="223.33333333333331" width="311" height="19.333333333333343"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="MainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -833,8 +831,11 @@ Just want to say hi? </string>
         <image name="search" width="9.3333330154418945" height="9.3333330154418945"/>
         <image name="tick" width="512" height="512"/>
         <image name="upload" width="170.66667175292969" height="170.66667175292969"/>
-        <namedColor name="Text">
+        <namedColor name="MainText">
             <color red="0.16078431372549021" green="0.2196078431372549" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Text">
+            <color red="1" green="1" blue="0.95099997520446777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
