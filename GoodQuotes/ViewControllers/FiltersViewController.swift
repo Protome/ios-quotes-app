@@ -36,8 +36,6 @@ class FiltersViewController: UIViewController {
                                                 .ChangeBackground : "ChangeBackground" ]
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var applyButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
     
     var currentShelf = ""
     var changesMade = false
@@ -63,21 +61,6 @@ class FiltersViewController: UIViewController {
     override func viewDidLoad() {
         currentShelf = defaultsService.loadDefaultShelf() ?? defaultShelf
         
-        tableView.reloadData()
-    }
-    
-    @IBAction func ApplyFilters(_ sender: UIButton) {
-        if(changesMade) {
-            defaultsService.storeDefaultShelf(shelfName: currentShelf)
-        }
-        
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func ResetToDefaults(_ sender: Any) {
-        defaultsService.wipeFilters()
-        currentShelf = defaultShelf
-        defaultsService.storeDefaultShelf(shelfName: currentShelf)
         tableView.reloadData()
     }
     
@@ -190,7 +173,7 @@ extension FiltersViewController: ShelvesSelectionDelegate
 {
     func shelfSelected(shelfName: String) {
         currentShelf = shelfName
-        changesMade = true
+        defaultsService.storeDefaultShelf(shelfName: currentShelf)
         tableView.reloadData()
     }
 }

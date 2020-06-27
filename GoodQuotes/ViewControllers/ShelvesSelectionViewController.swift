@@ -35,7 +35,7 @@ class ShelvesSelectionViewController: UIViewController {
         loadShelves(self)
         
         if popoverPresentationController?.presentationStyle == .popover {
-            activityIndicator.style = UIActivityIndicatorView.Style.gray
+            activityIndicator.style = UIActivityIndicatorView.Style.medium
             selectHeightConstraint.constant = 0
             view.layoutIfNeeded()
         }

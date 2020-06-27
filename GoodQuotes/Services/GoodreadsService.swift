@@ -50,6 +50,7 @@ class GoodreadsService {
                     self.loginToUser(oauthswift, completion: completion)
             },
                 failure: { error in
+                    self.oauthswift = nil
                     print( "ERROR ERROR: \(error.localizedDescription)", terminator: "")
             })
         }
@@ -155,7 +156,7 @@ class GoodreadsService {
     
     func addBookToShelf(sender: UIViewController, bookId: String, completion: @escaping () -> ())
     {
-        guard let oauthswift = oauthswift, !oauthswift.client.credential.oauthToken.isEmpty else {
+        guard let oauthswift = oauthswift, self.isLoggedIn == LoginState.LoggedIn else {
             loginToGoodreadsAccount(sender: sender) { self.addBookToShelf(sender: sender, bookId: bookId, completion: completion) }
             return
         }
