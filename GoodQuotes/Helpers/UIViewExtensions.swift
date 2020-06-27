@@ -23,15 +23,8 @@ extension UIView {
     }
     
     func toImage(withinFrame: CGRect) -> UIImage? {
-        let convertedFrame = convert(withinFrame, to: self)
-        UIGraphicsBeginImageContextWithOptions(withinFrame.size, isOpaque, 0.0)
-        defer { UIGraphicsEndImageContext() }
-        if let context = UIGraphicsGetCurrentContext() {
-                context.concatenate(CGAffineTransform(translationX: -withinFrame.origin.x, y: -withinFrame.origin.y))
-                layer.render(in: context)
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            return image
+        return UIGraphicsImageRenderer(bounds: withinFrame).image { _ in
+            drawHierarchy(in: bounds, afterScreenUpdates: true)
         }
-        return nil
     }
 }
