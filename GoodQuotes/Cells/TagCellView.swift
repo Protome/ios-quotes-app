@@ -18,7 +18,7 @@ class TagCellView: UITableViewCell
     var customTag:Tags?
     
     override func prepareForReuse() {
-        SelectedTick.isHidden = !selectedTag
+        SelectedTick?.isHidden = !selectedTag
     }
     
     func setupCell(tag: Tags, selected: Bool)
@@ -26,11 +26,11 @@ class TagCellView: UITableViewCell
         customTag = tag
         TagLabel.text = tag.rawValue
         selectedTag = selected
-        SelectedTick.isHidden = !selected
+        SelectedTick?.isHidden = !selected
     }
     
     func setSelected(selected: Bool) {
         selectedTag = selected
-        SelectedTick.isHidden = !selected
+        SelectedTick?.isHidden = !selected
     }
 }

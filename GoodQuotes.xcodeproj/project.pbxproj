@@ -49,6 +49,7 @@
 		E5C5CCAC211C8E600010ACB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCAA211C8E600010ACB0 /* LaunchScreen.storyboard */; };
 		E5C5CCB7211C8E600010ACB0 /* GoodQuotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCB6211C8E600010ACB0 /* GoodQuotesTests.swift */; };
 		E5CCE0C022A6FB8F00886885 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CCE0BF22A6FB8F00886885 /* GradientView.swift */; };
+		E5CFE69224A7E54700D5A554 /* BookSelectionShelfListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CFE69124A7E54700D5A554 /* BookSelectionShelfListViewController.swift */; };
 		E5E0592C222BFCA900DF74EC /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E0592B222BFCA900DF74EC /* FeedbackViewController.swift */; };
 		E5E525F22126060500EF1E1B /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E525F12126060500EF1E1B /* UserCredentials.swift */; };
 		E5E525F42126065400EF1E1B /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E525F32126065400EF1E1B /* KeychainError.swift */; };
@@ -116,6 +117,7 @@
 		E5C5CCB6211C8E600010ACB0 /* GoodQuotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodQuotesTests.swift; sourceTree = "<group>"; };
 		E5C5CCB8211C8E600010ACB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5CCE0BF22A6FB8F00886885 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		E5CFE69124A7E54700D5A554 /* BookSelectionShelfListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionShelfListViewController.swift; sourceTree = "<group>"; };
 		E5E0592B222BFCA900DF74EC /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		E5E525F12126060500EF1E1B /* UserCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
 		E5E525F32126065400EF1E1B /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				E5E0592B222BFCA900DF74EC /* FeedbackViewController.swift */,
 				E57D4A5322A5D4E4007B93F1 /* ColourSelectionViewController.swift */,
 				E57D4A5522A5D6DF007B93F1 /* GradientCell.swift */,
+				E5CFE69124A7E54700D5A554 /* BookSelectionShelfListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 			files = (
 				E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */,
 				E5996546222A0E8800BAA33C /* UIImageViewExtensions.swift in Sources */,
+				E5CFE69224A7E54700D5A554 /* BookSelectionShelfListViewController.swift in Sources */,
 				E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */,
 				E57D4A5822A5D99E007B93F1 /* GradientsService.swift in Sources */,
 				E58394C6213AF0E800AC78DE /* ReviewRequestService.swift in Sources */,

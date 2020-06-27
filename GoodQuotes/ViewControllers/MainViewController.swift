@@ -125,6 +125,10 @@ class MainViewController: UIViewController {
         UIApplication.shared.open(URL(string: "https://www.goodreads.com/book/show/\(bookId)")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
     
+    @IBAction func SelectBookFromAccount(_ sender: Any) {
+        performSegue(withIdentifier: "ShowBookList", sender: self)
+    }
+    
     func setupNavBar() {
         let hasBeenSetUp = self.navigationController?.navigationBar.subviews.contains(where: { view in
             return view is UIVisualEffectView
