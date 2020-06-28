@@ -137,22 +137,9 @@ class MainViewController: UIViewController {
     }
     
     func setupNavBar() {
-        let hasBeenSetUp = self.navigationController?.navigationBar.subviews.contains(where: { view in
-            return view is UIVisualEffectView
-        }) ?? false
-        
-        if hasBeenSetUp { return }
-        
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        let barHeight = self.view.safeAreaInsets.top
-        let offsetY = self.navigationController!.navigationBar.bounds.origin.y + (self.navigationController!.navigationBar.bounds.height - barHeight)
-        visualEffectView.frame = CGRect(origin: CGPoint(x: self.navigationController!.navigationBar.bounds.origin.x, y: offsetY),
-                                        size: CGSize(width: self.navigationController!.navigationBar.bounds.width, height: barHeight ))
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.addSubview(visualEffectView)
-//        self.navigationController?.navigationBar.sendSubviewToBack(visualEffectView)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
    
     func setupButtons() {

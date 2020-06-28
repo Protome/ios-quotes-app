@@ -28,6 +28,10 @@ class BookSelectionShelfListViewController: UITableViewController {
         loadShelves(self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.tintColor = UIColor.gray
+    }
+    
     @objc func loadShelves(_ sender: Any) {
         let goodreadsService = GoodreadsService()
         refreshControl?.beginRefreshing()
@@ -63,12 +67,12 @@ class BookSelectionShelfListViewController: UITableViewController {
 extension BookSelectionShelfListViewController
 {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShelfCellView") as? TagCellView else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShelfCellView") as? ShelfCell else {
             return UITableViewCell()
         }
         
-        let shelfName = shelves[indexPath.row].name
-        cell.TagLabel.text = shelfName
+        let shelf = shelves[indexPath.row]
+        cell.setupCell(shelf: shelf, selected: false)
         if popoverPresentationController?.presentationStyle == .popover {
             cell.backgroundColor = UIColor.clear
         }
@@ -84,7 +88,7 @@ extension BookSelectionShelfListViewController
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let _ = tableView.cellForRow(at: indexPath) as? TagCellView else
+        guard let _ = tableView.cellForRow(at: indexPath) as? ShelfCell else
         {
             return
         }

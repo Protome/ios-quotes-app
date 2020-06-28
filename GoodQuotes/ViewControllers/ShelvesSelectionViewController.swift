@@ -65,13 +65,12 @@ class ShelvesSelectionViewController: UIViewController {
 extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TagCellView") as? TagCellView else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShelfCell") as? ShelfCell else {
             return UITableViewCell()
         }
     
-        let shelfName = shelves[indexPath.row].name
-        cell.TagLabel.text = shelfName
-        cell.setSelected(selected: shelfName == currentShelf)
+        let shelf = shelves[indexPath.row]
+        cell.setupCell(shelf: shelf, selected: shelf.name == currentShelf)
         if popoverPresentationController?.presentationStyle == .popover {
             cell.backgroundColor = UIColor.clear
         }
@@ -87,7 +86,7 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let _ = tableView.cellForRow(at: indexPath) as? TagCellView else
+        guard let _ = tableView.cellForRow(at: indexPath) as? ShelfCell else
         {
             return
         }
@@ -106,7 +105,7 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
     {
         for index in 0...tableview.numberOfRows(inSection: 0)
         {
-            if let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as? TagCellView
+            if let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as? ShelfCell
             {
                 cell.setSelected(selected: currentShelf == cell.TagLabel.text)
             }

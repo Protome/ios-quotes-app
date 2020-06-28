@@ -432,15 +432,21 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShelfCellView" rowHeight="58" id="q05-4Y-BF1" customClass="TagCellView" customModule="GoodQuotes" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShelfCellView" rowHeight="58" id="q05-4Y-BF1" customClass="ShelfCell" customModule="GoodQuotes" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="115" width="375" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q05-4Y-BF1" id="Rib-wX-Hd1">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWh-Du-39f">
-                                            <rect key="frame" x="16" y="17" width="343" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWh-Du-39f">
+                                            <rect key="frame" x="16" y="17.333333333333336" width="300.33333333333331" height="23.333333333333336"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                            <color key="textColor" name="Text"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Item" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soT-QX-18h">
+                                            <rect key="frame" x="324.33333333333331" y="17" width="34.666666666666686" height="24"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                             <color key="textColor" name="Text"/>
                                             <nil key="highlightedColor"/>
@@ -448,13 +454,16 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="soT-QX-18h" firstAttribute="leading" secondItem="gWh-Du-39f" secondAttribute="trailing" constant="8" id="GGj-mV-c0x"/>
+                                        <constraint firstItem="soT-QX-18h" firstAttribute="trailing" secondItem="Rib-wX-Hd1" secondAttribute="trailingMargin" id="Kae-DG-2re"/>
                                         <constraint firstItem="gWh-Du-39f" firstAttribute="centerY" secondItem="Rib-wX-Hd1" secondAttribute="centerY" id="SQG-x0-jPu"/>
-                                        <constraint firstItem="gWh-Du-39f" firstAttribute="trailing" secondItem="Rib-wX-Hd1" secondAttribute="trailingMargin" id="jMX-J0-xtM"/>
+                                        <constraint firstItem="soT-QX-18h" firstAttribute="centerY" secondItem="gWh-Du-39f" secondAttribute="centerY" id="pAw-NW-Z9F"/>
                                         <constraint firstItem="gWh-Du-39f" firstAttribute="leading" secondItem="Rib-wX-Hd1" secondAttribute="leadingMargin" id="rdC-KR-n49"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <connections>
+                                    <outlet property="BookCount" destination="soT-QX-18h" id="qpy-oW-o3o"/>
                                     <outlet property="TagLabel" destination="gWh-Du-39f" id="dBY-7e-OCz"/>
                                 </connections>
                             </tableViewCell>
@@ -493,7 +502,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No shelves found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZt-sl-A9E">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No books found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZt-sl-A9E">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="87" id="OSM-3V-jb2"/>
@@ -704,7 +713,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TagCellView" rowHeight="58" id="yF3-dg-Y9j" customClass="TagCellView" customModule="GoodQuotes" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShelfCell" rowHeight="58" id="yF3-dg-Y9j" customClass="ShelfCell" customModule="GoodQuotes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yF3-dg-Y9j" id="1Za-6U-gJu">
@@ -895,9 +904,9 @@ Just want to say hi? </string>
                                 <rect key="frame" x="0.0" y="401.33333333333326" width="375" height="410.66666666666674"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJw-EL-qn4">
-                                        <rect key="frame" x="24" y="76" width="327" height="258.66666666666669"/>
+                                        <rect key="frame" x="24" y="76" width="327" height="258.33333333333331"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XKN-OM-KXE">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="258.66666666666669"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="258.33333333333331"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fpR-MN-25e">

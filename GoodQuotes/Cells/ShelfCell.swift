@@ -1,5 +1,5 @@
 //
-//  TagCellView.swift
+//  ShelfCell.swift
 //  GoodQuotes
 //
 //  Created by Kieran Bamford on 11/08/2018.
@@ -9,28 +9,27 @@
 import Foundation
 import UIKit
 
-class TagCellView: UITableViewCell
+class ShelfCell: UITableViewCell
 {
     @IBOutlet weak var SelectedTick: UIImageView!
     @IBOutlet weak var TagLabel: UILabel!
-    var selectedTag = false
-    
-    var customTag:Tags?
+    @IBOutlet weak var BookCount: UILabel!
+    var selectedShelf = false
     
     override func prepareForReuse() {
-        SelectedTick?.isHidden = !selectedTag
+        SelectedTick?.isHidden = !selectedShelf
     }
     
-    func setupCell(tag: Tags, selected: Bool)
+    func setupCell(shelf: Shelf, selected: Bool)
     {
-        customTag = tag
-        TagLabel.text = tag.rawValue
-        selectedTag = selected
+        TagLabel.text = shelf.name
+        BookCount?.text = "\(shelf.book_count) books"
+        selectedShelf = selected
         SelectedTick?.isHidden = !selected
     }
     
     func setSelected(selected: Bool) {
-        selectedTag = selected
+        selectedShelf = selected
         SelectedTick?.isHidden = !selected
     }
 }
