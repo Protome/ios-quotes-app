@@ -30,6 +30,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var DividerLine: UIView!
     @IBOutlet weak var BookSearchField: BookSearchBox!
     
+    @IBOutlet weak var BookSelectButton: UIBarButtonItem!
+    
     let averageRatingText = "Average Rating:"
     let quoteService = QuoteService()
     let reviewService = ReviewRequestService()
@@ -51,6 +53,9 @@ class MainViewController: UIViewController {
             pastelView?.startAnimation()
             pastelView?.pauseAnimation()
         }
+        
+        BookSelectButton.isEnabled = GoodreadsService.sharedInstance.isLoggedIn == LoginState.LoggedIn
+        BookSelectButton.image = GoodreadsService.sharedInstance.isLoggedIn == LoginState.LoggedIn ? UIImage(systemName: "book.circle") : UIImage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
