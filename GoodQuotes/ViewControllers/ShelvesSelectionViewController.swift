@@ -31,8 +31,6 @@ class ShelvesSelectionViewController: UIViewController {
         if let shelf = savedShelf {
             currentShelf = shelf
         }
-       
-        loadShelves(self)
         
         if popoverPresentationController?.presentationStyle == .popover {
             activityIndicator.style = UIActivityIndicatorView.Style.medium
@@ -44,9 +42,13 @@ class ShelvesSelectionViewController: UIViewController {
             refreshControl?.addTarget(self, action: #selector(self.loadShelves(_:)), for: .valueChanged)
             tableview?.refreshControl = refreshControl
         }
+        
+        loadShelves(self)
     }
     
     @objc func loadShelves(_ sender: Any) {
+        refreshControl?.beginRefreshing()
+        
         let goodreadsService = GoodreadsService()
         goodreadsService.loadShelves(sender: self) { shelves in
             self.activityIndicator.stopAnimating()

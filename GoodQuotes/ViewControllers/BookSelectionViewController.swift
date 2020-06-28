@@ -14,9 +14,13 @@ class BookSelectionViewController: UITableViewController {
     
     @IBOutlet weak var ErrorHeaderConstraint: NSLayoutConstraint!
     @IBOutlet weak var HeaderView: UIView!
+    @IBOutlet weak var bottomSpinner: UIActivityIndicatorView!
     
+    let buffer = 15
     var books = [Book]()
     var shelf: Shelf?
+    var pages: Pages?
+    var isLoading = false
     
     override func viewDidLoad() {
         ErrorHeaderConstraint.constant = 0
@@ -33,19 +37,41 @@ class BookSelectionViewController: UITableViewController {
     
     @objc func loadBooks(_ sender: Any) {
         let goodreadsService = GoodreadsService()
-        guard let shelf = shelf else {
+        guard let shelf = shelf, !isLoading else {
             return
         }
-        
+        isLoading = true
         refreshControl?.beginRefreshing()
         
-        goodreadsService.getBooksFromShelf(sender: self, shelf: shelf, page: 1, completion: { books in
-            self.books = books
-            self.tableView.reloadData()
-            self.refreshControl?.endRefreshing()
+        goodreadsService.getBooksFromShelf(sender: self, shelf: shelf, page: pages?.nextPage ?? 1, completion: { books, pages in
+            self.pages = pages
+            if(pages.currentPage == 1) {
+                self.books = books
+                self.tableView.reloadData()
+            }
+            else {
+                if books.count == 0 { return }
+                
+                let previousResultCount = self.books.count
+                self.books.append(contentsOf: books)
+                var indexesToUpdate = [IndexPath]()
+                for index in previousResultCount...(self.books.count - 1) {
+                    indexesToUpdate.append(IndexPath(row: index, section: 0))
+                }
+                
+                UIView.setAnimationsEnabled(false)
+                self.tableView?.beginUpdates()
+                self.tableView?.insertRows(at: indexesToUpdate, with: UITableView.RowAnimation.none)
+                self.tableView?.endUpdates()
+                UIView.setAnimationsEnabled(true)
+            }
             
+            
+            self.refreshControl?.endRefreshing()
             self.ErrorHeaderConstraint.constant = books.count == 0 ? 87 : 0
             self.HeaderView.frame.size.height = books.count == 0 ? 87 : 0
+            self.isLoading = false
+            self.bottomSpinner.stopAnimating()
         })
     }
     
@@ -65,6 +91,12 @@ extension BookSelectionViewController
         if popoverPresentationController?.presentationStyle == .popover {
             cell.backgroundColor = UIColor.clear
         }
+        
+        if indexPath.row == (pages?.lastItem ?? 1) - buffer, pages?.hasMoreToLoad ?? true {
+            bottomSpinner.startAnimating()
+            loadBooks(self)
+        }
+        
         return cell
     }
     

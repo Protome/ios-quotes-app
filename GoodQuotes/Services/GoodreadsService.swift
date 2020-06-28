@@ -178,7 +178,7 @@ class GoodreadsService {
         })
     }
     
-    func getBooksFromShelf(sender: UIViewController, shelf: Shelf, page: Int, completion: (([Book]) -> ())?)
+    func getBooksFromShelf(sender: UIViewController, shelf: Shelf, page: Int, completion: (([Book], Pages) -> ())?)
     {
         guard let _ = self.id else {
             loginToGoodreadsAccount(sender: sender) {
@@ -191,7 +191,7 @@ class GoodreadsService {
         components?.queryItems = [
             URLQueryItem(name: "key", value: "\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
             URLQueryItem(name: "shelf", value: shelf.name),
-            URLQueryItem(name: "per_page", value: String(describing: 200)),
+            URLQueryItem(name: "per_page", value: String(describing: 50)),
             URLQueryItem(name: "page", value: String(describing: page)),
         ]
         
@@ -202,7 +202,11 @@ class GoodreadsService {
                 let books = xml["GoodreadsResponse", "books", "book"].map {
                     return Book(bookXml: $0)
                 }
-                completion?(books)
+                
+                let booksXml = xml["GoodreadsResponse", "books"]
+                let pages = Pages(xml: booksXml)
+                
+                completion?(books, pages)
             }
         }
     }
