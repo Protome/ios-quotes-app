@@ -28,16 +28,16 @@ class BookSearchResultCell: UITableViewCell {
         CoverImageView.setImageFromUrl(book.imageUrl)
         TitleLabelView.text = book.title
         AuthorLabelView.text = book.author.name
-        BlurContainer.layer.cornerRadius = 4
-        BlurContainer.layer.masksToBounds = true
+        BlurContainer?.layer.cornerRadius = 4
+        BlurContainer?.layer.masksToBounds = true
         AddShadow()
     }
     
     private func AddShadow() {
-        CellBackground.layer.masksToBounds = false
-        CellBackground.layer.shadowColor = UIColor.black.cgColor
-        CellBackground.layer.shadowOpacity = 0.2
-        CellBackground.layer.shadowOffset = CGSize(width: 2, height: 4)
+        CellBackground?.layer.masksToBounds = false
+        CellBackground?.layer.shadowColor = UIColor.black.cgColor
+        CellBackground?.layer.shadowOpacity = 0.2
+        CellBackground?.layer.shadowOffset = CGSize(width: 2, height: 4)
     }
 
 }

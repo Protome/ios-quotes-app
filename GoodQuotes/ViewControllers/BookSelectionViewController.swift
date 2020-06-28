@@ -1,5 +1,5 @@
 //
-//  BookSelectionShelfListViewController.swift
+//  BookSelectionViewController.swift
 //  GoodQuotes
 //
 //  Created by Kieran Bamford on 27/06/2020.
@@ -9,61 +9,60 @@
 import Foundation
 import UIKit
 
-class BookSelectionShelfListViewController: UITableViewController {
+class BookSelectionViewController: UITableViewController {
     weak var delegate: ShelvesSelectionDelegate?
+    
     @IBOutlet weak var ErrorHeaderConstraint: NSLayoutConstraint!
     @IBOutlet weak var HeaderView: UIView!
-    var shelves = [Shelf]()
-    var selectedShelf: Shelf?
-
+    
+    var books = [Book]()
+    var shelf: Shelf?
+    
     override func viewDidLoad() {
         ErrorHeaderConstraint.constant = 0
         HeaderView.frame.size.height = 0
         
+        title = shelf?.name
+        
         refreshControl = UIRefreshControl(frame: tableView.frame)
-        refreshControl?.addTarget(self, action: #selector(self.loadShelves(_:)), for: .valueChanged)
+        refreshControl?.addTarget(self, action: #selector(self.loadBooks(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         
-        loadShelves(self)
+        loadBooks(self)
     }
     
-    @objc func loadShelves(_ sender: Any) {
+    @objc func loadBooks(_ sender: Any) {
         let goodreadsService = GoodreadsService()
+        guard let shelf = shelf else {
+            return
+        }
+        
         refreshControl?.beginRefreshing()
         
-        goodreadsService.loadShelves(sender: self) { shelves in
-            self.shelves = shelves
+        goodreadsService.getBooksFromShelf(sender: self, shelf: shelf, page: 1, completion: { books in
+            self.books = books
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
             
-            if shelves.count == 0 {
-                self.ErrorHeaderConstraint.constant = 87
-                self.HeaderView.frame.size.height = 87
-            }
-        }
+            self.ErrorHeaderConstraint.constant = books.count == 0 ? 87 : 0
+            self.HeaderView.frame.size.height = books.count == 0 ? 87 : 0
+        })
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? BookSelectionViewController {
-            destination.shelf = selectedShelf!
-        }
-    }
-    
-    @IBAction func selectShelf(_ sender: Any) {
-//        delegate?.shelfSelected(shelfName: currentShelf)
+    @IBAction func selectBook(_ sender: Any) {
+        //        delegate?.shelfSelected(shelfName: currentShelf)
         navigationController?.popViewController(animated: true)
     }
 }
 
-extension BookSelectionShelfListViewController
+extension BookSelectionViewController
 {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShelfCellView") as? TagCellView else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BookCell") as? BookSearchResultCell else {
             return UITableViewCell()
         }
         
-        let shelfName = shelves[indexPath.row].name
-        cell.TagLabel.text = shelfName
+        cell.SetupCell(book: books[indexPath.row])
         if popoverPresentationController?.presentationStyle == .popover {
             cell.backgroundColor = UIColor.clear
         }
@@ -75,7 +74,7 @@ extension BookSelectionShelfListViewController
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shelves.count
+        return books.count
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -83,7 +82,5 @@ extension BookSelectionShelfListViewController
         {
             return
         }
-        selectedShelf = shelves[indexPath.row]
-        performSegue(withIdentifier: "ShowBooksFromShelf", sender: self)
     }
 }
