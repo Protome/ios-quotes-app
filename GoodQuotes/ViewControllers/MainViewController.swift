@@ -78,8 +78,10 @@ class MainViewController: UIViewController {
         setupButtons()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nav = segue.destination as? UINavigationController, let destination = nav.topViewController as? BookSelectionShelfListViewController {
+            destination.bookDelegate = self
+        }
     }
     
     @objc func setupButtonsFromNotification(_ notification: Notification) {
@@ -123,11 +125,11 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func ViewBookOnGoodreads(_ sender: Any) {
-        guard let bookId = currentBook?.id else {
+        guard let bookId = currentBook?.id, let url = URL(string: "https://www.goodreads.com/book/show/\(bookId)") else {
             return
         }
         
-        UIApplication.shared.open(URL(string: "https://www.goodreads.com/book/show/\(bookId)")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+        UIApplication.shared.open(url)
     }
     
     @IBAction func SelectBookFromAccount(_ sender: Any) {
@@ -380,7 +382,9 @@ extension MainViewController: BookSearchSelectionDelegate {
     }
 }
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+extension MainViewController: BookSelectionDelegate {
+    func bookSelected(book: Book) {
+        BookSearchField.text = "\(book.title) \(book.author.name)"
+        loadRandomQuote()
+    }
 }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class BookSelectionViewController: UITableViewController {
-    weak var delegate: ShelvesSelectionDelegate?
+    weak var delegate: BookSelectionDelegate?
     
     @IBOutlet weak var ErrorHeaderConstraint: NSLayoutConstraint!
     @IBOutlet weak var HeaderView: UIView!
@@ -49,9 +49,8 @@ class BookSelectionViewController: UITableViewController {
         })
     }
     
-    @IBAction func selectBook(_ sender: Any) {
-        //        delegate?.shelfSelected(shelfName: currentShelf)
-        navigationController?.popViewController(animated: true)
+    @IBAction func closeModal(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -78,9 +77,23 @@ extension BookSelectionViewController
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let _ = tableView.cellForRow(at: indexPath) as? TagCellView else
+        guard let _ = tableView.cellForRow(at: indexPath) as? BookSearchResultCell else
         {
             return
         }
+        
+        let selectedBook = books[indexPath.row]
+        let defaultsService = UserDefaultsService()
+        defaultsService.storeBook(book: selectedBook)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.bookSelected(book: selectedBook)
+        dismiss(animated: true, completion: nil)
     }
+}
+
+
+protocol BookSelectionDelegate: class
+{
+    func bookSelected(book: Book)
 }

@@ -149,8 +149,8 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
             signInOutGoodreads()
         }
         
-        if section == .VisitGoodreads {
-            UIApplication.shared.open(URL(string: "https://www.goodreads.com")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+        if section == .VisitGoodreads, let url = URL(string: "https://www.goodreads.com") {
+            UIApplication.shared.open(url)
         }
     }
     
@@ -176,9 +176,4 @@ extension FiltersViewController: ShelvesSelectionDelegate
         defaultsService.storeDefaultShelf(shelfName: currentShelf)
         tableView.reloadData()
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

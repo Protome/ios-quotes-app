@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 class BookSelectionShelfListViewController: UITableViewController {
-    weak var delegate: ShelvesSelectionDelegate?
+    weak var bookDelegate: BookSelectionDelegate?
+    
     @IBOutlet weak var ErrorHeaderConstraint: NSLayoutConstraint!
     @IBOutlet weak var HeaderView: UIView!
     var shelves = [Shelf]()
@@ -46,11 +47,15 @@ class BookSelectionShelfListViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? BookSelectionViewController {
             destination.shelf = selectedShelf!
+            destination.delegate = bookDelegate
         }
     }
     
+    @IBAction func closeModal(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func selectShelf(_ sender: Any) {
-//        delegate?.shelfSelected(shelfName: currentShelf)
         navigationController?.popViewController(animated: true)
     }
 }

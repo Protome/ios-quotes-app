@@ -464,7 +464,13 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             <outlet property="delegate" destination="oqf-RQ-RVa" id="mky-ec-GHd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Shelves" id="9C5-BK-BfG"/>
+                    <navigationItem key="navigationItem" title="Shelves" id="9C5-BK-BfG">
+                        <barButtonItem key="rightBarButtonItem" title="Close" id="SPa-nP-Pq0">
+                            <connections>
+                                <action selector="closeModal:" destination="oqf-RQ-RVa" id="lEc-GY-bJu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="ErrorHeaderConstraint" destination="fGZ-Iv-J9V" id="8az-iq-LTI"/>
                         <outlet property="HeaderView" destination="RJo-Xs-voW" id="r87-hp-8iT"/>
@@ -519,7 +525,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xv2-tE-cn8">
-                                            <rect key="frame" x="54.666666666666657" y="16" width="304.33333333333337" height="18"/>
+                                            <rect key="frame" x="54.666666666666657" y="20" width="304.33333333333337" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="xsJ-QT-b9H"/>
                                             </constraints>
@@ -528,7 +534,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCW-TS-hax">
-                                            <rect key="frame" x="54.666666666666657" y="34" width="41" height="21.666666666666671"/>
+                                            <rect key="frame" x="54.666666666666657" y="38" width="41" height="21.666666666666671"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21.5" id="lbe-jt-ucF"/>
                                             </constraints>
@@ -554,7 +560,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                         <constraint firstAttribute="bottom" secondItem="ovt-eb-vUf" secondAttribute="bottom" constant="16" id="0ga-ZK-g90"/>
                                         <constraint firstItem="mCW-TS-hax" firstAttribute="leading" secondItem="ovt-eb-vUf" secondAttribute="trailing" constant="8" id="449-1d-5kf"/>
                                         <constraint firstAttribute="trailing" secondItem="Xv2-tE-cn8" secondAttribute="trailing" constant="16" id="NeI-Yi-5xl"/>
-                                        <constraint firstItem="Xv2-tE-cn8" firstAttribute="top" secondItem="ovt-eb-vUf" secondAttribute="top" id="Sm6-eI-tt2"/>
+                                        <constraint firstItem="Xv2-tE-cn8" firstAttribute="top" secondItem="ovt-eb-vUf" secondAttribute="top" constant="4" id="Sm6-eI-tt2"/>
                                         <constraint firstItem="ovt-eb-vUf" firstAttribute="top" secondItem="nAp-Dp-L2c" secondAttribute="top" constant="16" id="TJx-5T-oUg"/>
                                         <constraint firstItem="Xv2-tE-cn8" firstAttribute="leading" secondItem="ovt-eb-vUf" secondAttribute="trailing" constant="8" id="WAg-ua-SAL"/>
                                         <constraint firstItem="mCW-TS-hax" firstAttribute="top" secondItem="Xv2-tE-cn8" secondAttribute="bottom" id="enx-pz-Fpw"/>
@@ -574,7 +580,13 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             <outlet property="delegate" destination="BdN-JH-Mbt" id="Snl-FL-NEz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Books" id="ulP-lZ-hZo"/>
+                    <navigationItem key="navigationItem" title="Books" id="ulP-lZ-hZo">
+                        <barButtonItem key="rightBarButtonItem" title="Close" id="N5f-hB-wgo">
+                            <connections>
+                                <action selector="closeModal:" destination="BdN-JH-Mbt" id="dSS-bw-QEn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="ErrorHeaderConstraint" destination="OSM-3V-jb2" id="x0d-7K-63d"/>
                         <outlet property="HeaderView" destination="vsQ-7T-9Sb" id="Exa-sd-NVM"/>
@@ -883,9 +895,9 @@ Just want to say hi? </string>
                                 <rect key="frame" x="0.0" y="401.33333333333326" width="375" height="410.66666666666674"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJw-EL-qn4">
-                                        <rect key="frame" x="24" y="76" width="327" height="258.33333333333331"/>
+                                        <rect key="frame" x="24" y="76" width="327" height="258.66666666666669"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XKN-OM-KXE">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="259"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="258.66666666666669"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fpR-MN-25e">
