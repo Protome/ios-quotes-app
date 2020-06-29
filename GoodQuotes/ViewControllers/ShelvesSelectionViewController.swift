@@ -12,7 +12,6 @@ import UIKit
 class ShelvesSelectionViewController: UIViewController {
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var selectHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     weak var delegate: ShelvesSelectionDelegate?
     
@@ -21,21 +20,25 @@ class ShelvesSelectionViewController: UIViewController {
     var shelves = [Shelf]()
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadShelves(self)
+    }
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         let defaultsService = UserDefaultsService()
         let savedShelf = defaultsService.loadDefaultShelf()
         
         if let shelf = savedShelf {
             currentShelf = shelf
         }
-       
-        loadShelves(self)
         
         if popoverPresentationController?.presentationStyle == .popover {
-            activityIndicator.style = UIActivityIndicatorView.Style.medium
             selectHeightConstraint.constant = 0
             view.layoutIfNeeded()
         }
@@ -47,9 +50,10 @@ class ShelvesSelectionViewController: UIViewController {
     }
     
     @objc func loadShelves(_ sender: Any) {
+        refreshControl?.beginRefreshing()
+        
         let goodreadsService = GoodreadsService()
         goodreadsService.loadShelves(sender: self) { shelves in
-            self.activityIndicator.stopAnimating()
             self.shelves = shelves
             self.tableview.reloadData()
             self.refreshControl?.endRefreshing()
@@ -65,13 +69,12 @@ class ShelvesSelectionViewController: UIViewController {
 extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TagCellView") as? TagCellView else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShelfCell") as? ShelfCell else {
             return UITableViewCell()
         }
-    
-        let shelfName = shelves[indexPath.row].name
-        cell.TagLabel.text = shelfName
-        cell.setSelected(selected: shelfName == currentShelf)
+        
+        let shelf = shelves[indexPath.row]
+        cell.setupCell(shelf: shelf, selected: shelf.name == currentShelf)
         if popoverPresentationController?.presentationStyle == .popover {
             cell.backgroundColor = UIColor.clear
         }
@@ -87,7 +90,7 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let _ = tableView.cellForRow(at: indexPath) as? TagCellView else
+        guard let _ = tableView.cellForRow(at: indexPath) as? ShelfCell else
         {
             return
         }
@@ -96,8 +99,8 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
         deselectCells()
         
         if popoverPresentationController?.presentationStyle == .popover {
-           DispatchQueue.main.async {
-            self.delegate?.shelfSelected(shelfName: self.currentShelf)
+            DispatchQueue.main.async {
+                self.delegate?.shelfSelected(shelfName: self.currentShelf)
             }
         }
     }
@@ -106,7 +109,7 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
     {
         for index in 0...tableview.numberOfRows(inSection: 0)
         {
-            if let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as? TagCellView
+            if let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as? ShelfCell
             {
                 cell.setSelected(selected: currentShelf == cell.TagLabel.text)
             }

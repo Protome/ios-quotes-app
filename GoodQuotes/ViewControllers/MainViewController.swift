@@ -30,6 +30,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var DividerLine: UIView!
     @IBOutlet weak var BookSearchField: BookSearchBox!
     
+    @IBOutlet weak var BookSelectButton: UIBarButtonItem!
+    
     let averageRatingText = "Average Rating:"
     let quoteService = QuoteService()
     let reviewService = ReviewRequestService()
@@ -51,6 +53,9 @@ class MainViewController: UIViewController {
             pastelView?.startAnimation()
             pastelView?.pauseAnimation()
         }
+        
+        BookSelectButton.isEnabled = GoodreadsService.sharedInstance.isLoggedIn == LoginState.LoggedIn
+        BookSelectButton.image = GoodreadsService.sharedInstance.isLoggedIn == LoginState.LoggedIn ? UIImage(systemName: "book.circle") : UIImage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,8 +78,10 @@ class MainViewController: UIViewController {
         setupButtons()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nav = segue.destination as? UINavigationController, let destination = nav.topViewController as? BookSelectionShelfListViewController {
+            destination.bookDelegate = self
+        }
     }
     
     @objc func setupButtonsFromNotification(_ notification: Notification) {
@@ -118,30 +125,21 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func ViewBookOnGoodreads(_ sender: Any) {
-        guard let bookId = currentBook?.id else {
+        guard let bookId = currentBook?.id, let url = URL(string: "https://www.goodreads.com/book/show/\(bookId)") else {
             return
         }
         
-        UIApplication.shared.open(URL(string: "https://www.goodreads.com/book/show/\(bookId)")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+        UIApplication.shared.open(url)
+    }
+    
+    @IBAction func SelectBookFromAccount(_ sender: Any) {
+        performSegue(withIdentifier: "ShowBookList", sender: self)
     }
     
     func setupNavBar() {
-        let hasBeenSetUp = self.navigationController?.navigationBar.subviews.contains(where: { view in
-            return view is UIVisualEffectView
-        }) ?? false
-        
-        if hasBeenSetUp { return }
-        
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        let barHeight = self.view.safeAreaInsets.top
-        let offsetY = self.navigationController!.navigationBar.bounds.origin.y + (self.navigationController!.navigationBar.bounds.height - barHeight)
-        visualEffectView.frame = CGRect(origin: CGPoint(x: self.navigationController!.navigationBar.bounds.origin.x, y: offsetY),
-                                        size: CGSize(width: self.navigationController!.navigationBar.bounds.width, height: barHeight ))
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.addSubview(visualEffectView)
-//        self.navigationController?.navigationBar.sendSubviewToBack(visualEffectView)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
    
     func setupButtons() {
@@ -371,7 +369,9 @@ extension MainViewController: BookSearchSelectionDelegate {
     }
 }
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+extension MainViewController: BookSelectionDelegate {
+    func bookSelected(book: Book) {
+        BookSearchField.text = "\(book.title) \(book.author.name)"
+        loadRandomQuote()
+    }
 }

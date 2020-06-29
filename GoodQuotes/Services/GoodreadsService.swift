@@ -13,7 +13,7 @@ import OAuthSwift
 
 class GoodreadsService {
     static var sharedInstance = GoodreadsService()
-
+    
     var isLoggedIn = LoginState.LoggedOut {
         didSet {
             NotificationCenter.default.post(name: .loginStateChanged, object: nil)
@@ -148,7 +148,7 @@ class GoodreadsService {
                 let pages = ceil(totalResults/18)
                 let results = xml["GoodreadsResponse", "search", "results", "work"]
                 let bookResults =  results.map({  return Book(xml: $0) })
-
+                
                 completion(bookResults, Int(pages))
             }
         }
@@ -167,14 +167,47 @@ class GoodreadsService {
                           "book_id" : bookId]
         
         let _ = oauthswift.client.post("https://www.goodreads.com/shelf/add_to_shelf.xml",
-                                parameters: parameters,
-                                headers: nil,
-                                body: nil,
-                                success: { response in
-                                    completion()
+                                       parameters: parameters,
+                                       headers: nil,
+                                       body: nil,
+                                       success: { response in
+                                        completion()
         }, failure: { error in
             completion()
             print(error)
         })
+    }
+    
+    func getBooksFromShelf(sender: UIViewController, shelf: Shelf, page: Int, completion: (([Book], Pages) -> ())?)
+    {
+        guard let _ = self.id else {
+            loginToGoodreadsAccount(sender: sender) {
+                self.getBooksFromShelf(sender: sender, shelf: shelf, page: page, completion: completion)
+            }
+            return
+        }
+        let urlString = "https://www.goodreads.com/review/list/\(id!).xml"
+        var components = URLComponents(string: urlString)
+        components?.queryItems = [
+            URLQueryItem(name: "key", value: "\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
+            URLQueryItem(name: "shelf", value: shelf.name),
+            URLQueryItem(name: "per_page", value: String(describing: 50)),
+            URLQueryItem(name: "page", value: String(describing: page)),
+        ]
+        
+        if let url = components?.url
+        {
+            Alamofire.request(url).response { response in
+                let xml = XML.parse(response.data!)
+                let books = xml["GoodreadsResponse", "books", "book"].map {
+                    return Book(bookXml: $0)
+                }
+                
+                let booksXml = xml["GoodreadsResponse", "books"]
+                let pages = Pages(xml: booksXml)
+                
+                completion?(books, pages)
+            }
+        }
     }
 }

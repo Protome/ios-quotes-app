@@ -8,5 +8,5 @@ target 'GoodQuotes' do
     pod "Pastel"
     pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
     pod 'OAuthSwift', '~> 1.3.0'
-    pod 'ChromaColorPicker'
+    pod 'ChromaColorPicker', '1.7.2'
 end

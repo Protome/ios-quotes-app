@@ -33,6 +33,14 @@ struct Book: Codable {
         averageRating = xml["average_rating"].double ?? 0
     }
     
+    init(bookXml: XML.Accessor) {
+        id = bookXml["id"].text ?? ""
+        title = bookXml["title"].text ?? ""
+        author = Author(xml: bookXml["authors", "author"])
+        imageUrl = bookXml["image_url"].text ?? ""
+        averageRating = 0
+    }
+    
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
