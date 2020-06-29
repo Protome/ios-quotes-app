@@ -18,18 +18,22 @@ class BookSelectionShelfListViewController: UITableViewController {
     var selectedShelf: Shelf?
 
     override func viewDidLoad() {
+        super.viewDidLoad()
         ErrorHeaderConstraint.constant = 0
         HeaderView.frame.size.height = 0
         
         refreshControl = UIRefreshControl(frame: tableView.frame)
         refreshControl?.addTarget(self, action: #selector(self.loadShelves(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
-        
-        loadShelves(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.tintColor = UIColor.gray
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadShelves(self)
     }
     
     @objc func loadShelves(_ sender: Any) {

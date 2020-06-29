@@ -59,6 +59,7 @@ class ColourSelectionViewController : UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         styleView()
         
         let indexPath = IndexPath(row: selectedIndex, section: 0)

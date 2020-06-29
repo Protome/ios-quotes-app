@@ -23,6 +23,7 @@ class BookSelectionViewController: UITableViewController {
     var isLoading = false
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         ErrorHeaderConstraint.constant = 0
         HeaderView.frame.size.height = 0
         
@@ -31,7 +32,10 @@ class BookSelectionViewController: UITableViewController {
         refreshControl = UIRefreshControl(frame: tableView.frame)
         refreshControl?.addTarget(self, action: #selector(self.loadBooks(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         loadBooks(self)
     }
     
