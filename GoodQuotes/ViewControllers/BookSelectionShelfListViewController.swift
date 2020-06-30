@@ -14,6 +14,7 @@ class BookSelectionShelfListViewController: UITableViewController {
     
     @IBOutlet weak var ErrorHeaderConstraint: NSLayoutConstraint!
     @IBOutlet weak var HeaderView: UIView!
+    @IBOutlet weak var bottomActivityIndicator: UIActivityIndicatorView!
     var shelves = [Shelf]()
     var selectedShelf: Shelf?
 
@@ -25,6 +26,7 @@ class BookSelectionShelfListViewController: UITableViewController {
         refreshControl = UIRefreshControl(frame: tableView.frame)
         refreshControl?.addTarget(self, action: #selector(self.loadShelves(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
+        extendedLayoutIncludesOpaqueBars = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +46,7 @@ class BookSelectionShelfListViewController: UITableViewController {
             self.shelves = shelves
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
+            self.bottomActivityIndicator?.stopAnimating()
             
             if shelves.count == 0 {
                 self.ErrorHeaderConstraint.constant = 87

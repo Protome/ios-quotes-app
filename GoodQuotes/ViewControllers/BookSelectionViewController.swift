@@ -28,14 +28,12 @@ class BookSelectionViewController: UITableViewController {
         HeaderView.frame.size.height = 0
         
         title = shelf?.name
-        
-        refreshControl = UIRefreshControl(frame: tableView.frame)
         refreshControl?.addTarget(self, action: #selector(self.loadBooks(_:)), for: .valueChanged)
-        tableView.refreshControl = refreshControl
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        bottomSpinner.startAnimating()
         loadBooks(self)
     }
     

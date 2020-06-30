@@ -12,7 +12,7 @@ import UIKit
 class ShelvesSelectionViewController: UIViewController {
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var selectHeightConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     weak var delegate: ShelvesSelectionDelegate?
     
     var refreshControl : UIRefreshControl?
@@ -57,6 +57,9 @@ class ShelvesSelectionViewController: UIViewController {
             self.shelves = shelves
             self.tableview.reloadData()
             self.refreshControl?.endRefreshing()
+            self.activityIndicator?.stopAnimating()
+            self.tableview?.tableHeaderView?.frame.size.height = 0
+            self.view.layoutIfNeeded()
         }
     }
     

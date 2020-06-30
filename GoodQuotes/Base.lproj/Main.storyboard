@@ -375,8 +375,8 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
         <!--Navigation Controller-->
         <scene sceneID="QU2-AO-biP">
             <objects>
-                <navigationController id="CdA-P3-sk5" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="UwW-wh-N5H">
+                <navigationController extendedLayoutIncludesOpaqueBars="YES" id="CdA-P3-sk5" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="UwW-wh-N5H">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -392,7 +392,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
         <!--Shelves-->
         <scene sceneID="Xpk-zh-nyy">
             <objects>
-                <tableViewController id="oqf-RQ-RVa" customClass="BookSelectionShelfListViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="oqf-RQ-RVa" customClass="BookSelectionShelfListViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="K2c-il-Moa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -420,9 +420,18 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="nPr-xJ-Xkd">
-                            <rect key="frame" x="0.0" y="201" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="201" width="375" height="61"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="PyS-Ph-Oe4">
+                                    <rect key="frame" x="169" y="12" width="37" height="37"/>
+                                </activityIndicatorView>
+                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="PyS-Ph-Oe4" firstAttribute="centerX" secondItem="nPr-xJ-Xkd" secondAttribute="centerX" id="2w4-cE-Exp"/>
+                                <constraint firstItem="PyS-Ph-Oe4" firstAttribute="centerY" secondItem="nPr-xJ-Xkd" secondAttribute="centerY" id="4xV-2N-N7n"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShelfCellView" rowHeight="58" id="q05-4Y-BF1" customClass="ShelfCell" customModule="GoodQuotes" customModuleProvider="target">
@@ -476,6 +485,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                     <connections>
                         <outlet property="ErrorHeaderConstraint" destination="fGZ-Iv-J9V" id="8az-iq-LTI"/>
                         <outlet property="HeaderView" destination="RJo-Xs-voW" id="r87-hp-8iT"/>
+                        <outlet property="bottomActivityIndicator" destination="PyS-Ph-Oe4" id="dX7-SA-mDQ"/>
                         <segue destination="BdN-JH-Mbt" kind="show" identifier="ShowBooksFromShelf" id="Xsf-ca-HT3"/>
                     </connections>
                 </tableViewController>
@@ -486,7 +496,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
         <!--Books-->
         <scene sceneID="eew-tw-iRR">
             <objects>
-                <tableViewController id="BdN-JH-Mbt" customClass="BookSelectionViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="BdN-JH-Mbt" customClass="BookSelectionViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Srm-XU-eV7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -514,11 +524,11 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Gom-gq-xLG">
-                            <rect key="frame" x="0.0" y="224" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="224" width="375" height="61"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="wsa-od-YPw">
-                                    <rect key="frame" x="177.66666666666666" y="12" width="20" height="20"/>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="wsa-od-YPw">
+                                    <rect key="frame" x="169" y="12" width="37" height="37"/>
                                 </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -598,6 +608,10 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="6aD-ug-9j9">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle"/>
+                    </refreshControl>
                     <connections>
                         <outlet property="ErrorHeaderConstraint" destination="OSM-3V-jb2" id="x0d-7K-63d"/>
                         <outlet property="HeaderView" destination="vsQ-7T-9Sb" id="Exa-sd-NVM"/>
@@ -624,11 +638,6 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="P6J-bg-CHX">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="4"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </view>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="pjD-bx-6gI">
-                                    <rect key="frame" x="0.0" y="118" width="375" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -694,7 +703,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyc-dL-2nH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1007" y="-484"/>
+            <point key="canvasLocation" x="1005.6" y="-484.72906403940891"/>
         </scene>
         <!--Shelves-->
         <scene sceneID="nOW-nz-UHh">
@@ -707,14 +716,28 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="a5i-RT-fma">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="720"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="4AD-y2-Dnk">
-                                    <rect key="frame" x="0.0" y="114" width="375" height="1"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="z70-8E-VRQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="wmf-Re-fsa">
+                                            <rect key="frame" x="177.66666666666666" y="12" width="20" height="20"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstItem="wmf-Re-fsa" firstAttribute="centerY" secondItem="z70-8E-VRQ" secondAttribute="centerY" id="5Ky-RG-ykw"/>
+                                        <constraint firstItem="wmf-Re-fsa" firstAttribute="centerX" secondItem="z70-8E-VRQ" secondAttribute="centerX" id="uRl-R1-9Hy"/>
+                                    </constraints>
+                                </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="Y9q-B9-mKf">
+                                    <rect key="frame" x="0.0" y="158" width="375" height="15"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShelfCell" rowHeight="58" id="yF3-dg-Y9j" customClass="ShelfCell" customModule="GoodQuotes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="58"/>
+                                        <rect key="frame" x="0.0" y="72" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yF3-dg-Y9j" id="1Za-6U-gJu">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
@@ -784,13 +807,14 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                         <viewLayoutGuide key="safeArea" id="EAc-xA-8AN"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="wmf-Re-fsa" id="5wR-T5-QzJ"/>
                         <outlet property="selectHeightConstraint" destination="M13-pn-YvH" id="dpE-T0-AxJ"/>
                         <outlet property="tableview" destination="a5i-RT-fma" id="zlP-3U-j2y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j2o-EP-oTc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1894" y="284"/>
+            <point key="canvasLocation" x="1893.5999999999999" y="283.74384236453204"/>
         </scene>
         <!--Feedback-->
         <scene sceneID="7vK-c4-NeV">
@@ -892,20 +916,20 @@ Just want to say hi? </string>
                                 <rect key="frame" x="0.0" y="456" width="375" height="356"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJw-EL-qn4">
-                                        <rect key="frame" x="24" y="48.666666666666686" width="327" height="258.66666666666669"/>
+                                        <rect key="frame" x="24" y="48.333333333333314" width="327" height="259.33333333333331"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XKN-OM-KXE">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="258"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="260"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fpR-MN-25e">
-                                                    <rect key="frame" x="8" y="15.999999999999943" width="311" height="153"/>
+                                                    <rect key="frame" x="8" y="16.000000000000057" width="311" height="153"/>
                                                     <string key="text">Any child knows what a witch looks like. The warts are important, yes, the hooked nose, the cruel smile. But it’s the hat that cinches it: pointy and black with a wide rim. Plenty of people have warts and hooked noses and cruel smiles but are not witches at all. Hats change everything.</string>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                                     <color key="textColor" name="MainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="The Girl Who Circumnavigated Fairyland in a Ship of Her Own Making (Fairyland, #1)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaM-cQ-O6U">
-                                                    <rect key="frame" x="8" y="176.99999999999994" width="311" height="38.333333333333343"/>
+                                                    <rect key="frame" x="8" y="177.00000000000006" width="311" height="38.333333333333343"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" name="MainText"/>
                                                     <nil key="highlightedColor"/>
