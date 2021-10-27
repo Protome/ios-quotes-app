@@ -33,7 +33,7 @@ extension XML {
         /// So the result of parsing is missing.
         /// See https://developer.apple.com/documentation/foundation/xmlparser/errorcode
         private(set) var error: XMLError?
-        
+
         func parse(_ data: Data) -> Accessor {
             stack = [Element]()
             stack.append(documentRoot)
@@ -46,22 +46,22 @@ extension XML {
                 return Accessor(documentRoot)
             }
         }
-        
-        override init() {
-            trimmingManner = nil
-        }
-        
-        init(trimming manner: CharacterSet) {
-            trimmingManner = manner
+
+        init(trimming manner: CharacterSet? = nil, ignoreNamespaces: Bool = false) {
+            self.trimmingManner = manner
+            self.ignoreNamespaces = ignoreNamespaces
+            self.documentRoot = Element(name: "XML.Parser.AbstructedDocumentRoot", ignoreNamespaces: ignoreNamespaces)
         }
         
         // MARK:- private
-        fileprivate var documentRoot = Element(name: "XML.Parser.AbstructedDocumentRoot")
+        fileprivate var documentRoot: Element
         fileprivate var stack = [Element]()
         fileprivate let trimmingManner: CharacterSet?
+        fileprivate let ignoreNamespaces: Bool
         
         func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-            let node = Element(name: elementName)
+            let node = Element(name: elementName, ignoreNamespaces: ignoreNamespaces)
+            node.lineNumberStart = parser.lineNumber
             if !attributeDict.isEmpty {
                 node.attributes = attributeDict
             }
@@ -80,8 +80,13 @@ extension XML {
                 stack.last?.text = "" + string
             }
         }
+
+        func parser(_ parser: XMLParser, foundCDATA CDATABlock: Data) {
+            stack.last?.CDATA = CDATABlock
+        }
         
         func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+            stack.last?.lineNumberEnd = parser.lineNumber
             if let trimmingManner = self.trimmingManner {
                 stack.last?.text = stack.last?.text?.trimmingCharacters(in: trimmingManner)
             }

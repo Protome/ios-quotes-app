@@ -111,8 +111,8 @@ class UserDefaultsService
     func storeColours(colours: [UIColor])
     {
         let defaults = UserDefaults.standard
-        defaults.set(colours[0].hexCode, forKey: backgroundColour1)
-        defaults.set(colours[1].hexCode, forKey: backgroundColour2)
+        defaults.set(colours[0].hexStringFromColor(), forKey: backgroundColour1)
+        defaults.set(colours[1].hexStringFromColor(), forKey: backgroundColour2)
     }
     
     func loadColours() -> [UIColor]?

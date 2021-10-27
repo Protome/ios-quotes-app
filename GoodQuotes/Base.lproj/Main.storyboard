@@ -720,7 +720,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                         <segue destination="boQ-35-Qqe" kind="show" identifier="ShowShelves" id="qGd-Vk-OTI"/>
                         <segue destination="CK4-Sh-ahE" kind="show" identifier="ShowAcknowledgements" id="YJZ-Wr-GpW"/>
                         <segue destination="2xS-Us-Fpt" kind="show" identifier="ShowFeedback" id="GmH-sg-eNg"/>
-                        <segue destination="z9T-Zc-gxW" kind="show" identifier="ChangeBackground" id="xdD-2g-k23"/>
+                        <segue destination="z9T-Zc-gxW" kind="presentation" identifier="ChangeBackground" id="xdD-2g-k23"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyc-dL-2nH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -886,13 +886,13 @@ Just want to say hi? </string>
         <!--Background-->
         <scene sceneID="1kL-en-ezg">
             <objects>
-                <viewController title="Background" id="z9T-Zc-gxW" customClass="ColourSelectionViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Background" modalPresentationStyle="fullScreen" id="z9T-Zc-gxW" customClass="ColourSelectionViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e6E-rS-mbf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="d8U-Kh-bX0">
-                                <rect key="frame" x="0.0" y="108" width="375" height="292.66666666666669"/>
+                                <rect key="frame" x="0.0" y="139.99999999999997" width="375" height="308.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="15" id="ptk-Cl-drC">
                                     <size key="itemSize" width="105" height="105"/>
@@ -932,12 +932,12 @@ Just want to say hi? </string>
                                 </collectionReusableView>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="239-eO-z2f">
-                                <rect key="frame" x="0.0" y="429.66666666666674" width="375" height="328.33333333333326"/>
+                                <rect key="frame" x="0.0" y="477.33333333333326" width="375" height="334.66666666666674"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJw-EL-qn4">
-                                        <rect key="frame" x="24" y="34.666666666666629" width="327" height="259"/>
+                                        <rect key="frame" x="24" y="38.000000000000057" width="327" height="258.66666666666669"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XKN-OM-KXE">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="259"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="258.66666666666669"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fpR-MN-25e">
@@ -948,13 +948,13 @@ Just want to say hi? </string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="The Girl Who Circumnavigated Fairyland in a Ship of Her Own Making (Fairyland, #1)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaM-cQ-O6U">
-                                                    <rect key="frame" x="8" y="177.00000000000006" width="311" height="38.333333333333343"/>
+                                                    <rect key="frame" x="8" y="177" width="311" height="38.333333333333343"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" name="MainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Catherynne M. Valente" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1F-F0-8TQ">
-                                                    <rect key="frame" x="8" y="223.33333333333331" width="311" height="19.333333333333343"/>
+                                                    <rect key="frame" x="8" y="223.33333333333326" width="311" height="19.333333333333343"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" name="MainText"/>
                                                     <nil key="highlightedColor"/>
@@ -976,12 +976,12 @@ Just want to say hi? </string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <blurEffect style="light"/>
                                     </visualEffectView>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sf-mt-6gH">
-                                        <rect key="frame" x="206.33333333333337" y="0.0" width="168.66666666666663" height="147.66666666666666"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sf-mt-6gH">
+                                        <rect key="frame" x="206.33333333333337" y="0.0" width="168.66666666666663" height="150.66666666666666"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACr-x8-Vau">
-                                        <rect key="frame" x="0.0" y="172.66666666666669" width="168.66666666666666" height="147.66666666666669"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACr-x8-Vau">
+                                        <rect key="frame" x="0.0" y="142.00000000000006" width="168.66666666666666" height="150.66666666666669"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -1001,7 +1001,7 @@ Just want to say hi? </string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aX3-2N-XiU">
-                                <rect key="frame" x="0.0" y="400.66666666666669" width="375" height="29"/>
+                                <rect key="frame" x="0.0" y="448.33333333333331" width="375" height="29"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhq-QY-XL6">
                                         <rect key="frame" x="16" y="4" width="65" height="21"/>
@@ -1017,6 +1017,23 @@ Just want to say hi? </string>
                                     <constraint firstItem="uhq-QY-XL6" firstAttribute="leading" secondItem="aX3-2N-XiU" secondAttribute="leading" constant="16" id="qt0-rN-kpT"/>
                                 </constraints>
                             </view>
+                            <navigationBar contentMode="scaleToFill" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2y7-Ai-SZP">
+                                <rect key="frame" x="0.0" y="44" width="375" height="96"/>
+                                <items>
+                                    <navigationItem title="Background" largeTitleDisplayMode="always" id="geR-Rw-f7a">
+                                        <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="dak-0Y-vmG">
+                                            <connections>
+                                                <action selector="closeModal:" destination="pBy-VS-NT2" id="yQx-N1-KH1"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="vJG-rV-3Hh">
+                                            <connections>
+                                                <action selector="SaveChanges:" destination="z9T-Zc-gxW" id="srd-5V-20Z"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dgm-Tl-MpH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1024,17 +1041,19 @@ Just want to say hi? </string>
                             <constraint firstItem="d8U-Kh-bX0" firstAttribute="leading" secondItem="dgm-Tl-MpH" secondAttribute="leading" id="1Fx-JC-IXZ"/>
                             <constraint firstItem="dgm-Tl-MpH" firstAttribute="trailing" secondItem="d8U-Kh-bX0" secondAttribute="trailing" id="KK2-ae-e95"/>
                             <constraint firstItem="239-eO-z2f" firstAttribute="trailing" secondItem="dgm-Tl-MpH" secondAttribute="trailing" id="NWa-gR-nqS"/>
+                            <constraint firstItem="2y7-Ai-SZP" firstAttribute="top" secondItem="dgm-Tl-MpH" secondAttribute="top" id="OGG-pd-eZQ"/>
                             <constraint firstItem="dgm-Tl-MpH" firstAttribute="trailing" secondItem="aX3-2N-XiU" secondAttribute="trailing" id="TXp-bx-SSV"/>
                             <constraint firstItem="239-eO-z2f" firstAttribute="top" secondItem="aX3-2N-XiU" secondAttribute="bottom" id="Tly-d7-WoB"/>
-                            <constraint firstItem="d8U-Kh-bX0" firstAttribute="height" secondItem="dgm-Tl-MpH" secondAttribute="height" multiplier="0.45" id="ayA-RJ-z97"/>
+                            <constraint firstItem="2y7-Ai-SZP" firstAttribute="leading" secondItem="dgm-Tl-MpH" secondAttribute="leading" id="WzJ-o8-qXh"/>
+                            <constraint firstItem="d8U-Kh-bX0" firstAttribute="height" secondItem="dgm-Tl-MpH" secondAttribute="height" multiplier="0.42" id="ayA-RJ-z97"/>
+                            <constraint firstItem="2y7-Ai-SZP" firstAttribute="trailing" secondItem="dgm-Tl-MpH" secondAttribute="trailing" id="bQa-NL-jrH"/>
                             <constraint firstAttribute="bottom" secondItem="239-eO-z2f" secondAttribute="bottom" id="c8L-0N-i77"/>
                             <constraint firstItem="aX3-2N-XiU" firstAttribute="top" secondItem="d8U-Kh-bX0" secondAttribute="bottom" id="qcm-0m-V4t"/>
-                            <constraint firstItem="d8U-Kh-bX0" firstAttribute="top" secondItem="dgm-Tl-MpH" secondAttribute="top" id="rIL-jD-MfL"/>
+                            <constraint firstItem="d8U-Kh-bX0" firstAttribute="top" secondItem="2y7-Ai-SZP" secondAttribute="bottom" id="rIL-jD-MfL"/>
                             <constraint firstItem="aX3-2N-XiU" firstAttribute="leading" secondItem="dgm-Tl-MpH" secondAttribute="leading" id="rSk-WI-fND"/>
                             <constraint firstItem="239-eO-z2f" firstAttribute="leading" secondItem="dgm-Tl-MpH" secondAttribute="leading" id="ydy-Rn-zVW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Background" id="fyr-Ga-GfM"/>
                     <connections>
                         <outlet property="BottomLeftColourPIcker" destination="ACr-x8-Vau" id="H56-c8-rds"/>
                         <outlet property="CollectionView" destination="d8U-Kh-bX0" id="oqT-tT-fpg"/>
@@ -1055,6 +1074,7 @@ Just want to say hi? </string>
     <resources>
         <image name="arrow.2.circlepath" catalog="system" width="128" height="101"/>
         <image name="book.circle" catalog="system" width="128" height="121"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="plus" catalog="system" width="128" height="113"/>
