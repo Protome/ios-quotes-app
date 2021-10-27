@@ -58,7 +58,6 @@ class ShelvesSelectionViewController: UIViewController {
             self.tableview.reloadData()
             self.refreshControl?.endRefreshing()
             self.activityIndicator?.stopAnimating()
-            self.tableview?.tableHeaderView?.frame.size.height = 0
             self.view.layoutIfNeeded()
         }
     }
@@ -120,7 +119,7 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
     }
 }
 
-protocol ShelvesSelectionDelegate: class
+protocol ShelvesSelectionDelegate: AnyObject
 {
     func shelfSelected(shelfName: String)
 }

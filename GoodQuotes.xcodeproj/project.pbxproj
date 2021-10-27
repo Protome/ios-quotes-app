@@ -3,17 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		06469ED1BBCB8BAC478B8A97 /* Pods_GoodQuotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */; };
+		E503C70824AFB5F900AB54DE /* ShelfItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503C70724AFB5F900AB54DE /* ShelfItemView.swift */; };
 		E50ADDC1222B48E20037ACBD /* TextOnlyResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E50ADDC0222B48E20037ACBD /* TextOnlyResultCell.xib */; };
 		E50ADDC3222B49B20037ACBD /* TextOnlyResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */; };
 		E50C0AD922A8762300B2305E /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50C0AD822A8762300B2305E /* UIColorExtensions.swift */; };
 		E52121682124DE620027BCFC /* GoodreadsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52121672124DE620027BCFC /* GoodreadsService.swift */; };
 		E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5279ED6212765D8007BC585 /* BlurButtonView.xib */; };
 		E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5279ED8212765F6007BC585 /* BlurButtonView.swift */; };
+		E550688B253B33CF00943B2E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E550688A253B33CF00943B2E /* WidgetKit.framework */; };
+		E550688D253B33CF00943B2E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E550688C253B33CF00943B2E /* SwiftUI.framework */; };
+		E5506890253B33CF00943B2E /* Quotey_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550688F253B33CF00943B2E /* Quotey_Widget.swift */; };
+		E5506893253B33D000943B2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5506892253B33D000943B2E /* Assets.xcassets */; };
+		E5506895253B33D000943B2E /* Quotey_Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E5506891253B33CF00943B2E /* Quotey_Widget.intentdefinition */; };
+		E5506896253B33D000943B2E /* Quotey_Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E5506891253B33CF00943B2E /* Quotey_Widget.intentdefinition */; };
+		E5506899253B33D000943B2E /* Quotey-WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E5506889253B33CF00943B2E /* Quotey-WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E554D40A211C9E3100F32AF9 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D409211C9E3100F32AF9 /* QuoteService.swift */; };
 		E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40C211CC03A00F32AF9 /* Quote.swift */; };
 		E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */; };
@@ -60,6 +68,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E5506897253B33D000943B2E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E5C5CC96211C8E5D0010ACB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5506888253B33CF00943B2E;
+			remoteInfo = "Quotey-WidgetExtension";
+		};
 		E5C5CCB3211C8E600010ACB0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E5C5CC96211C8E5D0010ACB0 /* Project object */;
@@ -69,16 +84,38 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E550689A253B33D000943B2E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E5506899253B33D000943B2E /* Quotey-WidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		20B20ECBD04CA8B77E56FE71 /* Pods-GoodQuotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.release.xcconfig"; sourceTree = "<group>"; };
 		AC0E28153F7504ED9B61A988 /* Pods-GoodQuotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.debug.xcconfig"; sourceTree = "<group>"; };
 		CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodQuotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E503C70724AFB5F900AB54DE /* ShelfItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfItemView.swift; sourceTree = "<group>"; };
 		E50ADDC0222B48E20037ACBD /* TextOnlyResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextOnlyResultCell.xib; sourceTree = "<group>"; };
 		E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOnlyResultCell.swift; sourceTree = "<group>"; };
 		E50C0AD822A8762300B2305E /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		E52121672124DE620027BCFC /* GoodreadsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodreadsService.swift; sourceTree = "<group>"; };
 		E5279ED6212765D8007BC585 /* BlurButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlurButtonView.xib; sourceTree = "<group>"; };
 		E5279ED8212765F6007BC585 /* BlurButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurButtonView.swift; sourceTree = "<group>"; };
+		E5506889253B33CF00943B2E /* Quotey-WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Quotey-WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E550688A253B33CF00943B2E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		E550688C253B33CF00943B2E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		E550688F253B33CF00943B2E /* Quotey_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotey_Widget.swift; sourceTree = "<group>"; };
+		E5506891253B33CF00943B2E /* Quotey_Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Quotey_Widget.intentdefinition; sourceTree = "<group>"; };
+		E5506892253B33D000943B2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E5506894253B33D000943B2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E554D409211C9E3100F32AF9 /* QuoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteService.swift; sourceTree = "<group>"; };
 		E554D40C211CC03A00F32AF9 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastelHelper.swift; sourceTree = "<group>"; };
@@ -129,6 +166,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E5506886253B33CF00943B2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E550688D253B33CF00943B2E /* SwiftUI.framework in Frameworks */,
+				E550688B253B33CF00943B2E /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5C5CC9B211C8E5D0010ACB0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -160,8 +206,26 @@
 			isa = PBXGroup;
 			children = (
 				CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */,
+				E550688A253B33CF00943B2E /* WidgetKit.framework */,
+				E550688C253B33CF00943B2E /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E503C70524AFAF7800AB54DE /* SwiftUIViews */ = {
+			isa = PBXGroup;
+			children = (
+				E503C70624AFB4A800AB54DE /* Cells */,
+			);
+			path = SwiftUIViews;
+			sourceTree = "<group>";
+		};
+		E503C70624AFB4A800AB54DE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E503C70724AFB5F900AB54DE /* ShelfItemView.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		E5279ED421276402007BC585 /* CustomViews */ = {
@@ -181,6 +245,17 @@
 				E5279ED8212765F6007BC585 /* BlurButtonView.swift */,
 			);
 			path = BlurButton;
+			sourceTree = "<group>";
+		};
+		E550688E253B33CF00943B2E /* Quotey-Widget */ = {
+			isa = PBXGroup;
+			children = (
+				E550688F253B33CF00943B2E /* Quotey_Widget.swift */,
+				E5506891253B33CF00943B2E /* Quotey_Widget.intentdefinition */,
+				E5506892253B33D000943B2E /* Assets.xcassets */,
+				E5506894253B33D000943B2E /* Info.plist */,
+			);
+			path = "Quotey-Widget";
 			sourceTree = "<group>";
 		};
 		E554D408211C9D2B00F32AF9 /* Services */ = {
@@ -276,6 +351,7 @@
 			children = (
 				E5C5CCA0211C8E5D0010ACB0 /* GoodQuotes */,
 				E5C5CCB5211C8E600010ACB0 /* GoodQuotesTests */,
+				E550688E253B33CF00943B2E /* Quotey-Widget */,
 				E5C5CC9F211C8E5D0010ACB0 /* Products */,
 				6571DB88678E0E534CAB06DC /* Pods */,
 				8B8A0105C4260B67664C8A74 /* Frameworks */,
@@ -287,6 +363,7 @@
 			children = (
 				E5C5CC9E211C8E5D0010ACB0 /* GoodQuotes.app */,
 				E5C5CCB2211C8E600010ACB0 /* GoodQuotesTests.xctest */,
+				E5506889253B33CF00943B2E /* Quotey-WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -294,6 +371,7 @@
 		E5C5CCA0211C8E5D0010ACB0 /* GoodQuotes */ = {
 			isa = PBXGroup;
 			children = (
+				E503C70524AFAF7800AB54DE /* SwiftUIViews */,
 				E5279ED421276402007BC585 /* CustomViews */,
 				E554D41F211F426F00F32AF9 /* Enums */,
 				E554D41A211F376900F32AF9 /* Cells */,
@@ -324,6 +402,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E5506888253B33CF00943B2E /* Quotey-WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E550689D253B33D000943B2E /* Build configuration list for PBXNativeTarget "Quotey-WidgetExtension" */;
+			buildPhases = (
+				E5506885253B33CF00943B2E /* Sources */,
+				E5506886253B33CF00943B2E /* Frameworks */,
+				E5506887253B33CF00943B2E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Quotey-WidgetExtension";
+			productName = "Quotey-WidgetExtension";
+			productReference = E5506889253B33CF00943B2E /* Quotey-WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		E5C5CC9D211C8E5D0010ACB0 /* GoodQuotes */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5C5CCBB211C8E600010ACB0 /* Build configuration list for PBXNativeTarget "GoodQuotes" */;
@@ -333,10 +428,12 @@
 				E5C5CC9B211C8E5D0010ACB0 /* Frameworks */,
 				E5C5CC9C211C8E5D0010ACB0 /* Resources */,
 				45DCFBC0AC8F613AAB8F6D9A /* [CP] Embed Pods Frameworks */,
+				E550689A253B33D000943B2E /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E5506898253B33D000943B2E /* PBXTargetDependency */,
 			);
 			name = GoodQuotes;
 			productName = GoodQuotes;
@@ -367,10 +464,13 @@
 		E5C5CC96211C8E5D0010ACB0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0940;
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1310;
 				ORGANIZATIONNAME = Protome;
 				TargetAttributes = {
+					E5506888253B33CF00943B2E = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
 					E5C5CC9D211C8E5D0010ACB0 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1020;
@@ -397,11 +497,20 @@
 			targets = (
 				E5C5CC9D211C8E5D0010ACB0 /* GoodQuotes */,
 				E5C5CCB1211C8E600010ACB0 /* GoodQuotesTests */,
+				E5506888253B33CF00943B2E /* Quotey-WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E5506887253B33CF00943B2E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5506893253B33D000943B2E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5C5CC9C211C8E5D0010ACB0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -465,6 +574,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E5506885253B33CF00943B2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5506890253B33CF00943B2E /* Quotey_Widget.swift in Sources */,
+				E5506895253B33D000943B2E /* Quotey_Widget.intentdefinition in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5C5CC9A211C8E5D0010ACB0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -481,6 +599,7 @@
 				E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */,
 				E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */,
 				E554D423211F4BE400F32AF9 /* FilterCell.swift in Sources */,
+				E503C70824AFB5F900AB54DE /* ShelfItemView.swift in Sources */,
 				E554D421211F44EB00F32AF9 /* UserDefaultsService.swift in Sources */,
 				E57D4A5622A5D6DF007B93F1 /* GradientCell.swift in Sources */,
 				E5B195CB212B42A800A9901C /* LoginState.swift in Sources */,
@@ -491,6 +610,7 @@
 				E5CFE69424A7EED500D5A554 /* BookSelectionViewController.swift in Sources */,
 				E5E525FC21262D2200EF1E1B /* AuthStorageService.swift in Sources */,
 				E5996544222A0B3000BAA33C /* BookSearchResultCell.swift in Sources */,
+				E5506896253B33D000943B2E /* Quotey_Widget.intentdefinition in Sources */,
 				E56C495424A8C341009A9569 /* Pages.swift in Sources */,
 				E554D415211F33BC00F32AF9 /* FiltersViewController.swift in Sources */,
 				E554D412211F17C200F32AF9 /* Tags.swift in Sources */,
@@ -523,6 +643,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E5506898253B33D000943B2E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5506888253B33CF00943B2E /* Quotey-WidgetExtension */;
+			targetProxy = E5506897253B33D000943B2E /* PBXContainerItemProxy */;
+		};
 		E5C5CCB4211C8E600010ACB0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E5C5CC9D211C8E5D0010ACB0 /* GoodQuotes */;
@@ -550,6 +675,57 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E550689B253B33D000943B2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
+				INFOPLIST_FILE = "Quotey-Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.protome.GoodQuotes.Quotey-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		E550689C253B33D000943B2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
+				INFOPLIST_FILE = "Quotey-Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.5;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.protome.GoodQuotes.Quotey-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		E5C5CCB9211C8E600010ACB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -576,6 +752,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -601,7 +778,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -636,6 +813,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -655,7 +833,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -668,6 +846,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AC0E28153F7504ED9B61A988 /* Pods-GoodQuotes.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -690,6 +869,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 20B20ECBD04CA8B77E56FE71 /* Pods-GoodQuotes.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -753,6 +933,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E550689D253B33D000943B2E /* Build configuration list for PBXNativeTarget "Quotey-WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E550689B253B33D000943B2E /* Debug */,
+				E550689C253B33D000943B2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E5C5CC99211C8E5D0010ACB0 /* Build configuration list for PBXProject "GoodQuotes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

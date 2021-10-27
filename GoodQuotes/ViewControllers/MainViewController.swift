@@ -78,6 +78,14 @@ class MainViewController: UIViewController {
         setupButtons()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        if navigationController?.navigationBar != nil {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        }
+        super.viewWillDisappear(animated)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nav = segue.destination as? UINavigationController, let destination = nav.topViewController as? BookSelectionShelfListViewController {
             destination.bookDelegate = self
@@ -210,7 +218,7 @@ class MainViewController: UIViewController {
         
         GoodreadsButton.activate()
     }
-
+    
     private func addGradient()
     {
         pastelView?.removeFromSuperview()
@@ -277,8 +285,8 @@ class MainViewController: UIViewController {
                            initialSpringVelocity: 0.0,
                            options: .beginFromCurrentState,
                            animations: {
-                self.view.layoutIfNeeded()
-            })
+                            self.view.layoutIfNeeded()
+                           })
             
             self.RatingLabel.text = self.averageRatingText
             self.updateBookImage(bookCover: nil)
@@ -332,7 +340,7 @@ class MainViewController: UIViewController {
                        animations: {
                         self.BookBackgroundView.alpha = 1
                         self.view.layoutIfNeeded()
-        }, completion: nil)
+                       }, completion: nil)
     }
     
     private func hideBookDetails() {
@@ -346,7 +354,7 @@ class MainViewController: UIViewController {
                        animations: {
                         self.BookBackgroundView.alpha = 0
                         self.view.layoutIfNeeded()
-        }, completion: nil)
+                       }, completion: nil)
     }
 }
 
@@ -357,7 +365,7 @@ extension MainViewController: ShelvesSelectionDelegate, UIPopoverPresentationCon
     
     func shelfSelected(shelfName: String) {
         openModal?.dismiss(animated: true, completion: nil)
-    
+        
         let defaultsService = UserDefaultsService()
         defaultsService.storeDefaultShelf(shelfName: shelfName)
     }

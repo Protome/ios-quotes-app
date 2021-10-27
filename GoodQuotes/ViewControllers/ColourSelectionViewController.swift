@@ -191,7 +191,7 @@ extension ColourSelectionViewController: UICollectionViewDataSource, UICollectio
     }
 }
 
-protocol ColourSelectionDelegate: class
+protocol ColourSelectionDelegate: AnyObject
 {
     func coloursSelected(colours: [UIColor])
 }

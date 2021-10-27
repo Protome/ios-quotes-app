@@ -254,7 +254,7 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
     }
 }
 
-protocol BookSearchSelectionDelegate: class
+protocol BookSearchSelectionDelegate: AnyObject
 {
     func newSearchTermSelected()
 }

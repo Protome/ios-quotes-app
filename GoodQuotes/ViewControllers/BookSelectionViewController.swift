@@ -127,7 +127,7 @@ extension BookSelectionViewController
 }
 
 
-protocol BookSelectionDelegate: class
+protocol BookSelectionDelegate: AnyObject
 {
     func bookSelected(book: Book)
 }
