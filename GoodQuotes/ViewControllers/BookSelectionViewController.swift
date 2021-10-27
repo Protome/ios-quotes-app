@@ -76,10 +76,6 @@ class BookSelectionViewController: UITableViewController {
             self.bottomSpinner.stopAnimating()
         })
     }
-    
-    @IBAction func closeModal(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
 }
 
 extension BookSelectionViewController

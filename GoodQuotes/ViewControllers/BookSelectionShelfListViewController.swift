@@ -61,14 +61,6 @@ class BookSelectionShelfListViewController: UITableViewController {
             destination.delegate = bookDelegate
         }
     }
-    
-    @IBAction func closeModal(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func selectShelf(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
 }
 
 extension BookSelectionShelfListViewController

@@ -50,6 +50,8 @@ class ColourSelectionViewController : UIViewController {
         
         CollectionView.dataSource = self
         CollectionView.delegate = self
+        
+        isModalInPresentation = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
