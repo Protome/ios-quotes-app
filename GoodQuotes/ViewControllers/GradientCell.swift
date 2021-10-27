@@ -39,7 +39,7 @@ class GradientCell: UICollectionViewCell
     func setupCell(gradientName: String)
     {
         self.gradientName = gradientName
-        GradientBackgroundContainer.layer.cornerRadius = 6
+        GradientBackgroundContainer.layer.cornerRadius = 10
         GradientBackgroundContainer.layer.borderColor = UIColor.black.cgColor
         
         createGradientView()

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="is8-aw-xg4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="is8-aw-xg4">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -422,7 +422,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="nPr-xJ-Xkd">
-                            <rect key="frame" x="0.0" y="201" width="375" height="61"/>
+                            <rect key="frame" x="0.0" y="212.33333206176758" width="375" height="61"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="PyS-Ph-Oe4">
@@ -437,7 +437,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShelfCellView" rowHeight="58" id="q05-4Y-BF1" customClass="ShelfCell" customModule="GoodQuotes" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115" width="375" height="58"/>
+                                <rect key="frame" x="0.0" y="131.66666603088379" width="375" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q05-4Y-BF1" id="Rib-wX-Hd1">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
@@ -526,7 +526,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Gom-gq-xLG">
-                            <rect key="frame" x="0.0" y="224" width="375" height="61"/>
+                            <rect key="frame" x="0.0" y="235.33333206176758" width="375" height="61"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="wsa-od-YPw">
@@ -541,7 +541,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" rowHeight="81" id="7cb-FC-N4P" customClass="BookSearchResultCell" customModule="GoodQuotes" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115" width="375" height="81"/>
+                                <rect key="frame" x="0.0" y="131.66666603088379" width="375" height="81"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7cb-FC-N4P" id="nAp-Dp-L2c">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
@@ -646,7 +646,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FilterCell" rowHeight="58" id="fdW-yU-wMJ" customClass="FilterCell" customModule="GoodQuotes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="32" width="375" height="58"/>
+                                        <rect key="frame" x="0.0" y="48.666666030883789" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fdW-yU-wMJ" id="Cte-c5-hyo">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
@@ -733,7 +733,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="720"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Y9q-B9-mKf">
-                                    <rect key="frame" x="0.0" y="114" width="375" height="61"/>
+                                    <rect key="frame" x="0.0" y="125.33333206176758" width="375" height="61"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="wmf-Re-fsa">
@@ -748,7 +748,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShelfCell" rowHeight="58" id="yF3-dg-Y9j" customClass="ShelfCell" customModule="GoodQuotes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="58"/>
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yF3-dg-Y9j" id="1Za-6U-gJu">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
@@ -916,7 +916,7 @@ Just want to say hi? </string>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJw-EL-qn4">
                                         <rect key="frame" x="24" y="48.333333333333314" width="327" height="259.33333333333331"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XKN-OM-KXE">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="259.33333333333331"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="260"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fpR-MN-25e">
@@ -1027,7 +1027,7 @@ Just want to say hi? </string>
     </scenes>
     <designables>
         <designable name="UkD-63-O14">
-            <size key="intrinsicContentSize" width="219.66666666666666" height="34"/>
+            <size key="intrinsicContentSize" width="220.66666666666666" height="34"/>
         </designable>
     </designables>
     <resources>
@@ -1043,18 +1043,12 @@ Just want to say hi? </string>
             <color red="0.16078431372549021" green="0.2196078431372549" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Text">
-            <color red="0.16078431904315948" green="0.21960784494876862" blue="0.27058824896812439" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.16078430414199829" green="0.21960783004760742" blue="0.27058824896812439" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="tableCellGroupedBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="tableCellGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tableCellGroupedBackgroundColor">

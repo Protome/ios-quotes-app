@@ -247,20 +247,20 @@ class MainViewController: UIViewController {
     
     private func styleView()
     {
-        backgroundView.layer.cornerRadius = 6
+        backgroundView.layer.cornerRadius = 10
         backgroundView.clipsToBounds = true
         
-        BookBackgroundView.layer.cornerRadius = 6
+        BookBackgroundView.layer.cornerRadius = 10
         BookBackgroundView.clipsToBounds = true
         
         maxDistanceTop = BookViewTopConstraint.constant
         
-        BookCoverImageview.layer.cornerRadius = 2
+        BookCoverImageview.layer.cornerRadius = 4
         
         BookViewTopConstraint.constant = -maxDistanceTop
         BookBackgroundView.alpha = 0
         
-        DividerLine.layer.cornerRadius = 2
+        DividerLine.layer.cornerRadius = 4
         view.layoutIfNeeded()
     }
     
