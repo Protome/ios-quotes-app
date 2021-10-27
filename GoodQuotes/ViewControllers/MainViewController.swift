@@ -89,6 +89,10 @@ class MainViewController: UIViewController {
         if let nav = segue.destination as? UINavigationController, let destination = nav.topViewController as? BookSelectionShelfListViewController {
             destination.bookDelegate = self
         }
+        
+        if let nav = segue.destination as? UINavigationController, let destination = nav.topViewController as? FiltersViewController {
+            destination.delegate = self
+        }
     }
     
     @objc func setupButtonsFromNotification(_ notification: Notification) {
@@ -389,5 +393,13 @@ extension MainViewController: BookSelectionDelegate {
     func bookSelected(book: Book) {
         BookSearchField.text = "\(book.title) \(book.author.name)"
         loadRandomQuote()
+    }
+}
+
+extension MainViewController: SettingsDelegate {
+    func ScreenClosing() {
+        addGradient()
+        pastelView?.startAnimation()
+        pastelView?.pauseAnimation()
     }
 }

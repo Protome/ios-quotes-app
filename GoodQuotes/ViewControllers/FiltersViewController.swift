@@ -18,7 +18,14 @@ enum Settings: String {
     case ChangeBackground = "Change Background Colour"
 }
 
+protocol SettingsDelegate: AnyObject
+{
+    func ScreenClosing()
+}
+
 class FiltersViewController: UIViewController {
+    weak var delegate: SettingsDelegate?
+    
     let goodreadsTitles = (signIn: "Sign In to Goodreads", signOut: "Sign Out of Goodreads")
     let defaultShelf = "to-read"
     
@@ -68,6 +75,12 @@ class FiltersViewController: UIViewController {
         if let destination = segue.destination as? ShelvesSelectionViewController {
             destination.delegate = self
         }
+    }
+    
+    override func closeModal(_ sender: Any) {
+        delegate?.ScreenClosing()
+        
+        dismiss(animated: true, completion: nil)
     }
     
     func updateFilterCells()
