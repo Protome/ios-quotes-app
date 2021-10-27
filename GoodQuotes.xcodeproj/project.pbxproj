@@ -15,6 +15,8 @@
 		E52121682124DE620027BCFC /* GoodreadsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52121672124DE620027BCFC /* GoodreadsService.swift */; };
 		E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5279ED6212765D8007BC585 /* BlurButtonView.xib */; };
 		E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5279ED8212765F6007BC585 /* BlurButtonView.swift */; };
+		E532E91927297E7A0081B386 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E532E91827297E7A0081B386 /* UIViewControllerExtensions.swift */; };
+		E532E91B2729B8BD0081B386 /* OpenLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E532E91A2729B8BD0081B386 /* OpenLibraryService.swift */; };
 		E550688B253B33CF00943B2E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E550688A253B33CF00943B2E /* WidgetKit.framework */; };
 		E550688D253B33CF00943B2E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E550688C253B33CF00943B2E /* SwiftUI.framework */; };
 		E5506890253B33CF00943B2E /* Quotey_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550688F253B33CF00943B2E /* Quotey_Widget.swift */; };
@@ -109,6 +111,8 @@
 		E52121672124DE620027BCFC /* GoodreadsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodreadsService.swift; sourceTree = "<group>"; };
 		E5279ED6212765D8007BC585 /* BlurButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlurButtonView.xib; sourceTree = "<group>"; };
 		E5279ED8212765F6007BC585 /* BlurButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurButtonView.swift; sourceTree = "<group>"; };
+		E532E91827297E7A0081B386 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		E532E91A2729B8BD0081B386 /* OpenLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLibraryService.swift; sourceTree = "<group>"; };
 		E5506889253B33CF00943B2E /* Quotey-WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Quotey-WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E550688A253B33CF00943B2E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E550688C253B33CF00943B2E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -268,6 +272,7 @@
 				E5E525FB21262D2200EF1E1B /* AuthStorageService.swift */,
 				E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */,
 				E57D4A5722A5D99E007B93F1 /* GradientsService.swift */,
+				E532E91A2729B8BD0081B386 /* OpenLibraryService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 		E554D40E211EFBEC00F32AF9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E532E91827297E7A0081B386 /* UIViewControllerExtensions.swift */,
 				E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */,
 				E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */,
 				E5588E112129A71500A84BEC /* CGPointExtensions.swift */,
@@ -595,6 +601,7 @@
 				E58394C6213AF0E800AC78DE /* ReviewRequestService.swift in Sources */,
 				E5818A052126C6610099BEAF /* Book.swift in Sources */,
 				E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */,
+				E532E91927297E7A0081B386 /* UIViewControllerExtensions.swift in Sources */,
 				E5E525FE2126374500EF1E1B /* Shelf.swift in Sources */,
 				E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */,
 				E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */,
@@ -621,6 +628,7 @@
 				E57D4A5422A5D4E4007B93F1 /* ColourSelectionViewController.swift in Sources */,
 				E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */,
 				E5E525F22126060500EF1E1B /* UserCredentials.swift in Sources */,
+				E532E91B2729B8BD0081B386 /* OpenLibraryService.swift in Sources */,
 				E5E525FA2126260600EF1E1B /* KeychainPasswordItem.swift in Sources */,
 				E50ADDC3222B49B20037ACBD /* TextOnlyResultCell.swift in Sources */,
 				E5818A072126C9DC0099BEAF /* Author.swift in Sources */,

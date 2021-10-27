@@ -85,16 +85,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add to Goodreads Shelf" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Kz-00-d4Y">
-                                <rect key="frame" x="56.333333333333336" y="736" width="92.333333333333314" height="30.333333333333371"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
-                                <color key="textColor" name="MainText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-LE-oxr" customClass="BlurButtonView" customModule="GoodQuotes" customModuleProvider="target">
                                 <rect key="frame" x="251.66666666666663" y="690" width="42" height="42"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" label="Share">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="a6P-Bj-4y7"/>
                                     <constraint firstAttribute="width" constant="42" id="cO0-oN-kzk"/>
@@ -112,12 +109,15 @@
                                 <rect key="frame" x="81.666666666666671" y="690" width="42" height="42"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" hint="Adds book to Goodreads Shelf" label="Add">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="8IS-PE-ojN"/>
                                     <constraint firstAttribute="width" constant="42" id="97l-Uz-7zE"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="heart" catalog="system"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="plus" catalog="system"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="legacyButtonTouchDown:" destination="BYZ-38-t0r" eventType="touchDown" id="ZgL-gj-TJh"/>
@@ -142,13 +142,10 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.2.circlepath" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GvD-Rq-T4H">
                                 <rect key="frame" x="163.66666666666666" y="677" width="48" height="46.666666666666629"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" label="Reload">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share quote" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwR-U6-Z6h">
-                                <rect key="frame" x="226.33333333333334" y="736" width="92.333333333333343" height="15.333333333333371"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
-                                <color key="textColor" name="MainText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apT-li-tRR">
                                 <rect key="frame" x="24" y="325.33333333333331" width="327" height="122"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7gg-7i-AB1">
@@ -234,7 +231,6 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Izz-a8-QME" firstAttribute="trailing" secondItem="GvD-Rq-T4H" secondAttribute="trailing" constant="8" id="0uY-o4-ULY"/>
-                            <constraint firstItem="qwR-U6-Z6h" firstAttribute="centerX" secondItem="9rb-LE-oxr" secondAttribute="centerX" id="1QA-3B-Vcl"/>
                             <constraint firstItem="a3a-ce-8Oo" firstAttribute="trailing" secondItem="PJY-dX-bER" secondAttribute="trailing" constant="24" id="3co-8Q-Qwl"/>
                             <constraint firstItem="Izz-a8-QME" firstAttribute="centerX" secondItem="a3a-ce-8Oo" secondAttribute="centerX" id="5Iq-IS-cQg"/>
                             <constraint firstItem="PJY-dX-bER" firstAttribute="leading" secondItem="a3a-ce-8Oo" secondAttribute="leading" constant="24" id="5x7-Ts-V0E"/>
@@ -243,20 +239,15 @@
                             <constraint firstItem="PJY-dX-bER" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.65" priority="999" id="Bep-vc-4cS"/>
                             <constraint firstItem="vhm-tI-LXG" firstAttribute="bottom" secondItem="Izz-a8-QME" secondAttribute="bottom" id="Cmb-UI-9lD"/>
                             <constraint firstItem="Izz-a8-QME" firstAttribute="leading" secondItem="vhm-tI-LXG" secondAttribute="trailing" constant="32" id="FWL-8B-8Nf"/>
-                            <constraint firstItem="qwR-U6-Z6h" firstAttribute="top" secondItem="9rb-LE-oxr" secondAttribute="bottom" constant="4" id="Nop-sk-RWW"/>
-                            <constraint firstItem="qwR-U6-Z6h" firstAttribute="width" secondItem="9rb-LE-oxr" secondAttribute="width" multiplier="2.2" id="O8b-D8-cQg"/>
                             <constraint firstItem="apT-li-tRR" firstAttribute="width" secondItem="PJY-dX-bER" secondAttribute="width" id="PnG-we-5B3"/>
                             <constraint firstItem="apT-li-tRR" firstAttribute="centerX" secondItem="PJY-dX-bER" secondAttribute="centerX" id="U1j-dg-IHA"/>
                             <constraint firstItem="9rb-LE-oxr" firstAttribute="bottom" secondItem="Izz-a8-QME" secondAttribute="bottom" id="Z1u-Cy-6Pb"/>
-                            <constraint firstItem="2Kz-00-d4Y" firstAttribute="width" secondItem="vhm-tI-LXG" secondAttribute="width" multiplier="2.2" id="a1y-he-jyT"/>
                             <constraint firstItem="apT-li-tRR" firstAttribute="top" secondItem="PJY-dX-bER" secondAttribute="bottom" constant="24" id="a9a-e7-sDJ"/>
                             <constraint firstItem="Izz-a8-QME" firstAttribute="top" relation="greaterThanOrEqual" secondItem="apT-li-tRR" secondAttribute="bottom" constant="26" id="coh-Qn-aHH"/>
                             <constraint firstItem="GvD-Rq-T4H" firstAttribute="top" secondItem="Izz-a8-QME" secondAttribute="top" constant="8" id="eOY-0V-eUI"/>
-                            <constraint firstItem="2Kz-00-d4Y" firstAttribute="top" secondItem="vhm-tI-LXG" secondAttribute="bottom" constant="4" id="hP0-Zg-KcX"/>
                             <constraint firstItem="PJY-dX-bER" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.65" id="jyW-P2-7l6"/>
                             <constraint firstItem="apT-li-tRR" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.15" id="mFG-3l-Aww"/>
                             <constraint firstItem="Izz-a8-QME" firstAttribute="bottom" secondItem="GvD-Rq-T4H" secondAttribute="bottom" constant="8" id="oFD-ic-Qzh"/>
-                            <constraint firstItem="2Kz-00-d4Y" firstAttribute="centerX" secondItem="vhm-tI-LXG" secondAttribute="centerX" id="oPb-lu-B1U"/>
                             <constraint firstItem="a3a-ce-8Oo" firstAttribute="bottom" secondItem="Izz-a8-QME" secondAttribute="bottom" constant="46" id="rGR-VN-b7s"/>
                             <constraint firstItem="GvD-Rq-T4H" firstAttribute="leading" secondItem="Izz-a8-QME" secondAttribute="leading" constant="8" id="yEY-WI-cK9"/>
                         </constraints>
@@ -308,7 +299,7 @@
                         <barButtonItem key="rightBarButtonItem" image="gear" catalog="system" width="52" id="DXa-Go-t8f">
                             <color key="tintColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="AvR-Ec-ZOr" kind="show" identifier="" id="RJD-qA-Q8R"/>
+                                <segue destination="3Wg-Uy-ArU" kind="presentation" id="VkB-bF-HJN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -332,18 +323,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="101.59999999999999" y="94.581280788177338"/>
+            <point key="canvasLocation" x="106" y="95"/>
         </scene>
         <!--About-->
         <scene sceneID="IAN-8a-waB">
             <objects>
                 <viewController title="About" id="CK4-Sh-ahE" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="diF-2h-9rI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WDY-UU-vzl">
-                                <rect key="frame" x="16" y="182" width="343" height="314"/>
+                                <rect key="frame" x="16" y="150" width="343" height="314"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="314" id="a3v-le-rLu"/>
@@ -369,16 +360,17 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             <constraint firstItem="WDY-UU-vzl" firstAttribute="top" secondItem="d44-Rj-Mtn" secondAttribute="top" constant="42" id="wuc-Nk-K5O"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="About" id="yvh-9B-2bi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0BN-cU-4GB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1893.5999999999999" y="964.28571428571433"/>
+            <point key="canvasLocation" x="2711" y="950"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QU2-AO-biP">
             <objects>
                 <navigationController extendedLayoutIncludesOpaqueBars="YES" id="CdA-P3-sk5" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="UwW-wh-N5H">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="UwW-wh-N5H">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -625,16 +617,36 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
             </objects>
             <point key="canvasLocation" x="1005.6" y="-1163.0541871921182"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mSB-Tb-Y16">
+            <objects>
+                <navigationController id="3Wg-Uy-ArU" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="lvo-rh-Nfp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Uf9-ga-U12">
+                        <rect key="frame" x="0.0" y="-54" width="0.0" height="0.0"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="AvR-Ec-ZOr" kind="relationship" relationship="rootViewController" id="78s-ud-wT7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wwZ-l1-d82" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1006" y="-500"/>
+        </scene>
         <!--Settings-->
         <scene sceneID="uGJ-pv-7sT">
             <objects>
                 <viewController title="Settings" id="AvR-Ec-ZOr" customClass="FiltersViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iLi-wj-WrV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l5d-zQ-23o">
-                                <rect key="frame" x="0.0" y="140" width="375" height="638"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="702"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="sectionIndexColor" name="Text"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -696,6 +708,13 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             <constraint firstItem="l5d-zQ-23o" firstAttribute="top" secondItem="sY6-0x-vGe" secondAttribute="top" id="q4A-wV-cSP"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Settings" id="CSg-Kz-E3U">
+                        <barButtonItem key="rightBarButtonItem" title="Close" id="Ca8-fF-7Qa">
+                            <connections>
+                                <action selector="closeModal:" destination="iyc-dL-2nH" id="l5j-d6-Twb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="l5d-zQ-23o" id="8Og-su-gdr"/>
                         <segue destination="boQ-35-Qqe" kind="show" identifier="ShowShelves" id="qGd-Vk-OTI"/>
@@ -706,18 +725,18 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyc-dL-2nH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1005.6" y="-484.72906403940891"/>
+            <point key="canvasLocation" x="1826" y="-500"/>
         </scene>
         <!--Shelves-->
         <scene sceneID="nOW-nz-UHh">
             <objects>
                 <viewController storyboardIdentifier="ShelvesSelectionViewController" title="Shelves" id="boQ-35-Qqe" customClass="ShelvesSelectionViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7jg-cY-NuN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imO-Ke-hBz">
-                                <rect key="frame" x="56" y="728" width="263" height="42"/>
+                                <rect key="frame" x="56" y="708" width="263" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="M13-pn-YvH"/>
                                 </constraints>
@@ -730,7 +749,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="a5i-RT-fma">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="720"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="700"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Y9q-B9-mKf">
                                     <rect key="frame" x="0.0" y="125.33333206176758" width="375" height="61"/>
@@ -804,6 +823,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                             <constraint firstItem="imO-Ke-hBz" firstAttribute="top" secondItem="a5i-RT-fma" secondAttribute="bottom" constant="8" id="rUx-UG-oJh"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Shelves" id="iKa-XP-EZo"/>
                     <connections>
                         <outlet property="activityIndicator" destination="wmf-Re-fsa" id="5wR-T5-QzJ"/>
                         <outlet property="selectHeightConstraint" destination="M13-pn-YvH" id="dpE-T0-AxJ"/>
@@ -812,18 +832,18 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j2o-EP-oTc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1893.5999999999999" y="283.74384236453204"/>
+            <point key="canvasLocation" x="2711" y="270"/>
         </scene>
         <!--Feedback-->
         <scene sceneID="7vK-c4-NeV">
             <objects>
                 <viewController title="Feedback" id="2xS-Us-Fpt" customClass="FeedbackViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nQw-p7-G5n">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXh-Po-niA">
-                                <rect key="frame" x="24" y="182" width="327" height="82"/>
+                                <rect key="frame" x="24" y="150" width="327" height="82"/>
                                 <string key="text">Got some changes you want to suggest or improvements you'd like to see in the app? 
 See something that's broken?
 Just want to say hi? </string>
@@ -832,7 +852,7 @@ Just want to say hi? </string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGl-cq-6Po">
-                                <rect key="frame" x="100" y="314" width="175" height="50"/>
+                                <rect key="frame" x="100" y="282" width="175" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="CiQ-Zt-7PL"/>
                                     <constraint firstAttribute="width" constant="175" id="fe9-uC-RIw"/>
@@ -854,24 +874,25 @@ Just want to say hi? </string>
                             <constraint firstItem="XGl-cq-6Po" firstAttribute="top" secondItem="sXh-Po-niA" secondAttribute="bottom" constant="50" id="uM9-R2-zWe"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Feedback" id="bK0-7b-XaP"/>
                     <connections>
                         <outlet property="MessageButton" destination="XGl-cq-6Po" id="Fc0-rW-rUA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLa-lj-8nV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1894" y="-485"/>
+            <point key="canvasLocation" x="2714" y="-500"/>
         </scene>
         <!--Background-->
         <scene sceneID="1kL-en-ezg">
             <objects>
                 <viewController title="Background" id="z9T-Zc-gxW" customClass="ColourSelectionViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e6E-rS-mbf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="d8U-Kh-bX0">
-                                <rect key="frame" x="0.0" y="140" width="375" height="287"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="292.66666666666669"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="15" id="ptk-Cl-drC">
                                     <size key="itemSize" width="105" height="105"/>
@@ -911,16 +932,16 @@ Just want to say hi? </string>
                                 </collectionReusableView>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="239-eO-z2f">
-                                <rect key="frame" x="0.0" y="456" width="375" height="356"/>
+                                <rect key="frame" x="0.0" y="429.66666666666674" width="375" height="328.33333333333326"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJw-EL-qn4">
-                                        <rect key="frame" x="24" y="48.333333333333314" width="327" height="259.33333333333331"/>
+                                        <rect key="frame" x="24" y="34.666666666666629" width="327" height="259"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XKN-OM-KXE">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="260"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="259"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fpR-MN-25e">
-                                                    <rect key="frame" x="8" y="16.000000000000057" width="311" height="153"/>
+                                                    <rect key="frame" x="8" y="16" width="311" height="153"/>
                                                     <string key="text">Any child knows what a witch looks like. The warts are important, yes, the hooked nose, the cruel smile. But it’s the hat that cinches it: pointy and black with a wide rim. Plenty of people have warts and hooked noses and cruel smiles but are not witches at all. Hats change everything.</string>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                                     <color key="textColor" name="MainText"/>
@@ -956,11 +977,11 @@ Just want to say hi? </string>
                                         <blurEffect style="light"/>
                                     </visualEffectView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sf-mt-6gH">
-                                        <rect key="frame" x="206.33333333333337" y="0.0" width="168.66666666666663" height="160.33333333333334"/>
+                                        <rect key="frame" x="206.33333333333337" y="0.0" width="168.66666666666663" height="147.66666666666666"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACr-x8-Vau">
-                                        <rect key="frame" x="0.0" y="154" width="168.66666666666666" height="160"/>
+                                        <rect key="frame" x="0.0" y="172.66666666666669" width="168.66666666666666" height="147.66666666666669"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -980,7 +1001,7 @@ Just want to say hi? </string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aX3-2N-XiU">
-                                <rect key="frame" x="0.0" y="427" width="375" height="29"/>
+                                <rect key="frame" x="0.0" y="400.66666666666669" width="375" height="29"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhq-QY-XL6">
                                         <rect key="frame" x="16" y="4" width="65" height="21"/>
@@ -1013,6 +1034,7 @@ Just want to say hi? </string>
                             <constraint firstItem="239-eO-z2f" firstAttribute="leading" secondItem="dgm-Tl-MpH" secondAttribute="leading" id="ydy-Rn-zVW"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Background" id="fyr-Ga-GfM"/>
                     <connections>
                         <outlet property="BottomLeftColourPIcker" destination="ACr-x8-Vau" id="H56-c8-rds"/>
                         <outlet property="CollectionView" destination="d8U-Kh-bX0" id="oqT-tT-fpg"/>
@@ -1022,7 +1044,7 @@ Just want to say hi? </string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pBy-VS-NT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1929" y="-1163"/>
+            <point key="canvasLocation" x="2714" y="-1163"/>
         </scene>
     </scenes>
     <designables>
@@ -1034,8 +1056,8 @@ Just want to say hi? </string>
         <image name="arrow.2.circlepath" catalog="system" width="128" height="101"/>
         <image name="book.circle" catalog="system" width="128" height="121"/>
         <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="rightArrow" width="170.66667175292969" height="170.66667175292969"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="tick" width="512" height="512"/>

@@ -61,7 +61,6 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupButtons()
-        setupNavBar()
     }
     
     override func viewDidLoad() {
@@ -133,21 +132,23 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func ViewBookOnGoodreads(_ sender: Any) {
-        guard let bookId = currentBook?.id, let url = URL(string: "https://www.goodreads.com/book/show/\(bookId)") else {
+        var bookUrl = "https://www.goodreads.com/book/show/"
+        if let book = currentBook, book.isbn != "" {
+            bookUrl = bookUrl + "isbn/\(book.isbn)"
+        }
+        else if let book = currentBook, book.id != "" {
+            bookUrl = bookUrl + book.id
+        }
+        
+        guard let url = URL(string: bookUrl) else {
             return
         }
         
-        UIApplication.shared.open(url)
+        OpenUrlInSafari(url:url)
     }
     
     @IBAction func SelectBookFromAccount(_ sender: Any) {
         performSegue(withIdentifier: "ShowBookList", sender: self)
-    }
-    
-    func setupNavBar() {
-        self.navigationController?.navigationBar.isTranslucent = true
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
    
     func setupButtons() {
@@ -296,9 +297,16 @@ class MainViewController: UIViewController {
                 self.hideBookDetails()
             }
             else {
-                GoodreadsService.sharedInstance.searchForBook(title: quote.publication, author: quote.author) { book in
-                    self.currentBook = book
-                    self.setupCurrentBookButton(book)
+                OpenLibraryService.sharedInstance.searchForBook(title: quote.publication, author: quote.author) { book in
+                    
+                    guard let bookResult = book else {
+                        self.currentBook = nil
+                        self.hideBookDetails()
+                        return
+                    }
+                    
+                    self.currentBook = bookResult
+                    self.setupCurrentBookButton(bookResult)
                     self.showBookDetails()
                 }
             }

@@ -8,10 +8,12 @@
 
 import Foundation
 import SwiftyXMLParser
+import SwiftyJSON
 
 struct Book: Codable {
 
     var id: String
+    var isbn: String
     var title: String
     var author: Author
     var imageUrl: String
@@ -19,6 +21,7 @@ struct Book: Codable {
     
     enum CodingKeys: String, CodingKey {
         case id
+        case isbn
         case title
         case author
         case imageUrl
@@ -27,6 +30,7 @@ struct Book: Codable {
     
     init(xml: XML.Accessor) {
         id = xml["best_book", "id"].text ?? ""
+        isbn = ""
         title = xml["best_book", "title"].text ?? ""
         author = Author(xml: xml["best_book", "author"])
         imageUrl = xml["best_book", "image_url"].text ?? ""
@@ -35,9 +39,20 @@ struct Book: Codable {
     
     init(bookXml: XML.Accessor) {
         id = bookXml["id"].text ?? ""
+        isbn = ""
         title = bookXml["title"].text ?? ""
         author = Author(xml: bookXml["authors", "author"])
         imageUrl = bookXml["image_url"].text ?? ""
+        averageRating = 0
+    }
+    
+    init(json: JSON) {
+        id = json["cover_edition_key"].stringValue
+        let isbnNumbers = json["isbn"].arrayValue
+        isbn = isbnNumbers.first?.stringValue ?? ""
+        title = json["title"].stringValue
+        author = Author(keysJson: json["author_key"].arrayValue, authorJson: json["author_name"].arrayValue)
+        imageUrl = "https://covers.openlibrary.org/b/OLID/\(id)-M.jpg"
         averageRating = 0
     }
     
@@ -48,6 +63,12 @@ struct Book: Codable {
         try container.encode(author, forKey: .author)
         try container.encode(imageUrl, forKey: .imageUrl)
         try container.encode(averageRating, forKey: .averageRating)
+        
+        do {
+            try container.encode(isbn, forKey: .isbn)
+        }
+        catch {
+        }
     }
     
     init(from decoder: Decoder) throws {
@@ -57,6 +78,13 @@ struct Book: Codable {
         author = try container.decode(Author.self, forKey: .author)
         imageUrl = try container.decode(String.self, forKey: .imageUrl)
         averageRating = try container.decode(Double.self, forKey: .averageRating)
+        
+        do {
+            isbn = try container.decode(String.self, forKey: .isbn)
+        }
+        catch {
+            isbn = ""
+        }
     }
 
 }
