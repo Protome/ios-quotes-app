@@ -309,7 +309,10 @@ class MainViewController: UIViewController {
                             self.view.layoutIfNeeded()
                            })
             
-            self.RatingLabel.text = self.averageRatingText
+            self.BookButtonTitleLabel.text = ""
+            self.BookButtonAuthorLabel.text = ""
+            self.BookButtonPublishDateLabel.text = ""
+            self.RatingLabel.text = ""
             self.updateBookImage(bookCover: nil)
             
             if quote.publication.isEmpty {
@@ -330,9 +333,6 @@ class MainViewController: UIViewController {
                         bookResult.averageRating = book.averageRating
                         
                         self.currentBook = bookResult
-                        self.BookButtonTitleLabel.text = bookResult.title
-                        self.BookButtonAuthorLabel.text = bookResult.author.name
-                        self.BookButtonPublishDateLabel.text = bookResult.publicationYear != nil ? "First published \(bookResult.publicationYear!)" : ""
                         
                         self.setupCurrentBookButton(bookResult)
                         self.showBookDetails()
@@ -355,6 +355,10 @@ class MainViewController: UIViewController {
                 self.updateBookImage(bookCover: image)
             }
         }
+        
+        self.BookButtonTitleLabel.text = book.title
+        self.BookButtonAuthorLabel.text = book.author.name
+        self.BookButtonPublishDateLabel.text = book.publicationYear != nil ? "First published \(book.publicationYear!)" : ""
         
         //TODO: Remove this. As we move the data over to OpenLibrary, we need to ditch Goodread's ratings or at least make them their own individual call.
         RatingLabel.text = "\(averageRatingText) \(book.averageRating)/5"
