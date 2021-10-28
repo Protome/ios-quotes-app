@@ -26,6 +26,9 @@ class MainViewController: UIViewController {
     @IBOutlet weak var BookBackgroundView: UIVisualEffectView!
     @IBOutlet weak var BookCoverImageview: UIImageView!
     @IBOutlet weak var BookViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var BookButtonTitleLabel: UILabel!
+    @IBOutlet weak var BookButtonAuthorLabel: UILabel!
+    @IBOutlet weak var BookButtonPublishDateLabel: UILabel!
     @IBOutlet weak var RatingLabel: UILabel!
     
     @IBOutlet weak var DividerLine: UIView!
@@ -327,6 +330,9 @@ class MainViewController: UIViewController {
                         bookResult.averageRating = book.averageRating
                         
                         self.currentBook = bookResult
+                        self.BookButtonTitleLabel.text = bookResult.title
+                        self.BookButtonAuthorLabel.text = bookResult.author.name
+                        self.BookButtonPublishDateLabel.text = bookResult.publicationYear != nil ? "First published \(bookResult.publicationYear!)" : ""
                         
                         self.setupCurrentBookButton(bookResult)
                         self.showBookDetails()

@@ -59,6 +59,9 @@
 		E5C5CCAC211C8E600010ACB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C5CCAA211C8E600010ACB0 /* LaunchScreen.storyboard */; };
 		E5C5CCB7211C8E600010ACB0 /* GoodQuotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C5CCB6211C8E600010ACB0 /* GoodQuotesTests.swift */; };
 		E5CCE0C022A6FB8F00886885 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CCE0BF22A6FB8F00886885 /* GradientView.swift */; };
+		E5CDD28A272B2B9C00A6B2D0 /* NumericExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CDD289272B2B9C00A6B2D0 /* NumericExtensions.swift */; };
+		E5CDD28C272B2BB800A6B2D0 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CDD28B272B2BB800A6B2D0 /* DataExtensions.swift */; };
+		E5CDD28E272B2C0600A6B2D0 /* UserDefaultExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CDD28D272B2C0600A6B2D0 /* UserDefaultExtensions.swift */; };
 		E5CFE69224A7E54700D5A554 /* BookSelectionShelfListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CFE69124A7E54700D5A554 /* BookSelectionShelfListViewController.swift */; };
 		E5CFE69424A7EED500D5A554 /* BookSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CFE69324A7EED500D5A554 /* BookSelectionViewController.swift */; };
 		E5E0592C222BFCA900DF74EC /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E0592B222BFCA900DF74EC /* FeedbackViewController.swift */; };
@@ -159,6 +162,9 @@
 		E5C5CCB6211C8E600010ACB0 /* GoodQuotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodQuotesTests.swift; sourceTree = "<group>"; };
 		E5C5CCB8211C8E600010ACB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5CCE0BF22A6FB8F00886885 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		E5CDD289272B2B9C00A6B2D0 /* NumericExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericExtensions.swift; sourceTree = "<group>"; };
+		E5CDD28B272B2BB800A6B2D0 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
+		E5CDD28D272B2C0600A6B2D0 /* UserDefaultExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultExtensions.swift; sourceTree = "<group>"; };
 		E5CFE69124A7E54700D5A554 /* BookSelectionShelfListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionShelfListViewController.swift; sourceTree = "<group>"; };
 		E5CFE69324A7EED500D5A554 /* BookSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionViewController.swift; sourceTree = "<group>"; };
 		E5E0592B222BFCA900DF74EC /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
@@ -302,6 +308,9 @@
 				E5B195CC212CA49100A9901C /* StringExtensions.swift */,
 				E5996545222A0E8800BAA33C /* UIImageViewExtensions.swift */,
 				E50C0AD822A8762300B2305E /* UIColorExtensions.swift */,
+				E5CDD289272B2B9C00A6B2D0 /* NumericExtensions.swift */,
+				E5CDD28B272B2BB800A6B2D0 /* DataExtensions.swift */,
+				E5CDD28D272B2C0600A6B2D0 /* UserDefaultExtensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -603,6 +612,7 @@
 				E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */,
 				E532E91927297E7A0081B386 /* UIViewControllerExtensions.swift in Sources */,
 				E5E525FE2126374500EF1E1B /* Shelf.swift in Sources */,
+				E5CDD28A272B2B9C00A6B2D0 /* NumericExtensions.swift in Sources */,
 				E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */,
 				E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */,
 				E554D423211F4BE400F32AF9 /* FilterCell.swift in Sources */,
@@ -613,6 +623,7 @@
 				E52121682124DE620027BCFC /* GoodreadsService.swift in Sources */,
 				E5CCE0C022A6FB8F00886885 /* GradientView.swift in Sources */,
 				E5E0592C222BFCA900DF74EC /* FeedbackViewController.swift in Sources */,
+				E5CDD28C272B2BB800A6B2D0 /* DataExtensions.swift in Sources */,
 				E5C5CCA4211C8E5D0010ACB0 /* MainViewController.swift in Sources */,
 				E5CFE69424A7EED500D5A554 /* BookSelectionViewController.swift in Sources */,
 				E5E525FC21262D2200EF1E1B /* AuthStorageService.swift in Sources */,
@@ -631,6 +642,7 @@
 				E532E91B2729B8BD0081B386 /* OpenLibraryService.swift in Sources */,
 				E5E525FA2126260600EF1E1B /* KeychainPasswordItem.swift in Sources */,
 				E50ADDC3222B49B20037ACBD /* TextOnlyResultCell.swift in Sources */,
+				E5CDD28E272B2C0600A6B2D0 /* UserDefaultExtensions.swift in Sources */,
 				E5818A072126C9DC0099BEAF /* Author.swift in Sources */,
 				E5B195CD212CA49100A9901C /* StringExtensions.swift in Sources */,
 				E59965402229DAEA00BAA33C /* BookSearchBox.swift in Sources */,

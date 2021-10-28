@@ -17,6 +17,7 @@ struct Book: Codable {
     var isbn: String
     var title: String
     var author: Author
+    var publicationYear: Int?
     var imageUrl: String
     var averageRating: Double
     
@@ -28,6 +29,7 @@ struct Book: Codable {
         case author
         case imageUrl
         case averageRating
+        case publicationYear
     }
     
     init(xml: XML.Accessor) {
@@ -38,6 +40,7 @@ struct Book: Codable {
         author = Author(xml: xml["best_book", "author"])
         imageUrl = xml["best_book", "image_url"].text ?? ""
         averageRating = xml["average_rating"].double ?? 0
+        publicationYear = nil
     }
     
     init(bookXml: XML.Accessor) {
@@ -48,6 +51,7 @@ struct Book: Codable {
         author = Author(xml: bookXml["authors", "author"])
         imageUrl = bookXml["image_url"].text ?? ""
         averageRating = 0
+        publicationYear = nil
     }
     
     init(json: JSON) {
@@ -58,7 +62,8 @@ struct Book: Codable {
         author = Author(keysJson: json["author_key"].arrayValue, authorJson: json["author_name"].arrayValue)
         imageUrl = "https://covers.openlibrary.org/b/OLID/\(id)-M.jpg"
         averageRating = 0
-        goodreadsId = ""
+        goodreadsId = json["id_goodreads"].arrayValue.first?.stringValue ?? ""
+        publicationYear = json["first_publish_year"].intValue
     }
     
     func encode(to encoder: Encoder) throws {
@@ -72,6 +77,7 @@ struct Book: Codable {
         do {
             try container.encode(goodreadsId, forKey: .goodreadsId)
             try container.encode(isbn, forKey: .isbn)
+            try container.encode(publicationYear, forKey: .publicationYear)
         }
         catch {
         }
@@ -88,6 +94,7 @@ struct Book: Codable {
         do {
             goodreadsId = try container.decode(String.self, forKey: .goodreadsId)
             isbn = try container.decode(String.self, forKey: .isbn)
+            publicationYear = try container.decode(Int.self, forKey: .publicationYear)
         }
         catch {
             goodreadsId = ""
