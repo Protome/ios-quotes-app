@@ -26,8 +26,7 @@ struct Author: Codable  {
     
     init(keysJson: [JSON], authorJson: [JSON]) {
         id = keysJson.first?.stringValue ?? ""
-        let authors = authorJson as? [String]
-        name = authors?.joined(separator: ", ") ?? ""
+        name = authorJson.map({ return $0.stringValue }).joined(separator: ", ")
     }
     
     init() {

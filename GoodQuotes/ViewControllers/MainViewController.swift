@@ -137,12 +137,17 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func ViewBookOnGoodreads(_ sender: Any) {
-        var bookUrl = "https://www.goodreads.com/book/show/"
-        if let book = currentBook, book.isbn != "" {
-            bookUrl = bookUrl + "isbn/\(book.isbn)"
+        var bookUrl = ""
+        let goodreadsBookUrl = "https://www.goodreads.com/book/show/"
+        let openLibraryUrl = "https://openlibrary.org/works/"
+        if let book = currentBook, book.goodreadsId != "" {
+            bookUrl = goodreadsBookUrl + book.goodreadsId
         }
         else if let book = currentBook, book.id != "" {
-            bookUrl = bookUrl + book.id
+            bookUrl = openLibraryUrl + book.id
+        }
+        else if let book = currentBook, book.isbn != "" {
+            bookUrl = goodreadsBookUrl + "isbn/\(book.isbn)"
         }
         
         guard let url = URL(string: bookUrl) else {
@@ -163,7 +168,6 @@ class MainViewController: UIViewController {
         RefreshButton.buttonAction = loadRandomQuote
     }
     
-    @IBOutlet weak var testImage: UIImageView!
     func shareQuote() {
         guard let background = pastelView?.snapshot() else  {return}
         let dummyBackgroundImage = UIImageView(image: background)
@@ -317,11 +321,13 @@ class MainViewController: UIViewController {
                         self.hideBookDetails()
                         return
                     }
-                    
-                    self.currentBook = bookResult
                     //TODO: Change this to be less shit
                     GoodreadsService.sharedInstance.searchForBook(title: bookResult.isbn, author: "") { book in
+                        bookResult.goodreadsId = book.goodreadsId
                         bookResult.averageRating = book.averageRating
+                        
+                        self.currentBook = bookResult
+                        
                         self.setupCurrentBookButton(bookResult)
                         self.showBookDetails()
                     }

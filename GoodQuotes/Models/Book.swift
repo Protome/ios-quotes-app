@@ -12,6 +12,7 @@ import SwiftyJSON
 
 struct Book: Codable {
 
+    var goodreadsId: String
     var id: String
     var isbn: String
     var title: String
@@ -20,6 +21,7 @@ struct Book: Codable {
     var averageRating: Double
     
     enum CodingKeys: String, CodingKey {
+        case goodreadsId
         case id
         case isbn
         case title
@@ -29,7 +31,8 @@ struct Book: Codable {
     }
     
     init(xml: XML.Accessor) {
-        id = xml["best_book", "id"].text ?? ""
+        goodreadsId = xml["best_book", "id"].text ?? ""
+        id = ""
         isbn = ""
         title = xml["best_book", "title"].text ?? ""
         author = Author(xml: xml["best_book", "author"])
@@ -38,7 +41,8 @@ struct Book: Codable {
     }
     
     init(bookXml: XML.Accessor) {
-        id = bookXml["id"].text ?? ""
+        goodreadsId = bookXml["id"].text ?? ""
+        id = ""
         isbn = ""
         title = bookXml["title"].text ?? ""
         author = Author(xml: bookXml["authors", "author"])
@@ -54,6 +58,7 @@ struct Book: Codable {
         author = Author(keysJson: json["author_key"].arrayValue, authorJson: json["author_name"].arrayValue)
         imageUrl = "https://covers.openlibrary.org/b/OLID/\(id)-M.jpg"
         averageRating = 0
+        goodreadsId = ""
     }
     
     func encode(to encoder: Encoder) throws {
@@ -65,6 +70,7 @@ struct Book: Codable {
         try container.encode(averageRating, forKey: .averageRating)
         
         do {
+            try container.encode(goodreadsId, forKey: .goodreadsId)
             try container.encode(isbn, forKey: .isbn)
         }
         catch {
@@ -80,9 +86,11 @@ struct Book: Codable {
         averageRating = try container.decode(Double.self, forKey: .averageRating)
         
         do {
+            goodreadsId = try container.decode(String.self, forKey: .goodreadsId)
             isbn = try container.decode(String.self, forKey: .isbn)
         }
         catch {
+            goodreadsId = ""
             isbn = ""
         }
     }
