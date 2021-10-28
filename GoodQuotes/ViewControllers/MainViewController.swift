@@ -312,15 +312,19 @@ class MainViewController: UIViewController {
             else {
                 OpenLibraryService.sharedInstance.searchForBook(title: quote.publication, author: quote.author) { book in
                     
-                    guard let bookResult = book else {
+                    guard var bookResult = book else {
                         self.currentBook = nil
                         self.hideBookDetails()
                         return
                     }
                     
                     self.currentBook = bookResult
-                    self.setupCurrentBookButton(bookResult)
-                    self.showBookDetails()
+                    //TODO: Change this to be less shit
+                    GoodreadsService.sharedInstance.searchForBook(title: bookResult.isbn, author: "") { book in
+                        bookResult.averageRating = book.averageRating
+                        self.setupCurrentBookButton(bookResult)
+                        self.showBookDetails()
+                    }
                 }
             }
             
@@ -340,6 +344,7 @@ class MainViewController: UIViewController {
             }
         }
         
+        //TODO: Remove this. As we move the data over to OpenLibrary, we need to ditch Goodread's ratings or at least make them their own individual call.
         RatingLabel.text = "\(averageRatingText) \(book.averageRating)/5"
     }
     
