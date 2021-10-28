@@ -11,7 +11,9 @@ import StoreKit
 
 class ReviewRequestService {
     let runIncrementerSetting = "numberOfRuns"
+    let runDateString = "lastDateRun"
     let minimumRunCount = 4
+    let monthsBetweenRequests = 6
     
     func incrementAppRuns() {
         let usD = UserDefaults()
@@ -22,7 +24,7 @@ class ReviewRequestService {
     
     func resetAppRuns() {
         let usD = UserDefaults()
-        usD.setValuesForKeys([runIncrementerSetting: 0])
+        usD.setValuesForKeys([runIncrementerSetting: 0, runDateString: Date()])
         usD.synchronize()
     }
     
@@ -39,14 +41,32 @@ class ReviewRequestService {
         return runs
     }
     
+    func getLastRequestDate() -> Date {
+        let usD = UserDefaults()
+        let savedDate = usD.value(forKey: runDateString)
+        var date = Date.distantPast
+        
+        if(savedDate != nil) {
+            date = savedDate as! Date
+        }
+        
+        return date
+    }
+    
+    func timeSinceLastRequest(lastRequest: Date) -> Bool {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.month], from: lastRequest, to: Date())
+        let months = components.month ?? 0
+        return months > 6
+    }
+    
     func showReview() {
+        let lastRequestDate = getLastRequestDate()
         let runs = getRunCounts()
         
-        if (runs > minimumRunCount) {
-            if #available(iOS 10.3, *) {
+        if (runs > minimumRunCount && timeSinceLastRequest(lastRequest: lastRequestDate)) {
                 SKStoreReviewController.requestReview()
                 resetAppRuns()
-            }
         }
     }
 }
