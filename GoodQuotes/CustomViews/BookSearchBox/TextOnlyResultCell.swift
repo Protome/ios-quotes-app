@@ -19,7 +19,7 @@ class TextOnlyResultCell: UITableViewCell {
     func SetupCell(text: String) {
         DescriptionLabel.text = text
         CellBackground.backgroundColor = UIColor.white
-        CellBackground.layer.cornerRadius = 4
+        CellBackground.layer.cornerRadius = 10
         AddShadow()
     }
     

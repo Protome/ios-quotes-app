@@ -39,7 +39,7 @@ class GradientCell: UICollectionViewCell
     func setupCell(gradientName: String)
     {
         self.gradientName = gradientName
-        GradientBackgroundContainer.layer.cornerRadius = 6
+        GradientBackgroundContainer.layer.cornerRadius = 10
         GradientBackgroundContainer.layer.borderColor = UIColor.black.cgColor
         
         createGradientView()
@@ -47,15 +47,7 @@ class GradientCell: UICollectionViewCell
         if gradientName == "Custom"
         {
             let colourPicker = ChromaColorPicker(frame: GradientBackgroundContainer.bounds)
-            colourPicker.padding = 5
-            colourPicker.stroke = 3
-            colourPicker.hexLabel.textColor = UIColor.clear
-            colourPicker.colorToggleButton.isHidden = true
             colourPicker.isUserInteractionEnabled = false
-            colourPicker.addButton.isHidden = true
-            colourPicker.handleLine.isHidden = true
-            colourPicker.shadeSlider.isHidden = true
-            colourPicker.handleView.isHidden = true
             GradientBackgroundContainer.addSubview(colourPicker)
         }
     }

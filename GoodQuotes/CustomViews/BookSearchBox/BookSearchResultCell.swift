@@ -28,7 +28,7 @@ class BookSearchResultCell: UITableViewCell {
         CoverImageView.setImageFromUrl(book.imageUrl)
         TitleLabelView.text = book.title
         AuthorLabelView.text = book.author.name
-        BlurContainer?.layer.cornerRadius = 4
+        BlurContainer?.layer.cornerRadius = 10
         BlurContainer?.layer.masksToBounds = true
         AddShadow()
     }

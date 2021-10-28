@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyXMLParser
+import SwiftyJSON
 
 struct Author: Codable  {
     var id: String
@@ -21,6 +22,16 @@ struct Author: Codable  {
     init(xml: XML.Accessor) {
         id = xml["id"].text ?? ""
         name = xml["name"].text ?? ""
+    }
+    
+    init(keysJson: [JSON], authorJson: [JSON]) {
+        id = keysJson.first?.stringValue ?? ""
+        name = authorJson.map({ return $0.stringValue }).joined(separator: ", ")
+    }
+    
+    init() {
+        id = ""
+        name = ""
     }
 
     func encode(to encoder: Encoder) throws {

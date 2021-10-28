@@ -17,7 +17,7 @@ class FeedbackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MessageButton.layer.cornerRadius = 8
+        MessageButton.layer.cornerRadius = 10
         MessageButton.layer.borderColor = MessageButton.tintColor.cgColor
         MessageButton.layer.borderWidth = 1
     }

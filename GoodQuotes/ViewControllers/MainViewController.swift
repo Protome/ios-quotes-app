@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var BookLabel: UILabel!
     @IBOutlet weak var AuthorLabel: UILabel!
     @IBOutlet weak var backgroundView: UIVisualEffectView!
+    @IBOutlet weak var QuoteContainerView: UIView!
     
     @IBOutlet weak var GoodreadsButton: BlurButtonView!
     @IBOutlet weak var ShareButton: BlurButtonView!
@@ -25,6 +26,9 @@ class MainViewController: UIViewController {
     @IBOutlet weak var BookBackgroundView: UIVisualEffectView!
     @IBOutlet weak var BookCoverImageview: UIImageView!
     @IBOutlet weak var BookViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var BookButtonTitleLabel: UILabel!
+    @IBOutlet weak var BookButtonAuthorLabel: UILabel!
+    @IBOutlet weak var BookButtonPublishDateLabel: UILabel!
     @IBOutlet weak var RatingLabel: UILabel!
     
     @IBOutlet weak var DividerLine: UIView!
@@ -61,7 +65,6 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupButtons()
-        setupNavBar()
     }
     
     override func viewDidLoad() {
@@ -89,6 +92,10 @@ class MainViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nav = segue.destination as? UINavigationController, let destination = nav.topViewController as? BookSelectionShelfListViewController {
             destination.bookDelegate = self
+        }
+        
+        if let nav = segue.destination as? UINavigationController, let destination = nav.topViewController as? FiltersViewController {
+            destination.delegate = self
         }
     }
     
@@ -133,21 +140,28 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func ViewBookOnGoodreads(_ sender: Any) {
-        guard let bookId = currentBook?.id, let url = URL(string: "https://www.goodreads.com/book/show/\(bookId)") else {
+        var bookUrl = ""
+        let goodreadsBookUrl = "https://www.goodreads.com/book/show/"
+        let openLibraryUrl = "https://openlibrary.org/works/"
+        if let book = currentBook, book.goodreadsId != "" {
+            bookUrl = goodreadsBookUrl + book.goodreadsId
+        }
+        else if let book = currentBook, book.id != "" {
+            bookUrl = openLibraryUrl + book.id
+        }
+        else if let book = currentBook, book.isbn != "" {
+            bookUrl = goodreadsBookUrl + "isbn/\(book.isbn)"
+        }
+        
+        guard let url = URL(string: bookUrl) else {
             return
         }
         
-        UIApplication.shared.open(url)
+        OpenUrlInSafari(url:url)
     }
     
     @IBAction func SelectBookFromAccount(_ sender: Any) {
         performSegue(withIdentifier: "ShowBookList", sender: self)
-    }
-    
-    func setupNavBar() {
-        self.navigationController?.navigationBar.isTranslucent = true
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
    
     func setupButtons() {
@@ -158,10 +172,17 @@ class MainViewController: UIViewController {
     }
     
     func shareQuote() {
-        if let image = view.toImage(withinFrame: backgroundView.frame) {
-            let vc = UIActivityViewController(activityItems: [image, "#Quotey"], applicationActivities: [])
-            present(vc, animated: true)
-        }
+        guard let background = pastelView?.snapshot() else  {return}
+        let dummyBackgroundImage = UIImageView(image: background)
+        
+        QuoteContainerView.insertSubview(dummyBackgroundImage, at: 0)
+        
+        let image = QuoteContainerView.snapshot()
+        
+        dummyBackgroundImage.removeFromSuperview()
+        
+        let vc = UIActivityViewController(activityItems: [image, "#Quotey"], applicationActivities: [])
+        present(vc, animated: true)
     }
     
     func addBookToShelf() {
@@ -247,20 +268,20 @@ class MainViewController: UIViewController {
     
     private func styleView()
     {
-        backgroundView.layer.cornerRadius = 6
+        backgroundView.layer.cornerRadius = 10
         backgroundView.clipsToBounds = true
         
-        BookBackgroundView.layer.cornerRadius = 6
+        BookBackgroundView.layer.cornerRadius = 10
         BookBackgroundView.clipsToBounds = true
         
         maxDistanceTop = BookViewTopConstraint.constant
         
-        BookCoverImageview.layer.cornerRadius = 2
+        BookCoverImageview.layer.cornerRadius = 4
         
         BookViewTopConstraint.constant = -maxDistanceTop
         BookBackgroundView.alpha = 0
         
-        DividerLine.layer.cornerRadius = 2
+        DividerLine.layer.cornerRadius = 4
         view.layoutIfNeeded()
     }
     
@@ -288,7 +309,10 @@ class MainViewController: UIViewController {
                             self.view.layoutIfNeeded()
                            })
             
-            self.RatingLabel.text = self.averageRatingText
+            self.BookButtonTitleLabel.text = ""
+            self.BookButtonAuthorLabel.text = ""
+            self.BookButtonPublishDateLabel.text = ""
+            self.RatingLabel.text = ""
             self.updateBookImage(bookCover: nil)
             
             if quote.publication.isEmpty {
@@ -296,10 +320,23 @@ class MainViewController: UIViewController {
                 self.hideBookDetails()
             }
             else {
-                GoodreadsService.sharedInstance.searchForBook(title: quote.publication, author: quote.author) { book in
-                    self.currentBook = book
-                    self.setupCurrentBookButton(book)
-                    self.showBookDetails()
+                OpenLibraryService.sharedInstance.searchForBook(title: quote.publication, author: quote.author) { book in
+                    
+                    guard var bookResult = book else {
+                        self.currentBook = nil
+                        self.hideBookDetails()
+                        return
+                    }
+                    //TODO: Change this to be less shit
+                    GoodreadsService.sharedInstance.searchForBook(title: bookResult.isbn, author: "") { book in
+                        bookResult.goodreadsId = book.goodreadsId
+                        bookResult.averageRating = book.averageRating
+                        
+                        self.currentBook = bookResult
+                        
+                        self.setupCurrentBookButton(bookResult)
+                        self.showBookDetails()
+                    }
                 }
             }
             
@@ -319,6 +356,11 @@ class MainViewController: UIViewController {
             }
         }
         
+        self.BookButtonTitleLabel.text = book.title
+        self.BookButtonAuthorLabel.text = book.author.name
+        self.BookButtonPublishDateLabel.text = book.publicationYear != nil ? "First published \(book.publicationYear!)" : ""
+        
+        //TODO: Remove this. As we move the data over to OpenLibrary, we need to ditch Goodread's ratings or at least make them their own individual call.
         RatingLabel.text = "\(averageRatingText) \(book.averageRating)/5"
     }
     
@@ -381,5 +423,13 @@ extension MainViewController: BookSelectionDelegate {
     func bookSelected(book: Book) {
         BookSearchField.text = "\(book.title) \(book.author.name)"
         loadRandomQuote()
+    }
+}
+
+extension MainViewController: SettingsDelegate {
+    func ScreenClosing() {
+        addGradient()
+        pastelView?.startAnimation()
+        pastelView?.pauseAnimation()
     }
 }

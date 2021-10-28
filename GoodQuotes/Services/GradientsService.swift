@@ -29,7 +29,7 @@ class GradientsService {
         get {
             let userDefaultService = UserDefaultsService()
             let colours = userDefaultService.loadColours()
-            return colours ?? [UIColor.lightGray, UIColor.darkGray]
+            return colours ?? [UIColor(named: "Peach2")!, UIColor(named: "Pink")!]
         }
     }
     

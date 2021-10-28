@@ -111,6 +111,8 @@ class GoodreadsService {
     
     func searchForBook(title: String, author: String, completion:  @escaping (Book) -> ())
     {
+        //TODO: replace this  with http://openlibrary.org/search.json?q=
+        
         var components = URLComponents(string: "https://www.goodreads.com/search/index.xml")
         components?.queryItems = [
             URLQueryItem(name: "key", value:"\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
