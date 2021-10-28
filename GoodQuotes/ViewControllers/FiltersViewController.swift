@@ -15,9 +15,17 @@ enum Settings: String {
     case SignInOutGoodreads = "SignInOutGoodreads"
     case VisitGoodreads = "Visit Goodreads"
     case Feedback = "Feedback"
+    case ChangeBackground = "Change Background Colour"
+}
+
+protocol SettingsDelegate: AnyObject
+{
+    func ScreenClosing()
 }
 
 class FiltersViewController: UIViewController {
+    weak var delegate: SettingsDelegate?
+    
     let goodreadsTitles = (signIn: "Sign In to Goodreads", signOut: "Sign Out of Goodreads")
     let defaultShelf = "to-read"
     
@@ -25,17 +33,16 @@ class FiltersViewController: UIViewController {
                           1 : "Goodreads",
                           2 : "Other"]
     
-    let sections: [Int : [Settings]] = [0 : [.GoodreadsShelf],
+    let sections: [Int : [Settings]] = [0 : [.GoodreadsShelf, .ChangeBackground],
                      1 : [.SignInOutGoodreads, .VisitGoodreads],
                      2 : [.About, .Feedback]]
     
     let segueForSection: [Settings : String] = [.GoodreadsShelf : "ShowShelves",
                                                 .About : "ShowAcknowledgements",
-                                                .Feedback : "ShowFeedback"]
+                                                .Feedback : "ShowFeedback",
+                                                .ChangeBackground : "ChangeBackground" ]
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var applyButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
     
     var currentShelf = ""
     var changesMade = false
@@ -55,7 +62,7 @@ class FiltersViewController: UIViewController {
             return
         }
         
-        navController.navigationBar.tintColor = UIColor.white
+        navController.navigationBar.tintColor = UIColor.gray
     }
     
     override func viewDidLoad() {
@@ -64,25 +71,16 @@ class FiltersViewController: UIViewController {
         tableView.reloadData()
     }
     
-    @IBAction func ApplyFilters(_ sender: UIButton) {
-        if(changesMade) {
-            defaultsService.storeDefaultShelf(shelfName: currentShelf)
-        }
-        
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func ResetToDefaults(_ sender: Any) {
-        defaultsService.wipeFilters()
-        currentShelf = defaultShelf
-        defaultsService.storeDefaultShelf(shelfName: currentShelf)
-        tableView.reloadData()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ShelvesSelectionViewController {
             destination.delegate = self
         }
+    }
+    
+    override func closeModal(_ sender: Any) {
+        delegate?.ScreenClosing()
+        
+        dismiss(animated: true, completion: nil)
     }
     
     func updateFilterCells()
@@ -164,8 +162,8 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
             signInOutGoodreads()
         }
         
-        if section == .VisitGoodreads {
-            UIApplication.shared.open(URL(string: "https://www.goodreads.com")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+        if section == .VisitGoodreads, let url = URL(string: "https://www.goodreads.com") {
+            UIApplication.shared.open(url)
         }
     }
     
@@ -188,12 +186,7 @@ extension FiltersViewController: ShelvesSelectionDelegate
 {
     func shelfSelected(shelfName: String) {
         currentShelf = shelfName
-        changesMade = true
+        defaultsService.storeDefaultShelf(shelfName: currentShelf)
         tableView.reloadData()
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

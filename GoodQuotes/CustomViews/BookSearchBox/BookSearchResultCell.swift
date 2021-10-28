@@ -15,6 +15,8 @@ class BookSearchResultCell: UITableViewCell {
     @IBOutlet weak var TitleLabelView: UILabel!
     @IBOutlet weak var AuthorLabelView: UILabel!
     @IBOutlet weak var CellBackground: UIView!
+    @IBOutlet weak var BlurContainer: UIView!
+    
     static var Nib = UINib(nibName: String(describing: BookSearchResultCell.self), bundle: nil)
     static var Identifier = String(describing: BookSearchResultCell.self)
     
@@ -26,16 +28,16 @@ class BookSearchResultCell: UITableViewCell {
         CoverImageView.setImageFromUrl(book.imageUrl)
         TitleLabelView.text = book.title
         AuthorLabelView.text = book.author.name
-        CellBackground.backgroundColor = UIColor.white//.withAlphaComponent(0.75)
-        CellBackground.layer.cornerRadius = 4
+        BlurContainer?.layer.cornerRadius = 10
+        BlurContainer?.layer.masksToBounds = true
         AddShadow()
     }
     
     private func AddShadow() {
-        CellBackground.layer.masksToBounds = false
-        CellBackground.layer.shadowColor = UIColor.black.cgColor
-        CellBackground.layer.shadowOpacity = 0.2
-        CellBackground.layer.shadowOffset = CGSize(width: 2, height: 4)
+        CellBackground?.layer.masksToBounds = false
+        CellBackground?.layer.shadowColor = UIColor.black.cgColor
+        CellBackground?.layer.shadowOpacity = 0.2
+        CellBackground?.layer.shadowOffset = CGSize(width: 2, height: 4)
     }
 
 }

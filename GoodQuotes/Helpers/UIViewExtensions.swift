@@ -10,28 +10,37 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func toImage() -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0.0)
-        defer { UIGraphicsEndImageContext() }
-        if let context = UIGraphicsGetCurrentContext() {
-            layer.render(in: context)
-            
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            return image
+    func toImage(withinFrame: CGRect) -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(bounds: withinFrame)
+        return renderer.image { rendererContext in
+            self.layer.render(in: rendererContext.cgContext)
         }
-        return nil
     }
     
-    func toImage(withinFrame: CGRect) -> UIImage? {
-        let convertedFrame = convert(withinFrame, to: self)
-        UIGraphicsBeginImageContextWithOptions(withinFrame.size, isOpaque, 0.0)
-        defer { UIGraphicsEndImageContext() }
-        if let context = UIGraphicsGetCurrentContext() {
-                context.concatenate(CGAffineTransform(translationX: -withinFrame.origin.x, y: -withinFrame.origin.y))
-                layer.render(in: context)
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            return image
+    func scale(by scale: CGFloat) {
+        self.contentScaleFactor = scale
+        for subview in self.subviews {
+            subview.scale(by: scale)
         }
-        return nil
+    }
+    
+//    func takeScreenshot(withinFrame: CGRect, with scale: CGFloat? = nil) -> Data? {
+//        guard withinFrame.width > 0, withinFrame.height > 0 else {
+//            return nil
+//        }
+//        let format = UIGraphicsImageRendererFormat()
+//        format.scale = 1
+//
+//        let renderer = UIGraphicsImageRenderer(size: withinFrame.size, format: format)
+//        let image = renderer.pngData { rendererContext in
+//            self.layer.render(in: rendererContext.cgContext)
+//        }
+//        return image
+//    }
+    
+    func snapshot() -> UIImage {
+        return UIGraphicsImageRenderer(size: bounds.size).image { _ in
+                    drawHierarchy(in: bounds, afterScreenUpdates: true)
+                }
     }
 }

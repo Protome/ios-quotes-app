@@ -94,104 +94,23 @@ import UIKit
 extension BlurButtonView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        if self.traitCollection.forceTouchCapability == .available {
-            touchExited = false
-            touchMoved(touch: touches.first)
-        } else {
             sendActions(for: .touchDown)
-        }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        touchMoved(touch: touches.first)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        if self.traitCollection.forceTouchCapability == .available {
-            touchEnded(touch: touches.first)
-        }
-        else {
-            sendActions(for: .touchUpInside)
-        }
+        sendActions(for: .touchUpInside)
     }
-    
+
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        if self.traitCollection.forceTouchCapability == .available {
-            touchEnded(touch: touches.first)
-        }
-        else {
             sendActions(for: .touchUpOutside)
-        }
     }
-    
-    private func touchMoved(touch: UITouch?) {
-        guard let touch = touch, !touchExited else { return }
-        
-        let cancelDistance: CGFloat = minWidth / 2 + 20
-        guard touch.location(in: self).distance(to: CGPoint(x: bounds.midX, y: bounds.midY)) < cancelDistance else {
-            touchExited = true
-            forceState = .reset
-            animateToRest()
-            return
-        }
-        
-        let force = touch.force / touch.maximumPossibleForce
-        let scale = 1 + (maxWidth / minWidth - 1) * force
-        
-        transform = CGAffineTransform(scaleX: scale, y: scale)
-        if !isOn { backgroundColor = UIColor(white: 0.2 - force * 0.2, alpha: 1) }
-        
-        switch forceState {
-        case .reset:
-            if force >= activationForce, forceTouchAction != nil {
-                forceState = .activated
-                activationFeedbackGenerator.impactOccurred()
-            }
-        case .activated:
-            if force <= confirmationForce, forceTouchAction != nil {
-                forceState = .confirmed
-                activate()
-            }
-        case .confirmed:
-            if force <= resetForce {
-                forceState = .reset
-            }
-        }
-    }
-    
-    private func touchEnded(touch: UITouch?) {
-        guard !touchExited else { return }
-        if frame.width  <= minWidth * 1.06, forceState != .activated  {
-            buttonAction?()
-        }
-        
-        if forceState == .activated, forceTouchAction != nil {
-            activate()
-        }
-        
-        forceState = .reset
-        animateToRest()
-    }
-    
+
     func activate() {
         isOn = !isOn
         backgroundColor = isOn ? onColor : offColor
         confirmationFeedbackGenerator.impactOccurred()
-        forceTouchAction?(isOn)
-    }
-    
-    private func animateToRest() {
-        let timingParameters = UISpringTimingParameters(damping: 0.4, response: 0.2)
-        let animator = UIViewPropertyAnimator(duration: 0, timingParameters: timingParameters)
-        animator.addAnimations {
-            self.transform = CGAffineTransform(scaleX: 1, y: 1)
-            self.backgroundColor = self.isOn ? self.onColor : self.offColor
-        }
-        animator.isInterruptible = true
-        animator.startAnimation()
     }
 }
 

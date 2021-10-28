@@ -7,5 +7,6 @@ target 'GoodQuotes' do
     pod 'AlamofireImage', '~> 3.3'
     pod "Pastel"
     pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
-    pod 'OAuthSwift', '~> 1.2.0'
+    pod 'OAuthSwift', '~> 1.3.0'
+    pod 'ChromaColorPicker'
 end
