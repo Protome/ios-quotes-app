@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var BookLabel: UILabel!
     @IBOutlet weak var AuthorLabel: UILabel!
     @IBOutlet weak var backgroundView: UIVisualEffectView!
+    @IBOutlet weak var QuoteContainerView: UIView!
     
     @IBOutlet weak var GoodreadsButton: BlurButtonView!
     @IBOutlet weak var ShareButton: BlurButtonView!
@@ -162,11 +163,19 @@ class MainViewController: UIViewController {
         RefreshButton.buttonAction = loadRandomQuote
     }
     
+    @IBOutlet weak var testImage: UIImageView!
     func shareQuote() {
-        if let image = view.toImage(withinFrame: backgroundView.frame) {
-            let vc = UIActivityViewController(activityItems: [image, "#Quotey"], applicationActivities: [])
-            present(vc, animated: true)
-        }
+        guard let background = pastelView?.snapshot() else  {return}
+        let dummyBackgroundImage = UIImageView(image: background)
+        
+        QuoteContainerView.insertSubview(dummyBackgroundImage, at: 0)
+        
+        let image = QuoteContainerView.snapshot()
+        
+        dummyBackgroundImage.removeFromSuperview()
+        
+        let vc = UIActivityViewController(activityItems: [image, "#Quotey"], applicationActivities: [])
+        present(vc, animated: true)
     }
     
     func addBookToShelf() {
