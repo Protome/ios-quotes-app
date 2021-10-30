@@ -13,6 +13,7 @@
 		E50ADDC3222B49B20037ACBD /* TextOnlyResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */; };
 		E50C0AD922A8762300B2305E /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50C0AD822A8762300B2305E /* UIColorExtensions.swift */; };
 		E52121682124DE620027BCFC /* GoodreadsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52121672124DE620027BCFC /* GoodreadsService.swift */; };
+		E526FEC2272D7AE900C0FF1B /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = E526FEC1272D7AE900C0FF1B /* Tools.swift */; };
 		E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5279ED6212765D8007BC585 /* BlurButtonView.xib */; };
 		E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5279ED8212765F6007BC585 /* BlurButtonView.swift */; };
 		E532E91927297E7A0081B386 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E532E91827297E7A0081B386 /* UIViewControllerExtensions.swift */; };
@@ -112,6 +113,7 @@
 		E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOnlyResultCell.swift; sourceTree = "<group>"; };
 		E50C0AD822A8762300B2305E /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		E52121672124DE620027BCFC /* GoodreadsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodreadsService.swift; sourceTree = "<group>"; };
+		E526FEC1272D7AE900C0FF1B /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		E5279ED6212765D8007BC585 /* BlurButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlurButtonView.xib; sourceTree = "<group>"; };
 		E5279ED8212765F6007BC585 /* BlurButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurButtonView.swift; sourceTree = "<group>"; };
 		E532E91827297E7A0081B386 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				E5CDD289272B2B9C00A6B2D0 /* NumericExtensions.swift */,
 				E5CDD28B272B2BB800A6B2D0 /* DataExtensions.swift */,
 				E5CDD28D272B2C0600A6B2D0 /* UserDefaultExtensions.swift */,
+				E526FEC1272D7AE900C0FF1B /* Tools.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				E5E525F22126060500EF1E1B /* UserCredentials.swift in Sources */,
 				E532E91B2729B8BD0081B386 /* OpenLibraryService.swift in Sources */,
 				E5E525FA2126260600EF1E1B /* KeychainPasswordItem.swift in Sources */,
+				E526FEC2272D7AE900C0FF1B /* Tools.swift in Sources */,
 				E50ADDC3222B49B20037ACBD /* TextOnlyResultCell.swift in Sources */,
 				E5CDD28E272B2C0600A6B2D0 /* UserDefaultExtensions.swift in Sources */,
 				E5818A072126C9DC0099BEAF /* Author.swift in Sources */,
@@ -877,7 +881,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.1;
+				MARKETING_VERSION = 1.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -900,7 +904,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.1;
+				MARKETING_VERSION = 1.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

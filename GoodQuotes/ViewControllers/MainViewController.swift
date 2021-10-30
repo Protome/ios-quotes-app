@@ -309,35 +309,15 @@ class MainViewController: UIViewController {
                             self.view.layoutIfNeeded()
                            })
             
-            self.BookButtonTitleLabel.text = ""
-            self.BookButtonAuthorLabel.text = ""
-            self.BookButtonPublishDateLabel.text = ""
-            self.RatingLabel.text = ""
-            self.updateBookImage(bookCover: nil)
+            
+            self.setupCurrentBookButton(nil)
             
             if quote.publication.isEmpty {
                 self.currentBook = nil
                 self.hideBookDetails()
             }
             else {
-                OpenLibraryService.sharedInstance.searchForBook(title: quote.publication, author: quote.author) { book in
-                    
-                    guard var bookResult = book else {
-                        self.currentBook = nil
-                        self.hideBookDetails()
-                        return
-                    }
-                    //TODO: Change this to be less shit
-                    GoodreadsService.sharedInstance.searchForBook(title: bookResult.isbn, author: "") { book in
-                        bookResult.goodreadsId = book.goodreadsId
-                        bookResult.averageRating = book.averageRating
-                        
-                        self.currentBook = bookResult
-                        
-                        self.setupCurrentBookButton(bookResult)
-                        self.showBookDetails()
-                    }
-                }
+                self.updateBookDetailsFromService(quote: quote)
             }
             
             let deadlineTime = DispatchTime.now() + .seconds(5)
@@ -348,8 +328,52 @@ class MainViewController: UIViewController {
             self.pastelView?.pauseAnimation()
         }
     }
+
+    private func updateBookDetailsFromService(quote: Quote) {
+        OpenLibraryService.sharedInstance.searchForBook(title: quote.publication, author: quote.author) { book in
+            guard let bookResult = book else {
+                self.updateBookDetailsFromWiderSearch(quote: quote)
+                return
+            }
+            
+            self.updateBookFromFallbackData(bookResult: bookResult, quote: quote)
+        }
+    }
     
-    private func setupCurrentBookButton(_ book: Book) {
+    private func updateBookDetailsFromWiderSearch(quote: Quote) {
+        OpenLibraryService.sharedInstance.wideSearchForBook(query: quote.publication) { book in
+            guard let bookResult = book else {
+                self.currentBook = nil
+                self.hideBookDetails()
+                return
+            }
+            self.updateBookFromFallbackData(bookResult: bookResult, quote: quote)
+        }
+    }
+    
+    private func updateBookFromFallbackData(bookResult: Book, quote: Quote) {
+        //TODO: Change this to be less shit
+        GoodreadsService.sharedInstance.searchForBook(title: quote.publication, author: quote.author) { book in
+            var bookCopy = bookResult
+            bookCopy.fillMissingDataFromFallback(fallbackBook: book)
+            
+            self.currentBook = bookCopy
+            
+            self.setupCurrentBookButton(bookCopy)
+            self.showBookDetails()
+        }
+    }
+    
+    private func setupCurrentBookButton(_ book: Book?) {
+        guard let book = book else {
+            self.BookButtonTitleLabel.text = ""
+            self.BookButtonAuthorLabel.text = ""
+            self.BookButtonPublishDateLabel.text = ""
+            self.RatingLabel.text = ""
+            self.updateBookImage(bookCover: nil)
+            return
+        }
+        
         Alamofire.request(book.imageUrl).responseImage { imageReponse in
             if let image = imageReponse.result.value {
                 self.updateBookImage(bookCover: image)
@@ -361,7 +385,7 @@ class MainViewController: UIViewController {
         self.BookButtonPublishDateLabel.text = book.publicationYear != nil ? "First published \(book.publicationYear!)" : ""
         
         //TODO: Remove this. As we move the data over to OpenLibrary, we need to ditch Goodread's ratings or at least make them their own individual call.
-        RatingLabel.text = "\(averageRatingText) \(book.averageRating)/5"
+        RatingLabel.text = book.averageRating == 0 ? "" :  "\(averageRatingText) \(book.averageRating)/5"
     }
     
     private func updateBookImage(bookCover: UIImage?) {

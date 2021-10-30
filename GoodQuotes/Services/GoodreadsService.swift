@@ -111,19 +111,22 @@ class GoodreadsService {
     
     func searchForBook(title: String, author: String, completion:  @escaping (Book) -> ())
     {
-        //TODO: replace this  with http://openlibrary.org/search.json?q=
-        
         var components = URLComponents(string: "https://www.goodreads.com/search/index.xml")
         components?.queryItems = [
             URLQueryItem(name: "key", value:"\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
-            URLQueryItem(name: "q", value:"\(title)+\(author)")]
+            URLQueryItem(name: "q", value:"\(title)+\(author.withoutSpecialCharacters(separator: ""))")]
         if let url = components?.url
         {
             Alamofire.request(url).response { response in
                 let xml = XML.parse(response.data!)
                 let results = xml["GoodreadsResponse", "search", "results", "work"]
-                let bestResult = Book(xml: results[0])
                 
+                let closestResult =  results.first { xml in
+                    let closestBook = Book(xml: xml)
+                    return closestBook.title == title && Tools.levenshtein(aStr: author, bStr: closestBook.author.name) < 3
+                }
+                
+                let bestResult = Book(xml: closestResult ?? results[0])
                 completion(bestResult)
             }
         }

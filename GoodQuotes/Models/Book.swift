@@ -102,4 +102,12 @@ struct Book: Codable {
         }
     }
 
+    mutating func fillMissingDataFromFallback(fallbackBook: Book) {
+        goodreadsId = fallbackBook.goodreadsId
+        title = title == "" ? fallbackBook.title : title
+        author = author.name == "" ? fallbackBook.author : author
+        imageUrl = imageUrl == "" ? fallbackBook.imageUrl : imageUrl
+        averageRating = fallbackBook.averageRating
+    }
+    
 }
