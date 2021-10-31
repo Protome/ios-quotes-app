@@ -297,6 +297,8 @@ class MainViewController: UIViewController {
         }
         
         quoteService.getRandomQuote { quote in
+            let sameBook = quote.author == self.AuthorLabel.text && quote.publication == self.BookLabel.text
+            
             self.QuoteLabel.text = "\(quote.quote)"
             self.AuthorLabel.text = quote.author
             self.BookLabel.text = quote.publication
@@ -309,6 +311,11 @@ class MainViewController: UIViewController {
                             self.view.layoutIfNeeded()
                            })
             
+            if sameBook {
+                //Dont bother reloading the book button if the book is the same
+                self.pastelView?.pauseAnimation()
+                return
+            }
             
             self.setupCurrentBookButton(nil)
             
