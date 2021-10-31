@@ -93,7 +93,7 @@ class OpenLibraryService {
         }
     }
     
-    func searchForBooks(title: String?, author: String?, query: String?, completion:  @escaping ([Book]) -> ())
+    func searchForBooks(title: String?, author: String?, query: String?, completion:  @escaping ([Book], Bool) -> ())
     {
         var components = URLComponents(string: "https://openlibrary.org/search.json")
         
@@ -115,7 +115,7 @@ class OpenLibraryService {
             
             ongoingRequest = Alamofire.request(url).response { response in
                 guard response.error == nil, let responseData = response.data else {
-                    completion([Book]())
+                    completion([Book](), true)
                     return
                 }
                 
@@ -124,14 +124,14 @@ class OpenLibraryService {
                     
                     let numFound = json["numFound"].intValue
                     
-                    if numFound == 0 { completion([Book]()) }
+                    if numFound == 0 { completion([Book](), false) }
                     
                     if numFound > 0 {
                         let bookResults = json["docs"].arrayValue.map({ return Book(json: $0)})
-                        completion(bookResults)
+                        completion(bookResults, false)
                     }
                 } catch {
-                    completion([Book]())
+                    completion([Book](), false)
                     return
                 }
             }

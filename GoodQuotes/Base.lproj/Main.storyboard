@@ -965,9 +965,9 @@ Just want to say hi? </string>
                                 <rect key="frame" x="0.0" y="477.33333333333326" width="375" height="334.66666666666674"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJw-EL-qn4">
-                                        <rect key="frame" x="24" y="38.000000000000057" width="327" height="258.33333333333331"/>
+                                        <rect key="frame" x="24" y="38.333333333333314" width="327" height="258"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XKN-OM-KXE">
-                                            <rect key="frame" x="0.0" y="0.0" width="327" height="259"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="327" height="258"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fpR-MN-25e">
@@ -984,7 +984,7 @@ Just want to say hi? </string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Catherynne M. Valente" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1F-F0-8TQ">
-                                                    <rect key="frame" x="8" y="223.33333333333326" width="311" height="19.333333333333343"/>
+                                                    <rect key="frame" x="8" y="223.33333333333337" width="311" height="19.333333333333343"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                                     <color key="textColor" name="MainText"/>
                                                     <nil key="highlightedColor"/>
