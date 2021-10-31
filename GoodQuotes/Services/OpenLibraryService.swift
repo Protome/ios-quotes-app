@@ -14,6 +14,8 @@ import SwiftUI
 class OpenLibraryService {
     static var sharedInstance = OpenLibraryService()
     
+    var ongoingRequest: DataRequest?
+    
     func searchForBook(title: String, author: String, completion:  @escaping (Book?) -> ())
     {
         var titleQuery = title
@@ -86,6 +88,51 @@ class OpenLibraryService {
                             completion(book)
                         }
                     }
+                }
+            }
+        }
+    }
+    
+    func searchForBooks(title: String?, author: String?, query: String?, completion:  @escaping ([Book]) -> ())
+    {
+        var components = URLComponents(string: "https://openlibrary.org/search.json")
+        
+        if let title = title {
+            components?.queryItems = [URLQueryItem(name: "title", value:title)]
+        }
+        
+        if let author = author {
+            components?.queryItems = [URLQueryItem(name: "author", value:author)]
+        }
+        
+        if let query = query {
+            components?.queryItems = [URLQueryItem(name: "q", value:query)]
+        }
+        
+        if let url = components?.url
+        {
+            ongoingRequest?.cancel()
+            
+            ongoingRequest = Alamofire.request(url).response { response in
+                guard response.error == nil, let responseData = response.data else {
+                    completion([Book]())
+                    return
+                }
+                
+                do {
+                    let json = try JSON(data: responseData)
+                    
+                    let numFound = json["numFound"].intValue
+                    
+                    if numFound == 0 { completion([Book]()) }
+                    
+                    if numFound > 0 {
+                        let bookResults = json["docs"].arrayValue.map({ return Book(json: $0)})
+                        completion(bookResults)
+                    }
+                } catch {
+                    completion([Book]())
+                    return
                 }
             }
         }

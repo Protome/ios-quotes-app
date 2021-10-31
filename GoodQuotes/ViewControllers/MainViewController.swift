@@ -452,7 +452,7 @@ extension MainViewController: BookSearchSelectionDelegate {
 
 extension MainViewController: BookSelectionDelegate {
     func bookSelected(book: Book) {
-        BookSearchField.text = "\(book.title) \(book.author.name)"
+        BookSearchField.text = "\(book.title)"
         loadRandomQuote()
     }
 }

@@ -29,10 +29,9 @@ import UIKit
     var searchResults: [Book] = [Book]()
     var resultsTableView : UITableView?
     var backgroundView : UIView?
-    var currentPage = 0
-    var numberOfPages = 1
     var dismissKeyboardGestureRecogniser : UITapGestureRecognizer?
     let defaultsService = UserDefaultsService()
+    let segmentHeader = UISegmentedControl(items: ["Title", "Author", "Either"])
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -92,46 +91,34 @@ import UIKit
         resultsTableView!.frame = CGRect(x: inset, y: parentVC.view.safeAreaInsets.top, width: width, height: CGFloat(parentVC.view.frame.height - parentVC.view.safeAreaInsets.top))
         parentVC.view.addSubview(resultsTableView!)
         
-        searchByCurrentText(page: 0)
+        searchByCurrentText()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         dismissView()
     }
     
-    func searchByCurrentText(page: Int) {
-        currentPage = page
-        GoodreadsService.sharedInstance.searchForBooks(title: text ?? "", page: currentPage) {
-            (books, pages) in
-            self.numberOfPages = pages
-            if self.currentPage == 0 {
-                self.searchResults = books
-                self.resultsTableView?.reloadData()
-            }
-            else {
-                if books.count == 0 { return }
-                
-                let previousResultCount = self.searchResults.count
-                self.searchResults.append(contentsOf: books)
-                var indexesToUpdate = [IndexPath]()
-                for index in previousResultCount...(self.searchResults.count - 1) {
-                    indexesToUpdate.append(IndexPath(row: index, section: 1))
-                }
-                
-                UIView.setAnimationsEnabled(false)
-                self.resultsTableView?.beginUpdates()
-                self.resultsTableView?.insertRows(at: indexesToUpdate, with: UITableView.RowAnimation.none)
-                self.resultsTableView?.scrollToRow(at: IndexPath(row: previousResultCount - 1, section: 1), at: .bottom, animated: false)
-                self.resultsTableView?.endUpdates()
-                UIView.setAnimationsEnabled(true)
-            }
+    func searchByCurrentText() {
+        let title = segmentHeader.selectedSegmentIndex == 0 ? text : nil
+        let author = segmentHeader.selectedSegmentIndex == 1 ? text : nil
+        let query = segmentHeader.selectedSegmentIndex == 2 ? text : nil
+        
+        OpenLibraryService.sharedInstance.searchForBooks(title: title, author: author, query: query) {
+            (books) in
+            self.searchResults = books
+            self.resultsTableView?.reloadData()
+            
         }
     }
     
     func setupTableView() {
         if resultsTableView != nil { return }
-        
         resultsTableView = UITableView()
+        
+        segmentHeader.selectedSegmentIndex = 0
+        segmentHeader.addTarget(self, action: #selector(segmentedControlChanged(_:)), for: .valueChanged)
+
+        resultsTableView?.tableHeaderView = segmentHeader
         resultsTableView?.delegate = self
         resultsTableView?.dataSource = self
         resultsTableView?.register(BookSearchResultCell.Nib, forCellReuseIdentifier: BookSearchResultCell.Identifier)
@@ -140,6 +127,10 @@ import UIKit
         resultsTableView?.tableFooterView = UIView()
         resultsTableView?.showsVerticalScrollIndicator = false
         resultsTableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
+    }
+    
+    @objc func segmentedControlChanged(_ sender: UISegmentedControl) {
+        Reload()
     }
     
     func setupDismissKeyboardView() {
@@ -183,10 +174,14 @@ import UIKit
             defaultsService.storeSearchTerm(search: text!)
         }
     }
+
+    func Reload() {
+        resultsTableView?.setContentOffset( CGPoint(x: 0, y: 0) , animated: true)
+        searchByCurrentText()
+    }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        resultsTableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        searchByCurrentText(page: 0)
+       Reload()
     }
     
     @objc func backgroundTapped(sender: UITapGestureRecognizer) {
@@ -224,10 +219,6 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
         
         cell.SetupCell(book: searchResults[indexPath.row])
         
-        if indexPath.row == searchResults.count - 1, currentPage < numberOfPages {
-            searchByCurrentText(page: currentPage + 1)
-        }
-        
         return cell
     }
     
@@ -243,7 +234,7 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
         }
         else {
             let selectedBook = searchResults[indexPath.row]
-            text = "\(selectedBook.title) \(selectedBook.author.name)"
+            text = "\(selectedBook.title)"
         
             defaultsService.storeBook(book: selectedBook)
         }
