@@ -42,7 +42,7 @@ class OpenLibraryService {
                     if numFound > 0 {
                         let closestResult =  json["docs"].arrayValue.first { json in
                             let closestBook = Book(json: json)
-                            return Tools.levenshtein(aStr: title, bStr: closestBook.title) < title.count/3 && Tools.levenshtein(aStr: author, bStr: closestBook.author.name) < 3
+                            return Tools.levenshtein(aStr: title, bStr: closestBook.title) < title.count/3 && Tools.levenshtein(aStr: author, bStr: closestBook.author.name) < 3 && !closestBook.id.isEmpty
                         }
                         
                         if let bookJson = closestResult {
