@@ -37,7 +37,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var BookSelectButton: UIBarButtonItem!
     
     let averageRatingText = "Average Rating:"
-    let quoteService = QuoteService()
+    let quoteService: QuoteServiceProtocol = QuoteService()
     let reviewService = ReviewRequestService()
     var pastelView:PastelView?
     var currentBook:Book?

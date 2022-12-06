@@ -10,13 +10,12 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class OpenLibraryService {
-    static var sharedInstance = OpenLibraryService()
+class OpenLibraryService: OpenLibraryServiceProtocol {
+    static var sharedInstance: OpenLibraryServiceProtocol = OpenLibraryService()
     
     var ongoingRequest: DataRequest?
     
-    func searchForBook(title: String, author: String, completion:  @escaping (Book?) -> ())
-    {
+    func searchForBook(title: String, author: String, completion:  @escaping (Book?) -> ()) {
         var titleQuery = title
         if title.contains("(") {
             let titleSplit = title.components(separatedBy: "(")
@@ -58,8 +57,7 @@ class OpenLibraryService {
         }
     }
     
-    func wideSearchForBook(query: String, completion:  @escaping (Book?) -> ())
-    {
+    func wideSearchForBook(query: String, completion:  @escaping (Book?) -> ()) {
         var components = URLComponents(string: "https://openlibrary.org/search.json")
         components?.queryItems = [
             URLQueryItem(name: "q", value: query)]
@@ -92,8 +90,7 @@ class OpenLibraryService {
         }
     }
     
-    func searchForBooks(title: String?, author: String?, query: String?, completion:  @escaping ([Book], Bool) -> ())
-    {
+    func searchForBooks(title: String?, author: String?, query: String?, completion:  @escaping ([Book], Bool) -> ()) {
         var components = URLComponents(string: "https://openlibrary.org/search.json")
         
         if let title = title {

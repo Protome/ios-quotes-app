@@ -10,10 +10,9 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-//TODO: This is a mess already, refactor it
-class QuoteService {
+class QuoteService: QuoteServiceProtocol {
     let baseUrl = "https://quoteyapi.herokuapp.com/api/v1/quotey/"
-//    let baseUrl = "http://192.168.0.5:8080/api/v1/quotey/"
+    //    let baseUrl = "http://192.168.0.5:8080/api/v1/quotey/"
     
     func getRandomQuote(completion: @escaping (Quote) -> ())
     {
@@ -21,15 +20,15 @@ class QuoteService {
         let searchType = defaultsService.loadCurrentFilterType()
         
         switch searchType {
-            case .None: getFullyRandomQuote(completion: completion)
-            case .Book:
-                let searchTerm = defaultsService.loadBook()
-                getBookQuote(book: searchTerm!, completion: completion)
+        case .None: getFullyRandomQuote(completion: completion)
+        case .Book:
+            let searchTerm = defaultsService.loadBook()
+            getBookQuote(book: searchTerm!, completion: completion)
             
-            case .Search:
-                let searchTerm = defaultsService.loadSearch()
-                getAuthorQuote(author: searchTerm ?? "", completion: completion)
-            case .Tag: break
+        case .Search:
+            let searchTerm = defaultsService.loadSearch()
+            getAuthorQuote(author: searchTerm ?? "", completion: completion)
+        case .Tag: break
         }
     }
     
@@ -123,35 +122,35 @@ class QuoteService {
         let url = baseUrl + "\(query)/\(pageNumber)"
         let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         Alamofire.request(encodedURL!).responseJSON { response in
-                if let jsonResponse = response.result.value {
-                    let json = JSON(jsonResponse)
-                    let quotes = json["quotes"].map({return Quote(jsonObject: $1)})
-                    completion(quotes)
-                }
+            if let jsonResponse = response.result.value {
+                let json = JSON(jsonResponse)
+                let quotes = json["quotes"].map({return Quote(jsonObject: $1)})
+                completion(quotes)
             }
+        }
     }
     
     internal func getTotalPageNumberForString(query: String,  completion: @escaping (Int) -> ())
     {
         let url = baseUrl + query
         let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-            Alamofire.request(encodedURL!).responseJSON { response in
-                if let jsonResponse = response.result.value {
-                    let json = JSON(jsonResponse)
-                    completion(json["total_pages"].intValue)
-                }
+        Alamofire.request(encodedURL!).responseJSON { response in
+            if let jsonResponse = response.result.value {
+                let json = JSON(jsonResponse)
+                completion(json["total_pages"].intValue)
             }
+        }
     }
     
     internal func getAllQuotesForTagAtPage(tag: String, pageNumber: Int, completion: @escaping ([Quote]) -> ())
     {
-            Alamofire.request(baseUrl + "\(tag)/\(pageNumber)").responseJSON { response in
-                if let jsonResponse = response.result.value {
-                    let json = JSON(jsonResponse)
-                    let quotes = json["quotes"].map({return Quote(jsonObject: $1)})
-                    completion(quotes)
-                }
+        Alamofire.request(baseUrl + "\(tag)/\(pageNumber)").responseJSON { response in
+            if let jsonResponse = response.result.value {
+                let json = JSON(jsonResponse)
+                let quotes = json["quotes"].map({return Quote(jsonObject: $1)})
+                completion(quotes)
             }
+        }
     }
     
     internal func randomAuthor() -> Character

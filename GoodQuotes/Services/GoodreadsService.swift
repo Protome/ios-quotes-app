@@ -11,8 +11,8 @@ import SwiftyXMLParser
 import Alamofire
 import OAuthSwift
 
-class GoodreadsService {
-    static var sharedInstance = GoodreadsService()
+class GoodreadsService: GoodreadsServiceProtocol {
+    static var sharedInstance: GoodreadsServiceProtocol = GoodreadsService()
     
     var isLoggedIn = LoginState.LoggedOut {
         didSet {
@@ -71,23 +71,6 @@ class GoodreadsService {
         isLoggedIn = .LoggedOut
     }
     
-    func loginToUser(_ oauthswift: OAuth1Swift, completion: (() -> ())?) {
-        let _ = oauthswift.client.get(
-            "https://www.goodreads.com/api/auth_user") { result in
-                switch result {
-                case .success(let response):
-                    let xml = try! XML.parse(response.string!)
-                    guard let id = xml["GoodreadsResponse", "user"].attributes["id"] else {
-                        return
-                    }
-                    self.id = id
-                    completion?()
-                case .failure(let error):
-                    print(error)
-                }
-            }
-    }
-    
     func loadShelves(sender: UIViewController, completion: (([Shelf]) -> ())?) {
         guard let _ = self.id else {
             loginToGoodreadsAccount(sender: sender) {
@@ -112,8 +95,7 @@ class GoodreadsService {
         }
     }
     
-    func searchForBook(title: String, author: String, completion:  @escaping (Book) -> ())
-    {
+    func searchForBook(title: String, author: String, completion:  @escaping (Book) -> ()) {
         var components = URLComponents(string: "https://www.goodreads.com/search/index.xml")
         components?.queryItems = [
             URLQueryItem(name: "key", value:"\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
@@ -135,8 +117,7 @@ class GoodreadsService {
         }
     }
     
-    func searchForBooks(title: String, page: Int, completion:  @escaping ([Book], Int) -> ())
-    {
+    func searchForBooks(title: String, page: Int, completion:  @escaping ([Book], Int) -> ()) {
         var components = URLComponents(string: "https://www.goodreads.com/search/index.xml")
         components?.queryItems = [
             URLQueryItem(name: "key", value:"\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
@@ -162,8 +143,7 @@ class GoodreadsService {
         }
     }
     
-    func addBookToShelf(sender: UIViewController, bookId: String, completion: @escaping () -> ())
-    {
+    func addBookToShelf(sender: UIViewController, bookId: String, completion: @escaping () -> ()) {
         guard let oauthswift = oauthswift, self.isLoggedIn == LoginState.LoggedIn else {
             loginToGoodreadsAccount(sender: sender) { self.addBookToShelf(sender: sender, bookId: bookId, completion: completion) }
             return
@@ -185,8 +165,7 @@ class GoodreadsService {
         }
     }
     
-    func getBooksFromShelf(sender: UIViewController, shelf: Shelf, page: Int, completion: (([Book], Pages) -> ())?)
-    {
+    func getBooksFromShelf(sender: UIViewController, shelf: Shelf, page: Int, completion: (([Book], Pages) -> ())?) {
         guard let _ = self.id else {
             loginToGoodreadsAccount(sender: sender) {
                 self.getBooksFromShelf(sender: sender, shelf: shelf, page: page, completion: completion)
@@ -217,4 +196,22 @@ class GoodreadsService {
             }
         }
     }
+    
+    internal func loginToUser(_ oauthswift: OAuth1Swift, completion: (() -> ())?) {
+        let _ = oauthswift.client.get(
+            "https://www.goodreads.com/api/auth_user") { result in
+                switch result {
+                case .success(let response):
+                    let xml = try! XML.parse(response.string!)
+                    guard let id = xml["GoodreadsResponse", "user"].attributes["id"] else {
+                        return
+                    }
+                    self.id = id
+                    completion?()
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
 }
