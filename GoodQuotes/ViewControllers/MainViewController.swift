@@ -33,14 +33,13 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var DividerLine: UIView!
     @IBOutlet weak var BookSearchField: BookSearchBox!
-    
     @IBOutlet weak var BookSelectButton: UIBarButtonItem!
     
-    let averageRatingText = "Average Rating:"
-    let quoteService: QuoteServiceProtocol = QuoteService()
-    let reviewService = ReviewRequestService()
+    lazy var viewModel = {
+        MainViewModel()
+    }()
+    
     var pastelView:PastelView?
-    var currentBook:Book?
     var restartAnimation = true
     var returningFromAuth = false
     var openModal: UIViewController?
@@ -143,6 +142,7 @@ class MainViewController: UIViewController {
         var bookUrl = ""
         let goodreadsBookUrl = "https://www.goodreads.com/book/show/"
         let openLibraryUrl = "https://openlibrary.org/works/"
+        let currentBook = viewModel.currentBook
         if let book = currentBook, book.goodreadsId != "" {
             bookUrl = goodreadsBookUrl + book.goodreadsId
         }
@@ -163,11 +163,11 @@ class MainViewController: UIViewController {
     @IBAction func SelectBookFromAccount(_ sender: Any) {
         performSegue(withIdentifier: "ShowBookList", sender: self)
     }
-   
+    
     func setupButtons() {
         ShareButton.buttonAction = shareQuote
         GoodreadsButton.buttonAction = addBookToShelf
-        GoodreadsButton.forceTouchAction = GoodreadsService.sharedInstance.isLoggedIn == .LoggedIn ? selectShelfAction : nil
+        //        GoodreadsButton.forceTouchAction = .isLoggedIn == .LoggedIn ? selectShelfAction : nil
         RefreshButton.buttonAction = loadRandomQuote
     }
     
@@ -186,7 +186,7 @@ class MainViewController: UIViewController {
     }
     
     func addBookToShelf() {
-        guard let book = currentBook else {
+        guard let book = viewModel.currentBook else {
             return
         }
         
@@ -296,103 +296,66 @@ class MainViewController: UIViewController {
             pastelView?.resumeAnimation()
         }
         
-        quoteService.getRandomQuote { quote in
-            let sameBook = quote.author == self.AuthorLabel.text && quote.publication == self.BookLabel.text
-            
-            self.QuoteLabel.text = "\(quote.quote)"
-            self.AuthorLabel.text = quote.author
-            self.BookLabel.text = quote.publication
-            
-            UIView.animate(withDuration: 1.2,
-                           delay: 0, usingSpringWithDamping: 0.6,
-                           initialSpringVelocity: 0.0,
-                           options: .beginFromCurrentState,
-                           animations: {
-                            self.view.layoutIfNeeded()
-                           })
-            
+        viewModel.loadRandomQuote(){ self.updateDataFromViewmodel() }
+    }
+    
+    private func updateDataFromViewmodel() {
+        guard let quote = self.viewModel.currentQuote else { return }
+        
+        let sameBook = quote.author == self.AuthorLabel.text && quote.publication == self.BookLabel.text
+        
+        self.QuoteLabel.text = "\(quote.quote)"
+        self.AuthorLabel.text = quote.author
+        self.BookLabel.text = quote.publication
+        
+        UIView.animate(withDuration: 1.2,
+                       delay: 0, usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 0.0,
+                       options: .beginFromCurrentState,
+                       animations: {
+            self.view.layoutIfNeeded()
+        })
+        
+        self.loadBookData(sameBook)
+    }
+    
+    private func loadBookData(_ sameBook: Bool) {
+        viewModel.updateBookDetailsFromService() {
             if sameBook {
                 //Dont bother reloading the book button if the book is the same
                 self.pastelView?.pauseAnimation()
                 return
             }
             
-            self.setupCurrentBookButton(nil)
-            
-            if quote.publication.isEmpty {
-                self.currentBook = nil
-                self.hideBookDetails()
-            }
-            else {
-                self.updateBookDetailsFromService(quote: quote)
-            }
-            
-            let deadlineTime = DispatchTime.now() + .seconds(5)
-            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-                self.reviewService.showReview()
-            }
-            
+            self.setupCurrentBookButton()
             self.pastelView?.pauseAnimation()
         }
     }
-
-    private func updateBookDetailsFromService(quote: Quote) {
-        OpenLibraryService.sharedInstance.searchForBook(title: quote.publication, author: quote.author) { book in
-            guard let bookResult = book else {
-                self.updateBookDetailsFromWiderSearch(quote: quote)
-                return
-            }
-            
-            self.updateBookFromFallbackData(bookResult: bookResult, quote: quote)
-        }
-    }
     
-    private func updateBookDetailsFromWiderSearch(quote: Quote) {
-        OpenLibraryService.sharedInstance.wideSearchForBook(query: quote.publication) { book in
-            guard let bookResult = book else {
-                self.currentBook = nil
-                self.hideBookDetails()
-                return
-            }
-            self.updateBookFromFallbackData(bookResult: bookResult, quote: quote)
-        }
-    }
-    
-    private func updateBookFromFallbackData(bookResult: Book, quote: Quote) {
-        //TODO: Change this to be less shit
-        GoodreadsService.sharedInstance.searchForBook(title: quote.publication, author: quote.author) { book in
-            var bookCopy = bookResult
-            bookCopy.fillMissingDataFromFallback(fallbackBook: book)
-            
-            self.currentBook = bookCopy
-            
-            self.setupCurrentBookButton(bookCopy)
-            self.showBookDetails()
-        }
-    }
-    
-    private func setupCurrentBookButton(_ book: Book?) {
-        guard let book = book else {
-            self.BookButtonTitleLabel.text = ""
-            self.BookButtonAuthorLabel.text = ""
-            self.BookButtonPublishDateLabel.text = ""
-            self.RatingLabel.text = ""
-            self.updateBookImage(bookCover: nil)
-            return
-        }
-        
-        Alamofire.request(book.imageUrl).responseImage { imageReponse in
-            if let image = imageReponse.result.value {
-                self.updateBookImage(bookCover: image)
+    private func setupCurrentBookButton() {
+        self.BookButtonTitleLabel.text = viewModel.bookTitle
+        self.BookButtonAuthorLabel.text = viewModel.authorName
+        self.BookButtonPublishDateLabel.text = viewModel.publishDate
+                
+        if let imageUrl = viewModel.currentBook?.imageUrl {
+            Alamofire.request(imageUrl).responseImage { imageReponse in
+                if let image = imageReponse.result.value {
+                    self.updateBookImage(bookCover: image)
+                }
             }
         }
-        
-        self.BookButtonTitleLabel.text = book.title
-        self.BookButtonAuthorLabel.text = book.author.name
-        self.BookButtonPublishDateLabel.text = book.publicationYear != nil ? "First published \(book.publicationYear!)" : ""
+        else {
+            updateBookImage(bookCover: nil)
+        }
         
         //TODO: Remove this. As we move the data over to OpenLibrary, we need to ditch Goodread's ratings or at least make them their own individual call.
-        RatingLabel.text = book.averageRating == 0 ? "" :  "\(averageRatingText) \(book.averageRating)/5"
+        RatingLabel.text = ""// book.averageRating == 0 ? "" :  "\(averageRatingText) \(book.averageRating)/5"
+        
+        if viewModel.showBookDetails {
+            showBookDetails()
+        } else {
+            hideBookDetails()
+        }
     }
     
     private func updateBookImage(bookCover: UIImage?) {
@@ -411,9 +374,9 @@ class MainViewController: UIViewController {
                        initialSpringVelocity: 0.0,
                        options: .beginFromCurrentState,
                        animations: {
-                        self.BookBackgroundView.alpha = 1
-                        self.view.layoutIfNeeded()
-                       }, completion: nil)
+            self.BookBackgroundView.alpha = 1
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     private func hideBookDetails() {
@@ -425,9 +388,9 @@ class MainViewController: UIViewController {
                        initialSpringVelocity: 0.0,
                        options: .beginFromCurrentState,
                        animations: {
-                        self.BookBackgroundView.alpha = 0
-                        self.view.layoutIfNeeded()
-                       }, completion: nil)
+            self.BookBackgroundView.alpha = 0
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
 
