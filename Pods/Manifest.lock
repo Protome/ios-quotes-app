@@ -3,18 +3,18 @@ PODS:
   - AlamofireImage (3.6.0):
     - Alamofire (~> 4.9)
   - ChromaColorPicker (2.0.2)
-  - OAuthSwift (1.3.0)
+  - OAuthSwift (2.0.0)
   - Pastel (0.6.0)
-  - SwiftyJSON (4.3.0)
+  - SwiftyJSON (5.0.1)
   - SwiftyXMLParser (5.5.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - AlamofireImage (~> 3.3)
   - ChromaColorPicker
-  - OAuthSwift (~> 1.3.0)
+  - OAuthSwift (~> 2.0.0)
   - Pastel
-  - SwiftyJSON (~> 4.0)
+  - SwiftyJSON (~> 5.0.1)
   - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
 
 SPEC REPOS:
@@ -32,18 +32,18 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftyXMLParser:
-    :commit: 41900bb1882e704a25d4946f2dbad71b4bb02b8f
+    :commit: d7a1d23f04c86c1cd2e8f19247dd15d74e0ea8be
     :git: https://github.com/yahoojapan/SwiftyXMLParser.git
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
   ChromaColorPicker: 307585f2dc23d4d72f24cad320c1e08825cb5c09
-  OAuthSwift: 7ef2f74cb570e1e30e2aeddc58fccc0f3891d057
+  OAuthSwift: 6805456763cf1c7ae0c16765257ed430b7aacae7
   Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
-  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   SwiftyXMLParser: 027d9e6fb54a38d95dccec025bcea9693f699c47
 
-PODFILE CHECKSUM: a0e08aaffdf3a414f7c424724bbde6e04bd3a304
+PODFILE CHECKSUM: 4f7bf46da10d96726adc3f97be69113b67b12044
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.11.3

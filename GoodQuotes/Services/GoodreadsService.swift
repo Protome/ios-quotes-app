@@ -41,18 +41,20 @@ class GoodreadsService {
         let authSecret = AuthStorageService.readTokenSecret()
         
         if authToken.isEmpty || authSecret.isEmpty{
+            
             let _ = oauthswift.authorize(
-                withCallbackURL: URL(string: "Quotey://oauth-callback/goodreads")!,
-                success: { credential, response, parameters in
-                    AuthStorageService.saveAuthToken(credential.oauthToken)
-                    AuthStorageService.saveTokenSecret(credential.oauthTokenSecret)
-                    self.isLoggedIn = .LoggedIn
-                    self.loginToUser(oauthswift, completion: completion)
-            },
-                failure: { error in
-                    self.oauthswift = nil
-                    print( "ERROR ERROR: \(error.localizedDescription)", terminator: "")
-            })
+                withCallbackURL: "Quotey://oauth-callback/goodreads") { result in
+                    switch result {
+                    case .success(let (credential, _, _)):
+                        AuthStorageService.saveAuthToken(credential.oauthToken)
+                        AuthStorageService.saveTokenSecret(credential.oauthTokenSecret)
+                        self.isLoggedIn = .LoggedIn
+                        self.loginToUser(oauthswift, completion: completion)
+                    case .failure(let error):
+                        self.oauthswift = nil
+                        print( "ERROR ERROR: \(error.localizedDescription)", terminator: "")
+                    }
+                }
         }
         else {
             oauthswift.client.credential.oauthToken = authToken
@@ -71,18 +73,19 @@ class GoodreadsService {
     
     func loginToUser(_ oauthswift: OAuth1Swift, completion: (() -> ())?) {
         let _ = oauthswift.client.get(
-            "https://www.goodreads.com/api/auth_user",
-            success: { response in
-                let xml = try! XML.parse(response.string!)
-                guard let id = xml["GoodreadsResponse", "user"].attributes["id"] else {
-                    return
+            "https://www.goodreads.com/api/auth_user") { result in
+                switch result {
+                case .success(let response):
+                    let xml = try! XML.parse(response.string!)
+                    guard let id = xml["GoodreadsResponse", "user"].attributes["id"] else {
+                        return
+                    }
+                    self.id = id
+                    completion?()
+                case .failure(let error):
+                    print(error)
                 }
-                self.id = id
-                
-                completion?()
-        }, failure: { error in
-            print(error)
-        })
+            }
     }
     
     func loadShelves(sender: UIViewController, completion: (([Shelf]) -> ())?) {
@@ -171,16 +174,15 @@ class GoodreadsService {
         let parameters = ["name" : shelfName,
                           "book_id" : bookId]
         
-        let _ = oauthswift.client.post("https://www.goodreads.com/shelf/add_to_shelf.xml",
-                                       parameters: parameters,
-                                       headers: nil,
-                                       body: nil,
-                                       success: { response in
-                                        completion()
-        }, failure: { error in
-            completion()
-            print(error)
-        })
+        let _ = oauthswift.client.post("https://www.goodreads.com/shelf/add_to_shelf.xml", parameters: parameters, headers: nil, body: nil) { result in
+            switch result {
+            case .success(_):
+                completion()
+            case.failure(let error):
+                completion()
+                print(error)
+            }
+        }
     }
     
     func getBooksFromShelf(sender: UIViewController, shelf: Shelf, page: Int, completion: (([Book], Pages) -> ())?)

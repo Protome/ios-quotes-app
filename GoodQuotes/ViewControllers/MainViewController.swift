@@ -199,7 +199,7 @@ class MainViewController: UIViewController {
             pastelView?.resumeAnimation()
         }
         returningFromAuth = true
-        GoodreadsService.sharedInstance.addBookToShelf(sender: self, bookId: book.id) {
+        GoodreadsService.sharedInstance.addBookToShelf(sender: self, bookId: book.goodreadsId) {
             self.pastelView?.pauseAnimation()
             self.returningFromAuth = false
         }
