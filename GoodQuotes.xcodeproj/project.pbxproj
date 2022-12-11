@@ -10,6 +10,7 @@
 		06469ED1BBCB8BAC478B8A97 /* Pods_GoodQuotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */; };
 		8920804B294676EA00BACBAD /* BookSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */; };
 		8920804D2946795200BACBAD /* BookSelectionShelfListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920804C2946795200BACBAD /* BookSelectionShelfListViewModel.swift */; };
+		8920804F29467F2D00BACBAD /* ShelvesSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920804E29467F2D00BACBAD /* ShelvesSelectionViewModel.swift */; };
 		8955D75A293F4505009AACDC /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955D759293F4505009AACDC /* MainViewModel.swift */; };
 		8955D75D293F6967009AACDC /* QuoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955D75C293F6967009AACDC /* QuoteServiceProtocol.swift */; };
 		8955D75F293F6C16009AACDC /* UserDefaultsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955D75E293F6C16009AACDC /* UserDefaultsServiceProtocol.swift */; };
@@ -117,6 +118,7 @@
 		20B20ECBD04CA8B77E56FE71 /* Pods-GoodQuotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.release.xcconfig"; sourceTree = "<group>"; };
 		8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionViewModel.swift; sourceTree = "<group>"; };
 		8920804C2946795200BACBAD /* BookSelectionShelfListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionShelfListViewModel.swift; sourceTree = "<group>"; };
+		8920804E29467F2D00BACBAD /* ShelvesSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelvesSelectionViewModel.swift; sourceTree = "<group>"; };
 		8955D759293F4505009AACDC /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8955D75C293F6967009AACDC /* QuoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteServiceProtocol.swift; sourceTree = "<group>"; };
 		8955D75E293F6C16009AACDC /* UserDefaultsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				8955D759293F4505009AACDC /* MainViewModel.swift */,
 				8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */,
 				8920804C2946795200BACBAD /* BookSelectionShelfListViewModel.swift */,
+				8920804E29467F2D00BACBAD /* ShelvesSelectionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				E5818A052126C6610099BEAF /* Book.swift in Sources */,
 				E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */,
 				E532E91927297E7A0081B386 /* UIViewControllerExtensions.swift in Sources */,
+				8920804F29467F2D00BACBAD /* ShelvesSelectionViewModel.swift in Sources */,
 				E5E525FE2126374500EF1E1B /* Shelf.swift in Sources */,
 				E5CDD28A272B2B9C00A6B2D0 /* NumericExtensions.swift in Sources */,
 				E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */,

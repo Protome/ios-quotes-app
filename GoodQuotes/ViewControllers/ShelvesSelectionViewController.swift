@@ -14,10 +14,9 @@ class ShelvesSelectionViewController: UIViewController {
     @IBOutlet weak var selectHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     weak var delegate: ShelvesSelectionDelegate?
+    let viewModel = ShelvesSelectionViewModel()
     
     var refreshControl : UIRefreshControl?
-    var currentShelf = ""
-    var shelves = [Shelf]()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -31,12 +30,6 @@ class ShelvesSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let defaultsService = UserDefaultsService()
-        let savedShelf = defaultsService.loadDefaultShelf()
-        
-        if let shelf = savedShelf {
-            currentShelf = shelf
-        }
         
         if popoverPresentationController?.presentationStyle == .popover {
             selectHeightConstraint.constant = 0
@@ -53,23 +46,20 @@ class ShelvesSelectionViewController: UIViewController {
         refreshControl?.beginRefreshing()
         Task {
             await loadShelves()
+            
+            tableview.reloadData()
+            refreshControl?.endRefreshing()
+            activityIndicator?.stopAnimating()
+            view.layoutIfNeeded()
         }
-        
-        self.tableview.reloadData()
-        self.refreshControl?.endRefreshing()
-        self.activityIndicator?.stopAnimating()
-        self.view.layoutIfNeeded()
     }
      
     func loadShelves() async -> Void {
-        let goodreadsService = GoodreadsService()
-        if let shelves = await goodreadsService.loadShelves(sender: self) {
-            self.shelves = shelves
-        }
+        await viewModel.loadShelves(sender: self)
     }
     
     @IBAction func selectShelf(_ sender: Any) {
-        delegate?.shelfSelected(shelfName: currentShelf)
+        delegate?.shelfSelected(shelfName: viewModel.currentShelf)
         navigationController?.popViewController(animated: true)
     }
 }
@@ -81,8 +71,8 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
             return UITableViewCell()
         }
         
-        let shelf = shelves[indexPath.row]
-        cell.setupCell(shelf: shelf, selected: shelf.name == currentShelf)
+        let shelf = viewModel.shelves[indexPath.row]
+        cell.setupCell(shelf: shelf, selected: shelf.name == viewModel.currentShelf)
         if popoverPresentationController?.presentationStyle == .popover {
             cell.backgroundColor = UIColor.clear
         }
@@ -94,7 +84,7 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shelves.count
+        return viewModel.shelves.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -102,13 +92,12 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
         {
             return
         }
-        
-        currentShelf = shelves[indexPath.row].name
+        viewModel.selectShelf(selected: indexPath.row)
         deselectCells()
         
         if popoverPresentationController?.presentationStyle == .popover {
             DispatchQueue.main.async {
-                self.delegate?.shelfSelected(shelfName: self.currentShelf)
+                self.delegate?.shelfSelected(shelfName: self.viewModel.currentShelf)
             }
         }
     }
@@ -119,7 +108,7 @@ extension ShelvesSelectionViewController: UITableViewDataSource, UITableViewDele
         {
             if let cell = tableview.cellForRow(at: IndexPath(row: index, section: 0)) as? ShelfCell
             {
-                cell.setSelected(selected: currentShelf == cell.TagLabel.text)
+                cell.setSelected(selected: viewModel.currentShelf == cell.TagLabel.text)
             }
         }
     }
