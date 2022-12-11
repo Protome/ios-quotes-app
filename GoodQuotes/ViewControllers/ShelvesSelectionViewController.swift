@@ -51,14 +51,20 @@ class ShelvesSelectionViewController: UIViewController {
     
     @objc func loadShelves(_ sender: Any) {
         refreshControl?.beginRefreshing()
+        Task {
+            await loadShelves()
+        }
         
+        self.tableview.reloadData()
+        self.refreshControl?.endRefreshing()
+        self.activityIndicator?.stopAnimating()
+        self.view.layoutIfNeeded()
+    }
+     
+    func loadShelves() async -> Void {
         let goodreadsService = GoodreadsService()
-        goodreadsService.loadShelves(sender: self) { shelves in
+        if let shelves = await goodreadsService.loadShelves(sender: self) {
             self.shelves = shelves
-            self.tableview.reloadData()
-            self.refreshControl?.endRefreshing()
-            self.activityIndicator?.stopAnimating()
-            self.view.layoutIfNeeded()
         }
     }
     

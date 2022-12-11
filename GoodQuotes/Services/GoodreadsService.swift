@@ -10,8 +10,10 @@ import Foundation
 import SwiftyXMLParser
 import Alamofire
 import OAuthSwift
+import OAuthSwiftAlamofire
 
-class GoodreadsService: GoodreadsServiceProtocol {
+//Currently using a mix of Swift Concurrency and CompletionHandlers due to OAuthSwift. Need to looking "Continuations"
+class GoodreadsService: GoodreadsServiceProtocol {  
     static var sharedInstance: GoodreadsServiceProtocol = GoodreadsService()
     
     var isLoggedIn = LoginState.LoggedOut {
@@ -20,49 +22,9 @@ class GoodreadsService: GoodreadsServiceProtocol {
         }
     }
     
-    var oauthswift: OAuthSwift?
+    var oauthswift: OAuth1Swift?
     var id: String?
-    var ongoingRequest: DataRequest?
-    
-    func loginToGoodreadsAccount(sender: UIViewController, completion:  (() -> ())?) {
-        let oauthswift = OAuth1Swift(
-            consumerKey:        Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"),
-            consumerSecret:     Bundle.main.localizedString(forKey: "goodreads_secret", value: nil, table: "Secrets"),
-            requestTokenUrl:    "https://www.goodreads.com/oauth/request_token",
-            authorizeUrl:       "https://www.goodreads.com/oauth/authorize?mobile=1",
-            accessTokenUrl:     "https://www.goodreads.com/oauth/access_token"
-        )
-        
-        self.oauthswift=oauthswift
-        oauthswift.allowMissingOAuthVerifier = true
-        oauthswift.authorizeURLHandler = SafariURLHandler(viewController: sender, oauthSwift: self.oauthswift!)
-        
-        let authToken = AuthStorageService.readAuthToken()
-        let authSecret = AuthStorageService.readTokenSecret()
-        
-        if authToken.isEmpty || authSecret.isEmpty{
-            
-            let _ = oauthswift.authorize(
-                withCallbackURL: "Quotey://oauth-callback/goodreads") { result in
-                    switch result {
-                    case .success(let (credential, _, _)):
-                        AuthStorageService.saveAuthToken(credential.oauthToken)
-                        AuthStorageService.saveTokenSecret(credential.oauthTokenSecret)
-                        self.isLoggedIn = .LoggedIn
-                        self.loginToUser(oauthswift, completion: completion)
-                    case .failure(let error):
-                        self.oauthswift = nil
-                        print( "ERROR ERROR: \(error.localizedDescription)", terminator: "")
-                    }
-                }
-        }
-        else {
-            oauthswift.client.credential.oauthToken = authToken
-            oauthswift.client.credential.oauthTokenSecret = authSecret
-            self.isLoggedIn = .LoggedIn
-            loginToUser(oauthswift, completion: completion)
-        }
-    }
+    var ongoingRequest: DataTask<Data>?
     
     func logoutOfGoodreadsAccount() {
         AuthStorageService.removeAuthToken()
@@ -71,12 +33,10 @@ class GoodreadsService: GoodreadsServiceProtocol {
         isLoggedIn = .LoggedOut
     }
     
-    func loadShelves(sender: UIViewController, completion: (([Shelf]) -> ())?) {
+    func loadShelves(sender: NSObject) async -> [Shelf]? {
         guard let _ = self.id else {
-            loginToGoodreadsAccount(sender: sender) {
-                self.loadShelves(sender: sender, completion: completion)
-            }
-            return
+            await loginToGoodreads(sender: sender)
+            return await self.loadShelves(sender: sender)
         }
         
         var components = URLComponents(string: "https://www.goodreads.com/shelf/list.xml")
@@ -85,25 +45,39 @@ class GoodreadsService: GoodreadsServiceProtocol {
             URLQueryItem(name: "user_id", value:"\(id ?? "")")]
         if let url = components?.url
         {
-            Alamofire.request(url).response { response in
-                let xml = XML.parse(response.data!)
+            let response = await AF.request(url, interceptor: oauthswift!.requestInterceptor).serializingData().response
+            switch response.result {
+            case .success(let data):
+                let xml = XML.parse(data)
                 let shelves = xml["GoodreadsResponse", "shelves", "user_shelf"].map {
                     return Shelf(id: $0["id"].text, name: $0["name"].text, book_count: $0["book_count"].int) }
                 
-                completion?(shelves)
+                return shelves
+            case .failure(let error):
+                print(error)
+                return nil
             }
         }
+        return nil
     }
     
-    func searchForBook(title: String, author: String, completion:  @escaping (Book) -> ()) {
+    func searchForBook(title: String, author: String) async -> Book? {
         var components = URLComponents(string: "https://www.goodreads.com/search/index.xml")
         components?.queryItems = [
             URLQueryItem(name: "key", value:"\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
             URLQueryItem(name: "q", value:"\(title)+\(author.withoutSpecialCharacters(separator: ""))")]
+        
         if let url = components?.url
         {
-            Alamofire.request(url).response { response in
-                let xml = XML.parse(response.data!)
+            var task = AF.request(url).serializingData()
+            if let oauthswift = oauthswift {
+                task = AF.request(url, interceptor: oauthswift.requestInterceptor).serializingData()
+            }
+            
+            let response = await task.response
+            switch response.result {
+            case .success(let data):
+                let xml = XML.parse(data)
                 let results = xml["GoodreadsResponse", "search", "results", "work"]
                 
                 let closestResult =  results.first { xml in
@@ -111,13 +85,16 @@ class GoodreadsService: GoodreadsServiceProtocol {
                     return closestBook.title == title && Tools.levenshtein(aStr: author, bStr: closestBook.author.name) < 3
                 }
                 
-                let bestResult = Book(xml: closestResult ?? results[0])
-                completion(bestResult)
+                return Book(xml: closestResult ?? results[0])
+            case .failure(let error):
+                print(error)
+                return nil
             }
         }
+        return nil
     }
     
-    func searchForBooks(title: String, page: Int, completion:  @escaping ([Book], Int) -> ()) {
+    func searchForBooks(title: String, page: Int) async -> ([Book], Int) {
         var components = URLComponents(string: "https://www.goodreads.com/search/index.xml")
         components?.queryItems = [
             URLQueryItem(name: "key", value:"\(Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"))"),
@@ -126,26 +103,27 @@ class GoodreadsService: GoodreadsServiceProtocol {
         if let url = components?.url
         {
             ongoingRequest?.cancel()
-            ongoingRequest = Alamofire.request(url).response { response in
-                guard response.error == nil else {
-                    return
-                }
-                
-                let xml = XML.parse(response.data!)
-                let searchResults = xml["GoodreadsResponse", "search"]
-                let totalResults = searchResults["total-results"].double ?? 0
-                let pages = ceil(totalResults/18)
-                let results = xml["GoodreadsResponse", "search", "results", "work"]
-                let bookResults =  results.map({  return Book(xml: $0) })
-                
-                completion(bookResults, Int(pages))
-            }
+            ongoingRequest = AF.request(url, interceptor: oauthswift!.requestInterceptor).serializingData()
+            
+            let response = await ongoingRequest!.response
+            
+            let xml = XML.parse(response.data!)
+            let searchResults = xml["GoodreadsResponse", "search"]
+            let totalResults = searchResults["total-results"].double ?? 0
+            let pages = ceil(totalResults/18)
+            let results = xml["GoodreadsResponse", "search", "results", "work"]
+            let bookResults =  results.map({  return Book(xml: $0) })
+            
+            return (bookResults, Int(pages))
         }
+        return ([Book](), 0)
     }
     
-    func addBookToShelf(sender: UIViewController, bookId: String, completion: @escaping () -> ()) {
+    func addBookToShelf(sender: NSObject, bookId: String, completion: @escaping () -> ()) {
         guard let oauthswift = oauthswift, self.isLoggedIn == LoginState.LoggedIn else {
-            loginToGoodreadsAccount(sender: sender) { self.addBookToShelf(sender: sender, bookId: bookId, completion: completion) }
+            Task { await loginToGoodreadsAccount(sender: sender)
+                self.addBookToShelf(sender: sender, bookId: bookId, completion: completion)
+            }
             return
         }
         
@@ -165,12 +143,10 @@ class GoodreadsService: GoodreadsServiceProtocol {
         }
     }
     
-    func getBooksFromShelf(sender: UIViewController, shelf: Shelf, page: Int, completion: (([Book], Pages) -> ())?) {
+    func getBooksFromShelf(sender: NSObject, shelf: Shelf, page: Int) async -> (books: [Book], pages: Pages)? {
         guard let _ = self.id else {
-            loginToGoodreadsAccount(sender: sender) {
-                self.getBooksFromShelf(sender: sender, shelf: shelf, page: page, completion: completion)
-            }
-            return
+            await loginToGoodreadsAccount(sender: sender)
+            return await self.getBooksFromShelf(sender: sender, shelf: shelf, page: page)
         }
         let urlString = "https://www.goodreads.com/review/list/\(id!).xml"
         var components = URLComponents(string: urlString)
@@ -183,8 +159,10 @@ class GoodreadsService: GoodreadsServiceProtocol {
         
         if let url = components?.url
         {
-            Alamofire.request(url).response { response in
-                let xml = XML.parse(response.data!)
+            let response = await AF.request(url, interceptor: oauthswift!.requestInterceptor).serializingData().response
+            switch response.result {
+            case .success(let data):
+                let xml = XML.parse(data)
                 let books = xml["GoodreadsResponse", "books", "book"].map {
                     return Book(bookXml: $0)
                 }
@@ -192,26 +170,80 @@ class GoodreadsService: GoodreadsServiceProtocol {
                 let booksXml = xml["GoodreadsResponse", "books"]
                 let pages = Pages(xml: booksXml)
                 
-                completion?(books, pages)
+                return (books, pages)
+            case .failure(let error):
+                print(error)
+                return nil
             }
+        }
+        return nil
+    }
+    
+    func loginToGoodreads(sender: NSObject) async -> Void {
+        await loginToGoodreadsAccount(sender: sender)
+        if let oauthswift = oauthswift {
+            await loginToUser(oauthswift)
         }
     }
     
-    internal func loginToUser(_ oauthswift: OAuth1Swift, completion: (() -> ())?) {
-        let _ = oauthswift.client.get(
-            "https://www.goodreads.com/api/auth_user") { result in
-                switch result {
-                case .success(let response):
-                    let xml = try! XML.parse(response.string!)
-                    guard let id = xml["GoodreadsResponse", "user"].attributes["id"] else {
-                        return
+    internal func loginToGoodreadsAccount(sender: NSObject) async -> Void {
+        return await withCheckedContinuation { continuation in
+            let oauthswift = OAuth1Swift(
+                consumerKey:        Bundle.main.localizedString(forKey: "goodreads_key", value: nil, table: "Secrets"),
+                consumerSecret:     Bundle.main.localizedString(forKey: "goodreads_secret", value: nil, table: "Secrets"),
+                requestTokenUrl:    "https://www.goodreads.com/oauth/request_token",
+                authorizeUrl:       "https://www.goodreads.com/oauth/authorize?mobile=1",
+                accessTokenUrl:     "https://www.goodreads.com/oauth/access_token"
+            )
+            
+            self.oauthswift=oauthswift
+            oauthswift.allowMissingOAuthVerifier = true
+            oauthswift.authorizeURLHandler = SafariURLHandler(viewController: sender as! UIViewController, oauthSwift: self.oauthswift!)
+            
+            let authToken = AuthStorageService.readAuthToken()
+            let authSecret = AuthStorageService.readTokenSecret()
+            
+            if authToken.isEmpty || authSecret.isEmpty{
+                let _ = oauthswift.authorize(
+                    withCallbackURL: "Quotey://oauth-callback/goodreads") { result in
+                        switch result {
+                        case .success(let (credential, _, _)):
+                            AuthStorageService.saveAuthToken(credential.oauthToken)
+                            AuthStorageService.saveTokenSecret(credential.oauthTokenSecret)
+                            self.isLoggedIn = .LoggedIn
+                        case .failure(let error):
+                            self.oauthswift = nil
+                            print( "ERROR ERROR: \(error.localizedDescription)", terminator: "")
+                        }
                     }
-                    self.id = id
-                    completion?()
-                case .failure(let error):
-                    print(error)
-                }
             }
+            else {
+                oauthswift.client.credential.oauthToken = authToken
+                oauthswift.client.credential.oauthTokenSecret = authSecret
+                self.isLoggedIn = .LoggedIn
+            }
+            
+            continuation.resume()
+        }
     }
     
+    internal func loginToUser(_ oauthswift: OAuth1Swift) async -> Void {
+        return await withCheckedContinuation { continuation in
+            let _ = oauthswift.client.get(
+                "https://www.goodreads.com/api/auth_user") { result in
+                    switch result {
+                    case .success(let response):
+                        let xml = try! XML.parse(response.string!)
+                        guard let id = xml["GoodreadsResponse", "user"].attributes["id"] else {
+                            return
+                        }
+                        self.id = id
+                    case .failure(let error):
+                        print(error)
+                    }
+                    
+                    continuation.resume()
+                }
+        }
+    }
 }

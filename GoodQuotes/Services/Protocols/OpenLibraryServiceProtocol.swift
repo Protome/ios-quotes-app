@@ -10,7 +10,7 @@ import Foundation
 
 protocol OpenLibraryServiceProtocol {
     static var sharedInstance: OpenLibraryServiceProtocol { get }
-    func searchForBook(title: String, author: String, completion:  @escaping (Book?) -> ())
-    func wideSearchForBook(query: String, completion:  @escaping (Book?) -> ())
-    func searchForBooks(title: String?, author: String?, query: String?, completion:  @escaping ([Book], Bool) -> ())
+    func searchForBook(title: String, author: String) async -> Book?
+    func wideSearchForBook(query: String) async -> Book?
+    func searchForBooks(title: String?, author: String?, query: String?) async -> ([Book], Bool)
 }

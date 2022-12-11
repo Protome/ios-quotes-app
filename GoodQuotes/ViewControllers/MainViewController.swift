@@ -35,9 +35,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var BookSearchField: BookSearchBox!
     @IBOutlet weak var BookSelectButton: UIBarButtonItem!
     
-    lazy var viewModel = {
-        MainViewModel()
-    }()
+    let viewModel = MainViewModel()
     
     var pastelView:PastelView?
     var restartAnimation = true
@@ -50,7 +48,8 @@ class MainViewController: UIViewController {
         addGradient()
         
         if(!returningFromAuth) {
-            loadRandomQuote()
+            loadRandomQuoteTask()
+//            loadRandomQuote()
         }
         else {
             pastelView?.startAnimation()
@@ -118,7 +117,7 @@ class MainViewController: UIViewController {
         }
         
         if button == RefreshButton {
-            loadRandomQuote()
+            loadRandomQuoteTask()
         }
     }
     
@@ -167,8 +166,8 @@ class MainViewController: UIViewController {
     func setupButtons() {
         ShareButton.buttonAction = shareQuote
         GoodreadsButton.buttonAction = addBookToShelf
-        //        GoodreadsButton.forceTouchAction = .isLoggedIn == .LoggedIn ? selectShelfAction : nil
-        RefreshButton.buttonAction = loadRandomQuote
+//        GoodreadsButton.forceTouchAction = .isLoggedIn == .LoggedIn ? selectShelfAction : nil
+        RefreshButton.buttonAction = loadRandomQuoteTask
     }
     
     func shareQuote() {
@@ -211,7 +210,8 @@ class MainViewController: UIViewController {
         }
         
         if GoodreadsService.sharedInstance.isLoggedIn == .LoggedOut{
-            GoodreadsService.sharedInstance.loginToGoodreadsAccount(sender: self) {
+            Task {
+                await GoodreadsService.sharedInstance.loginToGoodreads(sender: self)
                 self.selectShelfAction(isActive)
             }
             return
@@ -285,8 +285,7 @@ class MainViewController: UIViewController {
         view.layoutIfNeeded()
     }
     
-    private func loadRandomQuote()
-    {
+    private func loadRandomQuoteTask() {
         if(restartAnimation)
         {
             pastelView?.startAnimation()
@@ -296,11 +295,20 @@ class MainViewController: UIViewController {
             pastelView?.resumeAnimation()
         }
         
-        viewModel.loadRandomQuote(){ self.updateDataFromViewmodel() }
+        Task {
+            await loadRandomQuote()
+            let sameBook = updateDataFromViewmodel()
+            await loadBookData(sameBook)
+        }
     }
     
-    private func updateDataFromViewmodel() {
-        guard let quote = self.viewModel.currentQuote else { return }
+    private func loadRandomQuote() async -> Void
+    {
+        await viewModel.loadRandomQuote()
+    }
+    
+    private func updateDataFromViewmodel() -> Bool {
+        guard let quote = self.viewModel.currentQuote else { return true }
         
         let sameBook = quote.author == self.AuthorLabel.text && quote.publication == self.BookLabel.text
         
@@ -316,20 +324,19 @@ class MainViewController: UIViewController {
             self.view.layoutIfNeeded()
         })
         
-        self.loadBookData(sameBook)
+        return sameBook
     }
     
-    private func loadBookData(_ sameBook: Bool) {
-        viewModel.updateBookDetailsFromService() {
-            if sameBook {
-                //Dont bother reloading the book button if the book is the same
-                self.pastelView?.pauseAnimation()
-                return
-            }
-            
-            self.setupCurrentBookButton()
+    private func loadBookData(_ sameBook: Bool) async -> Void {
+        await viewModel.updateBookDetailsFromService()
+        if sameBook {
+            //Dont bother reloading the book button if the book is the same
             self.pastelView?.pauseAnimation()
+            return
         }
+        
+        self.setupCurrentBookButton()
+        self.pastelView?.pauseAnimation()
     }
     
     private func setupCurrentBookButton() {
@@ -338,8 +345,8 @@ class MainViewController: UIViewController {
         self.BookButtonPublishDateLabel.text = viewModel.publishDate
                 
         if let imageUrl = viewModel.currentBook?.imageUrl {
-            Alamofire.request(imageUrl).responseImage { imageReponse in
-                if let image = imageReponse.result.value {
+            AF.request(imageUrl).responseImage { response in
+                if case .success(let image) = response.result {
                     self.updateBookImage(bookCover: image)
                 }
             }
@@ -409,14 +416,14 @@ extension MainViewController: ShelvesSelectionDelegate, UIPopoverPresentationCon
 
 extension MainViewController: BookSearchSelectionDelegate {
     func newSearchTermSelected() {
-        loadRandomQuote()
+        loadRandomQuoteTask()
     }
 }
 
 extension MainViewController: BookSelectionDelegate {
     func bookSelected(book: Book) {
         BookSearchField.text = "\(book.title)"
-        loadRandomQuote()
+        loadRandomQuoteTask()
     }
 }
 

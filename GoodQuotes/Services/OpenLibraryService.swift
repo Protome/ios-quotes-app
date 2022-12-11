@@ -13,9 +13,9 @@ import SwiftyJSON
 class OpenLibraryService: OpenLibraryServiceProtocol {
     static var sharedInstance: OpenLibraryServiceProtocol = OpenLibraryService()
     
-    var ongoingRequest: DataRequest?
+    var ongoingRequest: DataTask<JSON>?
     
-    func searchForBook(title: String, author: String, completion:  @escaping (Book?) -> ()) {
+    func searchForBook(title: String, author: String) async -> Book? {
         var titleQuery = title
         if title.contains("(") {
             let titleSplit = title.components(separatedBy: "(")
@@ -28,69 +28,77 @@ class OpenLibraryService: OpenLibraryServiceProtocol {
         components?.queryItems = [
             URLQueryItem(name: "author", value: authorQuery),
             URLQueryItem(name: "title", value: titleQuery)]
+        
         if let url = components?.url
         {
-            Alamofire.request(url).responseJSON { response in
-                if let jsonResponse = response.result.value {
-                    let json = JSON(jsonResponse)
-                    let numFound = json["numFound"].intValue
+            let response = await AF.request(url).serializingDecodable(JSON.self).response
+            switch response.result {
+            case .success(let json):
+                let numFound = json["numFound"].intValue
+                
+                if numFound == 0 { return nil }
+                
+                if numFound > 0 {
+                    let closestResult =  json["docs"].arrayValue.first { json in
+                        let closestBook = Book(json: json)
+                        return Tools.levenshtein(aStr: title, bStr: closestBook.title) < title.count/3 && Tools.levenshtein(aStr: author, bStr: closestBook.author.name) < 3 && !closestBook.id.isEmpty
+                    }
                     
-                    if numFound == 0 { completion(nil) }
-                    
-                    if numFound > 0 {
-                        let closestResult =  json["docs"].arrayValue.first { json in
-                            let closestBook = Book(json: json)
-                            return Tools.levenshtein(aStr: title, bStr: closestBook.title) < title.count/3 && Tools.levenshtein(aStr: author, bStr: closestBook.author.name) < 3 && !closestBook.id.isEmpty
-                        }
-                        
-                        if let bookJson = closestResult {
-                            let book = Book(json: bookJson)
-                            completion(book)
-                        }
-                        else if let bookJson = json["docs"].arrayValue.first {
-                            let book = Book(json: bookJson)
-                            completion(book)
-                        }
+                    if let bookJson = closestResult {
+                        let book = Book(json: bookJson)
+                        return book
+                    }
+                    else if let bookJson = json["docs"].arrayValue.first {
+                        let book = Book(json: bookJson)
+                        return book
                     }
                 }
+            case .failure(let error):
+                print(error)
+                return nil
             }
         }
+        
+        return nil
     }
     
-    func wideSearchForBook(query: String, completion:  @escaping (Book?) -> ()) {
+    func wideSearchForBook(query: String) async -> Book? {
         var components = URLComponents(string: "https://openlibrary.org/search.json")
         components?.queryItems = [
             URLQueryItem(name: "q", value: query)]
         if let url = components?.url
         {
-            Alamofire.request(url).responseJSON { response in
-                if let jsonResponse = response.result.value {
-                    let json = JSON(jsonResponse)
-                    let numFound = json["numFound"].intValue
+            let response = await AF.request(url).serializingDecodable(JSON.self).response
+            switch response.result {
+            case .success(let json):
+                let numFound = json["numFound"].intValue
+                
+                if numFound == 0 { return nil }
+                
+                if numFound > 0 {
+                    let closestResult =  json["docs"].arrayValue.first { json in
+                        let closestBook = Book(json: json)
+                        return Tools.levenshtein(aStr: query, bStr: closestBook.title) < query.count/3 || Tools.levenshtein(aStr: query, bStr: closestBook.author.name) < query.count/3
+                    }
                     
-                    if numFound == 0 { completion(nil) }
-                    
-                    if numFound > 0 {
-                        let closestResult =  json["docs"].arrayValue.first { json in
-                            let closestBook = Book(json: json)
-                            return Tools.levenshtein(aStr: query, bStr: closestBook.title) < query.count/3 || Tools.levenshtein(aStr: query, bStr: closestBook.author.name) < query.count/3
-                        }
-                        
-                        if let bookJson = closestResult {
-                            let book = Book(json: bookJson)
-                            completion(book)
-                        }
-                        else if let bookJson = json["docs"].arrayValue.first {
-                            let book = Book(json: bookJson)
-                            completion(book)
-                        }
+                    if let bookJson = closestResult {
+                        let book = Book(json: bookJson)
+                        return book
+                    }
+                    else if let bookJson = json["docs"].arrayValue.first {
+                        let book = Book(json: bookJson)
+                        return book
                     }
                 }
+            case .failure(let error):
+                print(error)
+                return nil
             }
         }
+        return nil
     }
     
-    func searchForBooks(title: String?, author: String?, query: String?, completion:  @escaping ([Book], Bool) -> ()) {
+    func searchForBooks(title: String?, author: String?, query: String?) async -> ([Book], Bool) {
         var components = URLComponents(string: "https://openlibrary.org/search.json")
         
         if let title = title {
@@ -108,29 +116,24 @@ class OpenLibraryService: OpenLibraryServiceProtocol {
         if let url = components?.url
         {
             ongoingRequest?.cancel()
+            ongoingRequest = AF.request(url).serializingDecodable(JSON.self)
             
-            ongoingRequest = Alamofire.request(url).response { response in
-                guard response.error == nil, let responseData = response.data else {
-                    completion([Book](), true)
-                    return
+            let response = await ongoingRequest!.response
+            switch response.result
+            {
+            case .success(let json):
+                let numFound = json["numFound"].intValue
+                if numFound == 0 { return ([Book](), false) }
+                if numFound > 0 {
+                    let bookResults = json["docs"].arrayValue.map({ return Book(json: $0)})
+                    return(bookResults, false)
                 }
-                
-                do {
-                    let json = try JSON(data: responseData)
-                    
-                    let numFound = json["numFound"].intValue
-                    
-                    if numFound == 0 { completion([Book](), false) }
-                    
-                    if numFound > 0 {
-                        let bookResults = json["docs"].arrayValue.map({ return Book(json: $0)})
-                        completion(bookResults, false)
-                    }
-                } catch {
-                    completion([Book](), false)
-                    return
-                }
+            case .failure(let error):
+                print(error)
+                return ([Book](), true)
             }
         }
+        
+        return ([Book](), true)
     }
 }

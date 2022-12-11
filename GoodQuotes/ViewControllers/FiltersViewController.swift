@@ -120,7 +120,8 @@ class FiltersViewController: UIViewController {
             present(alert, animated: true, completion: nil)
         }
         else {
-            goodreadsService.loginToGoodreadsAccount(sender: self) {
+            Task {
+                await goodreadsService.loginToGoodreads(sender: self)
                 self.tableView.reloadData()
             }
         }

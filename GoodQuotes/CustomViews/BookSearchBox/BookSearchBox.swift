@@ -93,14 +93,14 @@ import UIKit
         parentVC.view.addSubview(resultsTableView!)
         
         resultsTableView?.addObserver(self, forKeyPath: "contentSize", options: [.new, .old, .prior], context: nil)
-        searchByCurrentText()
+        Task { await searchByCurrentText() }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         dismissView()
     }
     
-    func searchByCurrentText() {
+    func searchByCurrentText() async -> Void {
         let title = segmentHeader.selectedSegmentIndex == 0 ? text : nil
         let author = segmentHeader.selectedSegmentIndex == 1 ? text : nil
         let query = segmentHeader.selectedSegmentIndex == 2 ? text : nil
@@ -109,14 +109,12 @@ import UIKit
         if !refreshControl.isRefreshing {
             refreshControl.beginRefreshing()
         }
-        OpenLibraryService.sharedInstance.searchForBooks(title: title, author: author, query: query) {
-            (books, error) in
-            if error { return }
-            
-            self.searchResults = books
-            self.resultsTableView?.reloadData()
-            self.refreshControl.endRefreshing()
-        }
+        let response = await OpenLibraryService.sharedInstance.searchForBooks(title: title, author: author, query: query)
+        if response.1 { return }
+        
+        self.searchResults = response.0
+        self.resultsTableView?.reloadData()
+        self.refreshControl.endRefreshing()
     }
     
     func setupTableView() {
@@ -193,7 +191,7 @@ import UIKit
     
     func Reload() {
         resultsTableView?.setContentOffset( CGPoint(x: 0, y: 0) , animated: true)
-        searchByCurrentText()
+        Task { await searchByCurrentText() }
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

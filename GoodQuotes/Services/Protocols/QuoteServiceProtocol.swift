@@ -9,13 +9,13 @@
 import Foundation
 
 protocol QuoteServiceProtocol {
-    func getRandomQuote(completion: @escaping (Quote) -> ())
-    func getFullyRandomQuote(completion: @escaping (Quote) -> ())
-    func getAuthorQuote(author: String, completion: @escaping (Quote) -> ())
-    func getTagQuotes(filter: String, completion: @escaping (Quote) -> ())
-    func getBookQuote(book: Book, completion: @escaping (Quote) -> ())
-    func getAllQuotesForStringAtPage(query: String, pageNumber: Int, completion: @escaping ([Quote]) -> ())
-    func getTotalPageNumberForString(query: String,  completion: @escaping (Int) -> ())
-    func getAllQuotesForTagAtPage(tag: String, pageNumber: Int, completion: @escaping ([Quote]) -> ())
+    func getRandomQuote() async -> Quote
+    func getFullyRandomQuote() async -> Quote
+    func getAuthorQuote(author: String) async -> Quote
+    func getTagQuotes(filter: String) async -> Quote
+    func getBookQuote(book: Book) async -> Quote
+    func getAllQuotesForStringAtPage(query: String, pageNumber: Int) async -> [Quote]
+    func getTotalPageNumberForString(query: String) async -> Int
+    func getAllQuotesForTagAtPage(tag: String, pageNumber: Int) async -> [Quote]
     func randomAuthor() -> Character
 }
