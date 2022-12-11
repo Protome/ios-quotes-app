@@ -7,17 +7,25 @@
 //
 
 import Foundation
+#if os(iOS)
+#if !OAUTH_APP_EXTENSIONS
+import UIKit
+#endif
+#endif
 
 let kHTTPHeaderContentType = "Content-Type"
 
 open class OAuthSwiftHTTPRequest: NSObject, OAuthSwiftRequestHandle {
+
+    // Using NSLock for Linux compatible locking 
+    let requestLock = NSLock()
 
     public typealias CompletionHandler = (_ result: Result<OAuthSwiftResponse, OAuthSwiftError>) -> Void
 
     /// HTTP request method
     /// https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods
     public enum Method: String {
-        case GET, POST, PUT, DELETE, PATCH, HEAD //, OPTIONS, TRACE, CONNECT
+        case GET, POST, PUT, DELETE, PATCH, HEAD // , OPTIONS, TRACE, CONNECT
 
         var isBody: Bool {
             return self == .POST || self == .PUT || self == .PATCH
@@ -69,9 +77,10 @@ open class OAuthSwiftHTTPRequest: NSObject, OAuthSwiftRequestHandle {
 
         OAuthSwiftHTTPRequest.executionContext {
             // perform lock here to prevent cancel calls on another thread while creating the request
-            objc_sync_enter(self)
-            defer { objc_sync_exit(self) }
+            self.requestLock.lock()
+            defer { self.requestLock.unlock() }
             if self.cancelRequested {
+                completion?(.failure(.cancelled))
                 return
             }
 
@@ -96,7 +105,9 @@ open class OAuthSwiftHTTPRequest: NSObject, OAuthSwiftRequestHandle {
 
             #if os(iOS)
                 #if !OAUTH_APP_EXTENSIONS
+                #if !targetEnvironment(macCatalyst)
                     UIApplication.shared.isNetworkActivityIndicatorVisible = self.config.sessionFactory.isNetworkActivityIndicatorVisible
+                    #endif
                 #endif
             #endif
         }
@@ -106,7 +117,9 @@ open class OAuthSwiftHTTPRequest: NSObject, OAuthSwiftRequestHandle {
     public static func completionHandler(completionHandler completion: CompletionHandler?, request: URLRequest, data: Data?, resp: URLResponse?, error: Error?) {
         #if os(iOS)
         #if !OAUTH_APP_EXTENSIONS
+        #if !targetEnvironment(macCatalyst)
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        #endif
         #endif
         #endif
 
@@ -138,7 +151,7 @@ open class OAuthSwiftHTTPRequest: NSObject, OAuthSwiftRequestHandle {
                 userInfo["Response-Headers"] = response.allHeaderFields
             }
             let error = NSError(domain: OAuthSwiftError.Domain, code: badRequestCode, userInfo: userInfo)
-            completion?(.failure(.requestError(error:error, request: request)))
+            completion?(.failure(.requestError(error: error, request: request)))
             return
         }
 
@@ -197,8 +210,8 @@ open class OAuthSwiftHTTPRequest: NSObject, OAuthSwiftRequestHandle {
 
     open func cancel() {
         // perform lock here to prevent cancel calls on another thread while creating the request
-        objc_sync_enter(self)
-        defer { objc_sync_exit(self) }
+        requestLock.lock()
+        defer { requestLock.unlock() }
         // either cancel the request if it's already running or set the flag to prohibit creation of the request
         if let task = task {
             task.cancel()
@@ -213,6 +226,7 @@ open class OAuthSwiftHTTPRequest: NSObject, OAuthSwiftRequestHandle {
 
     open class func makeRequest(config: Config) throws -> URLRequest {
         var request = config.urlRequest
+        OAuthSwift.log?.trace("URLRequest is created: \(request)")
         return try setupRequestForOAuth(request: &request,
                                         parameters: config.parameters,
                                         dataEncoding: config.dataEncoding,
@@ -234,6 +248,7 @@ open class OAuthSwiftHTTPRequest: NSObject, OAuthSwiftRequestHandle {
         for (key, value) in headers {
             request.setValue(value, forHTTPHeaderField: key)
         }
+        OAuthSwift.log?.trace("URLRequest is created: \(request)")
 
         return try setupRequestForOAuth(
             request: &request,
@@ -398,10 +413,10 @@ extension OAuthSwiftHTTPRequest {
             var requestHeaders = OAuthSwift.Headers()
             switch paramsLocation {
             case .authorizationHeader:
-                //Add oauth parameters in the Authorization header
+                // Add oauth parameters in the Authorization header
                 requestHeaders += credential.makeHeaders(signatureUrl, method: method, parameters: signatureParameters, body: body)
             case .requestURIQuery:
-                //Add oauth parameters as request parameters
+                // Add oauth parameters as request parameters
                 self.parameters += credential.authorizationParametersWithSignature(method: method, url: signatureUrl, parameters: signatureParameters, body: body)
             }
 

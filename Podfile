@@ -3,10 +3,11 @@ use_frameworks!
 
 target 'GoodQuotes' do
     pod 'SwiftyJSON', '~> 5.0.1'
-    pod 'Alamofire', '~> 4.7'
-    pod 'AlamofireImage', '~> 3.3'
+    pod 'Alamofire'
+    pod 'AlamofireImage', '~> 4.1'
     pod "Pastel"
     pod "SwiftyXMLParser", :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
-    pod 'OAuthSwift', '~> 2.0.0'
+    pod 'OAuthSwift'
+    pod 'OAuthSwiftAlamofire', :git => 'https://github.com/OAuthSwift/OAuthSwiftAlamofire.git', :tag => '1.0.0beta'
     pod 'ChromaColorPicker'
 end

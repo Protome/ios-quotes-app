@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		06469ED1BBCB8BAC478B8A97 /* Pods_GoodQuotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */; };
+		8920804B294676EA00BACBAD /* BookSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */; };
+		8920804D2946795200BACBAD /* BookSelectionShelfListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920804C2946795200BACBAD /* BookSelectionShelfListViewModel.swift */; };
 		8955D75A293F4505009AACDC /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955D759293F4505009AACDC /* MainViewModel.swift */; };
 		8955D75D293F6967009AACDC /* QuoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955D75C293F6967009AACDC /* QuoteServiceProtocol.swift */; };
 		8955D75F293F6C16009AACDC /* UserDefaultsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955D75E293F6C16009AACDC /* UserDefaultsServiceProtocol.swift */; };
@@ -113,6 +115,8 @@
 
 /* Begin PBXFileReference section */
 		20B20ECBD04CA8B77E56FE71 /* Pods-GoodQuotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.release.xcconfig"; sourceTree = "<group>"; };
+		8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionViewModel.swift; sourceTree = "<group>"; };
+		8920804C2946795200BACBAD /* BookSelectionShelfListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionShelfListViewModel.swift; sourceTree = "<group>"; };
 		8955D759293F4505009AACDC /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8955D75C293F6967009AACDC /* QuoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteServiceProtocol.swift; sourceTree = "<group>"; };
 		8955D75E293F6C16009AACDC /* UserDefaultsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -232,6 +236,8 @@
 			isa = PBXGroup;
 			children = (
 				8955D759293F4505009AACDC /* MainViewModel.swift */,
+				8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */,
+				8920804C2946795200BACBAD /* BookSelectionShelfListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -538,7 +544,7 @@
 				};
 			};
 			buildConfigurationList = E5C5CC99211C8E5D0010ACB0 /* Build configuration list for PBXProject "GoodQuotes" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -662,6 +668,7 @@
 				E57D4A5622A5D6DF007B93F1 /* GradientCell.swift in Sources */,
 				E5B195CB212B42A800A9901C /* LoginState.swift in Sources */,
 				E52121682124DE620027BCFC /* GoodreadsService.swift in Sources */,
+				8920804B294676EA00BACBAD /* BookSelectionViewModel.swift in Sources */,
 				E5CCE0C022A6FB8F00886885 /* GradientView.swift in Sources */,
 				8955D767293F7136009AACDC /* OpenLibraryServiceProtocol.swift in Sources */,
 				E5E0592C222BFCA900DF74EC /* FeedbackViewController.swift in Sources */,
@@ -675,6 +682,7 @@
 				E56C495424A8C341009A9569 /* Pages.swift in Sources */,
 				E554D415211F33BC00F32AF9 /* FiltersViewController.swift in Sources */,
 				8955D75F293F6C16009AACDC /* UserDefaultsServiceProtocol.swift in Sources */,
+				8920804D2946795200BACBAD /* BookSelectionShelfListViewModel.swift in Sources */,
 				E554D412211F17C200F32AF9 /* Tags.swift in Sources */,
 				E5B195C9212B14E700A9901C /* UIViewExtensions.swift in Sources */,
 				E554D40A211C9E3100F32AF9 /* QuoteService.swift in Sources */,
@@ -920,7 +928,7 @@
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
 				INFOPLIST_FILE = GoodQuotes/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -943,7 +951,7 @@
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
 				INFOPLIST_FILE = GoodQuotes/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
