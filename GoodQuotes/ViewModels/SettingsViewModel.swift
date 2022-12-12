@@ -9,7 +9,7 @@
 import Foundation
 
 class SettingsViewModel {
-    private var defaultsService: UserDefaultsServiceProtocol
+    private var userDefaultsService: UserDefaultsServiceProtocol
     private var goodreadsService: GoodreadsServiceProtocol
     
     var loggedIntoGoodreads: Bool { goodreadsService.isLoggedIn == .LoggedIn }
@@ -33,15 +33,15 @@ class SettingsViewModel {
     var currentShelf = ""
     var changesMade = false
     
-    init(defaultsService: UserDefaultsServiceProtocol = UserDefaultsService(), goodreadsService: GoodreadsServiceProtocol = GoodreadsService.sharedInstance, currentShelf: String = "", changesMade: Bool = false) {
-        self.defaultsService = defaultsService
+    init(userDefaultsService: UserDefaultsServiceProtocol = UserDefaultsService(), goodreadsService: GoodreadsServiceProtocol = GoodreadsService.sharedInstance, currentShelf: String = "", changesMade: Bool = false) {
+        self.userDefaultsService = userDefaultsService
         self.goodreadsService = goodreadsService
         self.currentShelf = currentShelf
         self.changesMade = changesMade
     }
     
     func setCurrentShelf() {
-        currentShelf = defaultsService.loadDefaultShelf() ?? defaultShelf
+        currentShelf = userDefaultsService.loadDefaultShelf() ?? defaultShelf
     }
     
     func titleForRow(indexPath: IndexPath) -> String
@@ -56,7 +56,7 @@ class SettingsViewModel {
         case .GoodreadsShelf:
             return  currentShelf.isEmpty ? item.rawValue : "\(item.rawValue): \(currentShelf)"
         case .SignInOutGoodreads:
-            return GoodreadsService.sharedInstance.isLoggedIn == .LoggedIn ? goodreadsTitles.signOut : goodreadsTitles.signIn
+            return goodreadsService.isLoggedIn == .LoggedIn ? goodreadsTitles.signOut : goodreadsTitles.signIn
         default:
             return item.rawValue
         }
@@ -72,6 +72,6 @@ class SettingsViewModel {
     
     func shelfSelected(shelfName: String) {
         currentShelf = shelfName
-        defaultsService.storeDefaultShelf(shelfName: currentShelf)
+        userDefaultsService.storeDefaultShelf(shelfName: currentShelf)
     }
 }

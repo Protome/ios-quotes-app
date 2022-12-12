@@ -32,6 +32,17 @@ struct Book: Codable {
         case publicationYear
     }
     
+    init() {
+        goodreadsId = ""
+        id = ""
+        isbn = ""
+        title = ""
+        author = Author()
+        imageUrl = ""
+        averageRating = 0
+        publicationYear = nil
+    }
+    
     init(xml: XML.Accessor) {
         goodreadsId = xml["best_book", "id"].text ?? ""
         id = ""

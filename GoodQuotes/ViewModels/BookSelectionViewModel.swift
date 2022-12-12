@@ -27,12 +27,11 @@ class BookSelectionViewModel {
     }
     
     func loadBooksFromShelf(sender: NSObject) async -> Void {
+        guard let shelf = shelf, !isLoading else {
+            return
+        }
         
-            guard let shelf = shelf, !isLoading else {
-                return
-            }
-        
-            isLoading = true
+        isLoading = true
         
         await goodreadsService.loginToGoodreads(sender: sender)
         let result = await goodreadsService.getBooksFromShelf(sender: sender, shelf: shelf, page: pages?.nextPage ?? 1)
