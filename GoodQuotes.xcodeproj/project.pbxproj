@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		06469ED1BBCB8BAC478B8A97 /* Pods_GoodQuotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */; };
+		190CD983FE8049EB6A196E3D /* GoodQuotesTests-GoodQuotesMocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA171B6F4FEB70029FD70A2 /* GoodQuotesTests-GoodQuotesMocks.generated.swift */; };
 		8920804B294676EA00BACBAD /* BookSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */; };
 		8920804D2946795200BACBAD /* BookSelectionShelfListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920804C2946795200BACBAD /* BookSelectionShelfListViewModel.swift */; };
 		8920804F29467F2D00BACBAD /* ShelvesSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920804E29467F2D00BACBAD /* ShelvesSelectionViewModel.swift */; };
@@ -23,6 +24,8 @@
 		8963EDB529474E7500CBB2DE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8963EDB429474E7500CBB2DE /* Settings.swift */; };
 		8963EDB72947524200CBB2DE /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8963EDB62947524200CBB2DE /* FeedbackViewModel.swift */; };
 		8963EDB9294752D800CBB2DE /* ColourSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8963EDB8294752D800CBB2DE /* ColourSelectionViewModel.swift */; };
+		897F40DA29475AD90084853F /* ShelvesSelectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897F40D929475AD90084853F /* ShelvesSelectionViewModelTests.swift */; };
+		AB17DC44D7412CAEEC8759E1 /* Pods_GoodQuotesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A908F75C5B4A62D6027558 /* Pods_GoodQuotesTests.framework */; };
 		E503C70824AFB5F900AB54DE /* ShelfItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503C70724AFB5F900AB54DE /* ShelfItemView.swift */; };
 		E50ADDC1222B48E20037ACBD /* TextOnlyResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E50ADDC0222B48E20037ACBD /* TextOnlyResultCell.xib */; };
 		E50ADDC3222B49B20037ACBD /* TextOnlyResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */; };
@@ -119,7 +122,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		176ECBE8BDC1451E1DEE26DF /* Pods-GoodQuotesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests.release.xcconfig"; sourceTree = "<group>"; };
+		191BC1A7C02D528D9C6ADE68 /* Pods-GoodQuotesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		20B20ECBD04CA8B77E56FE71 /* Pods-GoodQuotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.release.xcconfig"; sourceTree = "<group>"; };
+		7292C5D7F6132FA6344D2050 /* Pods-GoodQuotes-GoodQuotesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes-GoodQuotesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes-GoodQuotesTests/Pods-GoodQuotes-GoodQuotesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionViewModel.swift; sourceTree = "<group>"; };
 		8920804C2946795200BACBAD /* BookSelectionShelfListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionShelfListViewModel.swift; sourceTree = "<group>"; };
 		8920804E29467F2D00BACBAD /* ShelvesSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelvesSelectionViewModel.swift; sourceTree = "<group>"; };
@@ -135,6 +141,9 @@
 		8963EDB429474E7500CBB2DE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8963EDB62947524200CBB2DE /* FeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
 		8963EDB8294752D800CBB2DE /* ColourSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourSelectionViewModel.swift; sourceTree = "<group>"; };
+		897F40D929475AD90084853F /* ShelvesSelectionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelvesSelectionViewModelTests.swift; sourceTree = "<group>"; };
+		8A9F523B41E16627E4C363B6 /* Pods-GoodQuotes-GoodQuotesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes-GoodQuotesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes-GoodQuotesTests/Pods-GoodQuotes-GoodQuotesTests.release.xcconfig"; sourceTree = "<group>"; };
+		9BA171B6F4FEB70029FD70A2 /* GoodQuotesTests-GoodQuotesMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "GoodQuotesTests-GoodQuotesMocks.generated.swift"; path = "MockingbirdMocks/GoodQuotesTests-GoodQuotesMocks.generated.swift"; sourceTree = "<group>"; };
 		AC0E28153F7504ED9B61A988 /* Pods-GoodQuotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.debug.xcconfig"; sourceTree = "<group>"; };
 		CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodQuotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E503C70724AFB5F900AB54DE /* ShelfItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfItemView.swift; sourceTree = "<group>"; };
@@ -203,6 +212,7 @@
 		E5E525F92126260600EF1E1B /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		E5E525FB21262D2200EF1E1B /* AuthStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStorageService.swift; sourceTree = "<group>"; };
 		E5E525FD2126374500EF1E1B /* Shelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelf.swift; sourceTree = "<group>"; };
+		F7A908F75C5B4A62D6027558 /* Pods_GoodQuotesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodQuotesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,17 +237,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB17DC44D7412CAEEC8759E1 /* Pods_GoodQuotesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58C0012DC562B218B5C78316 /* Generated Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				9BA171B6F4FEB70029FD70A2 /* GoodQuotesTests-GoodQuotesMocks.generated.swift */,
+			);
+			name = "Generated Mocks";
+			sourceTree = "<group>";
+		};
 		6571DB88678E0E534CAB06DC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				AC0E28153F7504ED9B61A988 /* Pods-GoodQuotes.debug.xcconfig */,
 				20B20ECBD04CA8B77E56FE71 /* Pods-GoodQuotes.release.xcconfig */,
+				191BC1A7C02D528D9C6ADE68 /* Pods-GoodQuotesTests.debug.xcconfig */,
+				176ECBE8BDC1451E1DEE26DF /* Pods-GoodQuotesTests.release.xcconfig */,
+				7292C5D7F6132FA6344D2050 /* Pods-GoodQuotes-GoodQuotesTests.debug.xcconfig */,
+				8A9F523B41E16627E4C363B6 /* Pods-GoodQuotes-GoodQuotesTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -272,6 +295,7 @@
 		8963EDBA2947535200CBB2DE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				897F40D929475AD90084853F /* ShelvesSelectionViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -289,6 +313,7 @@
 				CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */,
 				E550688A253B33CF00943B2E /* WidgetKit.framework */,
 				E550688C253B33CF00943B2E /* SwiftUI.framework */,
+				F7A908F75C5B4A62D6027558 /* Pods_GoodQuotesTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -444,6 +469,7 @@
 				E5C5CC9F211C8E5D0010ACB0 /* Products */,
 				6571DB88678E0E534CAB06DC /* Pods */,
 				8B8A0105C4260B67664C8A74 /* Frameworks */,
+				58C0012DC562B218B5C78316 /* Generated Mocks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -536,9 +562,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5C5CCBE211C8E600010ACB0 /* Build configuration list for PBXNativeTarget "GoodQuotesTests" */;
 			buildPhases = (
+				B669C2E95B82C837E00984A3 /* [CP] Check Pods Manifest.lock */,
+				D5CEC885F977AF77ACEAC41D /* Generate Mockingbird Mocks */,
 				E5C5CCAE211C8E600010ACB0 /* Sources */,
 				E5C5CCAF211C8E600010ACB0 /* Frameworks */,
 				E5C5CCB0211C8E600010ACB0 /* Resources */,
+				472184B34A4FAB92E84EC5B5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -636,13 +665,38 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		472184B34A4FAB92E84EC5B5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5022527FA90FA83EB4664A40 /* [CP] Check Pods Manifest.lock */ = {
@@ -662,6 +716,44 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B669C2E95B82C837E00984A3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GoodQuotesTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5CEC885F977AF77ACEAC41D /* Generate Mockingbird Mocks */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Mockingbird Mocks";
+			outputPaths = (
+				"$(SRCROOT)/MockingbirdMocks/GoodQuotesTests-GoodQuotesMocks.generated.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -eu\n\n# Prevent Xcode 13 from running this script while indexing.\n[[ \"${ACTION}\" == \"indexbuild\" ]] && exit 0\n\n\"${SRCROOT}/Pods/MockingbirdFramework/mockingbird\" generate --targets \"GoodQuotes\" --outputs \"${SRCROOT}/MockingbirdMocks/GoodQuotesTests-GoodQuotesMocks.generated.swift\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -748,7 +840,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				897F40DA29475AD90084853F /* ShelvesSelectionViewModelTests.swift in Sources */,
 				E5C5CCB7211C8E600010ACB0 /* GoodQuotesTests.swift in Sources */,
+				190CD983FE8049EB6A196E3D /* GoodQuotesTests-GoodQuotesMocks.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1002,12 +1096,14 @@
 		};
 		E5C5CCBF211C8E600010ACB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 191BC1A7C02D528D9C6ADE68 /* Pods-GoodQuotesTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
 				INFOPLIST_FILE = GoodQuotesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1023,12 +1119,14 @@
 		};
 		E5C5CCC0211C8E600010ACB0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 176ECBE8BDC1451E1DEE26DF /* Pods-GoodQuotesTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
 				INFOPLIST_FILE = GoodQuotesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

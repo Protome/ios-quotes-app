@@ -11,3 +11,8 @@ target 'GoodQuotes' do
     pod 'OAuthSwiftAlamofire', :git => 'https://github.com/OAuthSwift/OAuthSwiftAlamofire.git', :tag => '1.0.0beta'
     pod 'ChromaColorPicker'
 end
+
+target 'GoodQuotesTests' do
+  pod 'MockingbirdFramework', '~> 0.20'
+  
+end

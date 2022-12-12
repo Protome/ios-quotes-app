@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol GoodreadsServiceProtocol {
     static var sharedInstance: GoodreadsServiceProtocol { get }
