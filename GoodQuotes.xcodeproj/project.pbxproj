@@ -269,6 +269,20 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		8963EDBA2947535200CBB2DE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		8963EDBB2947535D00CBB2DE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		8B8A0105C4260B67664C8A74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +483,8 @@
 		E5C5CCB5211C8E600010ACB0 /* GoodQuotesTests */ = {
 			isa = PBXGroup;
 			children = (
+				8963EDBB2947535D00CBB2DE /* Services */,
+				8963EDBA2947535200CBB2DE /* ViewModels */,
 				E5C5CCB6211C8E600010ACB0 /* GoodQuotesTests.swift */,
 				E5C5CCB8211C8E600010ACB0 /* Info.plist */,
 			);
