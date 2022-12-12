@@ -70,3 +70,12 @@ fastlane/test_output
 GoodQuotes/Secrets\.strings
 
 GoodQuotes/\.DS_Store
+
+# Generated
+*.generated.swift
+
+# Binaries
+Pods/MockingbirdFramework/mockingbird/bin/
+
+# Caches
+**/*.xcodeproj/MockingbirdCache/
