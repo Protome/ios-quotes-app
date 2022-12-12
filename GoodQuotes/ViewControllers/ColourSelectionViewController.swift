@@ -12,6 +12,7 @@ import Pastel
 import ChromaColorPicker
 
 class ColourSelectionViewController : UIViewController, UIGestureRecognizerDelegate {
+    let viewModel = ColourSelectionViewModel()
     
     @IBOutlet weak var PreviewGradientView: UIView!
     @IBOutlet weak var CollectionView: UICollectionView!

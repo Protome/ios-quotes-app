@@ -11,7 +11,8 @@ import UIKit
 import MessageUI
 
 class FeedbackViewController: UIViewController {
-    
+    let viewModel = FeedbackViewModel()
+        
     @IBOutlet weak var MessageButton: UIButton!
     
     override func viewDidLoad() {
@@ -26,13 +27,14 @@ class FeedbackViewController: UIViewController {
         sendEmail()
     }
 }
+
 extension FeedbackViewController: MFMailComposeViewControllerDelegate {
     func sendEmail() {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["kieran@quotey.app"])
-            mail.setSubject("Feedback")
+            mail.setToRecipients([viewModel.emailAddress])
+            mail.setSubject(viewModel.emailSubject)
             
             present(mail, animated: true)
         } else {

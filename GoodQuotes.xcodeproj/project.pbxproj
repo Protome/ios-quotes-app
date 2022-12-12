@@ -19,6 +19,10 @@
 		8955D765293F708E009AACDC /* ReviewRequestServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955D764293F708E009AACDC /* ReviewRequestServiceProtocol.swift */; };
 		8955D767293F7136009AACDC /* OpenLibraryServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955D766293F7136009AACDC /* OpenLibraryServiceProtocol.swift */; };
 		89586C7D293EDF3E00260027 /* Secrets.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89586C7C293EDF3E00260027 /* Secrets.strings */; };
+		8963EDB329474E4100CBB2DE /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8963EDB229474E4100CBB2DE /* SettingsViewModel.swift */; };
+		8963EDB529474E7500CBB2DE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8963EDB429474E7500CBB2DE /* Settings.swift */; };
+		8963EDB72947524200CBB2DE /* FeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8963EDB62947524200CBB2DE /* FeedbackViewModel.swift */; };
+		8963EDB9294752D800CBB2DE /* ColourSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8963EDB8294752D800CBB2DE /* ColourSelectionViewModel.swift */; };
 		E503C70824AFB5F900AB54DE /* ShelfItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503C70724AFB5F900AB54DE /* ShelfItemView.swift */; };
 		E50ADDC1222B48E20037ACBD /* TextOnlyResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E50ADDC0222B48E20037ACBD /* TextOnlyResultCell.xib */; };
 		E50ADDC3222B49B20037ACBD /* TextOnlyResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */; };
@@ -127,6 +131,10 @@
 		8955D764293F708E009AACDC /* ReviewRequestServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRequestServiceProtocol.swift; sourceTree = "<group>"; };
 		8955D766293F7136009AACDC /* OpenLibraryServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLibraryServiceProtocol.swift; sourceTree = "<group>"; };
 		89586C7C293EDF3E00260027 /* Secrets.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Secrets.strings; path = ../../../../Downloads/Secrets.strings; sourceTree = "<group>"; };
+		8963EDB229474E4100CBB2DE /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		8963EDB429474E7500CBB2DE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		8963EDB62947524200CBB2DE /* FeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewModel.swift; sourceTree = "<group>"; };
+		8963EDB8294752D800CBB2DE /* ColourSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourSelectionViewModel.swift; sourceTree = "<group>"; };
 		AC0E28153F7504ED9B61A988 /* Pods-GoodQuotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.debug.xcconfig"; sourceTree = "<group>"; };
 		CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodQuotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E503C70724AFB5F900AB54DE /* ShelfItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfItemView.swift; sourceTree = "<group>"; };
@@ -241,6 +249,9 @@
 				8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */,
 				8920804C2946795200BACBAD /* BookSelectionShelfListViewModel.swift */,
 				8920804E29467F2D00BACBAD /* ShelvesSelectionViewModel.swift */,
+				8963EDB229474E4100CBB2DE /* SettingsViewModel.swift */,
+				8963EDB62947524200CBB2DE /* FeedbackViewModel.swift */,
+				8963EDB8294752D800CBB2DE /* ColourSelectionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -371,7 +382,6 @@
 				E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */,
 				E5E0592B222BFCA900DF74EC /* FeedbackViewController.swift */,
 				E57D4A5322A5D4E4007B93F1 /* ColourSelectionViewController.swift */,
-				E57D4A5522A5D6DF007B93F1 /* GradientCell.swift */,
 				E5CFE69124A7E54700D5A554 /* BookSelectionShelfListViewController.swift */,
 				E5CFE69324A7EED500D5A554 /* BookSelectionViewController.swift */,
 			);
@@ -381,6 +391,7 @@
 		E554D41A211F376900F32AF9 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				E57D4A5522A5D6DF007B93F1 /* GradientCell.swift */,
 				E554D41B211F377B00F32AF9 /* ShelfCell.swift */,
 				E554D422211F4BE400F32AF9 /* FilterCell.swift */,
 			);
@@ -393,6 +404,7 @@
 				E554D411211F17C200F32AF9 /* Tags.swift */,
 				E554D41D211F426C00F32AF9 /* FilterType.swift */,
 				E5B195CA212B42A800A9901C /* LoginState.swift */,
+				8963EDB429474E7500CBB2DE /* Settings.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -654,6 +666,7 @@
 				8955D75A293F4505009AACDC /* MainViewModel.swift in Sources */,
 				E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */,
 				E5996546222A0E8800BAA33C /* UIImageViewExtensions.swift in Sources */,
+				8963EDB329474E4100CBB2DE /* SettingsViewModel.swift in Sources */,
 				E5CFE69224A7E54700D5A554 /* BookSelectionShelfListViewController.swift in Sources */,
 				E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */,
 				E57D4A5822A5D99E007B93F1 /* GradientsService.swift in Sources */,
@@ -667,6 +680,7 @@
 				E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */,
 				E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */,
 				E554D423211F4BE400F32AF9 /* FilterCell.swift in Sources */,
+				8963EDB9294752D800CBB2DE /* ColourSelectionViewModel.swift in Sources */,
 				E503C70824AFB5F900AB54DE /* ShelfItemView.swift in Sources */,
 				E554D421211F44EB00F32AF9 /* UserDefaultsService.swift in Sources */,
 				E57D4A5622A5D6DF007B93F1 /* GradientCell.swift in Sources */,
@@ -704,8 +718,10 @@
 				E5CDD28E272B2C0600A6B2D0 /* UserDefaultExtensions.swift in Sources */,
 				E5818A072126C9DC0099BEAF /* Author.swift in Sources */,
 				E5B195CD212CA49100A9901C /* StringExtensions.swift in Sources */,
+				8963EDB529474E7500CBB2DE /* Settings.swift in Sources */,
 				E59965402229DAEA00BAA33C /* BookSearchBox.swift in Sources */,
 				E554D41C211F377B00F32AF9 /* ShelfCell.swift in Sources */,
+				8963EDB72947524200CBB2DE /* FeedbackViewModel.swift in Sources */,
 				8955D765293F708E009AACDC /* ReviewRequestServiceProtocol.swift in Sources */,
 				E5E525F42126065400EF1E1B /* KeychainError.swift in Sources */,
 				E554D41E211F426C00F32AF9 /* FilterType.swift in Sources */,
