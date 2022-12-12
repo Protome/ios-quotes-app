@@ -49,7 +49,6 @@ class MainViewController: UIViewController {
         
         if(!returningFromAuth) {
             loadRandomQuoteTask()
-//            loadRandomQuote()
         }
         else {
             pastelView?.startAnimation()
@@ -92,7 +91,7 @@ class MainViewController: UIViewController {
             destination.bookDelegate = self
         }
         
-        if let nav = segue.destination as? UINavigationController, let destination = nav.topViewController as? FiltersViewController {
+        if let nav = segue.destination as? UINavigationController, let destination = nav.topViewController as? SettingsViewController {
             destination.delegate = self
         }
     }

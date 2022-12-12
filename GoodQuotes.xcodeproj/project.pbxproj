@@ -40,7 +40,7 @@
 		E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40C211CC03A00F32AF9 /* Quote.swift */; };
 		E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */; };
 		E554D412211F17C200F32AF9 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D411211F17C200F32AF9 /* Tags.swift */; };
-		E554D415211F33BC00F32AF9 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D414211F33BC00F32AF9 /* FiltersViewController.swift */; };
+		E554D415211F33BC00F32AF9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D414211F33BC00F32AF9 /* SettingsViewController.swift */; };
 		E554D41C211F377B00F32AF9 /* ShelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D41B211F377B00F32AF9 /* ShelfCell.swift */; };
 		E554D41E211F426C00F32AF9 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D41D211F426C00F32AF9 /* FilterType.swift */; };
 		E554D421211F44EB00F32AF9 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D420211F44EB00F32AF9 /* UserDefaultsService.swift */; };
@@ -150,7 +150,7 @@
 		E554D40C211CC03A00F32AF9 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastelHelper.swift; sourceTree = "<group>"; };
 		E554D411211F17C200F32AF9 /* Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
-		E554D414211F33BC00F32AF9 /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		E554D414211F33BC00F32AF9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E554D41B211F377B00F32AF9 /* ShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfCell.swift; sourceTree = "<group>"; };
 		E554D41D211F426C00F32AF9 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		E554D420211F44EB00F32AF9 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
@@ -367,7 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				E5C5CCA3211C8E5D0010ACB0 /* MainViewController.swift */,
-				E554D414211F33BC00F32AF9 /* FiltersViewController.swift */,
+				E554D414211F33BC00F32AF9 /* SettingsViewController.swift */,
 				E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */,
 				E5E0592B222BFCA900DF74EC /* FeedbackViewController.swift */,
 				E57D4A5322A5D4E4007B93F1 /* ColourSelectionViewController.swift */,
@@ -684,7 +684,7 @@
 				E5996544222A0B3000BAA33C /* BookSearchResultCell.swift in Sources */,
 				E5506896253B33D000943B2E /* Quotey_Widget.intentdefinition in Sources */,
 				E56C495424A8C341009A9569 /* Pages.swift in Sources */,
-				E554D415211F33BC00F32AF9 /* FiltersViewController.swift in Sources */,
+				E554D415211F33BC00F32AF9 /* SettingsViewController.swift in Sources */,
 				8955D75F293F6C16009AACDC /* UserDefaultsServiceProtocol.swift in Sources */,
 				8920804D2946795200BACBAD /* BookSelectionShelfListViewModel.swift in Sources */,
 				E554D412211F17C200F32AF9 /* Tags.swift in Sources */,

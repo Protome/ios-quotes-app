@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="is8-aw-xg4">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -670,7 +669,7 @@ App Logo was created by Amy Gallagher, go check her stuff out at http://www.amil
         <!--Settings-->
         <scene sceneID="uGJ-pv-7sT">
             <objects>
-                <viewController title="Settings" id="AvR-Ec-ZOr" customClass="FiltersViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Settings" id="AvR-Ec-ZOr" customClass="SettingsViewController" customModule="GoodQuotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iLi-wj-WrV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -965,7 +964,7 @@ Just want to say hi? </string>
                                 <rect key="frame" x="0.0" y="479" width="375" height="333"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJw-EL-qn4">
-                                        <rect key="frame" x="24" y="37.333333333333371" width="327" height="258.66666666666669"/>
+                                        <rect key="frame" x="24" y="37.333333333333371" width="327" height="258.33333333333331"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XKN-OM-KXE">
                                             <rect key="frame" x="0.0" y="0.0" width="327" height="259"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1098,7 +1097,7 @@ Just want to say hi? </string>
     </scenes>
     <designables>
         <designable name="UkD-63-O14">
-            <size key="intrinsicContentSize" width="220.66666666666666" height="34"/>
+            <size key="intrinsicContentSize" width="195.66666666666666" height="34"/>
         </designable>
     </designables>
     <resources>

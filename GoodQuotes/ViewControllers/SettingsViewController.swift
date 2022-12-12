@@ -23,7 +23,7 @@ protocol SettingsDelegate: AnyObject
     func ScreenClosing()
 }
 
-class FiltersViewController: UIViewController {
+class SettingsViewController: UIViewController {
     weak var delegate: SettingsDelegate?
     
     let goodreadsTitles = (signIn: "Sign In to Goodreads", signOut: "Sign Out of Goodreads")
@@ -128,7 +128,7 @@ class FiltersViewController: UIViewController {
     }
 }
 
-extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
+extension SettingsViewController: UITableViewDataSource, UITableViewDelegate
 {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilterCell") as? FilterCell else {
@@ -183,7 +183,7 @@ extension FiltersViewController: UITableViewDataSource, UITableViewDelegate
     }
 }
 
-extension FiltersViewController: ShelvesSelectionDelegate
+extension SettingsViewController: ShelvesSelectionDelegate
 {
     func shelfSelected(shelfName: String) {
         currentShelf = shelfName
