@@ -67,7 +67,7 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
-#GoodQuotes/Secrets\.strings
+GoodQuotes/Secrets\.strings
 
 GoodQuotes/\.DS_Store
 **/.DS_Store
