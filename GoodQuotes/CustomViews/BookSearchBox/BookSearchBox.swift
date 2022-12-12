@@ -101,6 +101,8 @@ import UIKit
     }
     
     func searchByCurrentText() async -> Void {
+        if text == "" { return }
+        
         let title = segmentHeader.selectedSegmentIndex == 0 ? text : nil
         let author = segmentHeader.selectedSegmentIndex == 1 ? text : nil
         let query = segmentHeader.selectedSegmentIndex == 2 ? text : nil
@@ -112,9 +114,9 @@ import UIKit
         let response = await OpenLibraryService.sharedInstance.searchForBooks(title: title, author: author, query: query)
         if response.1 { return }
         
-        self.searchResults = response.0
-        self.resultsTableView?.reloadData()
-        self.refreshControl.endRefreshing()
+        searchResults = response.0
+        resultsTableView?.reloadData()
+        refreshControl.endRefreshing()
     }
     
     func setupTableView() {
@@ -178,6 +180,7 @@ import UIKit
     
     func ClearSearch() {
         defaultsService.wipeFilters()
+        searchResults = [Book]()
         text = ""
     }
     
