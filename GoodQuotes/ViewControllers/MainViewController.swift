@@ -35,7 +35,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var BookSearchField: BookSearchBox!
     @IBOutlet weak var BookSelectButton: UIBarButtonItem!
     
-    let viewModel = MainViewModel()
+    var viewModel: MainViewModel?
     
     var pastelView:PastelView?
     var restartAnimation = true
@@ -140,7 +140,7 @@ class MainViewController: UIViewController {
         var bookUrl = ""
         let goodreadsBookUrl = "https://www.goodreads.com/book/show/"
         let openLibraryUrl = "https://openlibrary.org/works/"
-        let currentBook = viewModel.currentBook
+        let currentBook = viewModel?.currentBook
         if let book = currentBook, book.goodreadsId != "" {
             bookUrl = goodreadsBookUrl + book.goodreadsId
         }
@@ -184,7 +184,7 @@ class MainViewController: UIViewController {
     }
     
     func addBookToShelf() {
-        guard let book = viewModel.currentBook else {
+        guard let book = viewModel?.currentBook else {
             return
         }
         
@@ -303,17 +303,17 @@ class MainViewController: UIViewController {
     
     private func loadRandomQuote() async -> Void
     {
-        await viewModel.loadRandomQuote()
+        await viewModel?.loadRandomQuote()
     }
     
     private func updateDataFromViewmodel() -> Bool {
-        guard let quote = self.viewModel.currentQuote else { return true }
+        guard let quote = viewModel?.currentQuote else { return true }
         
-        let sameBook = quote.author == self.AuthorLabel.text && quote.publication == self.BookLabel.text
+        let sameBook = quote.author == AuthorLabel.text && quote.publication == BookLabel.text
         
-        self.QuoteLabel.text = "\(quote.quote)"
-        self.AuthorLabel.text = quote.author
-        self.BookLabel.text = quote.publication
+        QuoteLabel.text = "\(quote.quote)"
+        AuthorLabel.text = quote.author
+        BookLabel.text = quote.publication
         
         UIView.animate(withDuration: 1.2,
                        delay: 0, usingSpringWithDamping: 0.6,
@@ -327,7 +327,7 @@ class MainViewController: UIViewController {
     }
     
     private func loadBookData(_ sameBook: Bool) async -> Void {
-        await viewModel.updateBookDetailsFromService()
+        await viewModel?.updateBookDetailsFromService()
         if sameBook {
             //Dont bother reloading the book button if the book is the same
             self.pastelView?.pauseAnimation()
@@ -339,11 +339,11 @@ class MainViewController: UIViewController {
     }
     
     private func setupCurrentBookButton() {
-        self.BookButtonTitleLabel.text = viewModel.bookTitle
-        self.BookButtonAuthorLabel.text = viewModel.authorName
-        self.BookButtonPublishDateLabel.text = viewModel.publishDate
+        BookButtonTitleLabel.text = viewModel?.bookTitle
+        BookButtonAuthorLabel.text = viewModel?.authorName
+        BookButtonPublishDateLabel.text = viewModel?.publishDate
                 
-        if let imageUrl = viewModel.currentBook?.imageUrl {
+        if let imageUrl = viewModel?.currentBook?.imageUrl {
             AF.request(imageUrl).responseImage { response in
                 if case .success(let image) = response.result {
                     self.updateBookImage(bookCover: image)
@@ -357,7 +357,7 @@ class MainViewController: UIViewController {
         //TODO: Remove this. As we move the data over to OpenLibrary, we need to ditch Goodread's ratings or at least make them their own individual call.
         RatingLabel.text = ""// book.averageRating == 0 ? "" :  "\(averageRatingText) \(book.averageRating)/5"
         
-        if viewModel.showBookDetails {
+        if viewModel?.showBookDetails ?? false {
             showBookDetails()
         } else {
             hideBookDetails()

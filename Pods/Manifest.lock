@@ -11,6 +11,9 @@ PODS:
   - Pastel (0.6.0)
   - SwiftyJSON (5.0.1)
   - SwiftyXMLParser (5.5.0)
+  - Swinject (2.7.1)
+  - SwinjectStoryboard (2.2.2):
+    - Swinject (~> 2.7.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -22,6 +25,8 @@ DEPENDENCIES:
   - Pastel
   - SwiftyJSON (~> 5.0.1)
   - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
+  - Swinject
+  - SwinjectStoryboard
 
 SPEC REPOS:
   trunk:
@@ -32,6 +37,8 @@ SPEC REPOS:
     - OAuthSwift
     - Pastel
     - SwiftyJSON
+    - Swinject
+    - SwinjectStoryboard
 
 EXTERNAL SOURCES:
   OAuthSwiftAlamofire:
@@ -58,7 +65,9 @@ SPEC CHECKSUMS:
   Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   SwiftyXMLParser: 027d9e6fb54a38d95dccec025bcea9693f699c47
+  Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
+  SwinjectStoryboard: 240ce371396da09a4c43c72ee5c148108500e184
 
-PODFILE CHECKSUM: 36309de68fe584ff4c15db700315339347276ffc
+PODFILE CHECKSUM: b06da144316775b2da16d8342e4f5e1813417ff2
 
 COCOAPODS: 1.11.3

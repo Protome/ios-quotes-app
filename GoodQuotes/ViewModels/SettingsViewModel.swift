@@ -33,7 +33,7 @@ class SettingsViewModel {
     var currentShelf = ""
     var changesMade = false
     
-    init(userDefaultsService: UserDefaultsServiceProtocol = UserDefaultsService(), goodreadsService: GoodreadsServiceProtocol = GoodreadsService.sharedInstance, currentShelf: String = "", changesMade: Bool = false) {
+    init(userDefaultsService: UserDefaultsServiceProtocol, goodreadsService: GoodreadsServiceProtocol, currentShelf: String = "", changesMade: Bool = false) {
         self.userDefaultsService = userDefaultsService
         self.goodreadsService = goodreadsService
         self.currentShelf = currentShelf

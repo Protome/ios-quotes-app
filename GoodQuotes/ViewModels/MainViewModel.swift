@@ -26,7 +26,7 @@ class MainViewModel {
     }
     var showBookDetails: Bool { currentBook != nil }
     
-    init(quoteService: QuoteServiceProtocol = QuoteService(), reviewService: ReviewRequestServiceProtocol = ReviewRequestService(), goodreadsService: GoodreadsServiceProtocol = GoodreadsService(), openLibraryservice: OpenLibraryServiceProtocol = OpenLibraryService(), currentBook: Book? = nil, currentQuote: Quote? = nil) {
+    init(quoteService: QuoteServiceProtocol, reviewService: ReviewRequestServiceProtocol, goodreadsService: GoodreadsServiceProtocol, openLibraryservice: OpenLibraryServiceProtocol, currentBook: Book? = nil, currentQuote: Quote? = nil) {
         self.quoteService = quoteService
         self.reviewService = reviewService
         self.goodreadsService = goodreadsService

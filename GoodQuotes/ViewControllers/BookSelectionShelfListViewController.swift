@@ -11,12 +11,12 @@ import UIKit
 
 class BookSelectionShelfListViewController: UITableViewController {
     weak var bookDelegate: BookSelectionDelegate?
-    let viewModel = BookSelectionShelfListViewModel()
+    var viewModel: BookSelectionShelfListViewModel?
     
     @IBOutlet weak var ErrorHeaderConstraint: NSLayoutConstraint!
     @IBOutlet weak var HeaderView: UIView!
     @IBOutlet weak var bottomActivityIndicator: UIActivityIndicatorView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ErrorHeaderConstraint.constant = 0
@@ -27,7 +27,7 @@ class BookSelectionShelfListViewController: UITableViewController {
         tableView.refreshControl = refreshControl
         extendedLayoutIncludesOpaqueBars = true
         
-        title = viewModel.title
+        title = viewModel?.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,13 +44,13 @@ class BookSelectionShelfListViewController: UITableViewController {
     @objc func loadShelves(_ sender: Any) async -> Void {
         refreshControl?.beginRefreshing()
         
-        await viewModel.loadBooksFromShelf(sender: self)
+        await viewModel?.loadBooksFromShelf(sender: self)
         
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
         self.bottomActivityIndicator?.stopAnimating()
         
-        if viewModel.shelves.count == 0 {
+        if viewModel?.shelves.count == 0 {
             self.ErrorHeaderConstraint.constant = 87
             self.HeaderView.frame.size.height = 87
         }
@@ -58,7 +58,7 @@ class BookSelectionShelfListViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? BookSelectionViewController {
-            destination.viewModel.shelf = viewModel.selectedShelf!
+            destination.viewModel!.shelf = viewModel!.selectedShelf!
             destination.delegate = bookDelegate
         }
     }
@@ -71,10 +71,11 @@ extension BookSelectionShelfListViewController
             return UITableViewCell()
         }
         
-        let shelf = viewModel.shelves[indexPath.row]
-        cell.setupCell(shelf: shelf, selected: false)
-        if popoverPresentationController?.presentationStyle == .popover {
-            cell.backgroundColor = UIColor.clear
+        if let shelf = viewModel?.shelves[indexPath.row] {
+            cell.setupCell(shelf: shelf, selected: false)
+            if popoverPresentationController?.presentationStyle == .popover {
+                cell.backgroundColor = UIColor.clear
+            }
         }
         return cell
     }
@@ -84,7 +85,7 @@ extension BookSelectionShelfListViewController
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.shelves.count
+        return viewModel?.shelves.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -92,7 +93,7 @@ extension BookSelectionShelfListViewController
         {
             return
         }
-        viewModel.selectShelf(selected: indexPath.row)
+        viewModel?.selectShelf(selected: indexPath.row)
         performSegue(withIdentifier: "ShowBooksFromShelf", sender: self)
     }
 }

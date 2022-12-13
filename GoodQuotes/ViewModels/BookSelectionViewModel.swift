@@ -21,7 +21,7 @@ class BookSelectionViewModel {
     
     var title: String { shelf?.name ?? "Shelves" }
     
-    init(goodreadsService: GoodreadsServiceProtocol = GoodreadsService(), defaultsService: UserDefaultsServiceProtocol = UserDefaultsService()) {
+    init(goodreadsService: GoodreadsServiceProtocol, defaultsService: UserDefaultsServiceProtocol) {
         self.goodreadsService = goodreadsService
         self.defaultsService = defaultsService
     }

@@ -11,7 +11,7 @@ import UIKit
 
 class BookSelectionViewController: UITableViewController {
     weak var delegate: BookSelectionDelegate?
-    let viewModel = BookSelectionViewModel()
+    var viewModel: BookSelectionViewModel?
     
     @IBOutlet weak var ErrorHeaderConstraint: NSLayoutConstraint!
     @IBOutlet weak var HeaderView: UIView!
@@ -22,7 +22,7 @@ class BookSelectionViewController: UITableViewController {
         ErrorHeaderConstraint.constant = 0
         HeaderView.frame.size.height = 0
         
-        title = viewModel.title
+        title = viewModel?.title
         refreshControl?.addTarget(self, action: #selector(self.loadBooks(_:)), for: .valueChanged)
     }
     
@@ -40,11 +40,11 @@ class BookSelectionViewController: UITableViewController {
     
     func loadBooksFromShelf() async -> Void {
         refreshControl?.beginRefreshing()
-        await viewModel.loadBooksFromShelf(sender: self)
+        await viewModel!.loadBooksFromShelf(sender: self)
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
-        self.ErrorHeaderConstraint.constant = viewModel.books.count == 0 ? 87 : 0
-        self.HeaderView.frame.size.height = viewModel.books.count == 0 ? 87 : 0
+        self.ErrorHeaderConstraint.constant = viewModel!.books.count == 0 ? 87 : 0
+        self.HeaderView.frame.size.height = viewModel!.books.count == 0 ? 87 : 0
         self.bottomSpinner.stopAnimating()
     }
 }
@@ -56,12 +56,12 @@ extension BookSelectionViewController
             return UITableViewCell()
         }
         
-        cell.SetupCell(book: viewModel.books[indexPath.row])
+        cell.SetupCell(book: viewModel!.books[indexPath.row])
         if popoverPresentationController?.presentationStyle == .popover {
             cell.backgroundColor = UIColor.clear
         }
         
-        if indexPath.row == (viewModel.pages?.lastItem ?? 1) - viewModel.buffer, viewModel.pages?.hasMoreToLoad ?? true {
+        if indexPath.row == (viewModel?.pages?.lastItem ?? 1) - viewModel!.buffer, viewModel?.pages?.hasMoreToLoad ?? true {
             bottomSpinner.startAnimating()
             loadBooks(self)
         }
@@ -74,7 +74,7 @@ extension BookSelectionViewController
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.books.count
+        return viewModel?.books.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -83,9 +83,9 @@ extension BookSelectionViewController
             return
         }
         
-        viewModel.selectBook(selected: indexPath.row)
+        viewModel?.selectBook(selected: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
-        delegate?.bookSelected(book: viewModel.selectedBook!)
+        delegate?.bookSelected(book: viewModel!.selectedBook!)
         dismiss(animated: true, completion: nil)
     }
 }

@@ -12,6 +12,7 @@
 		8920804B294676EA00BACBAD /* BookSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */; };
 		8920804D2946795200BACBAD /* BookSelectionShelfListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920804C2946795200BACBAD /* BookSelectionShelfListViewModel.swift */; };
 		8920804F29467F2D00BACBAD /* ShelvesSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8920804E29467F2D00BACBAD /* ShelvesSelectionViewModel.swift */; };
+		89262A7029487E2D002DE9C3 /* SwinjectStoryboardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89262A6F29487E2D002DE9C3 /* SwinjectStoryboardExtensions.swift */; };
 		8955D75A293F4505009AACDC /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955D759293F4505009AACDC /* MainViewModel.swift */; };
 		8955D75D293F6967009AACDC /* QuoteServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955D75C293F6967009AACDC /* QuoteServiceProtocol.swift */; };
 		8955D75F293F6C16009AACDC /* UserDefaultsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955D75E293F6C16009AACDC /* UserDefaultsServiceProtocol.swift */; };
@@ -133,6 +134,7 @@
 		8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionViewModel.swift; sourceTree = "<group>"; };
 		8920804C2946795200BACBAD /* BookSelectionShelfListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionShelfListViewModel.swift; sourceTree = "<group>"; };
 		8920804E29467F2D00BACBAD /* ShelvesSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelvesSelectionViewModel.swift; sourceTree = "<group>"; };
+		89262A6F29487E2D002DE9C3 /* SwinjectStoryboardExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwinjectStoryboardExtensions.swift; sourceTree = "<group>"; };
 		8955D759293F4505009AACDC /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8955D75C293F6967009AACDC /* QuoteServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteServiceProtocol.swift; sourceTree = "<group>"; };
 		8955D75E293F6C16009AACDC /* UserDefaultsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsServiceProtocol.swift; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				E5C5CCAA211C8E600010ACB0 /* LaunchScreen.storyboard */,
 				E5C5CCAD211C8E600010ACB0 /* Info.plist */,
 				E57D4A5122A5D07C007B93F1 /* Colours.xcassets */,
+				89262A6F29487E2D002DE9C3 /* SwinjectStoryboardExtensions.swift */,
 			);
 			path = GoodQuotes;
 			sourceTree = "<group>";
@@ -677,13 +680,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -698,13 +697,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -788,6 +783,7 @@
 				E5996546222A0E8800BAA33C /* UIImageViewExtensions.swift in Sources */,
 				8963EDB329474E4100CBB2DE /* SettingsViewModel.swift in Sources */,
 				E5CFE69224A7E54700D5A554 /* BookSelectionShelfListViewController.swift in Sources */,
+				89262A7029487E2D002DE9C3 /* SwinjectStoryboardExtensions.swift in Sources */,
 				E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */,
 				E57D4A5822A5D99E007B93F1 /* GradientsService.swift in Sources */,
 				E58394C6213AF0E800AC78DE /* ReviewRequestService.swift in Sources */,

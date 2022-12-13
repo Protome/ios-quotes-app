@@ -15,7 +15,7 @@ class ShelvesSelectionViewModel {
     var currentShelf = ""
     var shelves = [Shelf]()
     
-    init(userDefaultsService: UserDefaultsServiceProtocol = UserDefaultsService(), goodreadsService: GoodreadsServiceProtocol = GoodreadsService(), currentShelf: String = "", shelves: [Shelf] = [Shelf]()) {
+    init(userDefaultsService: UserDefaultsServiceProtocol, goodreadsService: GoodreadsServiceProtocol, currentShelf: String = "", shelves: [Shelf] = [Shelf]()) {
         self.userDefaultsService = userDefaultsService
         self.goodreadsService = goodreadsService
         self.currentShelf = currentShelf

@@ -16,7 +16,7 @@ protocol SettingsDelegate: AnyObject
 
 class SettingsViewController: UIViewController {
     weak var delegate: SettingsDelegate?
-    let viewModel = SettingsViewModel()
+    var viewModel: SettingsViewModel?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -38,7 +38,7 @@ class SettingsViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        viewModel.setCurrentShelf()
+        viewModel?.setCurrentShelf()
         tableView.reloadData()
     }
     
@@ -55,10 +55,12 @@ class SettingsViewController: UIViewController {
     }
     
     func signInOutGoodreads() {
+        guard let viewModel = viewModel else { return }
+        
         if(viewModel.loggedIntoGoodreads) {
             let alert = UIAlertController(title: "Are you sure?", message: "You'll need to log in again to add books to your shelves (the rest of the app will still work)", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-                self.viewModel.logoutOfGoodreads()
+                self.viewModel?.logoutOfGoodreads()
                 self.tableView.reloadData()
             }))
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
@@ -80,26 +82,26 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate
             return UITableViewCell()
         }
         
-        cell.TitleLabel.text = viewModel.titleForRow(indexPath: indexPath)
+        cell.TitleLabel.text = viewModel?.titleForRow(indexPath: indexPath)
         
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.sections.keys.count
+        return viewModel?.sections.keys.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.sections[section]!.count
+        return viewModel?.sections[section]!.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let section = viewModel.sections[indexPath.section]?[indexPath.row] else
+        guard let section = viewModel?.sections[indexPath.section]?[indexPath.row] else
         {
             return
         }
         
-        if let segue = viewModel.segueForSection[section] {
+        if let segue = viewModel?.segueForSection[section] {
             performSegue(withIdentifier: segue, sender: self)
             return
         }
@@ -114,7 +116,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.sectionTitles[section]
+        return viewModel?.sectionTitles[section]
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -131,7 +133,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate
 extension SettingsViewController: ShelvesSelectionDelegate
 {
     func shelfSelected(shelfName: String) {
-        viewModel.shelfSelected(shelfName: shelfName)
+        viewModel?.shelfSelected(shelfName: shelfName)
         tableView.reloadData()
     }
 }

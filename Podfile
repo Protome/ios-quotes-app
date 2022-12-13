@@ -10,6 +10,8 @@ target 'GoodQuotes' do
     pod 'OAuthSwift'
     pod 'OAuthSwiftAlamofire', :git => 'https://github.com/OAuthSwift/OAuthSwiftAlamofire.git', :tag => '1.0.0beta'
     pod 'ChromaColorPicker'
+    pod 'Swinject'
+    pod 'SwinjectStoryboard'
 end
 
 target 'GoodQuotesTests' do

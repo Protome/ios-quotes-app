@@ -29,7 +29,9 @@ class BookSelectionViewModelTests: XCTestCase {
         let goodreadsMock = mock(GoodreadsServiceProtocol.self)
         given(await goodreadsMock.getBooksFromShelf(sender: any(), shelf: any(), page: any())).willReturn(nil)
         
-        let viewModel = BookSelectionViewModel(goodreadsService: goodreadsMock)
+        let userDefaultsMock = mock(UserDefaultsServiceProtocol.self)
+        
+        let viewModel = BookSelectionViewModel(goodreadsService: goodreadsMock, defaultsService: userDefaultsMock)
         viewModel.shelf = dummyShelf
         await viewModel.loadBooksFromShelf(sender: dummyNSObject)
         
@@ -46,8 +48,10 @@ class BookSelectionViewModelTests: XCTestCase {
 
         let goodreadsMock = mock(GoodreadsServiceProtocol.self)
         given(await goodreadsMock.getBooksFromShelf(sender: any(), shelf: any(), page: any())).willReturn((dummyBookArray, dummyPages))
+        
+        let userDefaultsMock = mock(UserDefaultsServiceProtocol.self)
 
-        let viewModel = BookSelectionViewModel(goodreadsService: goodreadsMock)
+        let viewModel = BookSelectionViewModel(goodreadsService: goodreadsMock, defaultsService: userDefaultsMock)
         viewModel.shelf = dummyShelf
         await viewModel.loadBooksFromShelf(sender: dummyNSObject)
 
