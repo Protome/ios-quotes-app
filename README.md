@@ -16,7 +16,8 @@ Currently allows users to
 - Search specifically for quotes from books in the user's goodreads shelves
 
 Roadmap
-- Adding RXSwift and refactoring to add proper Dependency Injection (probably with Swinject)
+- Adding RXSwift
+- ~~Add proper Dependency Injection (probably with Swinject)~~ Now added!
 - Some bugfixing
 - The ability to add a new shelf to your Goodreads
 - Make those ugly settings screens look nicer
