@@ -30,7 +30,6 @@
 		89B6E6112947936A00328AD3 /* BookSelectionShelfListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B6E6102947936A00328AD3 /* BookSelectionShelfListViewModelTests.swift */; };
 		89B6E6132947956C00328AD3 /* BookSelectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B6E6122947956C00328AD3 /* BookSelectionViewModelTests.swift */; };
 		89B6E61529479F2100328AD3 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B6E61429479F2100328AD3 /* MainViewModelTests.swift */; };
-		AB17DC44D7412CAEEC8759E1 /* Pods_GoodQuotesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A908F75C5B4A62D6027558 /* Pods_GoodQuotesTests.framework */; };
 		E503C70824AFB5F900AB54DE /* ShelfItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503C70724AFB5F900AB54DE /* ShelfItemView.swift */; };
 		E50ADDC1222B48E20037ACBD /* TextOnlyResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E50ADDC0222B48E20037ACBD /* TextOnlyResultCell.xib */; };
 		E50ADDC3222B49B20037ACBD /* TextOnlyResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */; };
@@ -47,7 +46,7 @@
 		E5506893253B33D000943B2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5506892253B33D000943B2E /* Assets.xcassets */; };
 		E5506895253B33D000943B2E /* Quotey_Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E5506891253B33CF00943B2E /* Quotey_Widget.intentdefinition */; };
 		E5506896253B33D000943B2E /* Quotey_Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E5506891253B33CF00943B2E /* Quotey_Widget.intentdefinition */; };
-		E5506899253B33D000943B2E /* Quotey-WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E5506889253B33CF00943B2E /* Quotey-WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E5506899253B33D000943B2E /* Quotey-WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E5506889253B33CF00943B2E /* Quotey-WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E554D40A211C9E3100F32AF9 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D409211C9E3100F32AF9 /* QuoteService.swift */; };
 		E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40C211CC03A00F32AF9 /* Quote.swift */; };
 		E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */; };
@@ -60,6 +59,7 @@
 		E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */; };
 		E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5588E112129A71500A84BEC /* CGPointExtensions.swift */; };
 		E56C495424A8C341009A9569 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C495324A8C341009A9569 /* Pages.swift */; };
+		E56D805029F345A800F8DADC /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = E56D804F29F345A800F8DADC /* Swinject */; };
 		E57D4A5222A5D07C007B93F1 /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57D4A5122A5D07C007B93F1 /* Colours.xcassets */; };
 		E57D4A5422A5D4E4007B93F1 /* ColourSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D4A5322A5D4E4007B93F1 /* ColourSelectionViewController.swift */; };
 		E57D4A5622A5D6DF007B93F1 /* GradientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57D4A5522A5D6DF007B93F1 /* GradientCell.swift */; };
@@ -71,6 +71,13 @@
 		E5996542222A0A2200BAA33C /* BookSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5996541222A0A2200BAA33C /* BookSearchResultCell.xib */; };
 		E5996544222A0B3000BAA33C /* BookSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5996543222A0B3000BAA33C /* BookSearchResultCell.swift */; };
 		E5996546222A0E8800BAA33C /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5996545222A0E8800BAA33C /* UIImageViewExtensions.swift */; };
+		E5A48C3329F33ADE00E2DD65 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E5A48C3229F33ADE00E2DD65 /* Alamofire */; };
+		E5A48C3629F33B1800E2DD65 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = E5A48C3529F33B1800E2DD65 /* SwiftyJSON */; };
+		E5A48C3929F33B5200E2DD65 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = E5A48C3829F33B5200E2DD65 /* AlamofireImage */; };
+		E5A48C3C29F33BF500E2DD65 /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = E5A48C3B29F33BF500E2DD65 /* SwiftyXMLParser */; };
+		E5A48C3F29F33C3000E2DD65 /* OAuthSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E5A48C3E29F33C3000E2DD65 /* OAuthSwift */; };
+		E5A48C4829F33F2100E2DD65 /* SwinjectStoryboard in Frameworks */ = {isa = PBXBuildFile; productRef = E5A48C4729F33F2100E2DD65 /* SwinjectStoryboard */; };
+		E5A48C4B29F340DD00E2DD65 /* Mockingbird in Frameworks */ = {isa = PBXBuildFile; productRef = E5A48C4A29F340DD00E2DD65 /* Mockingbird */; };
 		E5B02E5B212719DD00436517 /* ShelvesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B02E5A212719DD00436517 /* ShelvesSelectionViewController.swift */; };
 		E5B195C9212B14E700A9901C /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B195C8212B14E700A9901C /* UIViewExtensions.swift */; };
 		E5B195CB212B42A800A9901C /* LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B195CA212B42A800A9901C /* LoginState.swift */; };
@@ -113,22 +120,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E550689A253B33D000943B2E /* Embed App Extensions */ = {
+		E550689A253B33D000943B2E /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E5506899253B33D000943B2E /* Quotey-WidgetExtension.appex in Embed App Extensions */,
+				E5506899253B33D000943B2E /* Quotey-WidgetExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		176ECBE8BDC1451E1DEE26DF /* Pods-GoodQuotesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests.release.xcconfig"; sourceTree = "<group>"; };
-		191BC1A7C02D528D9C6ADE68 /* Pods-GoodQuotesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		20B20ECBD04CA8B77E56FE71 /* Pods-GoodQuotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes.release.xcconfig"; sourceTree = "<group>"; };
 		7292C5D7F6132FA6344D2050 /* Pods-GoodQuotes-GoodQuotesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodQuotes-GoodQuotesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodQuotes-GoodQuotesTests/Pods-GoodQuotes-GoodQuotesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8920804A294676EA00BACBAD /* BookSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSelectionViewModel.swift; sourceTree = "<group>"; };
@@ -222,7 +227,6 @@
 		E5E525F92126260600EF1E1B /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		E5E525FB21262D2200EF1E1B /* AuthStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStorageService.swift; sourceTree = "<group>"; };
 		E5E525FD2126374500EF1E1B /* Shelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelf.swift; sourceTree = "<group>"; };
-		F7A908F75C5B4A62D6027558 /* Pods_GoodQuotesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodQuotesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,7 +243,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5A48C3629F33B1800E2DD65 /* SwiftyJSON in Frameworks */,
+				E5A48C4829F33F2100E2DD65 /* SwinjectStoryboard in Frameworks */,
+				E5A48C3929F33B5200E2DD65 /* AlamofireImage in Frameworks */,
+				E5A48C3F29F33C3000E2DD65 /* OAuthSwift in Frameworks */,
 				06469ED1BBCB8BAC478B8A97 /* Pods_GoodQuotes.framework in Frameworks */,
+				E5A48C3329F33ADE00E2DD65 /* Alamofire in Frameworks */,
+				E5A48C3C29F33BF500E2DD65 /* SwiftyXMLParser in Frameworks */,
+				E56D805029F345A800F8DADC /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +258,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB17DC44D7412CAEEC8759E1 /* Pods_GoodQuotesTests.framework in Frameworks */,
+				E5A48C4B29F340DD00E2DD65 /* Mockingbird in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,8 +278,6 @@
 			children = (
 				AC0E28153F7504ED9B61A988 /* Pods-GoodQuotes.debug.xcconfig */,
 				20B20ECBD04CA8B77E56FE71 /* Pods-GoodQuotes.release.xcconfig */,
-				191BC1A7C02D528D9C6ADE68 /* Pods-GoodQuotesTests.debug.xcconfig */,
-				176ECBE8BDC1451E1DEE26DF /* Pods-GoodQuotesTests.release.xcconfig */,
 				7292C5D7F6132FA6344D2050 /* Pods-GoodQuotes-GoodQuotesTests.debug.xcconfig */,
 				8A9F523B41E16627E4C363B6 /* Pods-GoodQuotes-GoodQuotesTests.release.xcconfig */,
 			);
@@ -327,7 +336,6 @@
 				CA5ADDE2568197FC17FDDDD9 /* Pods_GoodQuotes.framework */,
 				E550688A253B33CF00943B2E /* WidgetKit.framework */,
 				E550688C253B33CF00943B2E /* SwiftUI.framework */,
-				F7A908F75C5B4A62D6027558 /* Pods_GoodQuotesTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -561,7 +569,7 @@
 				E5C5CC9B211C8E5D0010ACB0 /* Frameworks */,
 				E5C5CC9C211C8E5D0010ACB0 /* Resources */,
 				45DCFBC0AC8F613AAB8F6D9A /* [CP] Embed Pods Frameworks */,
-				E550689A253B33D000943B2E /* Embed App Extensions */,
+				E550689A253B33D000943B2E /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -569,6 +577,15 @@
 				E5506898253B33D000943B2E /* PBXTargetDependency */,
 			);
 			name = GoodQuotes;
+			packageProductDependencies = (
+				E5A48C3229F33ADE00E2DD65 /* Alamofire */,
+				E5A48C3529F33B1800E2DD65 /* SwiftyJSON */,
+				E5A48C3829F33B5200E2DD65 /* AlamofireImage */,
+				E5A48C3B29F33BF500E2DD65 /* SwiftyXMLParser */,
+				E5A48C3E29F33C3000E2DD65 /* OAuthSwift */,
+				E5A48C4729F33F2100E2DD65 /* SwinjectStoryboard */,
+				E56D804F29F345A800F8DADC /* Swinject */,
+			);
 			productName = GoodQuotes;
 			productReference = E5C5CC9E211C8E5D0010ACB0 /* GoodQuotes.app */;
 			productType = "com.apple.product-type.application";
@@ -577,12 +594,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5C5CCBE211C8E600010ACB0 /* Build configuration list for PBXNativeTarget "GoodQuotesTests" */;
 			buildPhases = (
-				B669C2E95B82C837E00984A3 /* [CP] Check Pods Manifest.lock */,
 				D5CEC885F977AF77ACEAC41D /* Generate Mockingbird Mocks */,
 				E5C5CCAE211C8E600010ACB0 /* Sources */,
 				E5C5CCAF211C8E600010ACB0 /* Frameworks */,
 				E5C5CCB0211C8E600010ACB0 /* Resources */,
-				472184B34A4FAB92E84EC5B5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -590,6 +605,9 @@
 				E5C5CCB4211C8E600010ACB0 /* PBXTargetDependency */,
 			);
 			name = GoodQuotesTests;
+			packageProductDependencies = (
+				E5A48C4A29F340DD00E2DD65 /* Mockingbird */,
+			);
 			productName = GoodQuotesTests;
 			productReference = E5C5CCB2211C8E600010ACB0 /* GoodQuotesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -600,8 +618,9 @@
 		E5C5CC96211C8E5D0010ACB0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = Protome;
 				TargetAttributes = {
 					E5506888253B33CF00943B2E = {
@@ -627,6 +646,16 @@
 				Base,
 			);
 			mainGroup = E5C5CC95211C8E5D0010ACB0;
+			packageReferences = (
+				E5A48C3129F33ADE00E2DD65 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E5A48C3429F33B1800E2DD65 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				E5A48C3729F33B5200E2DD65 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+				E5A48C3A29F33BF400E2DD65 /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
+				E5A48C3D29F33C3000E2DD65 /* XCRemoteSwiftPackageReference "OAuthSwift" */,
+				E5A48C4629F33F2100E2DD65 /* XCRemoteSwiftPackageReference "SwinjectStoryboard" */,
+				E5A48C4929F340DD00E2DD65 /* XCRemoteSwiftPackageReference "mockingbird" */,
+				E56D804E29F345A800F8DADC /* XCRemoteSwiftPackageReference "Swinject" */,
+			);
 			productRefGroup = E5C5CC9F211C8E5D0010ACB0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -689,23 +718,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoodQuotes/Pods-GoodQuotes-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		472184B34A4FAB92E84EC5B5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoodQuotesTests/Pods-GoodQuotesTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5022527FA90FA83EB4664A40 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -718,28 +730,6 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-GoodQuotes-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B669C2E95B82C837E00984A3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GoodQuotesTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1108,7 +1098,6 @@
 		};
 		E5C5CCBF211C8E600010ACB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 191BC1A7C02D528D9C6ADE68 /* Pods-GoodQuotesTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1131,7 +1120,6 @@
 		};
 		E5C5CCC0211C8E600010ACB0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 176ECBE8BDC1451E1DEE26DF /* Pods-GoodQuotesTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1192,6 +1180,116 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E56D804E29F345A800F8DADC /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		E5A48C3129F33ADE00E2DD65 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		E5A48C3429F33B1800E2DD65 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		E5A48C3729F33B5200E2DD65 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		E5A48C3A29F33BF400E2DD65 /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yahoojapan/SwiftyXMLParser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		E5A48C3D29F33C3000E2DD65 /* XCRemoteSwiftPackageReference "OAuthSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OAuthSwift/OAuthSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		E5A48C4629F33F2100E2DD65 /* XCRemoteSwiftPackageReference "SwinjectStoryboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/SwinjectStoryboard.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		E5A48C4929F340DD00E2DD65 /* XCRemoteSwiftPackageReference "mockingbird" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/birdrides/mockingbird.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.20.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E56D804F29F345A800F8DADC /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E56D804E29F345A800F8DADC /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		E5A48C3229F33ADE00E2DD65 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5A48C3129F33ADE00E2DD65 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		E5A48C3529F33B1800E2DD65 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5A48C3429F33B1800E2DD65 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		E5A48C3829F33B5200E2DD65 /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5A48C3729F33B5200E2DD65 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
+		};
+		E5A48C3B29F33BF500E2DD65 /* SwiftyXMLParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5A48C3A29F33BF400E2DD65 /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
+			productName = SwiftyXMLParser;
+		};
+		E5A48C3E29F33C3000E2DD65 /* OAuthSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5A48C3D29F33C3000E2DD65 /* XCRemoteSwiftPackageReference "OAuthSwift" */;
+			productName = OAuthSwift;
+		};
+		E5A48C4729F33F2100E2DD65 /* SwinjectStoryboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5A48C4629F33F2100E2DD65 /* XCRemoteSwiftPackageReference "SwinjectStoryboard" */;
+			productName = SwinjectStoryboard;
+		};
+		E5A48C4A29F340DD00E2DD65 /* Mockingbird */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5A48C4929F340DD00E2DD65 /* XCRemoteSwiftPackageReference "mockingbird" */;
+			productName = Mockingbird;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E5C5CC96211C8E5D0010ACB0 /* Project object */;
 }
