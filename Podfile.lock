@@ -1,73 +1,41 @@
 PODS:
   - Alamofire (5.6.4)
-  - AlamofireImage (4.2.0):
-    - Alamofire (~> 5.4)
   - ChromaColorPicker (2.0.2)
-  - MockingbirdFramework (0.20.0)
   - OAuthSwift (2.2.0)
   - OAuthSwiftAlamofire (1.0.0beta):
     - Alamofire
     - OAuthSwift
   - Pastel (0.6.0)
-  - SwiftyJSON (5.0.1)
-  - SwiftyXMLParser (5.5.0)
-  - Swinject (2.7.1)
-  - SwinjectStoryboard (2.2.2):
-    - Swinject (~> 2.7.1)
 
 DEPENDENCIES:
-  - Alamofire
-  - AlamofireImage (~> 4.1)
   - ChromaColorPicker
-  - MockingbirdFramework (~> 0.20)
-  - OAuthSwift
   - OAuthSwiftAlamofire (from `https://github.com/OAuthSwift/OAuthSwiftAlamofire.git`, tag `1.0.0beta`)
   - Pastel
-  - SwiftyJSON (~> 5.0.1)
-  - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
-  - Swinject
-  - SwinjectStoryboard
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - AlamofireImage
     - ChromaColorPicker
-    - MockingbirdFramework
     - OAuthSwift
     - Pastel
-    - SwiftyJSON
-    - Swinject
-    - SwinjectStoryboard
 
 EXTERNAL SOURCES:
   OAuthSwiftAlamofire:
     :git: https://github.com/OAuthSwift/OAuthSwiftAlamofire.git
     :tag: 1.0.0beta
-  SwiftyXMLParser:
-    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
 
 CHECKOUT OPTIONS:
   OAuthSwiftAlamofire:
     :git: https://github.com/OAuthSwift/OAuthSwiftAlamofire.git
     :tag: 1.0.0beta
-  SwiftyXMLParser:
-    :commit: d7a1d23f04c86c1cd2e8f19247dd15d74e0ea8be
-    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
-  AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
   ChromaColorPicker: 307585f2dc23d4d72f24cad320c1e08825cb5c09
-  MockingbirdFramework: 54e35fbbb47b806c1a1fae2cf3ef99f6eceb55e5
   OAuthSwift: 75efbb5bd9a4b2b71a37bd7e986bf3f55ddd54c6
   OAuthSwiftAlamofire: 34e6b8f231ea7fad88ea96c0ab876fa12a11180e
   Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
-  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
-  SwiftyXMLParser: 027d9e6fb54a38d95dccec025bcea9693f699c47
-  Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
-  SwinjectStoryboard: 240ce371396da09a4c43c72ee5c148108500e184
 
-PODFILE CHECKSUM: b06da144316775b2da16d8342e4f5e1813417ff2
+PODFILE CHECKSUM: 2ad412554691b73336e5e162c0a044f60bcbe2cf
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1
