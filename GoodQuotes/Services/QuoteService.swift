@@ -103,13 +103,12 @@ class QuoteService: QuoteServiceProtocol {
     {
         let url = baseUrl + "\(query)/\(pageNumber)"
         let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let task = AF.request(encodedURL!).serializingDecodable(JSON.self)
+        let task = AF.request(encodedURL!).serializingDecodable(QuotesResponse.self)
         let response = await task.response
         
         switch response.result {
-        case .success(let json):
-            let quotes = json["quotes"].map({return Quote(jsonObject: $1)})
-            return quotes
+        case .success(let quoteResponse):
+            return quoteResponse.quotes
         case .failure(let error):
             print (error)
             return [Quote]()
@@ -133,12 +132,11 @@ class QuoteService: QuoteServiceProtocol {
     
     internal func getAllQuotesForTagAtPage(tag: String, pageNumber: Int) async -> [Quote]
     {
-        let response = await AF.request(baseUrl + "\(tag)/\(pageNumber)").serializingDecodable(JSON.self).response
+        let response = await AF.request(baseUrl + "\(tag)/\(pageNumber)").serializingDecodable(QuotesResponse.self).response
         
         switch response.result {
-        case .success(let json):
-            let quotes = json["quotes"].map({return Quote(jsonObject: $1)})
-            return quotes
+        case .success(let quoteResponsee):
+            return quoteResponsee.quotes
         case .failure(let error):
             print (error)
             return [Quote]()
