@@ -11,26 +11,28 @@ import SwiftyXMLParser
 import Alamofire
 import OAuthSwift
 import OAuthSwiftAlamofire
+import Combine
 
 //Currently using a mix of Swift Concurrency and CompletionHandlers due to OAuthSwift. Need to looking "Continuations"
-class GoodreadsService: GoodreadsServiceProtocol {  
-    static var sharedInstance: GoodreadsServiceProtocol = GoodreadsService()
-    
-    var isLoggedIn = LoginState.LoggedOut {
-        didSet {
-            NotificationCenter.default.post(name: .loginStateChanged, object: nil)
-        }
+class GoodreadsService: GoodreadsServiceProtocol {
+    private let isLoggedIn = CurrentValueSubject<LoginState, Never>(LoginState.LoggedOut)
+    var isLoggedInPublisher: AnyPublisher<LoginState, Never> {
+        return isLoggedIn.eraseToAnyPublisher()
     }
     
     var oauthswift: OAuth1Swift?
     var id: String?
     var ongoingRequest: DataTask<Data>?
     
+    init() {
+        isLoggedIn.send(AuthStorageService.readAuthToken().isEmpty ? .LoggedOut : .LoggedIn)
+    }
+    
     func logoutOfGoodreadsAccount() {
         AuthStorageService.removeAuthToken()
         AuthStorageService.removeTokenSecret()
         oauthswift = nil
-        isLoggedIn = .LoggedOut
+        isLoggedIn.send(.LoggedOut)
     }
     
     func loadShelves(sender: NSObject) async -> [Shelf]? {
@@ -120,7 +122,7 @@ class GoodreadsService: GoodreadsServiceProtocol {
     }
     
     func addBookToShelf(sender: NSObject, bookId: String, completion: @escaping () -> ()) {
-        guard let oauthswift = oauthswift, self.isLoggedIn == LoginState.LoggedIn else {
+        guard let oauthswift = oauthswift, self.isLoggedIn.value == LoginState.LoggedIn else {
             Task { await loginToGoodreadsAccount(sender: sender)
                 self.addBookToShelf(sender: sender, bookId: bookId, completion: completion)
             }
@@ -210,7 +212,7 @@ class GoodreadsService: GoodreadsServiceProtocol {
                         case .success(let (credential, _, _)):
                             AuthStorageService.saveAuthToken(credential.oauthToken)
                             AuthStorageService.saveTokenSecret(credential.oauthTokenSecret)
-                            self.isLoggedIn = .LoggedIn
+                            self.isLoggedIn.send(.LoggedIn)
                         case .failure(let error):
                             self.oauthswift = nil
                             print( "ERROR ERROR: \(error.localizedDescription)", terminator: "")
@@ -220,7 +222,7 @@ class GoodreadsService: GoodreadsServiceProtocol {
             else {
                 oauthswift.client.credential.oauthToken = authToken
                 oauthswift.client.credential.oauthTokenSecret = authSecret
-                self.isLoggedIn = .LoggedIn
+                self.isLoggedIn.send(.LoggedIn)
             }
             
             continuation.resume()

@@ -12,7 +12,7 @@ class SettingsViewModel {
     private var userDefaultsService: UserDefaultsServiceProtocol
     private var goodreadsService: GoodreadsServiceProtocol
     
-    var loggedIntoGoodreads: Bool { goodreadsService.isLoggedIn == .LoggedIn }
+    @Published var loggedIntoGoodreads = false
     let goodreadsTitles = (signIn: "Sign In to Goodreads", signOut: "Sign Out of Goodreads")
     let defaultShelf = "to-read"
     
@@ -38,6 +38,10 @@ class SettingsViewModel {
         self.goodreadsService = goodreadsService
         self.currentShelf = currentShelf
         self.changesMade = changesMade
+        
+        self.goodreadsService.isLoggedInPublisher
+            .map({ $0 == .LoggedIn})
+            .assign(to: &$loggedIntoGoodreads)
     }
     
     func setCurrentShelf() {
@@ -56,7 +60,7 @@ class SettingsViewModel {
         case .GoodreadsShelf:
             return  currentShelf.isEmpty ? item.rawValue : "\(item.rawValue): \(currentShelf)"
         case .SignInOutGoodreads:
-            return goodreadsService.isLoggedIn == .LoggedIn ? goodreadsTitles.signOut : goodreadsTitles.signIn
+            return loggedIntoGoodreads ? goodreadsTitles.signOut : goodreadsTitles.signIn
         default:
             return item.rawValue
         }

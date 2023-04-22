@@ -7,10 +7,10 @@
 //
 
 import Foundation
+import Combine
 
 protocol GoodreadsServiceProtocol {
-    static var sharedInstance: GoodreadsServiceProtocol { get }
-    var isLoggedIn: LoginState { get set }
+    var isLoggedInPublisher: AnyPublisher<LoginState, Never> { get }
     func loginToGoodreads(sender: NSObject) async -> Void
     func logoutOfGoodreadsAccount()
     func loadShelves(sender: NSObject) async -> [Shelf]?

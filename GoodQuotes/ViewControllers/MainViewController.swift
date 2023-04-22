@@ -10,6 +10,7 @@ import UIKit
 import Pastel
 import Alamofire
 import AlamofireImage
+import Combine
 
 class MainViewController: UIViewController {
     
@@ -35,11 +36,13 @@ class MainViewController: UIViewController {
     @IBOutlet weak var BookSearchField: BookSearchBox!
     @IBOutlet weak var BookSelectButton: UIBarButtonItem!
     
-    var viewModel: MainViewModel?
+    private var subscriptions = [AnyCancellable]()
     
+    var viewModel: MainViewModel?
     var pastelView:PastelView?
     var restartAnimation = true
     var returningFromAuth = false
+    var loggedIn = false
     var openModal: UIViewController?
     var maxDistanceTop: CGFloat = 0
     
@@ -54,9 +57,6 @@ class MainViewController: UIViewController {
             pastelView?.startAnimation()
             pastelView?.pauseAnimation()
         }
-        
-        BookSelectButton.isEnabled = GoodreadsService.sharedInstance.isLoggedIn == LoginState.LoggedIn
-        BookSelectButton.image = GoodreadsService.sharedInstance.isLoggedIn == LoginState.LoggedIn ? UIImage(systemName: "book.circle") : UIImage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -66,20 +66,62 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(setupButtonsFromNotification),
-                                               name: .loginStateChanged,
-                                               object: nil)
         
+        viewModel?.$loggedIn
+            .receive(on: RunLoop.main)
+            .sink {[weak self] loggedIn in
+                self?.loggedIn = loggedIn
+                self?.BookSelectButton.isEnabled = loggedIn
+                self?.BookSelectButton.image = loggedIn ? UIImage(systemName: "book.circle") : UIImage()
+                self?.setupButtons()
+            }
+            .store(in: &subscriptions)
+        //let sameBook = quote.author == AuthorLabel.text && quote.publication == BookLabel.text
+        viewModel?.$currentQuote
+            .receive(on: RunLoop.main)
+            .compactMap({ $0 })
+            .sink {[weak self] quote in
+                self?.updateDataFromViewmodel(quote: quote)
+            }
+            .store(in: &subscriptions)
+        
+        viewModel?.$currentBook
+            .receive(on: RunLoop.main)
+            .compactMap({ $0 })
+            .sink {[weak self] book in
+                self?.loadBookData(book: book)
+            }
+            .store(in: &subscriptions)
+        
+        viewModel?.$currentBook
+            .receive(on: RunLoop.main)
+            .compactMap({ $0?.publicationYear })
+            .map({ "First published \($0)" })
+            .sink { [weak self] publicationDate in self?.BookButtonPublishDateLabel.text = publicationDate }
+            .store(in: &subscriptions)
+        
+        viewModel?.$isLoading
+            .receive(on: RunLoop.main)
+            .sink { [weak self] isLoading in
+                if isLoading {
+                    if(self?.restartAnimation ?? false)
+                    {
+                        self?.pastelView?.startAnimation()
+                        self?.restartAnimation = false
+                    }
+                    else {
+                        self?.pastelView?.resumeAnimation()
+                    }
+                }
+                else { self?.pastelView?.pauseAnimation() }
+            }
+            .store(in: &subscriptions)
         BookSearchField.bookSearchDelegate = self
-        
-        GoodreadsService.sharedInstance.isLoggedIn = AuthStorageService.readAuthToken().isEmpty ? .LoggedOut : .LoggedIn
         styleView()
         setupButtons()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         if navigationController?.navigationBar != nil {
             navigationController?.navigationBar.prefersLargeTitles = true
         }
@@ -94,10 +136,6 @@ class MainViewController: UIViewController {
         if let nav = segue.destination as? UINavigationController, let destination = nav.topViewController as? SettingsViewController {
             destination.delegate = self
         }
-    }
-    
-    @objc func setupButtonsFromNotification(_ notification: Notification) {
-        setupButtons()
     }
     
     @IBAction func legacyButtonTouchUpInside(_ sender: Any) {
@@ -188,17 +226,8 @@ class MainViewController: UIViewController {
             return
         }
         
-        if(restartAnimation)
-        {
-            pastelView?.startAnimation()
-            restartAnimation = false
-        }
-        else {
-            pastelView?.resumeAnimation()
-        }
         returningFromAuth = true
-        GoodreadsService.sharedInstance.addBookToShelf(sender: self, bookId: book.goodreadsId) {
-            self.pastelView?.pauseAnimation()
+        viewModel?.addBookToShelf(sender: self, bookId: book.goodreadsId) {
             self.returningFromAuth = false
         }
     }
@@ -208,9 +237,9 @@ class MainViewController: UIViewController {
             return
         }
         
-        if GoodreadsService.sharedInstance.isLoggedIn == .LoggedOut{
+        if !loggedIn {
             Task {
-                await GoodreadsService.sharedInstance.loginToGoodreads(sender: self)
+                await viewModel?.loginToGoodreads(sender: self)
                 self.selectShelfAction(isActive)
             }
             return
@@ -285,32 +314,12 @@ class MainViewController: UIViewController {
     }
     
     private func loadRandomQuoteTask() {
-        if(restartAnimation)
-        {
-            pastelView?.startAnimation()
-            restartAnimation = false
-        }
-        else {
-            pastelView?.resumeAnimation()
-        }
-        
         Task {
-            await loadRandomQuote()
-            let sameBook = updateDataFromViewmodel()
-            await loadBookData(sameBook)
+            await viewModel?.loadRandomQuote()
         }
     }
     
-    private func loadRandomQuote() async -> Void
-    {
-        await viewModel?.loadRandomQuote()
-    }
-    
-    private func updateDataFromViewmodel() -> Bool {
-        guard let quote = viewModel?.currentQuote else { return true }
-        
-        let sameBook = quote.author == AuthorLabel.text && quote.publication == BookLabel.text
-        
+    private func updateDataFromViewmodel(quote: Quote) {
         QuoteLabel.text = "\(quote.quote)"
         AuthorLabel.text = quote.author
         BookLabel.text = quote.publication
@@ -322,31 +331,26 @@ class MainViewController: UIViewController {
                        animations: {
             self.view.layoutIfNeeded()
         })
-        
-        return sameBook
     }
     
-    private func loadBookData(_ sameBook: Bool) async -> Void {
-        await viewModel?.updateBookDetailsFromService()
-        if sameBook {
+    private func loadBookData(book: Book) {
+        if book.title == BookButtonTitleLabel.text {
             //Dont bother reloading the book button if the book is the same
             self.pastelView?.pauseAnimation()
             return
         }
         
-        self.setupCurrentBookButton()
-        self.pastelView?.pauseAnimation()
-    }
-    
-    private func setupCurrentBookButton() {
-        BookButtonTitleLabel.text = viewModel?.bookTitle
-        BookButtonAuthorLabel.text = viewModel?.authorName
-        BookButtonPublishDateLabel.text = viewModel?.publishDate
+        BookButtonTitleLabel.text = book.title
+        BookButtonAuthorLabel.text = book.author.name
                 
         if let imageUrl = viewModel?.currentBook?.imageUrl {
-            AF.request(imageUrl).responseImage { response in
-                if case .success(let image) = response.result {
-                    self.updateBookImage(bookCover: image)
+            AF.request(imageUrl).responseImage { [weak self] response in
+                switch response.result {
+                case .success(let image):
+                    self?.updateBookImage(bookCover: image)
+                case .failure(let error):
+                    print(error)
+                    self?.updateBookImage(bookCover: nil)
                 }
             }
         }
@@ -362,6 +366,8 @@ class MainViewController: UIViewController {
         } else {
             hideBookDetails()
         }
+        
+        pastelView?.pauseAnimation()
     }
     
     private func updateBookImage(bookCover: UIImage?) {
