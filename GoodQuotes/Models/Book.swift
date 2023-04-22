@@ -10,7 +10,10 @@ import Foundation
 import SwiftyXMLParser
 import SwiftyJSON
 
-struct Book: Codable {
+struct Book: Codable, Equatable {
+    static func == (lhs: Book, rhs: Book) -> Bool {
+        return lhs.id == rhs.id || lhs.goodreadsId == rhs.goodreadsId
+    }
 
     var goodreadsId: String
     var id: String

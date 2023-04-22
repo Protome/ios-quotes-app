@@ -10,21 +10,42 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject var viewModel: MainViewModel
+    @State private var renderedImage = Image(systemName: "photo")
+    @State private var shareSheetShown = false
+    @Environment(\.displayScale) var displayScale
     
     var body: some View {
         VStack() {
             quoteView
+                .padding(.horizontal, 26)
+                .padding(.top, 70)
+                .animation(.easeInOut, value: viewModel.currentQuote)
+                .onAppear { render() }
+                .onChange(of: viewModel.currentQuote) {_ in
+                    render()
+                }
+            bookView
+                .padding(.horizontal, 26)
+                .padding([.top, .bottom], 22)
+                .animation(.easeInOut, value: viewModel.currentBook)
+            Spacer()
+            buttons
                 .padding(.horizontal, 16)
+                .padding(.bottom)
+            
         }
+        .colorScheme(.light)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Rectangle().fill(.blue.gradient))
+        .background(Rectangle().fill(.blue.gradient)
+            .ignoresSafeArea())
     }
     
     var quoteView: some View {
         VStack() {
-            Text(viewModel.currentQuote?.quote ?? "")
+            Text(viewModel.currentQuote.quote)
                 .foregroundColor(Color("MainText"))
                 .font(.custom("Avenir Next", size: 16))
+                .multilineTextAlignment(.center)
                 .fontWeight(.medium)
                 .minimumScaleFactor(0.7)
                 .padding(.top, 16)
@@ -33,13 +54,15 @@ struct MainView: View {
                 .background(Color("MainText"))
                 .padding(.horizontal, 140)
                 .frame(height: 2)
-            Text(viewModel.currentQuote?.publication ?? "")
+            Text(viewModel.currentQuote.publication)
                 .foregroundColor(Color("MainText"))
                 .font(.custom("Avenir Next", size: 13))
+                .multilineTextAlignment(.center)
                 .padding(.horizontal, 8)
-            Text(viewModel.currentQuote?.author ?? "")
+            Text(viewModel.currentQuote.author)
                 .foregroundColor(Color("MainText"))
                 .font(.custom("Avenir Next", size: 13))
+                .multilineTextAlignment(.center)
                 .padding(.top, 0)
                 .padding(.bottom, 8)
                 .padding(.horizontal, 8)
@@ -47,6 +70,100 @@ struct MainView: View {
         .frame(maxWidth: .infinity)
         .background(.thinMaterial)
         .cornerRadius(10)
+    }
+    
+    var bookView: some View {
+        HStack() {
+            AsyncImage(url: URL(string: viewModel.currentBook?.imageUrl ?? ""))
+            { image in
+                image.resizable()
+            } placeholder: {
+                Color.gray
+            }
+            .frame(width: 60, height: 90)
+            .cornerRadius(4)
+            .padding(.all, 16)
+            VStack(alignment: .leading) {
+                Text(viewModel.currentBook?.title ?? "")
+                    .foregroundColor(Color("MainText"))
+                    .font(.custom("Avenir Next", size: 15))
+                    .fontWeight(.medium)
+                    .padding(.horizontal, 8)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text(viewModel.currentBook?.author.name ?? "")
+                    .foregroundColor(Color("MainText"))
+                    .font(.custom("Avenir Next", size: 14))
+                    .padding(.horizontal, 8)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                if let publicationYear = viewModel.currentBook?.publicationYear {
+                    Text(String(publicationYear))
+                        .foregroundColor(Color("MainText"))
+                        .font(.custom("Avenir Next", size: 14))
+                        .padding(.horizontal, 8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .animation(.easeInOut, value: viewModel.currentBook)
+        }
+        .frame(maxWidth: .infinity)
+        .background(.thinMaterial)
+        .cornerRadius(10)
+    }
+    
+    var buttons: some View {
+        HStack() {
+            Spacer()
+            if viewModel.loggedIn {
+                Button() {
+                    //                    viewModel.addCurrentBookToShelf(sender: self)
+                } label: {
+                    Image(systemName: "plus")
+                        .foregroundColor(Color.black)
+                        .frame(width: 42, height: 42)
+                        .background(.thinMaterial)
+                        .cornerRadius(21)
+                }
+            }
+            else {
+                Spacer()
+                    .frame(width: 42)
+            }
+            Button() {
+                Task {
+                    await viewModel.loadRandomQuote()
+                }
+            } label: {
+                Image(systemName: "arrow.triangle.2.circlepath")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.all, 16)
+                    .frame(width: 62, height: 62)
+                    .foregroundColor(Color.black)
+                    .background(.thinMaterial)
+                    .cornerRadius(31)
+            }
+            
+            ShareLink(item: renderedImage, preview: SharePreview(viewModel.currentBook?.title ?? "Quotey quote", image: renderedImage)) {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundColor(Color.black)
+                    .frame(width: 42, height: 42)
+                    .background(.thinMaterial)
+                    .cornerRadius(21)
+            }
+            
+            Spacer()
+        }
+    }
+    
+    @MainActor func render() {
+        let renderer = ImageRenderer(content: quoteView
+            .frame(width: 360).background(Rectangle().fill(.blue.gradient)))
+        renderer.scale = displayScale
+        
+        if let uiImage = renderer.uiImage {
+            renderedImage = Image(uiImage: uiImage)
+        }
     }
 }
 
@@ -65,8 +182,16 @@ struct MainView_Previews: PreviewProvider {
         
         MainView(viewModel: viewModel)
             .onAppear() {
-                viewModel.currentQuote = Quote(quote: "This is a test Quote", author: "Kieran Bamford", publication: "The Book of Kieran")
-        }
+                viewModel.currentQuote = Quote(quote: "This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote This is a test Quote ", author: "Kieran Bamford", publication: "The Book of Kieran")
+                var book = Book()
+                book.title = "The Book of Kieran"
+                book.author.name = "Kieran Bamford"
+                book.publicationYear = 1991
+                book.imageUrl = "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1537977912i/40523931.jpg"
+                
+                viewModel.currentBook = book
+                
+            }
         
     }
 }

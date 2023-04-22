@@ -15,7 +15,7 @@ import Foundation
     private var openLibraryservice: OpenLibraryServiceProtocol
     
     @Published var loggedIn = false
-    @Published var currentQuote: Quote? = nil
+    @Published var currentQuote: Quote = Quote(quote: "", author: "", publication: "")
     @Published var currentBook: Book? = nil
     @Published var isLoading = false
     
@@ -50,7 +50,7 @@ import Foundation
     
     //Search OpenLibrary for books with matching titles and author names.
     func updateBookDetailsFromService() async -> Void {
-        guard let currentQuote = currentQuote, !currentQuote.publication.isEmpty else {
+        guard !currentQuote.publication.isEmpty else {
             self.currentBook = nil
             return
         }
@@ -70,6 +70,11 @@ import Foundation
         await self.populateMissingBookDataFromGoodreads(bookResult: bookResult)
     }
     
+    func addCurrentBookToShelf(sender: NSObject) {
+        guard let id = currentBook?.goodreadsId else { return }
+        goodreadsService.addBookToShelf(sender: sender, bookId: id, completion: {})
+    }
+    
     func addBookToShelf(sender: NSObject, bookId: String, completion: @escaping () -> ()) {
         goodreadsService.addBookToShelf(sender: sender, bookId: bookId, completion: completion)
     }
@@ -80,7 +85,7 @@ import Foundation
     
     //If we cannot find any matches for the book, loosen our search params
     private func updateBookDetailsFromWiderSearch() async -> Void {
-        guard let currentQuote = currentQuote else { return }
+        guard !currentQuote.publication.isEmpty else { return }
         
         let book = await openLibraryservice.wideSearchForBook(query: currentQuote.publication)
         guard let bookResult = book else {
@@ -92,7 +97,7 @@ import Foundation
     
     //While Goodreads API still works there is some data we need that OpenLibrary does not offer. Populate the missing fields with this. If it fails/the api finally gets shut down there'll be less info but nothing should break.
     private func populateMissingBookDataFromGoodreads(bookResult: Book) async -> Void {
-        guard let currentQuote = currentQuote else { return }
+        guard !currentQuote.publication.isEmpty, !currentQuote.author.isEmpty else { return }
         
         let book = await goodreadsService.searchForBook(title: currentQuote.publication, author: currentQuote.author)
         if let book = book {

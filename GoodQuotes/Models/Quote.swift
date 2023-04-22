@@ -12,7 +12,7 @@ struct QuotesResponse: Decodable {
     let quotes: [Quote]
 }
 
-struct Quote: Decodable
+struct Quote: Decodable, Equatable
 {
     let quote: String
     let author: String
