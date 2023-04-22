@@ -14,12 +14,12 @@ class MainViewModel {
     private var goodreadsService: GoodreadsServiceProtocol
     private var openLibraryservice: OpenLibraryServiceProtocol
     
+    @Published var loggedIn = false
+    @Published var currentQuote: Quote? = nil
+    @Published var currentBook: Book? = nil
+    @Published var isLoading = false
+    
     let averageRatingText = "Average Rating:"
-    var isLoading = false
-    var currentBook: Book?
-    var currentQuote: Quote?
-    var bookTitle: String { currentBook?.title ?? "" }
-    var authorName: String { currentBook?.author.name ?? "" }
     var publishDate: String {
         guard let publicationYear = currentBook?.publicationYear else { return "" }
         return "First published \(publicationYear)"
@@ -32,6 +32,10 @@ class MainViewModel {
         self.goodreadsService = goodreadsService
         self.openLibraryservice = openLibraryservice
         self.currentBook = currentBook
+        
+        self.goodreadsService.isLoggedInPublisher
+            .map({ return $0 == .LoggedIn })
+            .assign(to: &$loggedIn)
     }
     
     func loadRandomQuote() async -> Void {
@@ -40,6 +44,7 @@ class MainViewModel {
         isLoading = true
         let quote = await quoteService.getRandomQuote()
         currentQuote = quote
+        await updateBookDetailsFromService()
         isLoading = false
     }
     
@@ -63,6 +68,14 @@ class MainViewModel {
         }
         
         await self.populateMissingBookDataFromGoodreads(bookResult: bookResult)
+    }
+    
+    func addBookToShelf(sender: NSObject, bookId: String, completion: @escaping () -> ()) {
+        goodreadsService.addBookToShelf(sender: sender, bookId: bookId, completion: completion)
+    }
+    
+    func loginToGoodreads(sender: NSObject) async -> Void {
+        await goodreadsService.loginToGoodreads(sender: sender)
     }
     
     //If we cannot find any matches for the book, loosen our search params
