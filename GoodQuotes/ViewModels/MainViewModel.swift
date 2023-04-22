@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MainViewModel {
+@MainActor class MainViewModel: ObservableObject {
     private var quoteService : QuoteServiceProtocol
     private var reviewService : ReviewRequestServiceProtocol
     private var goodreadsService: GoodreadsServiceProtocol

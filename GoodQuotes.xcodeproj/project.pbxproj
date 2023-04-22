@@ -58,6 +58,7 @@
 		E554D423211F4BE400F32AF9 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D422211F4BE400F32AF9 /* FilterCell.swift */; };
 		E554D427211F9F6F00F32AF9 /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */; };
 		E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5588E112129A71500A84BEC /* CGPointExtensions.swift */; };
+		E55FDC9829F3F7EE00D8791D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55FDC9729F3F7EE00D8791D /* MainView.swift */; };
 		E56C495424A8C341009A9569 /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56C495324A8C341009A9569 /* Pages.swift */; };
 		E56D805029F345A800F8DADC /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = E56D804F29F345A800F8DADC /* Swinject */; };
 		E57D4A5222A5D07C007B93F1 /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57D4A5122A5D07C007B93F1 /* Colours.xcassets */; };
@@ -189,6 +190,7 @@
 		E554D422211F4BE400F32AF9 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		E554D426211F9F6F00F32AF9 /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		E5588E112129A71500A84BEC /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
+		E55FDC9729F3F7EE00D8791D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E56C495324A8C341009A9569 /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
 		E57D4A5122A5D07C007B93F1 /* Colours.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colours.xcassets; sourceTree = "<group>"; };
 		E57D4A5322A5D4E4007B93F1 /* ColourSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourSelectionViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +345,8 @@
 		E503C70524AFAF7800AB54DE /* SwiftUIViews */ = {
 			isa = PBXGroup;
 			children = (
+				E55FDC9629F3F7D700D8791D /* CustomViews */,
+				E55FDC9529F3F7CD00D8791D /* Screens */,
 				E503C70624AFB4A800AB54DE /* Cells */,
 			);
 			path = SwiftUIViews;
@@ -468,6 +472,21 @@
 				8963EDB429474E7500CBB2DE /* Settings.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		E55FDC9529F3F7CD00D8791D /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				E55FDC9729F3F7EE00D8791D /* MainView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		E55FDC9629F3F7D700D8791D /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		E599653E2229D92E00BAA33C /* BookSearchBox */ = {
@@ -777,6 +796,7 @@
 				E5588E122129A71500A84BEC /* CGPointExtensions.swift in Sources */,
 				E57D4A5822A5D99E007B93F1 /* GradientsService.swift in Sources */,
 				E58394C6213AF0E800AC78DE /* ReviewRequestService.swift in Sources */,
+				E55FDC9829F3F7EE00D8791D /* MainView.swift in Sources */,
 				E5818A052126C6610099BEAF /* Book.swift in Sources */,
 				E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */,
 				E532E91927297E7A0081B386 /* UIViewControllerExtensions.swift in Sources */,
