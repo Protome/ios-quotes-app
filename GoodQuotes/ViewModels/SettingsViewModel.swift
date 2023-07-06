@@ -8,11 +8,15 @@
 
 import Foundation
 
-class SettingsViewModel {
+class SettingsViewModel: ObservableObject {
     private var userDefaultsService: UserDefaultsServiceProtocol
     private var goodreadsService: GoodreadsServiceProtocol
     
     @Published var loggedIntoGoodreads = false
+    @Published var goodreadsShelfTitle = Settings.GoodreadsShelf.rawValue
+    @Published var currentShelf = ""
+    @Published var signIntoGoodreadsTitle = ""
+    
     let goodreadsTitles = (signIn: "Sign In to Goodreads", signOut: "Sign Out of Goodreads")
     let defaultShelf = "to-read"
     
@@ -30,7 +34,6 @@ class SettingsViewModel {
                                                 .ChangeBackground : "ChangeBackground" ]
     
     
-    var currentShelf = ""
     var changesMade = false
     
     init(userDefaultsService: UserDefaultsServiceProtocol, goodreadsService: GoodreadsServiceProtocol, currentShelf: String = "", changesMade: Bool = false) {
@@ -42,10 +45,15 @@ class SettingsViewModel {
         self.goodreadsService.isLoggedInPublisher
             .map({ $0 == .LoggedIn})
             .assign(to: &$loggedIntoGoodreads)
+        
+        self.goodreadsService.isLoggedInPublisher
+            .map({ [weak self] loggedIn in (loggedIn == .LoggedIn ? self?.goodreadsTitles.signOut : self?.goodreadsTitles.signIn) ?? "" })
+            .assign(to: &$signIntoGoodreadsTitle)
     }
     
     func setCurrentShelf() {
         currentShelf = userDefaultsService.loadDefaultShelf() ?? defaultShelf
+        goodreadsShelfTitle = currentShelf.isEmpty ? Settings.GoodreadsShelf.rawValue : "\(Settings.GoodreadsShelf.rawValue): \(currentShelf)"
     }
     
     func titleForRow(indexPath: IndexPath) -> String

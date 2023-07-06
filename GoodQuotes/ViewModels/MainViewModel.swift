@@ -17,6 +17,7 @@ import Foundation
     @Published var loggedIn = false
     @Published var currentQuote: Quote = Quote(quote: "", author: "", publication: "")
     @Published var currentBook: Book? = nil
+    @Published var publicationDate: String = ""
     @Published var isLoading = false
     
     let averageRatingText = "Average Rating:"
@@ -36,6 +37,11 @@ import Foundation
         self.goodreadsService.isLoggedInPublisher
             .map({ return $0 == .LoggedIn })
             .assign(to: &$loggedIn)
+        
+        $currentBook
+            .compactMap({ $0?.publicationYear })
+            .map({ "First published \($0)" })
+            .assign(to: &$publicationDate)
     }
     
     func loadRandomQuote() async -> Void {

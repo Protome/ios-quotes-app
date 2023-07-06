@@ -11,33 +11,52 @@ import SwiftUI
 struct MainView: View {
     @StateObject var viewModel: MainViewModel
     @State private var renderedImage = Image(systemName: "photo")
-    @State private var shareSheetShown = false
+    @State private var showingSheet = false
     @Environment(\.displayScale) var displayScale
     
     var body: some View {
-        VStack() {
-            quoteView
-                .padding(.horizontal, 26)
-                .padding(.top, 70)
-                .animation(.easeOut(duration: 0.3), value: viewModel.currentQuote)
-                .onAppear { render() }
-                .onChange(of: viewModel.currentQuote) {_ in
-                    render()
+        NavigationStack {
+            VStack() {
+                quoteView
+                    .padding(.horizontal, 26)
+                    .padding(.top, 22)
+                    .animation(.easeOut(duration: 0.3), value: viewModel.currentQuote)
+                    .onAppear { render() }
+                    .onChange(of: viewModel.currentQuote) {_ in
+                        render()
+                    }
+                if viewModel.currentBook != nil {
+                    bookView
+                        .padding(.horizontal, 26)
+                        .padding([.top, .bottom], 22)
+                        .animation(.easeInOut, value: viewModel.currentBook)
                 }
-            bookView
-                .padding(.horizontal, 26)
-                .padding([.top, .bottom], 22)
-                .animation(.easeInOut, value: viewModel.currentBook)
-            Spacer()
-            buttons
-                .padding(.horizontal, 16)
-                .padding(.bottom)
-            
+                Spacer()
+                buttons
+                    .padding(.horizontal, 16)
+                    .padding(.bottom)
+                
+            }
+            .colorScheme(.light)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(background.ignoresSafeArea())
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button() {
+                        showingSheet = true
+                    } label: {
+                        Image(systemName: "gear").foregroundColor(.black)
+                    }
+                    .sheet(isPresented: $showingSheet) {
+                        SettingsView(viewModel: SettingsViewModel(userDefaultsService: UserDefaultsService(), goodreadsService: GoodreadsService()))
+                    }
+                }
+            }
         }
-        .colorScheme(.light)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Rectangle().fill(.blue.gradient)
-            .ignoresSafeArea())
+    }
+    
+    var background: some View {
+        Rectangle().fill(LinearGradient(gradient: Gradient(colors: GradientsService.Blue), startPoint: .bottomLeading, endPoint: .topTrailing))
     }
     
     var quoteView: some View {
@@ -60,7 +79,8 @@ struct MainView: View {
                 .padding([.bottom, .horizontal], 14)
         }
         .frame(maxWidth: .infinity)
-        .background(.thinMaterial)
+        .background(.thinMaterial
+            .opacity(0.75))
         .foregroundColor(Color("MainText"))
         .multilineTextAlignment(.center)
         .cornerRadius(10)
@@ -77,7 +97,7 @@ struct MainView: View {
             .frame(width: 60, height: 90)
             .cornerRadius(4)
             .padding(.all, 16)
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text(viewModel.currentBook?.title ?? "")
                     .foregroundColor(Color("MainText"))
                     .font(.custom("Avenir Next", size: 15))
@@ -87,19 +107,19 @@ struct MainView: View {
                     .foregroundColor(Color("MainText"))
                     .font(.custom("Avenir Next", size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                if let publicationYear = viewModel.currentBook?.publicationYear {
-                    Text(String(publicationYear))
-                        .foregroundColor(Color("MainText"))
-                        .font(.custom("Avenir Next", size: 14))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
+                Text(viewModel.publicationDate)
+                    .foregroundColor(Color("MainText"))
+                    .font(.custom("Avenir Next", size: 14))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 6)
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 8)
             .animation(.easeInOut, value: viewModel.currentBook)
         }
         .frame(maxWidth: .infinity)
-        .background(.thinMaterial)
+        .background(.thinMaterial
+            .opacity(0.75))
         .cornerRadius(10)
     }
     
@@ -132,7 +152,8 @@ struct MainView: View {
                     .padding(.all, 16)
                     .frame(width: 62, height: 62)
                     .foregroundColor(Color.black)
-                    .background(.thinMaterial)
+                    .background(.thinMaterial
+                        .opacity(0.75))
                     .cornerRadius(31)
             }
             
@@ -140,7 +161,8 @@ struct MainView: View {
                 Image(systemName: "square.and.arrow.up")
                     .foregroundColor(Color.black)
                     .frame(width: 42, height: 42)
-                    .background(.thinMaterial)
+                    .background(.thinMaterial
+                        .opacity(0.75))
                     .cornerRadius(21)
             }
             
@@ -150,7 +172,8 @@ struct MainView: View {
     
     @MainActor func render() {
         let renderer = ImageRenderer(content: quoteView
-            .frame(width: 360).background(Rectangle().fill(.blue.gradient)))
+            .frame(width: 360)
+            .background(background))
         renderer.scale = displayScale
         
         if let uiImage = renderer.uiImage {

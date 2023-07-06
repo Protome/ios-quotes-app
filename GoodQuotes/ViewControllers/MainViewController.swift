@@ -11,6 +11,7 @@ import Pastel
 import Alamofire
 import AlamofireImage
 import Combine
+import SwiftUI
 
 class MainViewController: UIViewController {
     
@@ -66,7 +67,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         viewModel?.$loggedIn
             .receive(on: RunLoop.main)
             .sink {[weak self] loggedIn in
@@ -84,7 +85,7 @@ class MainViewController: UIViewController {
                 self?.updateDataFromViewmodel(quote: quote)
             }
             .store(in: &subscriptions)
-        
+
         viewModel?.$currentBook
             .receive(on: RunLoop.main)
             .compactMap({ $0 })
@@ -92,14 +93,14 @@ class MainViewController: UIViewController {
                 self?.loadBookData(book: book)
             }
             .store(in: &subscriptions)
-        
+
         viewModel?.$currentBook
             .receive(on: RunLoop.main)
             .compactMap({ $0?.publicationYear })
             .map({ "First published \($0)" })
             .sink { [weak self] publicationDate in self?.BookButtonPublishDateLabel.text = publicationDate }
             .store(in: &subscriptions)
-        
+
         viewModel?.$isLoading
             .receive(on: RunLoop.main)
             .sink { [weak self] isLoading in
@@ -119,6 +120,10 @@ class MainViewController: UIViewController {
         BookSearchField.bookSearchDelegate = self
         styleView()
         setupButtons()
+        
+//        let swiftUIViewController = UIHostingController(rootView: MainView(viewModel: self.viewModel!))
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+//        self.navigationController?.pushViewController(swiftUIViewController, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -8,8 +8,12 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class GradientsService {
+    static let Blue = [Color("BlueGradientDark"),
+                                       Color("BlueGradientLight")]
+
     static private let BlueGradient = [UIColor(named: "BlueGradientLight")!,
                                        UIColor(named: "BlueGradientDark")!]
     
