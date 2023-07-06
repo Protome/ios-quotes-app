@@ -78,7 +78,16 @@ class OpenLibraryService: OpenLibraryServiceProtocol {
                 if numFound > 0 {
                     let closestResult =  json["docs"].arrayValue.first { json in
                         let closestBook = Book(json: json)
-                        return Tools.levenshtein(aStr: query, bStr: closestBook.title) < query.count/3 || Tools.levenshtein(aStr: query, bStr: closestBook.author.name) < query.count/3
+                        
+                        if closestBook.title.count >= query.count, Tools.levenshtein(aStr: query, bStr: closestBook.title) < query.count/3 {
+                            return true
+                        }
+                        
+                        if closestBook.author.name.count >= query.count, Tools.levenshtein(aStr: query, bStr: closestBook.author.name) < query.count/3 {
+                            return true
+                        }
+                        
+                        return false
                     }
                     
                     if let bookJson = closestResult {

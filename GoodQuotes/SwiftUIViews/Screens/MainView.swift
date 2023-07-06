@@ -19,7 +19,7 @@ struct MainView: View {
             quoteView
                 .padding(.horizontal, 26)
                 .padding(.top, 70)
-                .animation(.easeInOut, value: viewModel.currentQuote)
+                .animation(.easeOut(duration: 0.3), value: viewModel.currentQuote)
                 .onAppear { render() }
                 .onChange(of: viewModel.currentQuote) {_ in
                     render()
@@ -43,32 +43,26 @@ struct MainView: View {
     var quoteView: some View {
         VStack() {
             Text(viewModel.currentQuote.quote)
-                .foregroundColor(Color("MainText"))
                 .font(.custom("Avenir Next", size: 16))
-                .multilineTextAlignment(.center)
                 .fontWeight(.medium)
                 .minimumScaleFactor(0.7)
-                .padding(.top, 16)
-                .padding(.horizontal, 8)
+                .padding([.top, .horizontal], 14)
             Divider()
                 .background(Color("MainText"))
                 .padding(.horizontal, 140)
                 .frame(height: 2)
             Text(viewModel.currentQuote.publication)
-                .foregroundColor(Color("MainText"))
                 .font(.custom("Avenir Next", size: 13))
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 14)
             Text(viewModel.currentQuote.author)
-                .foregroundColor(Color("MainText"))
                 .font(.custom("Avenir Next", size: 13))
-                .multilineTextAlignment(.center)
                 .padding(.top, 0)
-                .padding(.bottom, 8)
-                .padding(.horizontal, 8)
+                .padding([.bottom, .horizontal], 14)
         }
         .frame(maxWidth: .infinity)
         .background(.thinMaterial)
+        .foregroundColor(Color("MainText"))
+        .multilineTextAlignment(.center)
         .cornerRadius(10)
     }
     
@@ -78,7 +72,7 @@ struct MainView: View {
             { image in
                 image.resizable()
             } placeholder: {
-                Color.gray
+                
             }
             .frame(width: 60, height: 90)
             .cornerRadius(4)
@@ -88,22 +82,20 @@ struct MainView: View {
                     .foregroundColor(Color("MainText"))
                     .font(.custom("Avenir Next", size: 15))
                     .fontWeight(.medium)
-                    .padding(.horizontal, 8)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text(viewModel.currentBook?.author.name ?? "")
                     .foregroundColor(Color("MainText"))
                     .font(.custom("Avenir Next", size: 14))
-                    .padding(.horizontal, 8)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 if let publicationYear = viewModel.currentBook?.publicationYear {
                     Text(String(publicationYear))
                         .foregroundColor(Color("MainText"))
                         .font(.custom("Avenir Next", size: 14))
-                        .padding(.horizontal, 8)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
             .frame(maxWidth: .infinity)
+            .padding(.horizontal, 8)
             .animation(.easeInOut, value: viewModel.currentBook)
         }
         .frame(maxWidth: .infinity)
