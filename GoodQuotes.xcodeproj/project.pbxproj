@@ -40,13 +40,6 @@
 		E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5279ED8212765F6007BC585 /* BlurButtonView.swift */; };
 		E532E91927297E7A0081B386 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E532E91827297E7A0081B386 /* UIViewControllerExtensions.swift */; };
 		E532E91B2729B8BD0081B386 /* OpenLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E532E91A2729B8BD0081B386 /* OpenLibraryService.swift */; };
-		E550688B253B33CF00943B2E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E550688A253B33CF00943B2E /* WidgetKit.framework */; };
-		E550688D253B33CF00943B2E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E550688C253B33CF00943B2E /* SwiftUI.framework */; };
-		E5506890253B33CF00943B2E /* Quotey_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550688F253B33CF00943B2E /* Quotey_Widget.swift */; };
-		E5506893253B33D000943B2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5506892253B33D000943B2E /* Assets.xcassets */; };
-		E5506895253B33D000943B2E /* Quotey_Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E5506891253B33CF00943B2E /* Quotey_Widget.intentdefinition */; };
-		E5506896253B33D000943B2E /* Quotey_Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E5506891253B33CF00943B2E /* Quotey_Widget.intentdefinition */; };
-		E5506899253B33D000943B2E /* Quotey-WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E5506889253B33CF00943B2E /* Quotey-WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E554D40A211C9E3100F32AF9 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D409211C9E3100F32AF9 /* QuoteService.swift */; };
 		E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40C211CC03A00F32AF9 /* Quote.swift */; };
 		E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */; };
@@ -103,13 +96,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E5506897253B33D000943B2E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E5C5CC96211C8E5D0010ACB0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E5506888253B33CF00943B2E;
-			remoteInfo = "Quotey-WidgetExtension";
-		};
 		E5C5CCB3211C8E600010ACB0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E5C5CC96211C8E5D0010ACB0 /* Project object */;
@@ -126,7 +112,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E5506899253B33D000943B2E /* Quotey-WidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,13 +156,8 @@
 		E5279ED8212765F6007BC585 /* BlurButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurButtonView.swift; sourceTree = "<group>"; };
 		E532E91827297E7A0081B386 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		E532E91A2729B8BD0081B386 /* OpenLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLibraryService.swift; sourceTree = "<group>"; };
-		E5506889253B33CF00943B2E /* Quotey-WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Quotey-WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E550688A253B33CF00943B2E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E550688C253B33CF00943B2E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		E550688F253B33CF00943B2E /* Quotey_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotey_Widget.swift; sourceTree = "<group>"; };
-		E5506891253B33CF00943B2E /* Quotey_Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Quotey_Widget.intentdefinition; sourceTree = "<group>"; };
-		E5506892253B33D000943B2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E5506894253B33D000943B2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E554D409211C9E3100F32AF9 /* QuoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteService.swift; sourceTree = "<group>"; };
 		E554D40C211CC03A00F32AF9 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastelHelper.swift; sourceTree = "<group>"; };
@@ -230,15 +210,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E5506886253B33CF00943B2E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E550688D253B33CF00943B2E /* SwiftUI.framework in Frameworks */,
-				E550688B253B33CF00943B2E /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E5C5CC9B211C8E5D0010ACB0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -375,17 +346,6 @@
 			path = BlurButton;
 			sourceTree = "<group>";
 		};
-		E550688E253B33CF00943B2E /* Quotey-Widget */ = {
-			isa = PBXGroup;
-			children = (
-				E550688F253B33CF00943B2E /* Quotey_Widget.swift */,
-				E5506891253B33CF00943B2E /* Quotey_Widget.intentdefinition */,
-				E5506892253B33D000943B2E /* Assets.xcassets */,
-				E5506894253B33D000943B2E /* Info.plist */,
-			);
-			path = "Quotey-Widget";
-			sourceTree = "<group>";
-		};
 		E554D408211C9D2B00F32AF9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,7 +447,6 @@
 			children = (
 				E5C5CCA0211C8E5D0010ACB0 /* GoodQuotes */,
 				E5C5CCB5211C8E600010ACB0 /* GoodQuotesTests */,
-				E550688E253B33CF00943B2E /* Quotey-Widget */,
 				E5C5CC9F211C8E5D0010ACB0 /* Products */,
 				6571DB88678E0E534CAB06DC /* Pods */,
 				8B8A0105C4260B67664C8A74 /* Frameworks */,
@@ -500,7 +459,6 @@
 			children = (
 				E5C5CC9E211C8E5D0010ACB0 /* GoodQuotes.app */,
 				E5C5CCB2211C8E600010ACB0 /* GoodQuotesTests.xctest */,
-				E5506889253B33CF00943B2E /* Quotey-WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -543,23 +501,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E5506888253B33CF00943B2E /* Quotey-WidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E550689D253B33D000943B2E /* Build configuration list for PBXNativeTarget "Quotey-WidgetExtension" */;
-			buildPhases = (
-				E5506885253B33CF00943B2E /* Sources */,
-				E5506886253B33CF00943B2E /* Frameworks */,
-				E5506887253B33CF00943B2E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Quotey-WidgetExtension";
-			productName = "Quotey-WidgetExtension";
-			productReference = E5506889253B33CF00943B2E /* Quotey-WidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		E5C5CC9D211C8E5D0010ACB0 /* GoodQuotes */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5C5CCBB211C8E600010ACB0 /* Build configuration list for PBXNativeTarget "GoodQuotes" */;
@@ -574,7 +515,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				E5506898253B33D000943B2E /* PBXTargetDependency */,
 			);
 			name = GoodQuotes;
 			packageProductDependencies = (
@@ -623,9 +563,6 @@
 				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = Protome;
 				TargetAttributes = {
-					E5506888253B33CF00943B2E = {
-						CreatedOnToolsVersion = 12.0.1;
-					};
 					E5C5CC9D211C8E5D0010ACB0 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1020;
@@ -662,20 +599,11 @@
 			targets = (
 				E5C5CC9D211C8E5D0010ACB0 /* GoodQuotes */,
 				E5C5CCB1211C8E600010ACB0 /* GoodQuotesTests */,
-				E5506888253B33CF00943B2E /* Quotey-WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E5506887253B33CF00943B2E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E5506893253B33D000943B2E /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E5C5CC9C211C8E5D0010ACB0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -755,15 +683,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		E5506885253B33CF00943B2E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E5506890253B33CF00943B2E /* Quotey_Widget.swift in Sources */,
-				E5506895253B33D000943B2E /* Quotey_Widget.intentdefinition in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E5C5CC9A211C8E5D0010ACB0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -802,7 +721,6 @@
 				E5CFE69424A7EED500D5A554 /* BookSelectionViewController.swift in Sources */,
 				E5E525FC21262D2200EF1E1B /* AuthStorageService.swift in Sources */,
 				E5996544222A0B3000BAA33C /* BookSearchResultCell.swift in Sources */,
-				E5506896253B33D000943B2E /* Quotey_Widget.intentdefinition in Sources */,
 				E56C495424A8C341009A9569 /* Pages.swift in Sources */,
 				E554D415211F33BC00F32AF9 /* SettingsViewController.swift in Sources */,
 				8955D75F293F6C16009AACDC /* UserDefaultsServiceProtocol.swift in Sources */,
@@ -851,11 +769,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E5506898253B33D000943B2E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E5506888253B33CF00943B2E /* Quotey-WidgetExtension */;
-			targetProxy = E5506897253B33D000943B2E /* PBXContainerItemProxy */;
-		};
 		E5C5CCB4211C8E600010ACB0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E5C5CC9D211C8E5D0010ACB0 /* GoodQuotes */;
@@ -883,57 +796,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		E550689B253B33D000943B2E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
-				INFOPLIST_FILE = "Quotey-Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.5;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.protome.GoodQuotes.Quotey-Widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		E550689C253B33D000943B2E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
-				INFOPLIST_FILE = "Quotey-Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.5;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.protome.GoodQuotes.Quotey-Widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 		E5C5CCB9211C8E600010ACB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1143,15 +1005,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E550689D253B33D000943B2E /* Build configuration list for PBXNativeTarget "Quotey-WidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E550689B253B33D000943B2E /* Debug */,
-				E550689C253B33D000943B2E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		E5C5CC99211C8E5D0010ACB0 /* Build configuration list for PBXProject "GoodQuotes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
