@@ -25,12 +25,11 @@ struct MainView: View {
                     .onChange(of: viewModel.currentQuote) {_ in
                         render()
                     }
-                if viewModel.currentBook != nil {
-                    bookView
-                        .padding(.horizontal, 26)
-                        .padding([.top, .bottom], 22)
-                        .animation(.easeInOut, value: viewModel.currentBook)
-                }
+                bookView
+                    .padding(.horizontal, 26)
+                    .padding([.top, .bottom], 22)
+                    .opacity(viewModel.currentBook == nil ? 0 : 1)
+                    .animation(.easeInOut, value: viewModel.currentBook)
                 Spacer()
                 buttons
                     .padding(.horizontal, 16)
@@ -53,6 +52,7 @@ struct MainView: View {
                 }
             }
         }
+//        }.searchable(text: viewModel)
     }
     
     var background: some View {
@@ -128,7 +128,7 @@ struct MainView: View {
             Spacer()
             if viewModel.loggedIn {
                 Button() {
-                    //                    viewModel.addCurrentBookToShelf(sender: self)
+                    viewModel.addCurrentBookToShelf(sender: NSObject())
                 } label: {
                     Image(systemName: "plus")
                         .foregroundColor(Color.black)

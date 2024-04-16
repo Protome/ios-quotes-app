@@ -112,4 +112,17 @@ import Foundation
             self.currentBook = bookCopy
         }
     }
+    
+    @Published var searchText = ""
+    @Published var searchResults: [Book]?
+    
+    func searchWithText(query: String) {
+//            defaultsService.wipeFilters()
+            
+            if query.count > 0 {
+//                defaultsService.storeSearchTerm(search: query)
+            }
+    }
+    
+    
 }

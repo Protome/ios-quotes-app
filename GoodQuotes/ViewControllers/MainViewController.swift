@@ -121,9 +121,9 @@ class MainViewController: UIViewController {
         styleView()
         setupButtons()
         
-//        let swiftUIViewController = UIHostingController(rootView: MainView(viewModel: self.viewModel!))
-//        self.navigationController?.setNavigationBarHidden(true, animated: true)
-//        self.navigationController?.pushViewController(swiftUIViewController, animated: true)
+        let swiftUIViewController = UIHostingController(rootView: MainView(viewModel: self.viewModel!))
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.pushViewController(swiftUIViewController, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
