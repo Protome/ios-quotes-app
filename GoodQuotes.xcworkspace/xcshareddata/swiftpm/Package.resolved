@@ -1,4 +1,5 @@
 {
+  "originHash" : "e7b9ff8eb51222bfd39b5a7be6576e0b718033f6c4e357dce9c8625ae8528fe4",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -82,6 +83,15 @@
       }
     },
     {
+      "identity" : "swiftsoup",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scinfu/SwiftSoup.git",
+      "state" : {
+        "revision" : "028487d4a8a291b2fe1b4392b5425b6172056148",
+        "version" : "2.7.2"
+      }
+    },
+    {
       "identity" : "swiftyjson",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftyJSON/SwiftyJSON.git",
@@ -118,5 +128,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

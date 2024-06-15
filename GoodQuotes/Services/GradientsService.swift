@@ -41,6 +41,5 @@ class GradientsService {
                                  "BlueGradient": BlueGradient,
                                  "YellowPeach": YellowPeach,
                                  "PeachPink": PeachPink,
-                                 "PurPink": PurPink,
-                                 "Custom": Custom]
+                                 "PurPink": PurPink]
 }

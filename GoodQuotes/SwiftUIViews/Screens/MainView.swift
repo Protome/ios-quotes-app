@@ -22,7 +22,7 @@ struct MainView: View {
                     .padding(.top, 22)
                     .animation(.easeOut(duration: 0.3), value: viewModel.currentQuote)
                     .onAppear { render() }
-                    .onChange(of: viewModel.currentQuote) {_ in
+                    .onChange(of: viewModel.currentQuote) {_, _ in
                         render()
                     }
                 bookView
@@ -61,22 +61,25 @@ struct MainView: View {
     
     var quoteView: some View {
         VStack() {
-            Text(viewModel.currentQuote.quote)
-                .font(.custom("Avenir Next", size: 16))
-                .fontWeight(.medium)
-                .minimumScaleFactor(0.7)
-                .padding([.top, .horizontal], 14)
-            Divider()
-                .background(Color("MainText"))
-                .padding(.horizontal, 140)
-                .frame(height: 2)
-            Text(viewModel.currentQuote.publication)
-                .font(.custom("Avenir Next", size: 13))
-                .padding(.horizontal, 14)
-            Text(viewModel.currentQuote.author)
-                .font(.custom("Avenir Next", size: 13))
-                .padding(.top, 0)
-                .padding([.bottom, .horizontal], 14)
+            if let quote = viewModel.currentQuote {
+                Text(quote.quote)
+                    .font(.custom("Avenir Next", size: 16))
+                    .fontWeight(.medium)
+                    .minimumScaleFactor(0.7)
+                    .padding([.top, .horizontal], 14)
+                Divider()
+                    .background(Color("MainText"))
+                    .padding(.horizontal, 140)
+                    .frame(height: 2)
+                Text(quote.publication)
+                    .font(.custom("Avenir Next", size: 13))
+                    .padding(.horizontal, 14)
+                Text(quote.author)
+                    .font(.custom("Avenir Next", size: 13))
+                    .padding(.top, 0)
+                    .padding([.bottom, .horizontal], 14)
+                
+            }
         }
         .frame(maxWidth: .infinity)
         .background(.thinMaterial
@@ -184,7 +187,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        let quoteService = QuoteService()
+        let quoteService = QuoteScraperService()
         let reviewService = ReviewRequestService()
         let goodreadsService = GoodreadsService()
         let openLibraryService = OpenLibraryService()

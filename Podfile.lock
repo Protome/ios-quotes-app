@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (5.6.4)
-  - ChromaColorPicker (2.0.2)
   - OAuthSwift (2.2.0)
   - OAuthSwiftAlamofire (1.0.0beta):
     - Alamofire
@@ -8,14 +7,12 @@ PODS:
   - Pastel (0.6.0)
 
 DEPENDENCIES:
-  - ChromaColorPicker
   - OAuthSwiftAlamofire (from `https://github.com/OAuthSwift/OAuthSwiftAlamofire.git`, tag `1.0.0beta`)
   - Pastel
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - ChromaColorPicker
     - OAuthSwift
     - Pastel
 
@@ -31,11 +28,10 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
-  ChromaColorPicker: 307585f2dc23d4d72f24cad320c1e08825cb5c09
   OAuthSwift: 75efbb5bd9a4b2b71a37bd7e986bf3f55ddd54c6
   OAuthSwiftAlamofire: 34e6b8f231ea7fad88ea96c0ab876fa12a11180e
   Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
 
-PODFILE CHECKSUM: 2ad412554691b73336e5e162c0a044f60bcbe2cf
+PODFILE CHECKSUM: 5c1783853849a653689115181306e549cb92dd96
 
 COCOAPODS: 1.12.1

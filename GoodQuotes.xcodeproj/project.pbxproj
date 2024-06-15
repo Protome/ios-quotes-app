@@ -34,13 +34,14 @@
 		E50ADDC1222B48E20037ACBD /* TextOnlyResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E50ADDC0222B48E20037ACBD /* TextOnlyResultCell.xib */; };
 		E50ADDC3222B49B20037ACBD /* TextOnlyResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */; };
 		E50C0AD922A8762300B2305E /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50C0AD822A8762300B2305E /* UIColorExtensions.swift */; };
+		E5104AF12BCF25AB00B5902F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = E5104AF02BCF25AB00B5902F /* SwiftSoup */; };
+		E5104AF32BCF270D00B5902F /* QuoteScraperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5104AF22BCF270D00B5902F /* QuoteScraperService.swift */; };
 		E52121682124DE620027BCFC /* GoodreadsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52121672124DE620027BCFC /* GoodreadsService.swift */; };
 		E526FEC2272D7AE900C0FF1B /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = E526FEC1272D7AE900C0FF1B /* Tools.swift */; };
 		E5279ED7212765D8007BC585 /* BlurButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5279ED6212765D8007BC585 /* BlurButtonView.xib */; };
 		E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5279ED8212765F6007BC585 /* BlurButtonView.swift */; };
 		E532E91927297E7A0081B386 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E532E91827297E7A0081B386 /* UIViewControllerExtensions.swift */; };
 		E532E91B2729B8BD0081B386 /* OpenLibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E532E91A2729B8BD0081B386 /* OpenLibraryService.swift */; };
-		E554D40A211C9E3100F32AF9 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D409211C9E3100F32AF9 /* QuoteService.swift */; };
 		E554D40D211CC03A00F32AF9 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40C211CC03A00F32AF9 /* Quote.swift */; };
 		E554D410211EFBFE00F32AF9 /* PastelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */; };
 		E554D412211F17C200F32AF9 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554D411211F17C200F32AF9 /* Tags.swift */; };
@@ -157,6 +158,7 @@
 		E50ADDC0222B48E20037ACBD /* TextOnlyResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextOnlyResultCell.xib; sourceTree = "<group>"; };
 		E50ADDC2222B49B20037ACBD /* TextOnlyResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextOnlyResultCell.swift; sourceTree = "<group>"; };
 		E50C0AD822A8762300B2305E /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		E5104AF22BCF270D00B5902F /* QuoteScraperService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteScraperService.swift; sourceTree = "<group>"; };
 		E52121672124DE620027BCFC /* GoodreadsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodreadsService.swift; sourceTree = "<group>"; };
 		E526FEC1272D7AE900C0FF1B /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		E5279ED6212765D8007BC585 /* BlurButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlurButtonView.xib; sourceTree = "<group>"; };
@@ -165,7 +167,6 @@
 		E532E91A2729B8BD0081B386 /* OpenLibraryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLibraryService.swift; sourceTree = "<group>"; };
 		E550688A253B33CF00943B2E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E550688C253B33CF00943B2E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		E554D409211C9E3100F32AF9 /* QuoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteService.swift; sourceTree = "<group>"; };
 		E554D40C211CC03A00F32AF9 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		E554D40F211EFBFE00F32AF9 /* PastelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastelHelper.swift; sourceTree = "<group>"; };
 		E554D411211F17C200F32AF9 /* Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
@@ -236,6 +237,7 @@
 				E5A48C3329F33ADE00E2DD65 /* Alamofire in Frameworks */,
 				E5A48C3C29F33BF500E2DD65 /* SwiftyXMLParser in Frameworks */,
 				E56D805029F345A800F8DADC /* Swinject in Frameworks */,
+				E5104AF12BCF25AB00B5902F /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,13 +369,13 @@
 			children = (
 				8955D75B293F6912009AACDC /* Protocols */,
 				E5E525F92126260600EF1E1B /* KeychainPasswordItem.swift */,
-				E554D409211C9E3100F32AF9 /* QuoteService.swift */,
 				E554D420211F44EB00F32AF9 /* UserDefaultsService.swift */,
 				E52121672124DE620027BCFC /* GoodreadsService.swift */,
 				E5E525FB21262D2200EF1E1B /* AuthStorageService.swift */,
 				E58394C5213AF0E800AC78DE /* ReviewRequestService.swift */,
 				E57D4A5722A5D99E007B93F1 /* GradientsService.swift */,
 				E532E91A2729B8BD0081B386 /* OpenLibraryService.swift */,
+				E5104AF22BCF270D00B5902F /* QuoteScraperService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -570,6 +572,7 @@
 				E5A48C3E29F33C3000E2DD65 /* OAuthSwift */,
 				E5A48C4729F33F2100E2DD65 /* SwinjectStoryboard */,
 				E56D804F29F345A800F8DADC /* Swinject */,
+				E5104AF02BCF25AB00B5902F /* SwiftSoup */,
 			);
 			productName = GoodQuotes;
 			productReference = E5C5CC9E211C8E5D0010ACB0 /* GoodQuotes.app */;
@@ -637,6 +640,7 @@
 				E5A48C4629F33F2100E2DD65 /* XCRemoteSwiftPackageReference "SwinjectStoryboard" */,
 				E5A48C4929F340DD00E2DD65 /* XCRemoteSwiftPackageReference "mockingbird" */,
 				E56D804E29F345A800F8DADC /* XCRemoteSwiftPackageReference "Swinject" */,
+				E5104AEF2BCF25AB00B5902F /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 			);
 			productRefGroup = E5C5CC9F211C8E5D0010ACB0 /* Products */;
 			projectDirPath = "";
@@ -744,6 +748,7 @@
 				E55FDC9829F3F7EE00D8791D /* MainView.swift in Sources */,
 				E5818A052126C6610099BEAF /* Book.swift in Sources */,
 				E5279ED9212765F6007BC585 /* BlurButtonView.swift in Sources */,
+				E5104AF32BCF270D00B5902F /* QuoteScraperService.swift in Sources */,
 				E532E91927297E7A0081B386 /* UIViewControllerExtensions.swift in Sources */,
 				8920804F29467F2D00BACBAD /* ShelvesSelectionViewModel.swift in Sources */,
 				E5E525FE2126374500EF1E1B /* Shelf.swift in Sources */,
@@ -778,7 +783,6 @@
 				8920804D2946795200BACBAD /* BookSelectionShelfListViewModel.swift in Sources */,
 				E554D412211F17C200F32AF9 /* Tags.swift in Sources */,
 				E5B195C9212B14E700A9901C /* UIViewExtensions.swift in Sources */,
-				E554D40A211C9E3100F32AF9 /* QuoteService.swift in Sources */,
 				8955D763293F7026009AACDC /* AuthStorageServiceProtocol.swift in Sources */,
 				E50C0AD922A8762300B2305E /* UIColorExtensions.swift in Sources */,
 				E5C4571429F740EB00471358 /* AboutView.swift in Sources */,
@@ -971,15 +975,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
 				INFOPLIST_FILE = GoodQuotes/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				INFOPLIST_KEY_CFBundleDisplayName = Quotey;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.3;
+				MARKETING_VERSION = 1.6.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -994,15 +1000,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = VNFZ3Q6QAX;
 				INFOPLIST_FILE = GoodQuotes/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				INFOPLIST_KEY_CFBundleDisplayName = Quotey;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.3;
+				MARKETING_VERSION = 1.6.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.protome.GoodQuotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1087,6 +1095,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E5104AEF2BCF25AB00B5902F /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.2;
+			};
+		};
 		E56D804E29F345A800F8DADC /* XCRemoteSwiftPackageReference "Swinject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swinject/Swinject.git";
@@ -1154,6 +1170,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E5104AF02BCF25AB00B5902F /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5104AEF2BCF25AB00B5902F /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
 		E56D804F29F345A800F8DADC /* Swinject */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E56D804E29F345A800F8DADC /* XCRemoteSwiftPackageReference "Swinject" */;

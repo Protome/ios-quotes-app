@@ -67,7 +67,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         viewModel?.$loggedIn
             .receive(on: RunLoop.main)
             .sink {[weak self] loggedIn in
@@ -85,15 +84,19 @@ class MainViewController: UIViewController {
                 self?.updateDataFromViewmodel(quote: quote)
             }
             .store(in: &subscriptions)
-
+        
         viewModel?.$currentBook
             .receive(on: RunLoop.main)
-            .compactMap({ $0 })
             .sink {[weak self] book in
-                self?.loadBookData(book: book)
+                if let book {
+                    self?.loadBookData(book: book)
+                }
+                else {
+                    self?.hideBookDetails()
+                }
             }
             .store(in: &subscriptions)
-
+        
         viewModel?.$currentBook
             .receive(on: RunLoop.main)
             .compactMap({ $0?.publicationYear })
@@ -101,6 +104,7 @@ class MainViewController: UIViewController {
             .sink { [weak self] publicationDate in self?.BookButtonPublishDateLabel.text = publicationDate }
             .store(in: &subscriptions)
 
+        
         viewModel?.$isLoading
             .receive(on: RunLoop.main)
             .sink { [weak self] isLoading in

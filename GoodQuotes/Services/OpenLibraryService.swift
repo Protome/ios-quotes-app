@@ -54,7 +54,7 @@ class OpenLibraryService: OpenLibraryServiceProtocol {
                     }
                 }
             case .failure(let error):
-                print(error)
+                print("searchForBook: \(error)")
                 return nil
             }
         }
@@ -100,7 +100,7 @@ class OpenLibraryService: OpenLibraryServiceProtocol {
                     }
                 }
             case .failure(let error):
-                print(error)
+                print("wideSearchForBook: \(error)")
                 return nil
             }
         }
@@ -138,7 +138,7 @@ class OpenLibraryService: OpenLibraryServiceProtocol {
                     return(bookResults, false)
                 }
             case .failure(let error):
-                print(error)
+                print("searchForBooks: \(error)")
                 return ([Book](), true)
             }
         }

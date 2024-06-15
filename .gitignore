@@ -71,6 +71,7 @@ GoodQuotes/Secrets\.strings
 
 GoodQuotes/\.DS_Store
 **/.DS_Store
+.DS_Store
 
 # Generated
 *.generated.swift

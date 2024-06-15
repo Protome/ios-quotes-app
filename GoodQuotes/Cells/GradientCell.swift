@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import Pastel
-import ChromaColorPicker
 
 class GradientCell: UICollectionViewCell
 {
@@ -44,12 +43,12 @@ class GradientCell: UICollectionViewCell
         
         createGradientView()
         
-        if gradientName == "Custom"
-        {
-            let colourPicker = ChromaColorPicker(frame: GradientBackgroundContainer.bounds)
-            colourPicker.isUserInteractionEnabled = false
-            GradientBackgroundContainer.addSubview(colourPicker)
-        }
+//        if gradientName == "Custom"
+//        {
+//            let colourPicker = ChromaColorPicker(frame: GradientBackgroundContainer.bounds)
+//            colourPicker.isUserInteractionEnabled = false
+//            GradientBackgroundContainer.addSubview(colourPicker)
+//        }
     }
     
     func createGradientView()
