@@ -1,0 +1,28 @@
+{
+  "name": "OAuthSwiftAlamofire",
+  "version": "1.0.0beta",
+  "license": "MIT",
+  "summary": "Sign Alamofire request with OAuthSwift",
+  "homepage": "https://github.com/OAuthSwift/OAuthSwiftAlamofire",
+  "authors": {
+    "phimage": "eric.marchand.n7@gmail.com"
+  },
+  "platforms": {
+    "ios": "10.0",
+    "osx": "10.12",
+    "tvos": "10.0"
+  },
+  "source": {
+    "git": "https://github.com/OAuthSwift/OAuthSwiftAlamofire.git",
+    "tag": "1.0.0beta"
+  },
+  "source_files": "Sources/*.swift",
+  "dependencies": {
+    "OAuthSwift": [
+
+    ],
+    "Alamofire": [
+
+    ]
+  }
+}
