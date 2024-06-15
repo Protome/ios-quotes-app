@@ -128,8 +128,7 @@ private extension QuoteScraperService {
             var quotes: [Quote] = []
             let quoteTexts = try document.select(".quoteText")
             
-            try quoteTexts.forEach({ element in
-                let authorOrTitleElements = try element.select(".authorOrTitle")
+            quoteTexts.forEach({ element in
                 let quoteText = element.textNodes().first?.text() ?? ""
                 let author = element.children().count > 1 ? (try? element.children()[1].text()) ?? "" : ""
                 let bookTitle = element.children().count > 2 ? (try? element.children()[2].text()) ?? "" : ""
