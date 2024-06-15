@@ -9,8 +9,8 @@
 import Foundation
 
 extension String {
-    var withoutSpecialCharacters: String {
-        let disallowedChars = CharacterSet.init(charactersIn: "=&*^()%$£@!|\\/")
-        return self.components(separatedBy: disallowedChars).joined(separator: "")
+    func withoutSpecialCharacters(separator: String?) -> String {
+        let disallowedChars = CharacterSet.init(charactersIn: "=&*^()%$£@!|\\/.")
+        return self.components(separatedBy: disallowedChars).joined(separator: separator ?? "")
     }
 }

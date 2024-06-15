@@ -11,23 +11,18 @@ import UIKit
 
 class BookSelectionViewController: UITableViewController {
     weak var delegate: BookSelectionDelegate?
+    var viewModel: BookSelectionViewModel?
     
     @IBOutlet weak var ErrorHeaderConstraint: NSLayoutConstraint!
     @IBOutlet weak var HeaderView: UIView!
     @IBOutlet weak var bottomSpinner: UIActivityIndicatorView!
-    
-    let buffer = 15
-    var books = [Book]()
-    var shelf: Shelf?
-    var pages: Pages?
-    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ErrorHeaderConstraint.constant = 0
         HeaderView.frame.size.height = 0
         
-        title = shelf?.name
+        title = viewModel?.title
         refreshControl?.addTarget(self, action: #selector(self.loadBooks(_:)), for: .valueChanged)
     }
     
@@ -38,43 +33,19 @@ class BookSelectionViewController: UITableViewController {
     }
     
     @objc func loadBooks(_ sender: Any) {
-        let goodreadsService = GoodreadsService()
-        guard let shelf = shelf, !isLoading else {
-            return
+        Task {
+            await loadBooksFromShelf()
         }
-        isLoading = true
+    }
+    
+    func loadBooksFromShelf() async -> Void {
         refreshControl?.beginRefreshing()
-        
-        goodreadsService.getBooksFromShelf(sender: self, shelf: shelf, page: pages?.nextPage ?? 1, completion: { books, pages in
-            self.pages = pages
-            if(pages.currentPage == 1) {
-                self.books = books
-                self.tableView.reloadData()
-            }
-            else {
-                if books.count == 0 { return }
-                
-                let previousResultCount = self.books.count
-                self.books.append(contentsOf: books)
-                var indexesToUpdate = [IndexPath]()
-                for index in previousResultCount...(self.books.count - 1) {
-                    indexesToUpdate.append(IndexPath(row: index, section: 0))
-                }
-                
-                UIView.setAnimationsEnabled(false)
-                self.tableView?.beginUpdates()
-                self.tableView?.insertRows(at: indexesToUpdate, with: UITableView.RowAnimation.none)
-                self.tableView?.endUpdates()
-                UIView.setAnimationsEnabled(true)
-            }
-            
-            
-            self.refreshControl?.endRefreshing()
-            self.ErrorHeaderConstraint.constant = books.count == 0 ? 87 : 0
-            self.HeaderView.frame.size.height = books.count == 0 ? 87 : 0
-            self.isLoading = false
-            self.bottomSpinner.stopAnimating()
-        })
+        await viewModel!.loadBooksFromShelf(sender: self)
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
+        self.ErrorHeaderConstraint.constant = viewModel!.books.count == 0 ? 87 : 0
+        self.HeaderView.frame.size.height = viewModel!.books.count == 0 ? 87 : 0
+        self.bottomSpinner.stopAnimating()
     }
 }
 
@@ -85,12 +56,12 @@ extension BookSelectionViewController
             return UITableViewCell()
         }
         
-        cell.SetupCell(book: books[indexPath.row])
+        cell.SetupCell(book: viewModel!.books[indexPath.row])
         if popoverPresentationController?.presentationStyle == .popover {
             cell.backgroundColor = UIColor.clear
         }
         
-        if indexPath.row == (pages?.lastItem ?? 1) - buffer, pages?.hasMoreToLoad ?? true {
+        if indexPath.row == (viewModel?.pages?.lastItem ?? 1) - viewModel!.buffer, viewModel?.pages?.hasMoreToLoad ?? true {
             bottomSpinner.startAnimating()
             loadBooks(self)
         }
@@ -103,7 +74,7 @@ extension BookSelectionViewController
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return books.count
+        return viewModel?.books.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -112,12 +83,9 @@ extension BookSelectionViewController
             return
         }
         
-        let selectedBook = books[indexPath.row]
-        let defaultsService = UserDefaultsService()
-        defaultsService.storeBook(book: selectedBook)
-        
+        viewModel?.selectBook(selected: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
-        delegate?.bookSelected(book: selectedBook)
+        delegate?.bookSelected(book: viewModel!.selectedBook!)
         dismiss(animated: true, completion: nil)
     }
 }

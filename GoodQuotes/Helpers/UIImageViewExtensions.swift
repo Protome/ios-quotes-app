@@ -9,16 +9,16 @@
 import Foundation
 import UIKit
 import Alamofire
+import AlamofireImage
 
 extension UIImageView {
      func setImageFromUrl(_ url: String) {
         guard !url.isEmpty else { return }
-        
-        Alamofire.request(url).responseImage { imageResponse in
-            if let image = imageResponse.result.value {
-                self.updateImageWithDefaultTransition(image: image)
-            }
-        }
+         AF.request(url).responseImage { response in
+             if case .success(let image) = response.result {
+                 self.updateImageWithDefaultTransition(image: image)
+             }
+         }
     }
     
     func updateImageWithDefaultTransition(image: UIImage?) {

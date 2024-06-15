@@ -9,20 +9,20 @@
 import Foundation
 import UIKit
 import Pastel
-import ChromaColorPicker
 
 class ColourSelectionViewController : UIViewController, UIGestureRecognizerDelegate {
+    let viewModel = ColourSelectionViewModel()
     
     @IBOutlet weak var PreviewGradientView: UIView!
     @IBOutlet weak var CollectionView: UICollectionView!
     @IBOutlet weak var TopRightColourPicker: UIView!
     @IBOutlet weak var BottomLeftColourPIcker: UIView!
     
-    var topRightHandle = ChromaColorHandle(color: UIColor(named: "GreenGradient2")!)
-    var bottomLeftHandle = ChromaColorHandle(color: UIColor(named: "GreenGradient1")!)
+//    var topRightHandle = ChromaColorHandle(color: UIColor(named: "GreenGradient2")!)
+//    var bottomLeftHandle = ChromaColorHandle(color: UIColor(named: "GreenGradient1")!)
     var coloursUpdated = false
-    var colourPickerTopRight = ChromaColorPicker()
-    var colourPickerBottomLeft = ChromaColorPicker()
+//    var colourPickerTopRight = ChromaColorPicker()
+//    var colourPickerBottomLeft = ChromaColorPicker()
     var previewPastelView: PastelView?
     var keys: [String]?
     var topRightColor = UIColor.white
@@ -60,7 +60,7 @@ class ColourSelectionViewController : UIViewController, UIGestureRecognizerDeleg
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        styleView()
+//        styleView()
         
         let indexPath = IndexPath(row: selectedIndex, section: 0)
         DispatchQueue.main.async {
@@ -76,31 +76,31 @@ class ColourSelectionViewController : UIViewController, UIGestureRecognizerDeleg
         
         userDefaultService.storeBackgroundType(type: selectedType)
         
-        if selectedType == "Custom" && coloursUpdated
-        {
-            userDefaultService.storeColours(colours: [bottomLeftColor, topRightColor])
-        }
+//        if selectedType == "Custom" && coloursUpdated
+//        {
+//            userDefaultService.storeColours(colours: [bottomLeftColor, topRightColor])
+//        }
         
         closeModal(self)
     }
     
-    func styleView()
-    {
-        view.layoutIfNeeded()
-        colourPickerTopRight = ChromaColorPicker(frame: TopRightColourPicker.bounds)
-        colourPickerTopRight.addHandle(topRightHandle)
-        colourPickerTopRight.delegate = self
-        
-        colourPickerBottomLeft = ChromaColorPicker(frame: BottomLeftColourPIcker.bounds)
-        colourPickerBottomLeft.addHandle(bottomLeftHandle)
-        colourPickerBottomLeft.delegate = self
-        
-        TopRightColourPicker.addSubview(colourPickerTopRight)
-        BottomLeftColourPIcker.addSubview(colourPickerBottomLeft)
-        
-        colourPickerTopRight.isHidden = colourType != "Custom"
-        colourPickerBottomLeft.isHidden = colourType != "Custom"
-    }
+//    func styleView()
+//    {
+//        view.layoutIfNeeded()
+//        colourPickerTopRight = ChromaColorPicker(frame: TopRightColourPicker.bounds)
+//        colourPickerTopRight.addHandle(topRightHandle)
+//        colourPickerTopRight.delegate = self
+//        
+//        colourPickerBottomLeft = ChromaColorPicker(frame: BottomLeftColourPIcker.bounds)
+//        colourPickerBottomLeft.addHandle(bottomLeftHandle)
+//        colourPickerBottomLeft.delegate = self
+//        
+//        TopRightColourPicker.addSubview(colourPickerTopRight)
+//        BottomLeftColourPIcker.addSubview(colourPickerBottomLeft)
+//        
+//        colourPickerTopRight.isHidden = colourType != "Custom"
+//        colourPickerBottomLeft.isHidden = colourType != "Custom"
+//    }
     
     func updatePreview(selectedColours: [UIColor])
     {
@@ -156,41 +156,41 @@ extension ColourSelectionViewController: UICollectionViewDataSource, UICollectio
         
         colourType = gradientName
         
-        if gradientName == "Custom",  let colours = userDefaultService.loadColours()
-        {
-            topRightHandle.color = colours[0]
-            bottomLeftHandle.color = colours[1]
-            selectedColours = colours
-        }
+//        if gradientName == "Custom",  let colours = userDefaultService.loadColours()
+//        {
+//            topRightHandle.color = colours[0]
+//            bottomLeftHandle.color = colours[1]
+//            selectedColours = colours
+//        }
         
-        colourPickerTopRight.isHidden = colourType != "Custom"
-        colourPickerBottomLeft.isHidden = colourType != "Custom"
+//        colourPickerTopRight.isHidden = colourType != "Custom"
+//        colourPickerBottomLeft.isHidden = colourType != "Custom"
         
         updatePreview(selectedColours: selectedColours)
     }
 }
 
-extension ColourSelectionViewController: ChromaColorPickerDelegate
-{
-    func colorPickerHandleDidChange(_ colorPicker: ChromaColorPicker, handle: ChromaColorHandle, to color: UIColor) {
-        
-        guard colourType == "Custom" else {
-            return
-        }
-        
-        if colorPicker == colourPickerTopRight {
-            topRightColor = color
-            coloursUpdated = true
-        }
-        
-        if colorPicker == colourPickerBottomLeft {
-            bottomLeftColor = color
-            coloursUpdated = true
-        }
-        
-        updatePreview(selectedColours: [bottomLeftColor, topRightColor])
-    }
-}
+//extension ColourSelectionViewController: ChromaColorPickerDelegate
+//{
+//    func colorPickerHandleDidChange(_ colorPicker: ChromaColorPicker, handle: ChromaColorHandle, to color: UIColor) {
+//        
+//        guard colourType == "Custom" else {
+//            return
+//        }
+//        
+//        if colorPicker == colourPickerTopRight {
+//            topRightColor = color
+//            coloursUpdated = true
+//        }
+//        
+//        if colorPicker == colourPickerBottomLeft {
+//            bottomLeftColor = color
+//            coloursUpdated = true
+//        }
+//        
+//        updatePreview(selectedColours: [bottomLeftColor, topRightColor])
+//    }
+//}
 
 protocol ColourSelectionDelegate: AnyObject
 {

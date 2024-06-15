@@ -18,7 +18,7 @@ open class OAuthSwift: NSObject, OAuthSwiftRequestHandle {
     open var version: OAuthSwiftCredential.Version { return self.client.credential.version }
 
     /// Handle the authorize url into a web view or browser
-    open var authorizeURLHandler: OAuthSwiftURLHandlerType = OAuthSwiftOpenURLExternally.sharedInstance
+    open var authorizeURLHandler: OAuthSwiftURLHandlerType = OAuthSwiftURLHandlerTypeFactory.default
 
     fileprivate var currentRequests: [String: OAuthSwiftRequestHandle] = [:]
 
@@ -29,14 +29,12 @@ open class OAuthSwift: NSObject, OAuthSwiftRequestHandle {
 
     // MARK: callback notification
     struct CallbackNotification {
-        @available(*, deprecated: 0.5, message: "Use Notification.Name.OAuthSwiftHandleCallbackURL")
-        static let notificationName = Notification.Name(rawValue: "OAuthSwiftCallbackNotificationName")
         static let optionsURLKey = "OAuthSwiftCallbackNotificationOptionsURLKey"
     }
 
     /// Handle callback url which contains now token information
     open class func handle(url: URL) {
-        let notification = Notification(name: NSNotification.Name.OAuthSwiftHandleCallbackURL, object: nil,
+        let notification = Notification(name: OAuthSwift.didHandleCallbackURL, object: nil,
             userInfo: [CallbackNotification.optionsURLKey: url])
         notificationCenter.post(notification)
     }
@@ -50,8 +48,11 @@ open class OAuthSwift: NSObject, OAuthSwiftRequestHandle {
     }
 
     func observeCallback(_ block: @escaping (_ url: URL) -> Void) {
-        self.observer = OAuthSwift.notificationCenter.addObserver(forName: NSNotification.Name.OAuthSwiftHandleCallbackURL, object: nil, queue: OperationQueue.main) { [weak self] notification in
-            self?.removeCallbackNotificationObserver()
+        self.observer = OAuthSwift.notificationCenter.addObserver(
+            forName: OAuthSwift.didHandleCallbackURL,
+            object: nil,
+            queue: OperationQueue.main) { [weak self] notification in
+                self?.removeCallbackNotificationObserver()
 
             if let urlFromUserInfo = notification.userInfo?[CallbackNotification.optionsURLKey] as? URL {
                 block(urlFromUserInfo)
@@ -66,6 +67,7 @@ open class OAuthSwift: NSObject, OAuthSwiftRequestHandle {
     public func removeCallbackNotificationObserver() {
         if let observer = self.observer {
             OAuthSwift.notificationCenter.removeObserver(observer)
+            self.observer = nil
         }
     }
 
@@ -102,9 +104,22 @@ extension OAuthSwift {
     public typealias Parameters = [String: Any]
     public typealias Headers = [String: String]
     public typealias ConfigParameters = [String: String]
-    /// MARK: callback alias
+    // MARK: callback alias
     public typealias TokenSuccess = (credential: OAuthSwiftCredential, response: OAuthSwiftResponse?, parameters: Parameters)
-    public typealias TokenSuccessHandler = (_ credential: OAuthSwiftCredential, _ response: OAuthSwiftResponse?, _ parameters: Parameters) -> Void
-    public typealias FailureHandler = (_ error: OAuthSwiftError) -> Void
-    public typealias TokenRenewedHandler = (_ credential: OAuthSwiftCredential) -> Void
+    public typealias TokenCompletionHandler = (Result<TokenSuccess, OAuthSwiftError>) -> Void
+    public typealias TokenRenewedHandler = (Result<OAuthSwiftCredential, Never>) -> Void
+
+}
+
+// MARK: - Logging
+extension OAuthSwift {
+
+   static var log: OAuthLogProtocol?
+
+   /// Enables the log level
+   /// And instantiates the log object
+   public static func setLogLevel(_ level: OAuthLogLevel) {
+      Self.log = OAuthDebugLogger(level)
+      OAuthSwift.log?.trace("Logging enabled with level: \(level)")
+   }
 }

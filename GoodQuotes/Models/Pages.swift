@@ -21,6 +21,13 @@ struct Pages  {
         return total > lastItem
     }
     
+    init() {
+        currentPage = 1
+        numPages = 1
+        lastItem = 1
+        total =  1
+    }
+    
     init(xml: XML.Accessor) {
         currentPage = Int(xml.attributes["currentpage"] ?? "1") ?? 1
         numPages = Int(xml.attributes["numpages"] ?? "1") ?? 1

@@ -20,7 +20,7 @@ struct TokenSecretConfiguration {
     static let accessGroup: String? = nil
 }
 
-struct AuthStorageService {
+struct AuthStorageService: AuthStorageServiceProtocol {
     
     static func saveAuthToken(_ token: String) {
         guard !token.isEmpty else {

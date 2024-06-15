@@ -29,16 +29,16 @@ import UIKit
     var searchResults: [Book] = [Book]()
     var resultsTableView : UITableView?
     var backgroundView : UIView?
-    var currentPage = 0
-    var numberOfPages = 1
     var dismissKeyboardGestureRecogniser : UITapGestureRecognizer?
     let defaultsService = UserDefaultsService()
+    let segmentHeader = UISegmentedControl(items: ["Title", "Author", "Either"])
+    let refreshControl = UIRefreshControl()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         delegate = self
         addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-   
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow),
@@ -92,54 +92,61 @@ import UIKit
         resultsTableView!.frame = CGRect(x: inset, y: parentVC.view.safeAreaInsets.top, width: width, height: CGFloat(parentVC.view.frame.height - parentVC.view.safeAreaInsets.top))
         parentVC.view.addSubview(resultsTableView!)
         
-        searchByCurrentText(page: 0)
+        resultsTableView?.addObserver(self, forKeyPath: "contentSize", options: [.new, .old, .prior], context: nil)
+        Task { await searchByCurrentText() }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         dismissView()
     }
     
-    func searchByCurrentText(page: Int) {
-        currentPage = page
-        GoodreadsService.sharedInstance.searchForBooks(title: text ?? "", page: currentPage) {
-            (books, pages) in
-            self.numberOfPages = pages
-            if self.currentPage == 0 {
-                self.searchResults = books
-                self.resultsTableView?.reloadData()
-            }
-            else {
-                if books.count == 0 { return }
-                
-                let previousResultCount = self.searchResults.count
-                self.searchResults.append(contentsOf: books)
-                var indexesToUpdate = [IndexPath]()
-                for index in previousResultCount...(self.searchResults.count - 1) {
-                    indexesToUpdate.append(IndexPath(row: index, section: 1))
-                }
-                
-                UIView.setAnimationsEnabled(false)
-                self.resultsTableView?.beginUpdates()
-                self.resultsTableView?.insertRows(at: indexesToUpdate, with: UITableView.RowAnimation.none)
-                self.resultsTableView?.scrollToRow(at: IndexPath(row: previousResultCount - 1, section: 1), at: .bottom, animated: false)
-                self.resultsTableView?.endUpdates()
-                UIView.setAnimationsEnabled(true)
-            }
+    func searchByCurrentText() async -> Void {
+        if text == "" { return }
+        
+        let title = segmentHeader.selectedSegmentIndex == 0 ? text : nil
+        let author = segmentHeader.selectedSegmentIndex == 1 ? text : nil
+        let query = segmentHeader.selectedSegmentIndex == 2 ? text : nil
+        
+        resultsTableView?.setContentOffset( CGPoint(x: 0, y: -refreshControl.frame.height) , animated: false)
+        if !refreshControl.isRefreshing {
+            refreshControl.beginRefreshing()
         }
+        let response = await OpenLibraryService.sharedInstance.searchForBooks(title: title, author: author, query: query)
+        if response.1 { return }
+        
+        searchResults = response.0
+        resultsTableView?.reloadData()
+        refreshControl.endRefreshing()
     }
     
     func setupTableView() {
         if resultsTableView != nil { return }
-        
         resultsTableView = UITableView()
+        
+        segmentHeader.addTarget(self, action: #selector(segmentedControlChanged(_:)), for: .valueChanged)
+        
+        refreshControl.tintColor = UIColor.white
+        refreshControl.addTarget(self, action: #selector(refreshPulled), for: .valueChanged)
+        
+        resultsTableView?.tableHeaderView = segmentHeader
+        resultsTableView?.refreshControl = refreshControl
         resultsTableView?.delegate = self
         resultsTableView?.dataSource = self
         resultsTableView?.register(BookSearchResultCell.Nib, forCellReuseIdentifier: BookSearchResultCell.Identifier)
         resultsTableView?.register(TextOnlyResultCell.Nib, forCellReuseIdentifier: TextOnlyResultCell.Identifier)
         resultsTableView?.backgroundColor = UIColor.clear
-        resultsTableView?.tableFooterView = UIView()
         resultsTableView?.showsVerticalScrollIndicator = false
         resultsTableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
+        
+        segmentHeader.selectedSegmentIndex = 0
+    }
+    
+    @objc func segmentedControlChanged(_ sender: UISegmentedControl) {
+        Reload()
+    }
+    
+    @objc func refreshPulled() {
+        Reload()
     }
     
     func setupDismissKeyboardView() {
@@ -173,6 +180,7 @@ import UIKit
     
     func ClearSearch() {
         defaultsService.wipeFilters()
+        searchResults = [Book]()
         text = ""
     }
     
@@ -184,9 +192,13 @@ import UIKit
         }
     }
     
+    func Reload() {
+        resultsTableView?.setContentOffset( CGPoint(x: 0, y: 0) , animated: true)
+        Task { await searchByCurrentText() }
+    }
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
-        resultsTableView?.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        searchByCurrentText(page: 0)
+        Reload()
     }
     
     @objc func backgroundTapped(sender: UITapGestureRecognizer) {
@@ -197,6 +209,15 @@ import UIKit
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
             resultsTableView?.tableFooterView = UIView(frame: CGRect(x: 0,y: 0, width: 0, height: keyboardHeight))
+        }
+    }
+    
+    @objc override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentSize" {
+            guard let parentVC = bookSearchDelegate as? UIViewController, let resultsTableView = resultsTableView else { return }
+            let maxHeight = CGFloat(parentVC.view.frame.height - parentVC.view.safeAreaInsets.top)
+            let height = min(resultsTableView.contentSize.height + refreshControl.frame.height, maxHeight)
+            resultsTableView.frame = CGRect(x: resultsTableView.frame.origin.x, y: resultsTableView.frame.origin.y, width: resultsTableView.frame.width, height: height)
         }
     }
 }
@@ -224,10 +245,6 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
         
         cell.SetupCell(book: searchResults[indexPath.row])
         
-        if indexPath.row == searchResults.count - 1, currentPage < numberOfPages {
-            searchByCurrentText(page: currentPage + 1)
-        }
-        
         return cell
     }
     
@@ -243,8 +260,8 @@ extension BookSearchBox : UITableViewDelegate, UITableViewDataSource
         }
         else {
             let selectedBook = searchResults[indexPath.row]
-            text = "\(selectedBook.title) \(selectedBook.author.name)"
-        
+            text = "\(selectedBook.title)"
+            
             defaultsService.storeBook(book: selectedBook)
         }
         tableView.deselectRow(at: indexPath, animated: true)

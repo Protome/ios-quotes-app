@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UserDefaultsService
+class UserDefaultsService: UserDefaultsServiceProtocol
 {
     let searchKey = "Search"
     let typeKey = "Type"
@@ -19,8 +19,7 @@ class UserDefaultsService
     let backgroundColour2 = "BackgroundColour2"
     let backgroundType = "BackgroundType"
     
-    func wipeFilters()
-    {
+    func wipeFilters() {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: searchKey)
         defaults.removeObject(forKey: typeKey)
@@ -29,15 +28,13 @@ class UserDefaultsService
         defaults.removeObject(forKey: backgroundColour2)
     }
     
-    func storeSearchTerm(search: String)
-    {
+    func storeSearchTerm(search: String) {
         let defaults = UserDefaults.standard
         defaults.set(search, forKey: searchKey)
         defaults.set(FilterType.Search.rawValue, forKey: typeKey)
     }
     
-    func loadSearch() -> String?
-    {
+    func loadSearch() -> String? {
         let defaults = UserDefaults.standard
         guard let search = defaults.string(forKey: searchKey) else
         {
@@ -57,8 +54,7 @@ class UserDefaultsService
         return type
     }
     
-    func storeBook(book: Book)
-    {
+    func storeBook(book: Book) {
         do {
             let defaults = UserDefaults.standard
             let data = try PropertyListEncoder().encode(book)
@@ -70,10 +66,8 @@ class UserDefaultsService
         }
     }
     
-    func loadBook() -> Book?
-    {
+    func loadBook() -> Book? {
         do {
-            
             let defaults = UserDefaults.standard
             guard let defaultsBook = defaults.object(forKey: bookKey) as? Data, let bookData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(defaultsBook) as? Data else
             {
@@ -97,8 +91,7 @@ class UserDefaultsService
         defaults.set(shelfName, forKey: shelfKey)
     }
     
-    func loadDefaultShelf() -> String?
-    {
+    func loadDefaultShelf() -> String? {
         let defaults = UserDefaults.standard
         guard let shelf = defaults.string(forKey: shelfKey) else
         {
@@ -108,19 +101,17 @@ class UserDefaultsService
         return shelf
     }
     
-    func storeColours(colours: [UIColor])
-    {
+    func storeColours(colours: [UIColor]) {
         let defaults = UserDefaults.standard
         defaults.set(colours[0], forKey: backgroundColour1)
         defaults.set(colours[1], forKey: backgroundColour2)
     }
     
-    func loadColours() -> [UIColor]?
-    {
+    func loadColours() -> [UIColor]? {
         let defaults = UserDefaults.standard
         guard let colour1 = defaults.color(forKey: backgroundColour1),
-            let colour2 = defaults.color(forKey: backgroundColour2)
-            else
+              let colour2 = defaults.color(forKey: backgroundColour2)
+        else
         {
             return nil
         }
@@ -128,17 +119,15 @@ class UserDefaultsService
         return [colour1, colour2]
     }
     
-    func storeBackgroundType(type: String)
-    {
+    func storeBackgroundType(type: String) {
         let defaults = UserDefaults.standard
         defaults.set(type, forKey: backgroundType)
     }
     
-    func loadBackgroundType() -> String
-    {
+    func loadBackgroundType() -> String {
         let defaults = UserDefaults.standard
         guard let backgroundType = defaults.string(forKey: backgroundType)
-            else
+        else
         {
             return "GreenGradient"
         }

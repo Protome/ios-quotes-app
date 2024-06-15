@@ -9,7 +9,7 @@
 import Foundation
 import StoreKit
 
-class ReviewRequestService {
+class ReviewRequestService: ReviewRequestServiceProtocol {
     let runIncrementerSetting = "numberOfRuns"
     let runDateString = "lastDateRun"
     let minimumRunCount = 4

@@ -18,8 +18,8 @@ public extension NSError {
     ///
     /// Also implements a special handling for the Facebook API, which indicates invalid tokens in a 
     /// different manner. See https://developers.facebook.com/docs/graph-api/using-graph-api#errors
-	public var isExpiredToken: Bool {
-        guard self.domain == NSURLErrorDomain else {
+    var isExpiredToken: Bool {
+        guard self.domain == NSURLErrorDomain || self.domain == OAuthSwiftError.Domain else {
             return false
         }
 		if self.code == 401 {
@@ -39,7 +39,11 @@ public extension NSError {
                 }
                 if let errors = jsonDic["errors"] as? [[String: AnyObject]] {
                     for error in errors {
-                        if let errorType = error["errorType"] as? String, errorType == "invalid_token" {
+                        if let errorType = error["errorType"] as? String, errorType == "invalid_token" || errorType == "expired_token" {
+                            return true
+                        } else if let urlString = self.userInfo[NSURLErrorFailingURLErrorKey] as? String, urlString.contains("api.twitter.com"), let errorCode = error["code"] as? Int, errorCode == 89 {
+                            // This is the code for expired or invalid twitter token
+                            // see: https://developer.twitter.com/en/docs/basics/response-codes
                             return true
                         }
                     }

@@ -11,13 +11,12 @@ import UIKit
 
 class BookSelectionShelfListViewController: UITableViewController {
     weak var bookDelegate: BookSelectionDelegate?
+    var viewModel: BookSelectionShelfListViewModel?
     
     @IBOutlet weak var ErrorHeaderConstraint: NSLayoutConstraint!
     @IBOutlet weak var HeaderView: UIView!
     @IBOutlet weak var bottomActivityIndicator: UIActivityIndicatorView!
-    var shelves = [Shelf]()
-    var selectedShelf: Shelf?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ErrorHeaderConstraint.constant = 0
@@ -27,6 +26,8 @@ class BookSelectionShelfListViewController: UITableViewController {
         refreshControl?.addTarget(self, action: #selector(self.loadShelves(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
         extendedLayoutIncludesOpaqueBars = true
+        
+        title = viewModel?.title
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,29 +36,29 @@ class BookSelectionShelfListViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadShelves(self)
+        Task {
+            await self.loadShelves(self)            
+        }
     }
     
-    @objc func loadShelves(_ sender: Any) {
-        let goodreadsService = GoodreadsService()
+    @objc func loadShelves(_ sender: Any) async -> Void {
         refreshControl?.beginRefreshing()
         
-        goodreadsService.loadShelves(sender: self) { shelves in
-            self.shelves = shelves
-            self.tableView.reloadData()
-            self.refreshControl?.endRefreshing()
-            self.bottomActivityIndicator?.stopAnimating()
-            
-            if shelves.count == 0 {
-                self.ErrorHeaderConstraint.constant = 87
-                self.HeaderView.frame.size.height = 87
-            }
+        await viewModel?.loadBooksFromShelf(sender: self)
+        
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
+        self.bottomActivityIndicator?.stopAnimating()
+        
+        if viewModel?.shelves.count == 0 {
+            self.ErrorHeaderConstraint.constant = 87
+            self.HeaderView.frame.size.height = 87
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? BookSelectionViewController {
-            destination.shelf = selectedShelf!
+            destination.viewModel!.shelf = viewModel!.selectedShelf!
             destination.delegate = bookDelegate
         }
     }
@@ -70,10 +71,11 @@ extension BookSelectionShelfListViewController
             return UITableViewCell()
         }
         
-        let shelf = shelves[indexPath.row]
-        cell.setupCell(shelf: shelf, selected: false)
-        if popoverPresentationController?.presentationStyle == .popover {
-            cell.backgroundColor = UIColor.clear
+        if let shelf = viewModel?.shelves[indexPath.row] {
+            cell.setupCell(shelf: shelf, selected: false)
+            if popoverPresentationController?.presentationStyle == .popover {
+                cell.backgroundColor = UIColor.clear
+            }
         }
         return cell
     }
@@ -83,7 +85,7 @@ extension BookSelectionShelfListViewController
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shelves.count
+        return viewModel?.shelves.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -91,7 +93,7 @@ extension BookSelectionShelfListViewController
         {
             return
         }
-        selectedShelf = shelves[indexPath.row]
+        viewModel?.selectShelf(selected: indexPath.row)
         performSegue(withIdentifier: "ShowBooksFromShelf", sender: self)
     }
 }
