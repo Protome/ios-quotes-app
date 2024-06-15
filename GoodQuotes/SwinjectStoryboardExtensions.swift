@@ -18,7 +18,7 @@ extension SwinjectStoryboard {
     }
     
     @objc class func setupServices() {
-        defaultContainer.register(QuoteServiceProtocol.self) { resolver in return QuoteService() }
+        defaultContainer.register(QuoteServiceProtocol.self) { resolver in return QuoteScraperService() }
         defaultContainer.register(UserDefaultsServiceProtocol.self) { resolver in return UserDefaultsService() }
         defaultContainer.register(GoodreadsServiceProtocol.self) { resolver in return GoodreadsService() }
         defaultContainer.register(AuthStorageServiceProtocol.self) { resolver in return AuthStorageService() }

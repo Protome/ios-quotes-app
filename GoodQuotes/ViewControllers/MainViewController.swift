@@ -87,9 +87,13 @@ class MainViewController: UIViewController {
         
         viewModel?.$currentBook
             .receive(on: RunLoop.main)
-            .compactMap({ $0 })
             .sink {[weak self] book in
-                self?.loadBookData(book: book)
+                if let book {
+                    self?.loadBookData(book: book)
+                }
+                else {
+                    self?.hideBookDetails()
+                }
             }
             .store(in: &subscriptions)
         
